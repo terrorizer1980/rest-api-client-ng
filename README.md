@@ -1,10 +1,9 @@
 # @senzing/rest-api-client-ng
 
 ## Overview
-This project is a package that provides a Angular TypeScript REST client intended to be used as a dependency for other [https://senzing.com/senzing-api/](Senzing) projects like [https://www.npmjs.com/package/@senzing/sdk-components-ng](@senzing/sdk-components-ng).
+This project is a package that provides a Angular TypeScript REST client intended to be used as a dependency for other [Senzing](https://senzing.com/senzing-api/) projects like [@senzing/sdk-components-ng](https://www.npmjs.com/package/@senzing/sdk-components-ng]).
 
-This project should conform to the OAS schema defined in [https://github.com/Senzing/rest-api-proposal/blob/master/senzing-api.yaml](Senzing/rest-api-proposal)
-https://raw.githubusercontent.com/Senzing/rest-api-proposal/master/senzing-api.yaml
+This project should conform to the OAS schema defined in [Senzing/rest-api-proposal](https://github.com/Senzing/rest-api-proposal/blob/master/senzing-api.yaml)
 
 ## Installation
 ```bash
@@ -26,7 +25,3 @@ The steps above will checkout the repo and build the package to the ./dist/@senz
 ## Running unit tests
 
 Run `npm run test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
