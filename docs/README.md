@@ -1,4 +1,4 @@
-N# @senzing/rest-api-client-ng
+# @senzing/rest-api-client-ng
 
 ## Overview
 This project is a package that provides a Angular TypeScript REST client intended to be used as a dependency for other [Senzing](https://senzing.com/senzing-api/) projects like [@senzing/sdk-components-ng](https://www.npmjs.com/package/@senzing/sdk-components-ng]).
