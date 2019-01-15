@@ -1,0 +1,27 @@
+{
+  "name": "@senzing/rest-api-client-ng",
+  "version": "0.0.2",
+  "description": "A package providing restful http interfaces to typescript interfaces to @senzing/rest-api-server-java",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Senzing/rest-api-client-ng.git"
+  },
+  "keywords": [
+    "REST",
+    "OAS3",
+    "OAS",
+    "Senzing",
+    "ER",
+    "Entity Resolution"
+  ],
+  "author": "Ara Winters",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Senzing/rest-api-client-ng/issues"
+  },
+  "homepage": "https://github.com/Senzing/rest-api-client-ng#readme",
+  "peerDependencies": {
+    "@angular/common": "^7.1.0",
+    "@angular/core": "^7.1.0"
+  }
+}
