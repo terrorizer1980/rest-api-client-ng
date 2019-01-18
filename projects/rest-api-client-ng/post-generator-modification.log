@@ -1,0 +1,12 @@
+Sometimes the generator misses stuff. Until I find out why, I'm detailing the changes made to models 
+after the fact here so we know what we're overwriting.
+
+
+projects\rest-api-client-ng\src\lib\model\szAttributeSearchResult.ts : 19
+extends SzBaseRelatedEntity
+
+projects\rest-api-client-ng\src\lib\model\szAttributeSearchResult.ts : 26
+resultType added
+
+projects\rest-api-client-ng\src\lib\model\szResolvedEntity.ts : 65
+changed 'any' to typed
