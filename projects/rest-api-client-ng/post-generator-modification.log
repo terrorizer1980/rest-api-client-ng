@@ -1,6 +1,9 @@
 Sometimes the generator misses stuff. Until I find out why, I'm detailing the changes made to models 
 after the fact here so we know what we're overwriting.
 
+projects\rest-api-client-ng\src\lib\model\*.ts
+*/import { ModelObject } from './modelObject';
+// import { ModelObject } from './modelObject';
 
 projects\rest-api-client-ng\src\lib\model\szAttributeSearchResult.ts : 19
 extends SzBaseRelatedEntity
