@@ -10,6 +10,9 @@
  * Do not edit the class manually.
  */
 
-export interface SzBaseResponseLinks { 
-    self?: string;
+export interface SzLoadRecordResponseData { 
+    /**
+     * The record ID of the record that was loaded.
+     */
+    recordId?: string;
 }

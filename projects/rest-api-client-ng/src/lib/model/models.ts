@@ -24,6 +24,8 @@ export * from './szError';
 export * from './szErrorResponse';
 export * from './szLicenseInfo';
 export * from './szLicenseResponse';
+export * from './szLoadRecordResponse';
+export * from './szLoadRecordResponseData';
 export * from './szRecordId';
 export * from './szRecordResponse';
 export * from './szRecordResponseData';
