@@ -18,6 +18,9 @@ import { CustomHttpUrlEncodingCodec }                        from '../encoder';
 
 import { Observable }                                        from 'rxjs';
 
+import { SzAttributeClass } from '../model/szAttributeClass';
+import { SzAttributeTypeResponse } from '../model/szAttributeTypeResponse';
+import { SzAttributeTypesResponse } from '../model/szAttributeTypesResponse';
 import { SzDataSourcesResponse } from '../model/szDataSourcesResponse';
 import { SzErrorResponse } from '../model/szErrorResponse';
 
@@ -56,6 +59,112 @@ export class ConfigService {
         return false;
     }
 
+
+    /**
+     * Get the attribute type identified by the attribute code.
+     * 
+     * @param attributeCode The attribute code that uniquely identifies the attribute type.
+     * @param withRaw Whether or not to include the raw JSON response from the underlying native API.  This raw response may include additional details but lack some of the abstraction the standard response provides.  If true, then the &#x27;rawData&#x27; field in the response will be a non-null value and contain the additional details.
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getAttributeType(attributeCode: string, withRaw?: boolean, observe?: 'body', reportProgress?: boolean): Observable<SzAttributeTypeResponse>;
+    public getAttributeType(attributeCode: string, withRaw?: boolean, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<SzAttributeTypeResponse>>;
+    public getAttributeType(attributeCode: string, withRaw?: boolean, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<SzAttributeTypeResponse>>;
+    public getAttributeType(attributeCode: string, withRaw?: boolean, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+        if (attributeCode === null || attributeCode === undefined) {
+            throw new Error('Required parameter attributeCode was null or undefined when calling getAttributeType.');
+        }
+
+        let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
+        if (withRaw !== undefined && withRaw !== null) {
+            queryParameters = queryParameters.set('withRaw', <any>withRaw);
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json; charset=UTF-8',
+            'application/json',
+            'default'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+        ];
+
+        return this.httpClient.get(`${this.basePath}/attribute-types/${encodeURIComponent(String(attributeCode))}`,
+            {
+                params: queryParameters,
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Get a list of configured attribute types.
+     * 
+     * @param withInternal The load ID to associate with the loaded record.
+     * @param attributeClass If specified, this filters the list of returned attribute types to those of a specific attribute class.  If not specified then no filtering on attribute class is performed and all are returned.
+     * @param featureType If specified, this filters the list of returned attribute types to those belonging to a specific feature type.  If not specified then no filtering on feature type is performed and all are returned.
+     * @param withRaw Whether or not to include the raw JSON response from the underlying native API.  This raw response may include additional details but lack some of the abstraction the standard response provides.  If true, then the &#x27;rawData&#x27; field in the response will be a non-null value and contain the additional details.
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getAttributeTypes(withInternal?: boolean, attributeClass?: SzAttributeClass, featureType?: string, withRaw?: boolean, observe?: 'body', reportProgress?: boolean): Observable<SzAttributeTypesResponse>;
+    public getAttributeTypes(withInternal?: boolean, attributeClass?: SzAttributeClass, featureType?: string, withRaw?: boolean, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<SzAttributeTypesResponse>>;
+    public getAttributeTypes(withInternal?: boolean, attributeClass?: SzAttributeClass, featureType?: string, withRaw?: boolean, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<SzAttributeTypesResponse>>;
+    public getAttributeTypes(withInternal?: boolean, attributeClass?: SzAttributeClass, featureType?: string, withRaw?: boolean, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
+        if (withInternal !== undefined && withInternal !== null) {
+            queryParameters = queryParameters.set('withInternal', <any>withInternal);
+        }
+        if (attributeClass !== undefined && attributeClass !== null) {
+            queryParameters = queryParameters.set('attributeClass', <any>attributeClass);
+        }
+        if (featureType !== undefined && featureType !== null) {
+            queryParameters = queryParameters.set('featureType', <any>featureType);
+        }
+        if (withRaw !== undefined && withRaw !== null) {
+            queryParameters = queryParameters.set('withRaw', <any>withRaw);
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json; charset=UTF-8',
+            'application/json',
+            'default'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+        ];
+
+        return this.httpClient.get(`${this.basePath}/attribute-types`,
+            {
+                params: queryParameters,
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
 
     /**
      * Get a list of configured data sources.
