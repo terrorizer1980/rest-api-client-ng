@@ -10,10 +10,10 @@
  * Do not edit the class manually.
  */
 //import { ModelObject } from './modelObject';
-import { SzLicenseInfo } from './szLicenseInfo';
+import { SzLicenseResponseData } from './szLicenseResponseData';
 import { SzResponseWithRawData } from './szResponseWithRawData';
 
 
 export interface SzLicenseResponse extends SzResponseWithRawData { 
-    data?: SzLicenseInfo;
+    data?: SzLicenseResponseData;
 }
