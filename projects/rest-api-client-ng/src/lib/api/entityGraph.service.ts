@@ -97,7 +97,6 @@ export class EntityGraphService {
         if (e !== undefined && e !== null) {
             e.forEach((val)=>{
                 queryParameters = queryParameters.append('e', <any>val);
-                console.log('findNetworkByEntityID: added e val('+ val +')');
             });
         }
         if (maxDegrees !== undefined && maxDegrees !== null) {
