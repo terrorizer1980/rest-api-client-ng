@@ -85,17 +85,19 @@ export class EntityGraphService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public findNetworkByEntityID(e: SzEntityIdentifiers, maxDegrees?: number, buildOut?: number, maxEntities?: number, withRaw?: boolean, observe?: 'body', reportProgress?: boolean): Observable<SzEntityNetworkResponse>;
-    public findNetworkByEntityID(e: SzEntityIdentifiers, maxDegrees?: number, buildOut?: number, maxEntities?: number, withRaw?: boolean, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<SzEntityNetworkResponse>>;
-    public findNetworkByEntityID(e: SzEntityIdentifiers, maxDegrees?: number, buildOut?: number, maxEntities?: number, withRaw?: boolean, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<SzEntityNetworkResponse>>;
-    public findNetworkByEntityID(e: SzEntityIdentifiers, maxDegrees?: number, buildOut?: number, maxEntities?: number, withRaw?: boolean, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public findNetworkByEntityID(e: Array<string|number>, maxDegrees?: number, buildOut?: number, maxEntities?: number, withRaw?: boolean, observe?: 'body', reportProgress?: boolean): Observable<SzEntityNetworkResponse>;
+    public findNetworkByEntityID(e: Array<string|number>, maxDegrees?: number, buildOut?: number, maxEntities?: number, withRaw?: boolean, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<SzEntityNetworkResponse>>;
+    public findNetworkByEntityID(e: Array<string|number>, maxDegrees?: number, buildOut?: number, maxEntities?: number, withRaw?: boolean, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<SzEntityNetworkResponse>>;
+    public findNetworkByEntityID(e: Array<string|number>, maxDegrees?: number, buildOut?: number, maxEntities?: number, withRaw?: boolean, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
         if (e === null || e === undefined) {
             throw new Error('Required parameter e was null or undefined when calling findNetworkByEntityID.');
         }
 
         let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
         if (e !== undefined && e !== null) {
-            queryParameters = queryParameters.set('e', <any>e);
+            e.forEach((val)=>{
+                queryParameters = queryParameters.append('e', <any>val);
+            });
         }
         if (maxDegrees !== undefined && maxDegrees !== null) {
             queryParameters = queryParameters.set('maxDegrees', <any>maxDegrees);
@@ -151,10 +153,10 @@ export class EntityGraphService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public findPathByEntityID(from: SzEntityIdentifier, to: SzEntityIdentifier, maxDegrees?: number, x?: SzEntityIdentifiers, forbidAvoided?: boolean, s?: Array<string>, withRaw?: boolean, observe?: 'body', reportProgress?: boolean): Observable<SzEntityPathResponse>;
-    public findPathByEntityID(from: SzEntityIdentifier, to: SzEntityIdentifier, maxDegrees?: number, x?: SzEntityIdentifiers, forbidAvoided?: boolean, s?: Array<string>, withRaw?: boolean, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<SzEntityPathResponse>>;
-    public findPathByEntityID(from: SzEntityIdentifier, to: SzEntityIdentifier, maxDegrees?: number, x?: SzEntityIdentifiers, forbidAvoided?: boolean, s?: Array<string>, withRaw?: boolean, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<SzEntityPathResponse>>;
-    public findPathByEntityID(from: SzEntityIdentifier, to: SzEntityIdentifier, maxDegrees?: number, x?: SzEntityIdentifiers, forbidAvoided?: boolean, s?: Array<string>, withRaw?: boolean, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public findPathByEntityID(from: SzEntityIdentifier, to: SzEntityIdentifier, maxDegrees?: number, x?: Array<string|number>, forbidAvoided?: boolean, s?: Array<string>, withRaw?: boolean, observe?: 'body', reportProgress?: boolean): Observable<SzEntityPathResponse>;
+    public findPathByEntityID(from: SzEntityIdentifier, to: SzEntityIdentifier, maxDegrees?: number, x?: Array<string|number>, forbidAvoided?: boolean, s?: Array<string>, withRaw?: boolean, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<SzEntityPathResponse>>;
+    public findPathByEntityID(from: SzEntityIdentifier, to: SzEntityIdentifier, maxDegrees?: number, x?: Array<string|number>, forbidAvoided?: boolean, s?: Array<string>, withRaw?: boolean, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<SzEntityPathResponse>>;
+    public findPathByEntityID(from: SzEntityIdentifier, to: SzEntityIdentifier, maxDegrees?: number, x?: Array<string|number>, forbidAvoided?: boolean, s?: Array<string>, withRaw?: boolean, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
         if (from === null || from === undefined) {
             throw new Error('Required parameter from was null or undefined when calling findPathByEntityID.');
         }
