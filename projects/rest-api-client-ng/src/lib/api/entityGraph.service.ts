@@ -160,17 +160,31 @@ export class EntityGraphService {
         if (from === null || from === undefined) {
             throw new Error('Required parameter from was null or undefined when calling findPathByEntityID.');
         }
+        if (from.id === null || from.id === undefined) {
+            throw new Error('Required parameter from.id was null or undefined when calling findPathByEntityID.');
+        }
         if (to === null || to === undefined) {
             throw new Error('Required parameter to was null or undefined when calling findPathByEntityID.');
         }
+        if (to.id === null || to.id === undefined) {
+            throw new Error('Required parameter to.id was null or undefined when calling findPathByEntityID.');
+        }
 
         let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
-        if (from !== undefined && from !== null) {
-            queryParameters = queryParameters.set('from', <any>from);
+        if (from.src !== null && from.src !== undefined) {
+            queryParameters = queryParameters.set('from', JSON.stringify(from));
         }
-        if (to !== undefined && to !== null) {
-            queryParameters = queryParameters.set('to', <any>to);
+        else {
+            queryParameters = queryParameters.set('from', from.id);
         }
+
+        if (to.src !== undefined && to.src !== null) {
+            queryParameters = queryParameters.set('to', JSON.stringify(to));
+        }
+        else {
+            queryParameters = queryParameters.set('to', to.id);
+        }
+
         if (maxDegrees !== undefined && maxDegrees !== null) {
             queryParameters = queryParameters.set('maxDegrees', <any>maxDegrees);
         }

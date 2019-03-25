@@ -874,7 +874,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="157" class="link-to-prism">projects/rest-api-client-ng/src/lib/api/entityGraph.service.ts:157</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="156" class="link-to-prism">projects/rest-api-client-ng/src/lib/api/entityGraph.service.ts:156</a></div>
                             </td>
                         </tr>
 
@@ -1079,7 +1079,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="158" class="link-to-prism">projects/rest-api-client-ng/src/lib/api/entityGraph.service.ts:158</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="157" class="link-to-prism">projects/rest-api-client-ng/src/lib/api/entityGraph.service.ts:157</a></div>
                             </td>
                         </tr>
 
@@ -1245,7 +1245,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="159" class="link-to-prism">projects/rest-api-client-ng/src/lib/api/entityGraph.service.ts:159</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="158" class="link-to-prism">projects/rest-api-client-ng/src/lib/api/entityGraph.service.ts:158</a></div>
                             </td>
                         </tr>
 
@@ -1411,7 +1411,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="160" class="link-to-prism">projects/rest-api-client-ng/src/lib/api/entityGraph.service.ts:160</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="159" class="link-to-prism">projects/rest-api-client-ng/src/lib/api/entityGraph.service.ts:159</a></div>
                             </td>
                         </tr>
 
@@ -1870,7 +1870,6 @@ export class EntityGraphService {
         if (e !&#x3D;&#x3D; undefined &amp;&amp; e !&#x3D;&#x3D; null) {
             e.forEach((val)&#x3D;&gt;{
                 queryParameters &#x3D; queryParameters.append(&#x27;e&#x27;, &lt;any&gt;val);
-                console.log(&#x27;findNetworkByEntityID: added e val(&#x27;+ val +&#x27;)&#x27;);
             });
         }
         if (maxDegrees !&#x3D;&#x3D; undefined &amp;&amp; maxDegrees !&#x3D;&#x3D; null) {
@@ -1934,17 +1933,31 @@ export class EntityGraphService {
         if (from &#x3D;&#x3D;&#x3D; null || from &#x3D;&#x3D;&#x3D; undefined) {
             throw new Error(&#x27;Required parameter from was null or undefined when calling findPathByEntityID.&#x27;);
         }
+        if (from.id &#x3D;&#x3D;&#x3D; null || from.id &#x3D;&#x3D;&#x3D; undefined) {
+            throw new Error(&#x27;Required parameter from.id was null or undefined when calling findPathByEntityID.&#x27;);
+        }
         if (to &#x3D;&#x3D;&#x3D; null || to &#x3D;&#x3D;&#x3D; undefined) {
             throw new Error(&#x27;Required parameter to was null or undefined when calling findPathByEntityID.&#x27;);
         }
+        if (to.id &#x3D;&#x3D;&#x3D; null || to.id &#x3D;&#x3D;&#x3D; undefined) {
+            throw new Error(&#x27;Required parameter to.id was null or undefined when calling findPathByEntityID.&#x27;);
+        }
 
         let queryParameters &#x3D; new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
-        if (from !&#x3D;&#x3D; undefined &amp;&amp; from !&#x3D;&#x3D; null) {
-            queryParameters &#x3D; queryParameters.set(&#x27;from&#x27;, &lt;any&gt;from);
+        if (from.src !&#x3D;&#x3D; null &amp;&amp; from.src !&#x3D;&#x3D; undefined) {
+            queryParameters &#x3D; queryParameters.set(&#x27;from&#x27;, JSON.stringify(from));
         }
-        if (to !&#x3D;&#x3D; undefined &amp;&amp; to !&#x3D;&#x3D; null) {
-            queryParameters &#x3D; queryParameters.set(&#x27;to&#x27;, &lt;any&gt;to);
+        else {
+            queryParameters &#x3D; queryParameters.set(&#x27;from&#x27;, from.id);
         }
+
+        if (to.src !&#x3D;&#x3D; undefined &amp;&amp; to.src !&#x3D;&#x3D; null) {
+            queryParameters &#x3D; queryParameters.set(&#x27;to&#x27;, JSON.stringify(to));
+        }
+        else {
+            queryParameters &#x3D; queryParameters.set(&#x27;to&#x27;, to.id);
+        }
+
         if (maxDegrees !&#x3D;&#x3D; undefined &amp;&amp; maxDegrees !&#x3D;&#x3D; null) {
             queryParameters &#x3D; queryParameters.set(&#x27;maxDegrees&#x27;, &lt;any&gt;maxDegrees);
         }
