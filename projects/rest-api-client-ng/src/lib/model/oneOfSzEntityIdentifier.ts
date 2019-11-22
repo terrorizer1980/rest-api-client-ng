@@ -10,9 +10,5 @@
  * Do not edit the class manually.
  */
 
-export interface SzLoadRecordResponseData { 
-    /**
-     * The record ID of the record that was loaded.
-     */
-    recordId?: string;
+export interface OneOfSzEntityIdentifier { 
 }

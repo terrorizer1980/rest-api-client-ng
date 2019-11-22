@@ -21,6 +21,7 @@ import { Observable }                                        from 'rxjs';
 import { SzAttributeClass } from '../model/szAttributeClass';
 import { SzAttributeTypeResponse } from '../model/szAttributeTypeResponse';
 import { SzAttributeTypesResponse } from '../model/szAttributeTypesResponse';
+import { SzConfigResponse } from '../model/szConfigResponse';
 import { SzDataSourcesResponse } from '../model/szDataSourcesResponse';
 import { SzErrorResponse } from '../model/szErrorResponse';
 
@@ -171,6 +172,81 @@ export class ConfigService {
         return this.httpClient.get(`${this.basePath}/attribute-types`,
             {
                 params: queryParameters,
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+    /**
+     * Gets the current configuration as raw JSON, no interpretation.
+     * 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getCurrentConfig(observe?: 'body', reportProgress?: boolean): Observable<SzConfigResponse>;
+    public getCurrentConfig(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<SzConfigResponse>>;
+    public getCurrentConfig(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<SzConfigResponse>>;
+    public getCurrentConfig(observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json; charset=UTF-8',
+            'application/json',
+            'default'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+        ];
+
+        return this.httpClient.get<SzConfigResponse>(`${this.basePath}/config/current`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Gets the default configuration as raw JSON, no interpretation.
+     * 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getDefaultConfig(observe?: 'body', reportProgress?: boolean): Observable<SzConfigResponse>;
+    public getDefaultConfig(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<SzConfigResponse>>;
+    public getDefaultConfig(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<SzConfigResponse>>;
+    public getDefaultConfig(observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json; charset=UTF-8',
+            'application/json',
+            'default'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+        ];
+
+        return this.httpClient.get<SzConfigResponse>(`${this.basePath}/config/default`,
+            {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
                 observe: observe,

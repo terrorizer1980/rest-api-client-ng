@@ -9,10 +9,10 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+import { SzResponseWithRawData } from './szResponseWithRawData';
 
-export interface SzLoadRecordResponseData { 
-    /**
-     * The record ID of the record that was loaded.
-     */
-    recordId?: string;
+/**
+ * The response containing raw configuration in the rawData field.
+ */
+export interface SzConfigResponse extends SzResponseWithRawData { 
 }
