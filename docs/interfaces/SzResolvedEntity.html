@@ -99,6 +99,10 @@
                                 </li>
                                 <li>
                                             <span class="modifier">Optional</span>
+                                        <a href="#characteristicData">characteristicData</a>
+                                </li>
+                                <li>
+                                            <span class="modifier">Optional</span>
                                         <a href="#entityId">entityId</a>
                                 </li>
                                 <li>
@@ -116,6 +120,10 @@
                                 <li>
                                             <span class="modifier">Optional</span>
                                         <a href="#nameData">nameData</a>
+                                </li>
+                                <li>
+                                            <span class="modifier">Optional</span>
+                                        <a href="#partial">partial</a>
                                 </li>
                                 <li>
                                             <span class="modifier">Optional</span>
@@ -255,6 +263,46 @@
                             <tr>
                                 <td class="col-md-4">
                                     <div class="io-description"><p>Usually the same as the entityName property, but this may differ if the entity was found based on a name search.  In such a case, this field represents the name that most closely matches the name that was searched on.</p>
+</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="characteristicData"></a>
+                                        <span class="name"><b>characteristicData</b><a href="#characteristicData"><span class="icon ion-ios-link"></span></a></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>characteristicData:     <code>Array&lt;string&gt;</code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>    <code>Array&lt;string&gt;</code>
+
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Optional</i>
+                                        </td>
+                                    </tr>
+
+
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>An array of characteristiics associated with the entity that are formatted for readability.  These will be prefixed by a characteristic type and optionally by a "usage type" if one was provided.</p>
 </div>
                                 </td>
                             </tr>
@@ -464,6 +512,46 @@
                         <tbody>
                                 <tr>
                                     <td class="col-md-4">
+                                        <a name="partial"></a>
+                                        <span class="name"><b>partial</b><a href="#partial"><span class="icon ion-ios-link"></span></a></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>partial:     <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Optional</i>
+                                        </td>
+                                    </tr>
+
+
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>If true then this SzResolvedEntity has complete features and records, otherwise they are not provided.  Also, the recordSummary items may be missing the topRecordIds if partial is true.  This can be true for partially retrieved related entities or if features are suppressed or if the minimal response flag has been specified.</p>
+</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
                                         <a name="phoneData"></a>
                                         <span class="name"><b>phoneData</b><a href="#phoneData"><span class="icon ion-ios-link"></span></a></span>
                                     </td>
@@ -615,7 +703,12 @@ export interface SzResolvedEntity {
      */
     nameData?: Array&lt;string&gt;;
     /**
+     * An array of characteristiics associated with the entity that are formatted for readability.  These will be prefixed by a characteristic type and optionally by a \&quot;usage type\&quot; if one was provided.
+     */
+    characteristicData?: Array&lt;string&gt;;
+    /**
      * An array of attributes associated with the entity that are formatted for readability.  These will be prefixed by an attribtue type and optionally by a \&quot;usage type\&quot; if one was provided.
+     * @deprecated use characteristicData instead
      */
     attributeData?: Array&lt;string&gt;;
     /**
@@ -640,6 +733,10 @@ export interface SzResolvedEntity {
     features?: {
         [key: string] : SzEntityFeature[]
     }
+    /**
+     * If true then this SzResolvedEntity has complete features and records, otherwise they are not provided.  Also, the recordSummary items may be missing the topRecordIds if partial is true.  This can be true for partially retrieved related entities or if features are suppressed or if the minimal response flag has been specified.
+     */
+    partial?: boolean;
 }</code></pre>
     </div>
 </div>
