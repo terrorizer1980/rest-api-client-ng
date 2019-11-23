@@ -1,3 +1,4 @@
+export * from './oneOfSzEntityIdentifier';
 export * from './szAttributeClass';
 export * from './szAttributeNecessity';
 export * from './szAttributeSearchResponse';
@@ -13,6 +14,7 @@ export * from './szBaseRelatedEntity';
 export * from './szBaseResponse';
 export * from './szBaseResponseLinks';
 export * from './szBaseResponseMeta';
+export * from './szConfigResponse';
 export * from './szDataSourceRecordSummary';
 export * from './szDataSourcesResponse';
 export * from './szDataSourcesResponseData';
@@ -34,6 +36,8 @@ export * from './szLicenseResponse';
 export * from './szLicenseResponseData';
 export * from './szLoadRecordResponse';
 export * from './szLoadRecordResponseData';
+// export * from './szMatchedRecord'; // auto-gen reference that does not exist
+//                                    // "szMatchedRecord" == "SzEntityRecord"
 export * from './szRecordId';
 export * from './szRecordResponse';
 export * from './szRecordResponseData';
@@ -41,3 +45,5 @@ export * from './szRelatedEntity';
 export * from './szRelationshipType';
 export * from './szResolvedEntity';
 export * from './szResponseWithRawData';
+export * from './szVersionInfo';
+export * from './szVersionResponse';

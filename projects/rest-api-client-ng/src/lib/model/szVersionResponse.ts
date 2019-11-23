@@ -9,10 +9,12 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+import { SzResponseWithRawData } from './szResponseWithRawData';
+import { SzVersionInfo } from './szVersionInfo';
 
-export interface SzLoadRecordResponseData { 
-    /**
-     * The record ID of the record that was loaded.
-     */
-    recordId?: string;
+/**
+ * The response containing the version information.
+ */
+export interface SzVersionResponse extends SzResponseWithRawData { 
+    data?: SzVersionInfo;
 }
