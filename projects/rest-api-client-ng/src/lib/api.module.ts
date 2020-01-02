@@ -3,6 +3,7 @@ import { Configuration } from './configuration';
 import { HttpClient } from '@angular/common/http';
 
 import { AdminService } from './api/admin.service';
+import { BulkDataService } from './api/bulkData.service';
 import { ConfigService } from './api/config.service';
 import { EntityDataService } from './api/entityData.service';
 import { EntityGraphService } from './api/entityGraph.service';
@@ -13,6 +14,7 @@ import { EntityGraphService } from './api/entityGraph.service';
   exports:      [],
   providers: [
     AdminService,
+    BulkDataService,
     ConfigService,
     EntityDataService,
     EntityGraphService ]
