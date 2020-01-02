@@ -1,6 +1,6 @@
 {
   "name": "@senzing/rest-api-client-ng",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "A package providing restful http interfaces to typescript interfaces to @senzing/senzing-api-server",
   "scripts": {
     "ng": "ng",
@@ -8,8 +8,8 @@
     "build:docs": "npx compodoc -p projects/rest-api-client-ng/tsconfig.lib.json -n \"Senzing Rest Api Client (Angular)\" -d docs --disableInternal --disablePrivate --disableDomTree --disableGraph --disableRoutesGraph",
     "docs": "npm run build:docs",
     "clean": "rimraf dist/@senzing/rest-api-client-ng",
-    "package": "npm run build && npm run build:docs && node post-build.js && cd ./dist/@senzing/rest-api-client-ng/ && npm pack",
-    "publish": "cd ./dist/@senzing/rest-api-client-ng/ && npm publish",
+    "package": "node post-build.js && cd ./dist/@senzing/rest-api-client-ng/ && npm pack",
+    "publish": "npm run build:docs && npm run package && cd ./dist/@senzing/rest-api-client-ng/ && npm publish --access private",
     "test": "ng test",
     "test:headless": "ng test --no-watch --watch=false --progress=false --no-progress --browsers=ChromeHeadlessCI",
     "lint": "ng lint",
