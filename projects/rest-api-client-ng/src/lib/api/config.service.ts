@@ -93,13 +93,10 @@ export class ConfigService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public addDataSources(body?: Body | string, dataSource?: string, withRaw?: boolean, observe?: 'body', reportProgress?: boolean): Observable<SzDataSourcesResponse>;
-    public addDataSources(body?: Body | string, dataSource?: string, withRaw?: boolean, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<SzDataSourcesResponse>>;
-    public addDataSources(body?: Body | string, dataSource?: string, withRaw?: boolean, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<SzDataSourcesResponse>>;
-    public addDataSources(body?: Body | string, dataSource?: string, withRaw?: boolean, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
-
-
-
+    public addDataSources(body?: Body | string, dataSource?: string | string[], withRaw?: boolean, observe?: 'body', reportProgress?: boolean): Observable<SzDataSourcesResponse>;
+    public addDataSources(body?: Body | string, dataSource?: string | string[], withRaw?: boolean, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<SzDataSourcesResponse>>;
+    public addDataSources(body?: Body | string, dataSource?: string | string[], withRaw?: boolean, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<SzDataSourcesResponse>>;
+    public addDataSources(body?: Body | string, dataSource?: string | string[], withRaw?: boolean, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
         if (dataSource !== undefined && dataSource !== null) {
@@ -146,69 +143,6 @@ export class ConfigService {
         );
     }
 
-
-    /**
-     * Obtains the current default configuration, adds the specified data sources and sets the modified configuration as the new default configuration -- returning the set of all configured data sources.
-     * 
-     * @param body The optional request body to describe the data sources to be created. This can be specified as an alternative to the &#x60;dataSource&#x60; parameter or in addition to it.  The content can be an array of string data source codes or &#x60;SzDataSource&#x60; objects.  It may also be a plain-text unquoted string that is simply a single data source code.
-     * @param dataSource The multi-valued query parameter where each value is a data source code identifying data sources to be created.
-     * @param withRaw Whether or not to include the raw JSON response from the underlying native API.  This raw response may include additional details but lack some of the abstraction the standard response provides.  If true, then the &#x27;rawData&#x27; field in the response will be a non-null value and contain the additional details.
-     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-     * @param reportProgress flag to report request and response progress.
-     */
-    /*
-    public addDataSources(body?: string, dataSource?: string, withRaw?: boolean, observe?: 'body', reportProgress?: boolean): Observable<SzDataSourcesResponse>;
-    public addDataSources(body?: string, dataSource?: string, withRaw?: boolean, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<SzDataSourcesResponse>>;
-    public addDataSources(body?: string, dataSource?: string, withRaw?: boolean, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<SzDataSourcesResponse>>;
-    public addDataSources(body?: string, dataSource?: string, withRaw?: boolean, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
-
-
-
-
-        let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
-        if (dataSource !== undefined && dataSource !== null) {
-            queryParameters = queryParameters.set('dataSource', <any>dataSource);
-        }
-        if (withRaw !== undefined && withRaw !== null) {
-            queryParameters = queryParameters.set('withRaw', <any>withRaw);
-        }
-
-        let headers = this.defaultHeaders;
-
-        // to determine the Accept header
-        let httpHeaderAccepts: string[] = [
-            'application/json; charset=UTF-8',
-            'application/json',
-            'default'
-        ];
-        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-        if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set('Accept', httpHeaderAcceptSelected);
-        }
-
-        // to determine the Content-Type header
-        const consumes: string[] = [
-            'application/json; charset=UTF-8',
-            'application/json',
-            'text/plain; charset=UTF=8',
-            'text/plain'
-        ];
-        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
-        if (httpContentTypeSelected != undefined) {
-            headers = headers.set('Content-Type', httpContentTypeSelected);
-        }
-
-        return this.httpClient.post<SzDataSourcesResponse>(`${this.basePath}/data-sources`,
-            body,
-            {
-                params: queryParameters,
-                withCredentials: this.configuration.withCredentials,
-                headers: headers,
-                observe: observe,
-                reportProgress: reportProgress
-            }
-        );
-    }*/
 
     /**
      * Obtains the current default configuration, adds the specified entity classes and sets the modified configuration as the new default configuration -- returning the set of all configured entity classes.
@@ -279,17 +213,18 @@ export class ConfigService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public addEntityTypes(body?: Body2, entityType?: string, entityClass?: string, observe?: 'body', reportProgress?: boolean): Observable<SzEntityTypesResponse>;
-    public addEntityTypes(body?: Body2, entityType?: string, entityClass?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<SzEntityTypesResponse>>;
-    public addEntityTypes(body?: Body2, entityType?: string, entityClass?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<SzEntityTypesResponse>>;
-    public addEntityTypes(body?: Body2, entityType?: string, entityClass?: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
-
-
-
+    public addEntityTypes(body?: Body2, entityType?: string | string[], entityClass?: string, observe?: 'body', reportProgress?: boolean): Observable<SzEntityTypesResponse>;
+    public addEntityTypes(body?: Body2, entityType?: string | string[], entityClass?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<SzEntityTypesResponse>>;
+    public addEntityTypes(body?: Body2, entityType?: string | string[], entityClass?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<SzEntityTypesResponse>>;
+    public addEntityTypes(body?: Body2, entityType?: string | string[], entityClass?: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
         if (entityType !== undefined && entityType !== null) {
-            queryParameters = queryParameters.set('entityType', <any>entityType);
+            if((entityType as string[]).length > 0) {
+                queryParameters = queryParameters.set('entityType', <any>(entityType as string[]).join(','));
+            } else {
+                queryParameters = queryParameters.set('entityType', <any>entityType);
+            }
         }
         if (entityClass !== undefined && entityClass !== null) {
             queryParameters = queryParameters.set('entityClass', <any>entityClass);
@@ -331,69 +266,6 @@ export class ConfigService {
             }
         );
     }
-
-    /**
-     * Obtains the current default configuration, adds the specified entity types and sets the modified configuration as the new default configuration -- returning the set of all configured entity types.
-     * 
-     * @param body The optional request body to describe the entity types to be created. This can be specified as an alternative to the &#x60;entityType&#x60; parameter or in addition to it.  The content must be an array of string entity type codes or &#x60;SzEntityType&#x60; objects.  It may also be a plain-text unquoted string that is simply a single entity type code.
-     * @param entityType The multi-valued query parameter where each value is an entity type code identifying entity types to be created.
-     * @param entityClass The optional single-valued query parameter to specify the entity class to use for all created entity types (i.e.: it is associated with all values of &#x60;entityType&#x60; specified).  This can be omitted if the entity types are fully described by an array of &#x60;SzEntityType&#x60; objects in the request body.
-     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-     * @param reportProgress flag to report request and response progress.
-     */
-    /*
-    public addEntityTypes(body?: string, entityType?: string, entityClass?: string, observe?: 'body', reportProgress?: boolean): Observable<SzEntityTypesResponse>;
-    public addEntityTypes(body?: string, entityType?: string, entityClass?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<SzEntityTypesResponse>>;
-    public addEntityTypes(body?: string, entityType?: string, entityClass?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<SzEntityTypesResponse>>;
-    public addEntityTypes(body?: string, entityType?: string, entityClass?: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
-
-
-
-
-        let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
-        if (entityType !== undefined && entityType !== null) {
-            queryParameters = queryParameters.set('entityType', <any>entityType);
-        }
-        if (entityClass !== undefined && entityClass !== null) {
-            queryParameters = queryParameters.set('entityClass', <any>entityClass);
-        }
-
-        let headers = this.defaultHeaders;
-
-        // to determine the Accept header
-        let httpHeaderAccepts: string[] = [
-            'application/json; charset=UTF-8',
-            'application/json',
-            'default'
-        ];
-        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-        if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set('Accept', httpHeaderAcceptSelected);
-        }
-
-        // to determine the Content-Type header
-        const consumes: string[] = [
-            'application/json; charset=UTF-8',
-            'application/json',
-            'text/plain; charset=UTF=8',
-            'text/plain'
-        ];
-        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
-        if (httpContentTypeSelected != undefined) {
-            headers = headers.set('Content-Type', httpContentTypeSelected);
-        }
-
-        return this.httpClient.post<SzEntityTypesResponse>(`${this.basePath}/entity-types`,
-            body,
-            {
-                params: queryParameters,
-                withCredentials: this.configuration.withCredentials,
-                headers: headers,
-                observe: observe,
-                reportProgress: reportProgress
-            }
-        );
-    }*/
 
     /**
      * Obtains the current default configuration, adds the specified entity types and sets the modified configuration as the new default configuration -- returning the set of all configured entity types.

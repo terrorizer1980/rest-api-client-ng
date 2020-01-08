@@ -60,90 +60,14 @@ export class BulkDataService {
     /**
      * Analyze a bulk data set of records
      * 
-     * @param body The bulk record data as a single JSON record per line, a JSON array, or a CSV.  Further, multipart/form-data can be provided with the &quot;data&quot; property representing the record data as described above.  Set your content type accordingly.  The data should be in pre-mapped format using JSON property names or CSV column names as described by the [Senzing Generic Entity Specification](https://senzing.zendesk.com/hc/en-us/articles/231925448-Generic-Entity-Specification).
-     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-     * @param reportProgress flag to report request and response progress.
-     */
-    /*
-    public analyzeBulkRecords(body: string, observe?: 'body', reportProgress?: boolean): Observable<SzBulkDataAnalysisResponse>;
-    public analyzeBulkRecords(body: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<SzBulkDataAnalysisResponse>>;
-    public analyzeBulkRecords(body: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<SzBulkDataAnalysisResponse>>;
-    public analyzeBulkRecords(body: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
-
-        if (body === null || body === undefined) {
-            throw new Error('Required parameter body was null or undefined when calling analyzeBulkRecords.');
-        }
-
-        let headers = this.defaultHeaders;
-
-        // to determine the Accept header
-        let httpHeaderAccepts: string[] = [
-            'application/json; charset=UTF-8',
-            'application/json',
-            'default'
-        ];
-        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-        if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set('Accept', httpHeaderAcceptSelected);
-        }
-
-        // to determine the Content-Type header
-        const consumes: string[] = [
-            'application/x-jsonlines; charset=UTF-8',
-            'application/x-jsonlines',
-            'application/json; charset=UTF-8',
-            'application/json',
-            'text/csv; charset=UTF-8',
-            'text/csv',
-            'text/plain; charset=UTF-8',
-            'text/plain',
-            'multipart/form-data'
-        ];
-        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
-        if (httpContentTypeSelected != undefined) {
-            headers = headers.set('Content-Type', httpContentTypeSelected);
-        }
-
-        const canConsumeForm = this.canConsumeForm(consumes);
-
-        let formParams: { append(param: string, value: any): void; };
-        let useForm = false;
-        let convertFormParamsToString = false;
-        // use FormData to transmit files using content-type "multipart/form-data"
-        // see https://stackoverflow.com/questions/4007969/application-x-www-form-urlencoded-or-multipart-form-data
-        useForm = canConsumeForm;
-        if (useForm) {
-            formParams = new FormData();
-        } else {
-            formParams = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
-        }
-
-        if (data !== undefined) {
-            formParams = formParams.append('data', <any>data) as any || formParams;
-        }
-
-        return this.httpClient.post<SzBulkDataAnalysisResponse>(`${this.basePath}/bulk-data/analyze`,
-            body,
-            {
-                withCredentials: this.configuration.withCredentials,
-                headers: headers,
-                observe: observe,
-                reportProgress: reportProgress
-            }
-        );
-    }*/
-
-    /**
-     * Analyze a bulk data set of records
-     * 
      * @param data 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public analyzeBulkRecords(body: string | Blob, observe?: 'body', reportProgress?: boolean): Observable<SzBulkDataAnalysisResponse>;
-    public analyzeBulkRecords(body: string | Blob, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<SzBulkDataAnalysisResponse>>;
-    public analyzeBulkRecords(body: string | Blob, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<SzBulkDataAnalysisResponse>>;
-    public analyzeBulkRecords(body: string | Blob, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public analyzeBulkRecords(body: string | Blob | File, observe?: 'body', reportProgress?: boolean): Observable<SzBulkDataAnalysisResponse>;
+    public analyzeBulkRecords(body: string | Blob | File, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<SzBulkDataAnalysisResponse>>;
+    public analyzeBulkRecords(body: string | Blob | File, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<SzBulkDataAnalysisResponse>>;
+    public analyzeBulkRecords(body: string | Blob | File, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (body === null || body === undefined) {
             throw new Error('Required parameter data was null or undefined when calling analyzeBulkRecords.');
@@ -166,6 +90,7 @@ export class BulkDataService {
         const consumes: string[] = [
             'application/x-jsonlines; charset=UTF-8',
             'application/x-jsonlines',
+            'application/vnd.ms-excel',
             'application/json; charset=UTF-8',
             'application/json',
             'text/csv; charset=UTF-8',
@@ -175,7 +100,11 @@ export class BulkDataService {
             'multipart/form-data'
         ];
         const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
-        if (httpContentTypeSelected != undefined) {
+        if ((body as File).type) {
+            // is file upload? probably? 
+            console.log('BulkDataService.analyzeBulkRecords set content type to ', httpContentTypeSelected);
+            headers = headers.set('Content-Type', "text/plain");
+        } else if (httpContentTypeSelected != undefined) {
             headers = headers.set('Content-Type', httpContentTypeSelected);
         }
 
@@ -216,19 +145,34 @@ export class BulkDataService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public loadBulkRecords(body: string | Blob, dataSource?: string, observe?: 'body', reportProgress?: boolean): Observable<SzBulkDataLoadResponse>;
-    public loadBulkRecords(body: string | Blob, dataSource?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<SzBulkDataLoadResponse>>;
-    public loadBulkRecords(body: string | Blob, dataSource?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<SzBulkDataLoadResponse>>;
-    public loadBulkRecords(body: string | Blob, dataSource?: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public loadBulkRecords(body: string | Blob | File, dataSource?: string | { [key: string]: string }, observe?: 'body', reportProgress?: boolean): Observable<SzBulkDataLoadResponse>;
+    public loadBulkRecords(body: string | Blob | File, dataSource?: string | { [key: string]: string }, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<SzBulkDataLoadResponse>>;
+    public loadBulkRecords(body: string | Blob | File, dataSource?: string | { [key: string]: string }, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<SzBulkDataLoadResponse>>;
+    public loadBulkRecords(body: string | Blob | File, dataSource?: string | { [key: string]: string }, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+        let prefix = '';
+        let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
 
         if (body === null || body === undefined) {
             throw new Error('Required parameter body was null or undefined when calling loadBulkRecords.');
         }
 
-
-        let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
         if (dataSource !== undefined && dataSource !== null) {
-            queryParameters = queryParameters.set('dataSource', <any>dataSource);
+            if((dataSource as { [key: string]: string })) {
+                const _dsArr = [];
+                for (const key in (dataSource as { [key: string]: string })) {
+                    _dsArr.push( dataSource[key] );
+                }
+                if(_dsArr.length > 0){
+                    console.log('BulkDataService.loadBulkRecords datasources set to: ', _dsArr);
+                    queryParameters = queryParameters.set('dataSource', <any>_dsArr.join(','));
+                } else {
+                    console.warn('BulkDataService.loadBulkRecords datasources not set!! ', dataSource);
+                }
+            } else {
+                // TODO: support dataSource<string[]>
+                // is single ds
+                queryParameters = queryParameters.set('dataSource', <any>dataSource);
+            }
         }
 
         let headers = this.defaultHeaders;
@@ -250,6 +194,7 @@ export class BulkDataService {
             'application/x-jsonlines',
             'application/json; charset=UTF-8',
             'application/json',
+            'application/vnd.ms-excel',
             'text/csv; charset=UTF-8',
             'text/csv',
             'text/plain; charset=UTF-8',
@@ -257,7 +202,11 @@ export class BulkDataService {
             'multipart/form-data'
         ];
         const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
-        if (httpContentTypeSelected != undefined) {
+        if ((body as File).type) {
+            // is file upload? probably? 
+            console.log('BulkDataService.loadBulkRecords set content type to ', httpContentTypeSelected);
+            headers = headers.set('Content-Type', "text/plain");
+        } else if (httpContentTypeSelected != undefined) {
             headers = headers.set('Content-Type', httpContentTypeSelected);
         }
 
@@ -290,173 +239,4 @@ export class BulkDataService {
             }
         );
     }
-
-    /**
-     * Load the records in the provided bulk data set.
-     * 
-     * @param body The bulk record data as a single JSON record per line, a JSON array, or a CSV.  Further, multipart/form-data can be provided with the &quot;data&quot; property representing the record data as described above.  Set your content type accordingly.  The data should be in pre-mapped format using JSON property names or CSV column names as described by the [Senzing Generic Entity Specification](https://senzing.zendesk.com/hc/en-us/articles/231925448-Generic-Entity-Specification).
-     * @param dataSource Used to set the overriding data source for the records.  This data source will be assigned to every record unless the record has a data source already and that data source has a specific override specified by a &#x60;dataSource_xxxx&#x60; parameter.  For example &#x60;dataSource_EMPL&#x60; will map the &#x60;EMPL&#x60; data source to the specified value.
-     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-     * @param reportProgress flag to report request and response progress.
-     */
-    /*
-    public loadBulkRecords(body: Array<{ [key: string]: ModelObject; }>, dataSource?: string, observe?: 'body', reportProgress?: boolean): Observable<SzBulkDataLoadResponse>;
-    public loadBulkRecords(body: Array<{ [key: string]: ModelObject; }>, dataSource?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<SzBulkDataLoadResponse>>;
-    public loadBulkRecords(body: Array<{ [key: string]: ModelObject; }>, dataSource?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<SzBulkDataLoadResponse>>;
-    public loadBulkRecords(body: Array<{ [key: string]: ModelObject; }>, dataSource?: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
-
-        if (body === null || body === undefined) {
-            throw new Error('Required parameter body was null or undefined when calling loadBulkRecords.');
-        }
-
-
-        let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
-        if (dataSource !== undefined && dataSource !== null) {
-            queryParameters = queryParameters.set('dataSource', <any>dataSource);
-        }
-
-        let headers = this.defaultHeaders;
-
-        // to determine the Accept header
-        let httpHeaderAccepts: string[] = [
-            'application/json; charset=UTF-8',
-            'application/json',
-            'default'
-        ];
-        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-        if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set('Accept', httpHeaderAcceptSelected);
-        }
-
-        // to determine the Content-Type header
-        const consumes: string[] = [
-            'application/x-jsonlines; charset=UTF-8',
-            'application/x-jsonlines',
-            'application/json; charset=UTF-8',
-            'application/json',
-            'text/csv; charset=UTF-8',
-            'text/csv',
-            'text/plain; charset=UTF-8',
-            'text/plain',
-            'multipart/form-data'
-        ];
-        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
-        if (httpContentTypeSelected != undefined) {
-            headers = headers.set('Content-Type', httpContentTypeSelected);
-        }
-
-        const canConsumeForm = this.canConsumeForm(consumes);
-
-        let formParams: { append(param: string, value: any): void; };
-        let useForm = false;
-        let convertFormParamsToString = false;
-        // use FormData to transmit files using content-type "multipart/form-data"
-        // see https://stackoverflow.com/questions/4007969/application-x-www-form-urlencoded-or-multipart-form-data
-        useForm = canConsumeForm;
-        if (useForm) {
-            formParams = new FormData();
-        } else {
-            formParams = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
-        }
-
-        if (data !== undefined) {
-            formParams = formParams.append('data', <any>data) as any || formParams;
-        }
-
-        return this.httpClient.post<SzBulkDataLoadResponse>(`${this.basePath}/bulk-data/load`,
-            body,
-            {
-                params: queryParameters,
-                withCredentials: this.configuration.withCredentials,
-                headers: headers,
-                observe: observe,
-                reportProgress: reportProgress
-            }
-        );
-    }*/
-
-    /**
-     * Load the records in the provided bulk data set.
-     * 
-     * @param data 
-     * @param dataSource Used to set the overriding data source for the records.  This data source will be assigned to every record unless the record has a data source already and that data source has a specific override specified by a &#x60;dataSource_xxxx&#x60; parameter.  For example &#x60;dataSource_EMPL&#x60; will map the &#x60;EMPL&#x60; data source to the specified value.
-     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-     * @param reportProgress flag to report request and response progress.
-     */
-    /*
-    public loadBulkRecords(data: Blob, dataSource?: string, observe?: 'body', reportProgress?: boolean): Observable<SzBulkDataLoadResponse>;
-    public loadBulkRecords(data: Blob, dataSource?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<SzBulkDataLoadResponse>>;
-    public loadBulkRecords(data: Blob, dataSource?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<SzBulkDataLoadResponse>>;
-    public loadBulkRecords(data: Blob, dataSource?: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
-
-        if (data === null || data === undefined) {
-            throw new Error('Required parameter data was null or undefined when calling loadBulkRecords.');
-        }
-
-
-        let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
-        if (dataSource !== undefined && dataSource !== null) {
-            queryParameters = queryParameters.set('dataSource', <any>dataSource);
-        }
-
-        let headers = this.defaultHeaders;
-
-        // to determine the Accept header
-        let httpHeaderAccepts: string[] = [
-            'application/json; charset=UTF-8',
-            'application/json',
-            'default'
-        ];
-        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-        if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set('Accept', httpHeaderAcceptSelected);
-        }
-
-        // to determine the Content-Type header
-        const consumes: string[] = [
-            'application/x-jsonlines; charset=UTF-8',
-            'application/x-jsonlines',
-            'application/json; charset=UTF-8',
-            'application/json',
-            'text/csv; charset=UTF-8',
-            'text/csv',
-            'text/plain; charset=UTF-8',
-            'text/plain',
-            'multipart/form-data'
-        ];
-        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
-        if (httpContentTypeSelected != undefined) {
-            headers = headers.set('Content-Type', httpContentTypeSelected);
-        }
-
-        const canConsumeForm = this.canConsumeForm(consumes);
-
-        let formParams: { append(param: string, value: any): void; };
-        let useForm = false;
-        let convertFormParamsToString = false;
-        // use FormData to transmit files using content-type "multipart/form-data"
-        // see https://stackoverflow.com/questions/4007969/application-x-www-form-urlencoded-or-multipart-form-data
-        useForm = canConsumeForm;
-        if (useForm) {
-            formParams = new FormData();
-        } else {
-            formParams = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
-        }
-
-        if (data !== undefined) {
-            formParams = formParams.append('data', <any>data) as any || formParams;
-        }
-
-        return this.httpClient.post<SzBulkDataLoadResponse>(`${this.basePath}/bulk-data/load`,
-            body,
-            {
-                params: queryParameters,
-                withCredentials: this.configuration.withCredentials,
-                headers: headers,
-                observe: observe,
-                reportProgress: reportProgress
-            }
-        );
-    }*/
-
 }
