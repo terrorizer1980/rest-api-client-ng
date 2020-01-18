@@ -164,7 +164,9 @@ export class BulkDataService {
                 }
                 if(_dsArr.length > 0){
                     console.log('BulkDataService.loadBulkRecords datasources set to: ', _dsArr);
-                    queryParameters = queryParameters.set('dataSource', <any>_dsArr.join(','));
+                    _dsArr.forEach( (ds: string) => {
+                        queryParameters = queryParameters.append('dataSource', ds);
+                    });
                 } else {
                     console.warn('BulkDataService.loadBulkRecords datasources not set!! ', dataSource);
                 }

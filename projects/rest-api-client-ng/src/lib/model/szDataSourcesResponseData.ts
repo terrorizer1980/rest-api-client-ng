@@ -1,3 +1,5 @@
+import { SzDataSource } from './szDataSource';
+
 /**
  * Senzing REST API
  * This is the Senzing REST API.  It describes the REST interface to Senzing API functions available via REST.  It leverages the Senzing native API which is documented at [https://docs.senzing.com](https://docs.senzing.com)
@@ -15,4 +17,7 @@ export interface SzDataSourcesResponseData {
      * The list of data source codes that are configured.
      */
     dataSources?: Array<string>;
+    dataSourceDetails: {
+        [id: string]: SzDataSource
+    };
 }

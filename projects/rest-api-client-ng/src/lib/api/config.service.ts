@@ -221,9 +221,15 @@ export class ConfigService {
         let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
         if (entityType !== undefined && entityType !== null) {
             if((entityType as string[]).length > 0) {
-                queryParameters = queryParameters.set('entityType', <any>(entityType as string[]).join(','));
+                (entityType as string[]).forEach( (entityType: string) => {
+                    queryParameters = queryParameters.append('entityType', entityType);
+                });
+                console.log('ConfigService.addEntityTypes: string[] entity types', queryParameters, entityType);
+
+                //queryParameters = queryParameters.set('entityType', <any>(entityType as string[]).join('&entityType='));
             } else {
                 queryParameters = queryParameters.set('entityType', <any>entityType);
+                console.log('ConfigService.addEntityTypes: single string entity type', queryParameters, entityType);
             }
         }
         if (entityClass !== undefined && entityClass !== null) {
@@ -276,14 +282,26 @@ export class ConfigService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public addEntityTypesForClass(entityClassCode?: string, body?: string | Array<SzEntityTypeDescriptor>, entityType?: string, observe?: 'body', reportProgress?: boolean): Observable<SzEntityTypesResponse>;
-    public addEntityTypesForClass(entityClassCode?: string, body?: string | Array<SzEntityTypeDescriptor>, entityType?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<SzEntityTypesResponse>>;
-    public addEntityTypesForClass(entityClassCode?: string, body?: string | Array<SzEntityTypeDescriptor>, entityType?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<SzEntityTypesResponse>>;
-    public addEntityTypesForClass(entityClassCode?: string, body?: string | Array<SzEntityTypeDescriptor>, entityType?: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public addEntityTypesForClass(entityClassCode?: string | string[], body?: string | Array<SzEntityTypeDescriptor>, entityType?: string, observe?: 'body', reportProgress?: boolean): Observable<SzEntityTypesResponse>;
+    public addEntityTypesForClass(entityClassCode?: string | string[], body?: string | Array<SzEntityTypeDescriptor>, entityType?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<SzEntityTypesResponse>>;
+    public addEntityTypesForClass(entityClassCode?: string | string[], body?: string | Array<SzEntityTypeDescriptor>, entityType?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<SzEntityTypesResponse>>;
+    public addEntityTypesForClass(entityClassCode?: string | string[], body?: string | Array<SzEntityTypeDescriptor>, entityType?: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
         if (entityType !== undefined && entityType !== null) {
-            queryParameters = queryParameters.set('entityType', <any>entityType);
+            if((entityClassCode as string[]).length > 0) {
+                (entityClassCode as string[]).forEach( (entityClassCodeStr: string) => {
+                    queryParameters = queryParameters.append('entityType', entityClassCodeStr);
+                });
+                console.log('ConfigService.addEntityTypesForClass: string[] entity class', queryParameters);
+
+                //queryParameters = queryParameters.set('entityType', <any>(entityClassCode as string[]).join('&ampentityType='));
+                //queryParameters = queryParameters.append('entityType', <any>(entityClassCode as string[]).join('&ampentityType='));
+
+            } else {
+                console.log('ConfigService.addEntityTypesForClass: single string entity class', queryParameters);
+                queryParameters = queryParameters.set('entityType', <any>entityClassCode);
+            }
         }
 
         let headers = this.defaultHeaders;
