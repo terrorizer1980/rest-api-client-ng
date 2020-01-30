@@ -10,5 +10,6 @@
  * Do not edit the class manually.
  */
 
-export interface Body3 { 
-}
+import { SzEntityTypeDescriptor } from './szEntityTypeDescriptor';
+
+export type Body3 = Array<SzEntityTypeDescriptor> | SzEntityTypeDescriptor;

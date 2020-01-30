@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 import { SzDataSourceRecordAnalysis } from './szDataSourceRecordAnalysis';
-
+import { SzEntityTypeRecordAnalysis } from './szEntityTypeRecordAnalysis';
 /**
  * Describes the analysis performed against a set of bulk data records described as a JSON array, JSON Lines format or CSV format.
  */
@@ -36,7 +36,15 @@ export interface SzBulkDataAnalysis {
      */
     recordsWithDataSourceCount?: number;
     /**
-     * The array of `SzDataSourceRecordAnalysis` elements map of string data source names to integer counts of how many records are provided with that data source name.
+     * The number of records provided that include a `ENTITY_TYPE` value.
+     */
+    recordsWithEntityTypeCount?: number;
+    /**
+     * The array of `SzDataSourceRecordAnalysis` elements providing statistics on the records by data source.
      */
     analysisByDataSource?: Array<SzDataSourceRecordAnalysis>;
+    /**
+     * The array of `SzEntityTypeRecordAnalysis` elements providing statistics on the records by entity type.
+     */
+    analysisByEntityType?: Array<SzEntityTypeRecordAnalysis>;
 }

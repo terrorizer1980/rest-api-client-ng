@@ -9,6 +9,6 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+import { SzDataSourceDescriptor } from './szDataSourceDescriptor';
 
-export interface Body { 
-}
+export type Body = Array<SzDataSourceDescriptor> | SzDataSourceDescriptor;

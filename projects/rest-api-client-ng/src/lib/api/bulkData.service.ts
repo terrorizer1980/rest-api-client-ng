@@ -16,6 +16,7 @@ import { HttpClient, HttpHeaders, HttpParams,
 import { CustomHttpUrlEncodingCodec }                        from '../encoder';
 
 import { Observable }                                        from 'rxjs';
+import { tap, catchError }                                               from 'rxjs/operators';
 
 import { SzBulkDataAnalysisResponse } from '../model/szBulkDataAnalysisResponse';
 import { SzBulkDataLoadResponse } from '../model/szBulkDataLoadResponse';
@@ -142,13 +143,14 @@ export class BulkDataService {
      * 
      * @param body The bulk record data as a single JSON record per line, a JSON array, or a CSV.  Further, multipart/form-data can be provided with the &quot;data&quot; property representing the record data as described above.  Set your content type accordingly.  The data should be in pre-mapped format using JSON property names or CSV column names as described by the [Senzing Generic Entity Specification](https://senzing.zendesk.com/hc/en-us/articles/231925448-Generic-Entity-Specification).
      * @param dataSource Used to set the overriding data source for the records.  This data source will be assigned to every record unless the record has a data source already and that data source has a specific override specified by a &#x60;dataSource_xxxx&#x60; parameter.  For example &#x60;dataSource_EMPL&#x60; will map the &#x60;EMPL&#x60; data source to the specified value.
+     * @param entityType Used to set the overriding entity type for the records.  This entity type will be assigned to every record unless the record already has an entity type and that data source has a specific override specified by a &#x60;entityType_xxxx&#x60; parameter.  For example &#x60;entityType_PERSON&#x60; will map the &#x60;PERSON&#x60; entity type to the specified value.  If no override is provided then the entity type specified for the record is used directly, unless the record has no entity type in which case an entity type by the same name as the data source is used.
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public loadBulkRecords(body: string | Blob | File, dataSource?: string | { [key: string]: string }, observe?: 'body', reportProgress?: boolean): Observable<SzBulkDataLoadResponse>;
-    public loadBulkRecords(body: string | Blob | File, dataSource?: string | { [key: string]: string }, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<SzBulkDataLoadResponse>>;
-    public loadBulkRecords(body: string | Blob | File, dataSource?: string | { [key: string]: string }, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<SzBulkDataLoadResponse>>;
-    public loadBulkRecords(body: string | Blob | File, dataSource?: string | { [key: string]: string }, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public loadBulkRecords(body: string | Blob | File, dataSource?: string | { [key: string]: string }, entityType?: string | { [key: string]: string }, observe?: 'body', reportProgress?: boolean): Observable<SzBulkDataLoadResponse>;
+    public loadBulkRecords(body: string | Blob | File, dataSource?: string | { [key: string]: string }, entityType?: string | { [key: string]: string }, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<SzBulkDataLoadResponse>>;
+    public loadBulkRecords(body: string | Blob | File, dataSource?: string | { [key: string]: string }, entityType?: string | { [key: string]: string }, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<SzBulkDataLoadResponse>>;
+    public loadBulkRecords(body: string | Blob | File, dataSource?: string | { [key: string]: string }, entityType?: string | { [key: string]: string }, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
         let prefix = '';
         let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
 
@@ -157,24 +159,39 @@ export class BulkDataService {
         }
 
         if (dataSource !== undefined && dataSource !== null) {
-            if((dataSource as { [key: string]: string })) {
-                const _dsArr = [];
-                for (const key in (dataSource as { [key: string]: string })) {
-                    _dsArr.push( dataSource[key] );
-                }
-                if(_dsArr.length > 0){
-                    console.log('BulkDataService.loadBulkRecords datasources set to: ', _dsArr);
-                    _dsArr.forEach( (ds: string) => {
-                        queryParameters = queryParameters.append('dataSource', ds);
-                    });
-                } else {
-                    console.warn('BulkDataService.loadBulkRecords datasources not set!! ', dataSource);
-                }
+            if((dataSource as { [key: string]: string }) && typeof (dataSource as { [key: string]: string }) !== 'string') {
+              for (const key in (dataSource as { [key: string]: string })) {
+                  if(key === null || key === 'null' || key === 'NULL') {
+                    queryParameters = queryParameters.append('dataSource', dataSource[key]);
+                    console.log('BulkDataService.loadBulkRecords append "dataSource" to: '+ dataSource[key], queryParameters);
+                  } else {
+                    queryParameters = queryParameters.append('dataSource_'+key, dataSource[key]);
+                    console.log('BulkDataService.loadBulkRecords append "'+ 'dataSource_'+key +'" to: '+ dataSource[key], queryParameters);
+                  }
+                  //console.log('BulkDataService.loadBulkRecords entity types set to: ', queryParameters);
+              }
             } else {
-                // TODO: support dataSource<string[]>
-                // is single ds
-                queryParameters = queryParameters.set('dataSource', <any>dataSource);
+              // is single ds
+              queryParameters = queryParameters.set('dataSource', <any>dataSource);
             }
+        }
+
+        if (entityType !== undefined && entityType !== null) {
+          if((entityType as { [key: string]: string }) && typeof (entityType as { [key: string]: string }) !== 'string') {
+            //const _etArr = [];
+            for (const key in (entityType as { [key: string]: string })) {
+                //_etArr.push( entityType[key] );
+                if(key === null || key === 'null' || key === 'NULL') {
+                  queryParameters = queryParameters.append('entityType', entityType[key]);
+                } else {
+                  queryParameters = queryParameters.append('entityType_'+key, entityType[key]);
+                }
+                //console.log('BulkDataService.loadBulkRecords entity types set to: ', queryParameters);
+            }
+          } else {
+            // is single et
+            queryParameters = queryParameters.set('entityType', <any>entityType);
+          }
         }
 
         let headers = this.defaultHeaders;
@@ -239,6 +256,10 @@ export class BulkDataService {
                 observe: observe,
                 reportProgress: reportProgress
             }
+        ).pipe(
+            tap( (resp) => {
+                console.log('BulkDataService.loadBulkRecords: ', resp);
+            })
         );
     }
 }

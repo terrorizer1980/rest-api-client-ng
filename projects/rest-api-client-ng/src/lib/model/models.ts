@@ -115,6 +115,7 @@ export * from './szEntityRecord';
 export * from './szEntityResponse';
 export * from './szEntityType';
 export * from './szEntityTypeDescriptor';
+export * from './szEntityTypeRecordAnalysis';
 export * from './szEntityTypeResponse';
 export * from './szEntityTypeResponseData';
 export * from './szEntityTypesResponse';

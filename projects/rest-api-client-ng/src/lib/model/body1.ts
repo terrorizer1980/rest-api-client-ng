@@ -10,5 +10,6 @@
  * Do not edit the class manually.
  */
 
-export interface Body1 { 
-}
+import { SzDataSourceDescriptor } from './szDataSourceDescriptor';
+
+export type Body1 = Array<SzDataSourceDescriptor> | SzDataSourceDescriptor;

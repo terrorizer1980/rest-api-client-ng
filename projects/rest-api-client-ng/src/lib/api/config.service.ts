@@ -220,7 +220,7 @@ export class ConfigService {
 
         let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
         if (entityType !== undefined && entityType !== null) {
-            if((entityType as string[]).length > 0) {
+            if((entityType as string[]).length > 0 && (entityType as string[]).forEach) {
                 (entityType as string[]).forEach( (entityType: string) => {
                     queryParameters = queryParameters.append('entityType', entityType);
                 });
