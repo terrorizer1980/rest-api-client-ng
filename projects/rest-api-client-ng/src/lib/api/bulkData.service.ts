@@ -89,6 +89,8 @@ export class BulkDataService {
 
         // to determine the Content-Type header
         const consumes: string[] = [
+            'text/plain; charset=UTF-8',
+            'text/plain',
             'application/x-jsonlines; charset=UTF-8',
             'application/x-jsonlines',
             'application/vnd.ms-excel',
@@ -96,16 +98,10 @@ export class BulkDataService {
             'application/json',
             'text/csv; charset=UTF-8',
             'text/csv',
-            'text/plain; charset=UTF-8',
-            'text/plain',
             'multipart/form-data'
         ];
-        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
-        if ((body as File).type) {
-            // is file upload? probably? 
-            console.log('BulkDataService.analyzeBulkRecords set content type to ', httpContentTypeSelected);
-            headers = headers.set('Content-Type', "text/plain");
-        } else if (httpContentTypeSelected != undefined) {
+        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes, body);
+        if(httpContentTypeSelected != undefined) {
             headers = headers.set('Content-Type', httpContentTypeSelected);
         }
 
@@ -163,10 +159,8 @@ export class BulkDataService {
               for (const key in (dataSource as { [key: string]: string })) {
                   if(key === null || key === 'null' || key === 'NULL') {
                     queryParameters = queryParameters.append('dataSource', dataSource[key]);
-                    console.log('BulkDataService.loadBulkRecords append "dataSource" to: '+ dataSource[key], queryParameters);
                   } else {
                     queryParameters = queryParameters.append('dataSource_'+key, dataSource[key]);
-                    console.log('BulkDataService.loadBulkRecords append "'+ 'dataSource_'+key +'" to: '+ dataSource[key], queryParameters);
                   }
                   //console.log('BulkDataService.loadBulkRecords entity types set to: ', queryParameters);
               }
@@ -178,15 +172,12 @@ export class BulkDataService {
 
         if (entityType !== undefined && entityType !== null) {
           if((entityType as { [key: string]: string }) && typeof (entityType as { [key: string]: string }) !== 'string') {
-            //const _etArr = [];
             for (const key in (entityType as { [key: string]: string })) {
-                //_etArr.push( entityType[key] );
                 if(key === null || key === 'null' || key === 'NULL') {
                   queryParameters = queryParameters.append('entityType', entityType[key]);
                 } else {
                   queryParameters = queryParameters.append('entityType_'+key, entityType[key]);
                 }
-                //console.log('BulkDataService.loadBulkRecords entity types set to: ', queryParameters);
             }
           } else {
             // is single et
@@ -198,15 +189,8 @@ export class BulkDataService {
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
-            'application/x-jsonlines; charset=UTF-8',
-            'application/x-jsonlines',
             'application/json; charset=UTF-8',
             'application/json',
-            'application/vnd.ms-excel',
-            'text/csv; charset=UTF-8',
-            'text/csv',
-            'text/plain; charset=UTF-8',
-            'text/plain',
             'default'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
@@ -227,19 +211,8 @@ export class BulkDataService {
             'text/plain',
             'multipart/form-data'
         ];
-        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
-        if ((body as File).type) {
-            // is file upload? probably? 
-            console.log('BulkDataService.loadBulkRecords set content type to ', httpContentTypeSelected, (body as File).type);
-            headers = headers.set('Content-Type', "text/plain");
-            /*
-            if(consumes.indexOf((body as File).type) >= 0) {
-              // try the type specified by the file
-              headers = headers.set('Content-Type', ((body as File).type));
-            } else {
-              headers = headers.set('Content-Type', httpContentTypeSelected);
-            }*/
-        } else if (httpContentTypeSelected != undefined) {
+        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes, body);
+        if (httpContentTypeSelected != undefined) {
             headers = headers.set('Content-Type', httpContentTypeSelected);
         }
 
