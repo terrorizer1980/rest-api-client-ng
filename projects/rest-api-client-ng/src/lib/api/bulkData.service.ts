@@ -65,10 +65,10 @@ export class BulkDataService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public analyzeBulkRecords(body: string | Blob | File, observe?: 'body', reportProgress?: boolean): Observable<SzBulkDataAnalysisResponse>;
-    public analyzeBulkRecords(body: string | Blob | File, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<SzBulkDataAnalysisResponse>>;
-    public analyzeBulkRecords(body: string | Blob | File, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<SzBulkDataAnalysisResponse>>;
-    public analyzeBulkRecords(body: string | Blob | File, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public analyzeBulkRecords(body: string | Blob | File | Array<{ [key: string]: any; }>, observe?: 'body', reportProgress?: boolean): Observable<SzBulkDataAnalysisResponse>;
+    public analyzeBulkRecords(body: string | Blob | File | Array<{ [key: string]: any; }>, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<SzBulkDataAnalysisResponse>>;
+    public analyzeBulkRecords(body: string | Blob | File | Array<{ [key: string]: any; }>, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<SzBulkDataAnalysisResponse>>;
+    public analyzeBulkRecords(body: string | Blob | File | Array<{ [key: string]: any; }>, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (body === null || body === undefined) {
             throw new Error('Required parameter data was null or undefined when calling analyzeBulkRecords.');
@@ -198,8 +198,15 @@ export class BulkDataService {
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
+            'application/x-jsonlines; charset=UTF-8',
+            'application/x-jsonlines',
             'application/json; charset=UTF-8',
             'application/json',
+            'application/vnd.ms-excel',
+            'text/csv; charset=UTF-8',
+            'text/csv',
+            'text/plain; charset=UTF-8',
+            'text/plain',
             'default'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
@@ -223,8 +230,15 @@ export class BulkDataService {
         const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
         if ((body as File).type) {
             // is file upload? probably? 
-            console.log('BulkDataService.loadBulkRecords set content type to ', httpContentTypeSelected);
+            console.log('BulkDataService.loadBulkRecords set content type to ', httpContentTypeSelected, (body as File).type);
             headers = headers.set('Content-Type', "text/plain");
+            /*
+            if(consumes.indexOf((body as File).type) >= 0) {
+              // try the type specified by the file
+              headers = headers.set('Content-Type', ((body as File).type));
+            } else {
+              headers = headers.set('Content-Type', httpContentTypeSelected);
+            }*/
         } else if (httpContentTypeSelected != undefined) {
             headers = headers.set('Content-Type', httpContentTypeSelected);
         }

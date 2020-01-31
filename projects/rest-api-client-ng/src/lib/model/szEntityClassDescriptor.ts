@@ -9,9 +9,9 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+import { SzEntityClass } from './szEntityClass';
 
 /**
  * Describes an entity class either as only its entity class code or as an `SzEntityClass` object.
  */
-export interface SzEntityClassDescriptor { 
-}
+export type SzEntityClassDescriptor = string | SzEntityClass;

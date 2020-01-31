@@ -9,15 +9,15 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+import { SzBulkDataStatus } from './szBulkDataStatus';
 import { SzBulkLoadError } from './szBulkLoadError';
-import { SzBulkLoadStatus } from './szBulkLoadStatus';
 import { SzDataSourceBulkLoadResult } from './szDataSourceBulkLoadResult';
 
 /**
  * Describes the result from loading a set of bulk data records described as a JSON array, JSON Lines format or CSV format.
  */
 export interface SzBulkLoadResult { 
-    status?: SzBulkLoadStatus;
+    status?: SzBulkDataStatus;
     /**
      * The character encoding used to process the bulk data.
      */

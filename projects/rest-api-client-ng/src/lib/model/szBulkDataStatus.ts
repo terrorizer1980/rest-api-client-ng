@@ -9,11 +9,15 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { SzBaseResponse } from './szBaseResponse';
-import { SzBaseResponseLinks } from './szBaseResponseLinks';
-import { SzBaseResponseMeta } from './szBaseResponseMeta';
-import { SzLoadRecordResponseData } from './szLoadRecordResponseData';
 
-export interface SzLoadRecordResponse extends SzBaseResponse { 
-    data?: SzLoadRecordResponseData;
-}
+/**
+ * Describes the status of a bulk data operation:   * `NOT_STARTED` - The bulk data operation has not started.   * `IN_PROGRESS` - If bulk data operation is in progress.   * `ABORTED` - The bulk data operation was aborted.   * `COMPLETED` - The bulk data operation completed normally.
+ */
+export type SzBulkDataStatus = 'NOT_STARTED' | 'IN_PROGRESS' | 'ABORTED' | 'COMPLETED';
+
+export const SzBulkDataStatus = {
+    NOTSTARTED: 'NOT_STARTED' as SzBulkDataStatus,
+    INPROGRESS: 'IN_PROGRESS' as SzBulkDataStatus,
+    ABORTED: 'ABORTED' as SzBulkDataStatus,
+    COMPLETED: 'COMPLETED' as SzBulkDataStatus
+};

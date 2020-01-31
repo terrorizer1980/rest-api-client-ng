@@ -9,12 +9,14 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+import { SzBulkDataStatus } from './szBulkDataStatus';
 import { SzDataSourceRecordAnalysis } from './szDataSourceRecordAnalysis';
 import { SzEntityTypeRecordAnalysis } from './szEntityTypeRecordAnalysis';
 /**
  * Describes the analysis performed against a set of bulk data records described as a JSON array, JSON Lines format or CSV format.
  */
 export interface SzBulkDataAnalysis { 
+    status?: SzBulkDataStatus;
     /**
      * The character encoding used to process the bulk data.
      */
