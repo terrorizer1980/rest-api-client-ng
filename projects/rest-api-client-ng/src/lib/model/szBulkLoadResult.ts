@@ -1,6 +1,6 @@
 /**
  * Senzing REST API
- * This is the Senzing REST API.  It describes the REST interface to Senzing API functions available via REST.  It leverages the Senzing native API which is documented at [https://docs.senzing.com](https://docs.senzing.com)
+ * This is the Senzing REST API.  It describes the REST interface to Senzing API functions available via REST.  It leverages the Senzing native API which is documented at [https://docs.senzing.com](https://docs.senzing.com). <br><br> <b>NOTE:</b> Some end-points described here will indicate \"(Supports SSE)\" to indicate that they support \"Server-sent Events\" via the `text/event-stream` media type.  This support is activated by adding the `Accept: text/event-stream` header to a request to override the default `application/json` media type.  Further, the end-point will behave the similarly to its stand operation but will produce `progress` events at regular intervals that are equivalent to its `200` response schema. Upon success, the final event will be `completed` with the same response schema as a `200` response.  Upon failure, the final event will be `failed` with same schema as the `4xx` or `5xx` response (typically the `SzErrorResponse`)
  *
  * OpenAPI spec version: 1.8.0
  * 
@@ -9,14 +9,16 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+import { SzBaseBulkLoadResult } from './szBaseBulkLoadResult';
 import { SzBulkDataStatus } from './szBulkDataStatus';
 import { SzBulkLoadError } from './szBulkLoadError';
 import { SzDataSourceBulkLoadResult } from './szDataSourceBulkLoadResult';
+import { SzEntityTypeBulkLoadResult } from './szEntityTypeBulkLoadResult';
 
 /**
  * Describes the result from loading a set of bulk data records described as a JSON array, JSON Lines format or CSV format.
  */
-export interface SzBulkLoadResult { 
+export interface SzBulkLoadResult extends SzBaseBulkLoadResult { 
     status?: SzBulkDataStatus;
     /**
      * The character encoding used to process the bulk data.
@@ -27,27 +29,19 @@ export interface SzBulkLoadResult {
      */
     mediaType?: string;
     /**
-     * The number of records found in the bulk data set.  This may not match the number of \"observed entities\" once loaded since some records may be exact duplicates.
+     * The number of records that are incomplete because they are missing the `DATA_SOURCE` field.
      */
-    recordCount?: number;
+    missingDataSourceCount?: number;
     /**
-     * The number of records successfully loaded from the bulk data set. This may not match the number of \"observed entities\" loaded since some records may be exact duplicates.
+     * The number of records that are incomplete because they are missing the `ENTITY_TYPE` field.
      */
-    loadedRecordCount?: number;
-    /**
-     * The number of records for which the attempt to load failed with an error.
-     */
-    failedRecordCount?: number;
-    /**
-     * The number of records that are incomplete because they are missing a `DATA_SOURCE` field.
-     */
-    incompleteRecordCount?: number;
+    missingEntityTypeCount?: number;
     /**
      * The array of `SzDataSourceBulkDataResult` elements describing the load statistics by data source.
      */
     resultsByDataSource?: Array<SzDataSourceBulkLoadResult>;
     /**
-     * The array of top error occurrences with the number of times they occurred.
+     * The array of `SzEntityTypeBulkDataResult` elements describing the load statistics by entity type.
      */
-    topErrors?: Array<SzBulkLoadError>;
+    resultsByEntityType?: Array<SzEntityTypeBulkLoadResult>;
 }

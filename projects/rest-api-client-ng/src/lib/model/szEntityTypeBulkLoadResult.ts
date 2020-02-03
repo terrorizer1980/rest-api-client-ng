@@ -13,11 +13,11 @@ import { SzBaseBulkLoadResult } from './szBaseBulkLoadResult';
 import { SzBulkLoadError } from './szBulkLoadError';
 
 /**
- * Provides bulk data load statistics specific to a given data source.
+ * Provides bulk data load statistics specific to a given enitty type.
  */
-export interface SzDataSourceBulkLoadResult extends SzBaseBulkLoadResult { 
+export interface SzEntityTypeBulkLoadResult extends SzBaseBulkLoadResult { 
     /**
-     * The data source code identifying the data source for which the load statistics are being provided.
+     * The entity type code identifying the entity type for which the load statistics are being provided.
      */
-    dataSource?: string;
+    entityType?: string;
 }

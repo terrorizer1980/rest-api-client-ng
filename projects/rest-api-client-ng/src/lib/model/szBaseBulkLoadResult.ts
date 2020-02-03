@@ -9,15 +9,26 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { SzBaseBulkLoadResult } from './szBaseBulkLoadResult';
 import { SzBulkLoadError } from './szBulkLoadError';
 
 /**
- * Provides bulk data load statistics specific to a given data source.
+ * Provides statistics specific common to all bulk load results regardless of how they are aggregated.
  */
-export interface SzDataSourceBulkLoadResult extends SzBaseBulkLoadResult { 
+export interface SzBaseBulkLoadResult { 
     /**
-     * The data source code identifying the data source for which the load statistics are being provided.
+     * The number of records found in the bulk data set having the associated data source.  This may not match the number of \"observed entities\" once loaded since some records may be exact duplicates.
      */
-    dataSource?: string;
+    recordCount?: number;
+    /**
+     * The number of records successfully loaded from the bulk data set having the associated data source.  This may not match the number of \"observed entities\" loaded for that data source since some records may be exact duplicates.
+     */
+    loadedRecordCount?: number;
+    /**
+     * The number of records from the bulk data set having the associated data source that failed to load.
+     */
+    failedRecordCount?: number;
+    /**
+     * The array of top error occurrences with the number of times they occurred when loading records with the associated data source.
+     */
+    topErrors?: Array<SzBulkLoadError>;
 }
