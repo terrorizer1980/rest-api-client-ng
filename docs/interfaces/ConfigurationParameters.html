@@ -355,7 +355,10 @@ export class Configuration {
      * @param contentTypes - the array of content types that are available for selection
      * @returns the selected content-type or &lt;code&gt;undefined&lt;/code&gt; if no selection could be made.
      */
-    public selectHeaderContentType (contentTypes: string[]): string | undefined {
+    public selectHeaderContentType (contentTypes: string[], body?: string | Blob | File | Array&lt;{ [key: string]: any; }&gt;): string | undefined {
+        if (body) {
+            return this.getMimeTypeFromBody(body);
+        }
         if (contentTypes.length &#x3D;&#x3D; 0) {
             return undefined;
         }
@@ -368,13 +371,79 @@ export class Configuration {
     }
 
     /**
+     * Attempts to return the valid mime-type based on the type of content detected from the body param.
+     * @param body - the content to try and detect mime-type from
+     * @returns the mime-type of the content to return or undefined if it could not be detected.
+     */
+    getMimeTypeFromBody(body?: string | Blob | File | Array&lt;{ [key: string]: any; }&gt;): string | undefined {
+        if (body) {
+            if((body as File).type || (body as File).name) {
+                // is file
+                let retVal &#x3D; (body as File).type !&#x3D;&#x3D; &#x27;&#x27; ? (body as File).type : &#x27;text/plain&#x27;;
+                switch( retVal ) {
+                    case &#x27;application/vnd.ms-excel&#x27;:
+                        if( (body as File).name &amp;&amp; (body as File).name.toUpperCase().indexOf(&#x27;.CSV&#x27;) &gt; 1) {
+                            // force text/csv since windows is dumb
+                            retVal &#x3D; &#x27;text/csv&#x27;;
+                        }
+                        break;
+                    case &#x27;application/vnd.ms-excel charset&#x3D;UTF-8&#x27;:
+                        if( (body as File).name &amp;&amp; (body as File).name.toUpperCase().indexOf(&#x27;.CSV&#x27;) &gt; 1) {
+                            // force text/csv since windows is dumb
+                            retVal &#x3D; &#x27;text/csv charset&#x3D;UTF-8&#x27;;
+                        }
+                        break;
+                    case &#x27;application/json&#x27;:
+                        break;
+                    case &#x27;x-jsonlines&#x27;:
+                        break;
+                    default:
+                        if((body as File).type &#x3D;&#x3D;&#x3D; &#x27;&#x27; &amp;&amp; (body as File).name !&#x3D;&#x3D; &#x27;&#x27; &amp;&amp; (body as File).name.indexOf(&#x27;.&#x27;) &gt; 0) {
+                            // has extenstion
+                            const fExt &#x3D; (body as File).name.substring( (body as File).name.indexOf(&#x27;.&#x27;)+1 ).toUpperCase();
+                            switch(fExt) {
+                                case &#x27;JSONL&#x27;:
+                                    retVal &#x3D; &#x27;application/x-jsonlines&#x27;;
+                                    break;
+                                case &#x27;CSV&#x27;:
+                                    retVal &#x3D; &#x27;text/csv&#x27;;
+                                    break;
+                                case &#x27;XLS&#x27;:
+                                    retVal &#x3D; &#x27;application/vnd.ms-excel&#x27;;
+                                    break;
+                            }
+                        }
+                        break;
+                }
+                return retVal;
+            } else if(typeof (body as string) &#x3D;&#x3D;&#x3D; &#x27;string&#x27;) {
+                // probably json
+                try{
+                    const isValidJSON &#x3D; JSON.parse((body as string));
+                    if(isValidJSON &amp;&amp; isValidJSON.length &gt;&#x3D; 1 &amp;&amp; isValidJSON.forEach) {
+                        // probably json lines
+                        return &#x27;application/x-jsonlines&#x27;;
+                    }
+                    return &#x27;application/json&#x27;;
+                } catch(err) {
+                    // maybe csv plain text
+                    return &#x27;text/csv&#x27;;
+                }
+            }
+        }
+    }
+
+    /**
      * Select the correct accept content-type to use for a request.
      * Uses {@link Configuration#isJsonMime} to determine the correct accept content-type.
      * If no content type is found return the first found type if the contentTypes is not empty
      * @param accepts - the array of content types that are available for selection.
      * @returns the selected content-type or &lt;code&gt;undefined&lt;/code&gt; if no selection could be made.
      */
-    public selectHeaderAccept(accepts: string[]): string | undefined {
+    public selectHeaderAccept(accepts: string[], body?: string | Blob | File | Array&lt;{ [key: string]: any; }&gt;): string | undefined {
+        if (body) {
+            return this.getMimeTypeFromBody(body);
+        }
         if (accepts.length &#x3D;&#x3D; 0) {
             return undefined;
         }
