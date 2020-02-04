@@ -116,6 +116,9 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
+                                <a href="#getMimeTypeFromBody">getMimeTypeFromBody</a>
+                            </li>
+                            <li>
                                     <span class="modifier">Public</span>
                                 <a href="#isJsonMime">isJsonMime</a>
                             </li>
@@ -414,6 +417,85 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
+                        <a name="getMimeTypeFromBody"></a>
+                        <span class="name">
+                            <b>
+                            getMimeTypeFromBody
+                            </b>
+                            <a href="#getMimeTypeFromBody"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>getMimeTypeFromBody(body?: string | Blob | File | Array<literal type>)</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="54" class="link-to-prism">projects/rest-api-client-ng/src/lib/configuration.ts:54</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Attempts to return the valid mime-type based on the type of content detected from the body param.</p>
+</div>
+
+                            <div class="io-description">
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                                    <td>Description</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>body</td>
+                                                        <td>
+                                                                    <code>string | Blob | File | Array&lt;literal type&gt;</code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            Yes
+                                                    </td>
+                                                    
+
+                                                        <td>
+                                                                <code><ul>
+<li>the content to try and detect mime-type from</li>
+</ul>
+</code>
+                                                        </td>
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code>string | undefined</code>
+
+                            </div>
+                                <div class="io-description">
+                                    <p>the mime-type of the content to return or undefined if it could not be detected.</p>
+
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
                         <a name="isJsonMime"></a>
                         <span class="name">
                             <b>
@@ -434,7 +516,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="75" class="link-to-prism">projects/rest-api-client-ng/src/lib/configuration.ts:75</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="144" class="link-to-prism">projects/rest-api-client-ng/src/lib/configuration.ts:144</a></div>
                             </td>
                         </tr>
 
@@ -513,14 +595,14 @@ JSON MIME examples:
                 <tr>
                     <td class="col-md-4">
                             <span class="modifier-icon icon ion-ios-reset"></span>
-                        <code>selectHeaderAccept(accepts: string[])</code>
+                        <code>selectHeaderAccept(accepts: string[], body?: string | Blob | File | Array<literal type>)</code>
                     </td>
                 </tr>
 
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="53" class="link-to-prism">projects/rest-api-client-ng/src/lib/configuration.ts:53</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="119" class="link-to-prism">projects/rest-api-client-ng/src/lib/configuration.ts:119</a></div>
                             </td>
                         </tr>
 
@@ -562,6 +644,20 @@ If no content type is found return the first found type if the contentTypes is n
 </code>
                                                         </td>
                                                 </tr>
+                                                <tr>
+                                                        <td>body</td>
+                                                        <td>
+                                                                    <code>string | Blob | File | Array&lt;literal type&gt;</code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            Yes
+                                                    </td>
+                                                    
+
+                                                        <td>
+                                                        </td>
+                                                </tr>
                                         </tbody>
                                     </table>
                             </div>
@@ -596,7 +692,7 @@ If no content type is found return the first found type if the contentTypes is n
                 <tr>
                     <td class="col-md-4">
                             <span class="modifier-icon icon ion-ios-reset"></span>
-                        <code>selectHeaderContentType(contentTypes: string[])</code>
+                        <code>selectHeaderContentType(contentTypes: string[], body?: string | Blob | File | Array<literal type>)</code>
                     </td>
                 </tr>
 
@@ -643,6 +739,20 @@ If no content type is found return the first found type if the contentTypes is n
 <li>the array of content types that are available for selection</li>
 </ul>
 </code>
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>body</td>
+                                                        <td>
+                                                                    <code>string | Blob | File | Array&lt;literal type&gt;</code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            Yes
+                                                    </td>
+                                                    
+
+                                                        <td>
                                                         </td>
                                                 </tr>
                                         </tbody>
@@ -706,7 +816,10 @@ export class Configuration {
      * @param contentTypes - the array of content types that are available for selection
      * @returns the selected content-type or &lt;code&gt;undefined&lt;/code&gt; if no selection could be made.
      */
-    public selectHeaderContentType (contentTypes: string[]): string | undefined {
+    public selectHeaderContentType (contentTypes: string[], body?: string | Blob | File | Array&lt;{ [key: string]: any; }&gt;): string | undefined {
+        if (body) {
+            return this.getMimeTypeFromBody(body);
+        }
         if (contentTypes.length &#x3D;&#x3D; 0) {
             return undefined;
         }
@@ -719,13 +832,79 @@ export class Configuration {
     }
 
     /**
+     * Attempts to return the valid mime-type based on the type of content detected from the body param.
+     * @param body - the content to try and detect mime-type from
+     * @returns the mime-type of the content to return or undefined if it could not be detected.
+     */
+    getMimeTypeFromBody(body?: string | Blob | File | Array&lt;{ [key: string]: any; }&gt;): string | undefined {
+        if (body) {
+            if((body as File).type || (body as File).name) {
+                // is file
+                let retVal &#x3D; (body as File).type !&#x3D;&#x3D; &#x27;&#x27; ? (body as File).type : &#x27;text/plain&#x27;;
+                switch( retVal ) {
+                    case &#x27;application/vnd.ms-excel&#x27;:
+                        if( (body as File).name &amp;&amp; (body as File).name.toUpperCase().indexOf(&#x27;.CSV&#x27;) &gt; 1) {
+                            // force text/csv since windows is dumb
+                            retVal &#x3D; &#x27;text/csv&#x27;;
+                        }
+                        break;
+                    case &#x27;application/vnd.ms-excel charset&#x3D;UTF-8&#x27;:
+                        if( (body as File).name &amp;&amp; (body as File).name.toUpperCase().indexOf(&#x27;.CSV&#x27;) &gt; 1) {
+                            // force text/csv since windows is dumb
+                            retVal &#x3D; &#x27;text/csv charset&#x3D;UTF-8&#x27;;
+                        }
+                        break;
+                    case &#x27;application/json&#x27;:
+                        break;
+                    case &#x27;x-jsonlines&#x27;:
+                        break;
+                    default:
+                        if((body as File).type &#x3D;&#x3D;&#x3D; &#x27;&#x27; &amp;&amp; (body as File).name !&#x3D;&#x3D; &#x27;&#x27; &amp;&amp; (body as File).name.indexOf(&#x27;.&#x27;) &gt; 0) {
+                            // has extenstion
+                            const fExt &#x3D; (body as File).name.substring( (body as File).name.indexOf(&#x27;.&#x27;)+1 ).toUpperCase();
+                            switch(fExt) {
+                                case &#x27;JSONL&#x27;:
+                                    retVal &#x3D; &#x27;application/x-jsonlines&#x27;;
+                                    break;
+                                case &#x27;CSV&#x27;:
+                                    retVal &#x3D; &#x27;text/csv&#x27;;
+                                    break;
+                                case &#x27;XLS&#x27;:
+                                    retVal &#x3D; &#x27;application/vnd.ms-excel&#x27;;
+                                    break;
+                            }
+                        }
+                        break;
+                }
+                return retVal;
+            } else if(typeof (body as string) &#x3D;&#x3D;&#x3D; &#x27;string&#x27;) {
+                // probably json
+                try{
+                    const isValidJSON &#x3D; JSON.parse((body as string));
+                    if(isValidJSON &amp;&amp; isValidJSON.length &gt;&#x3D; 1 &amp;&amp; isValidJSON.forEach) {
+                        // probably json lines
+                        return &#x27;application/x-jsonlines&#x27;;
+                    }
+                    return &#x27;application/json&#x27;;
+                } catch(err) {
+                    // maybe csv plain text
+                    return &#x27;text/csv&#x27;;
+                }
+            }
+        }
+    }
+
+    /**
      * Select the correct accept content-type to use for a request.
      * Uses {@link Configuration#isJsonMime} to determine the correct accept content-type.
      * If no content type is found return the first found type if the contentTypes is not empty
      * @param accepts - the array of content types that are available for selection.
      * @returns the selected content-type or &lt;code&gt;undefined&lt;/code&gt; if no selection could be made.
      */
-    public selectHeaderAccept(accepts: string[]): string | undefined {
+    public selectHeaderAccept(accepts: string[], body?: string | Blob | File | Array&lt;{ [key: string]: any; }&gt;): string | undefined {
+        if (body) {
+            return this.getMimeTypeFromBody(body);
+        }
         if (accepts.length &#x3D;&#x3D; 0) {
             return undefined;
         }
