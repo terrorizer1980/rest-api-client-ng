@@ -70,6 +70,9 @@
                             <a href="../injectables/AdminService.html">AdminService</a>
                         </li>
                         <li class="list-group-item">
+                            <a href="../injectables/BulkDataService.html">BulkDataService</a>
+                        </li>
+                        <li class="list-group-item">
                             <a href="../injectables/ConfigService.html">ConfigService</a>
                         </li>
                         <li class="list-group-item">
@@ -112,7 +115,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="21" class="link-to-prism">projects/rest-api-client-ng/src/lib/api.module.ts:21</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">projects/rest-api-client-ng/src/lib/api.module.ts:23</a></div>
                             </td>
                         </tr>
 
@@ -170,6 +173,7 @@ import { Configuration } from &#x27;./configuration&#x27;;
 import { HttpClient } from &#x27;@angular/common/http&#x27;;
 
 import { AdminService } from &#x27;./api/admin.service&#x27;;
+import { BulkDataService } from &#x27;./api/bulkData.service&#x27;;
 import { ConfigService } from &#x27;./api/config.service&#x27;;
 import { EntityDataService } from &#x27;./api/entityData.service&#x27;;
 import { EntityGraphService } from &#x27;./api/entityGraph.service&#x27;;
@@ -180,6 +184,7 @@ import { EntityGraphService } from &#x27;./api/entityGraph.service&#x27;;
   exports:      [],
   providers: [
     AdminService,
+    BulkDataService,
     ConfigService,
     EntityDataService,
     EntityGraphService ]

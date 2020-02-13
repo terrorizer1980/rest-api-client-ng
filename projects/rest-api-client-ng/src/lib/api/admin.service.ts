@@ -20,6 +20,8 @@ import { Observable }                                        from 'rxjs';
 
 import { SzBaseResponse } from '../model/szBaseResponse';
 import { SzLicenseResponse } from '../model/szLicenseResponse';
+import { SzServerInfoResponse } from '../model/szServerInfoResponse';
+import { SzVersionResponse } from '../model/szVersionResponse';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
@@ -70,6 +72,43 @@ export class AdminService {
         return false;
     }
 
+    /**
+     * Get info regarding the server&#x27;s state and supported features.
+     * 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getServerInfo(observe?: 'body', reportProgress?: boolean): Observable<SzServerInfoResponse>;
+    public getServerInfo(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<SzServerInfoResponse>>;
+    public getServerInfo(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<SzServerInfoResponse>>;
+    public getServerInfo(observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json; charset=UTF-8',
+            'application/json',
+            'default'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+        ];
+
+        return this.httpClient.get<SzServerInfoResponse>(`${this.basePath}/server-info`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
 
     /**
      * Gets a heartbeat from the server to make sure it is up and running.  The response will include the current timestamp.
@@ -99,7 +138,7 @@ export class AdminService {
         const consumes: string[] = [
         ];
 
-        return this.httpClient.get(`${this.basePath}/heartbeat`,
+        return this.httpClient.get<SzBaseResponse>(`${this.basePath}/heartbeat`,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
@@ -137,7 +176,45 @@ export class AdminService {
         const consumes: string[] = [
         ];
 
-        return this.httpClient.get(`${this.basePath}/license`,
+        return this.httpClient.get<SzLicenseResponse>(`${this.basePath}/license`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Get the full version information.
+     * 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public version(observe?: 'body', reportProgress?: boolean): Observable<SzVersionResponse>;
+    public version(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<SzVersionResponse>>;
+    public version(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<SzVersionResponse>>;
+    public version(observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json; charset=UTF-8',
+            'application/json',
+            'default'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+        ];
+
+        return this.httpClient.get<SzVersionResponse>(`${this.basePath}/version`,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,

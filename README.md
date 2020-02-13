@@ -1,5 +1,10 @@
 # @senzing/rest-api-client-ng
 
+[![Build Status](https://travis-ci.com/Senzing/rest-api-client-ng.svg?branch=master)](https://travis-ci.com/Senzing/rest-api-client-ng)
+[![npm version](https://badge.fury.io/js/%40senzing%2Frest-api-client-ng.svg)](https://badge.fury.io/js/%40senzing%2Frest-api-client-ng)
+![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/senzing/rest-api-client-ng?color=%2300c4ff&logo=latest%20tag)
+![GitHub package.json version](https://img.shields.io/github/package-json/v/senzing/rest-api-client-ng?color=orange&logo=latest&logoColor=blue)
+
 ## Overview
 This project is a package that provides a Angular TypeScript REST client intended to be used as a dependency for other [Senzing](https://senzing.com/senzing-api/) projects like [@senzing/sdk-components-ng](https://www.npmjs.com/package/@senzing/sdk-components-ng]).
 
