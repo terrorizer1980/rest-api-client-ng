@@ -23,6 +23,7 @@ export * from './szBaseResponseLinks';
 export * from './szBaseResponseMeta';
 export * from './szBulkDataAnalysis';
 export * from './szBulkDataAnalysisResponse';
+export * from './szBulkDataLoadResponse';
 export * from './szBulkDataStatus';
 export * from './szBulkLoadError';
 export * from './szBulkLoadResponse';
