@@ -325,7 +325,7 @@ export class EntityDataService {
         const consumes: string[] = [
         ];
 
-        return this.httpClient.request<SzEntityResponse>('get',`${this.basePath}/entities/${encodeURIComponent(String(entityId))}`,
+        return this.httpClient.get<SzEntityResponse>(`${this.basePath}/entities/${encodeURIComponent(String(entityId))}`,
             {
                 params: queryParameters,
                 withCredentials: this.configuration.withCredentials,

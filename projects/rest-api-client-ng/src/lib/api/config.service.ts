@@ -98,15 +98,18 @@ See the various request body examples.
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public addDataSources(body?: Body | string, dataSource?: Array<string>, withRaw?: boolean, observe?: 'body', reportProgress?: boolean): Observable<SzDataSourcesResponse>;
-    public addDataSources(body?: Body | string, dataSource?: Array<string>, withRaw?: boolean, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<SzDataSourcesResponse>>;
-    public addDataSources(body?: Body | string, dataSource?: Array<string>, withRaw?: boolean, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<SzDataSourcesResponse>>;
-    public addDataSources(body?: Body | string, dataSource?: Array<string>, withRaw?: boolean, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public addDataSources(body?: Body | string, dataSource?: string | Array<string>, withRaw?: boolean, observe?: 'body', reportProgress?: boolean): Observable<SzDataSourcesResponse>;
+    public addDataSources(body?: Body | string, dataSource?: string | Array<string>, withRaw?: boolean, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<SzDataSourcesResponse>>;
+    public addDataSources(body?: Body | string, dataSource?: string | Array<string>, withRaw?: boolean, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<SzDataSourcesResponse>>;
+    public addDataSources(body?: Body | string, dataSource?: string | Array<string>, withRaw?: boolean, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
         let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
-        if (dataSource) {
-            dataSource.forEach((element) => {
+        if (dataSource && (dataSource as Array<string>).forEach) {
+          (dataSource as Array<string>).forEach((element) => {
                 queryParameters = queryParameters.append('dataSource', <any>element);
             })
+        } else if(dataSource && (dataSource as string).toLowerCase) {
+          // single string
+          queryParameters = queryParameters.set('dataSource', (dataSource as string));
         }
         if (withRaw !== undefined && withRaw !== null) {
             queryParameters = queryParameters.set('withRaw', <any>withRaw);
