@@ -13,7 +13,9 @@
 import { SzAttributeTypeResponseData } from './szAttributeTypeResponseData';
 import { SzResponseWithRawData } from './szResponseWithRawData';
 
-
+/**
+ * The response containing information for a single attribute type.
+ */
 export interface SzAttributeTypeResponse extends SzResponseWithRawData {
     data?: SzAttributeTypeResponseData;
 }

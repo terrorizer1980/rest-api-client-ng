@@ -16,26 +16,26 @@ import { SzAttributeNecessity } from './szAttributeNecessity';
  * Describes an attribute type that partially (or fully) describes a feature of an entity that may be loaded as part of a record or used as criteria in a search.
  */
 export interface SzAttributeType {
-  /**
-   * The unique string that identifies the attribute type among all other attribute types.
-   */
-  attributeCode?: string;
-  /**
-   * The default value assumed for the attribute when it is not provided but is required as part of a feature.
-   */
-  defaultValue?: string;
-  necessity?: SzAttributeNecessity;
-  attributeClass?: SzAttributeClass;
-  /**
-   * Identifiers the feature type that this attribute type is an attribute of (if any).  For example, the \"NAME_FIRST\" attribute type would be an attribute of the \"NAME\" feature type and \"PASSPORT_COUNTRY\" would be an attribute of \"PASSPORT\" feature type. Some (advanced) attribute types are stand-alone and do not belong to a feature (e.g.: \"RECORD_ID\").
-   */
-  featureType?: string;
-  /**
-   * Indicates if the attribute type is considered to be \"advanced\". Advanced attribute types usually require the user to have some knowledge of how the data is mapped in the entity repository (e.g.: \"RECORD_ID\" or \"DATA_SOURCE\").  An application may exclude displaying these as options if these things are being auto-generated or automatically selected for the user.  You may want to contact Senzing support before leveraging advanced attribute types in your application.
-   */
-  advanced?: boolean;
-  /**
-   * Whether or not an attribute type is typically generated internally based on other attribute types.  These are not commonly used by the user except in some rare cases.  Examples include pre-hashed versions of attributes that are hashed.
-   */
-  internal?: boolean;
+    /**
+     * The unique string that identifies the attribute type among all other attribute types.
+     */
+    attributeCode?: string;
+    /**
+     * The default value assumed for the attribute when it is not provided but is required as part of a feature.
+     */
+    defaultValue?: string;
+    necessity?: SzAttributeNecessity;
+    attributeClass?: SzAttributeClass;
+    /**
+     * Identifiers the feature type that this attribute type is an attribute of (if any).  For example, the \"NAME_FIRST\" attribute type would be an attribute of the \"NAME\" feature type and \"PASSPORT_COUNTRY\" would be an attribute of \"PASSPORT\" feature type. Some (advanced) attribute types are stand-alone and do not belong to a feature (e.g.: \"RECORD_ID\").
+     */
+    featureType?: string;
+    /**
+     * Indicates if the attribute type is considered to be \"advanced\". Advanced attribute types usually require the user to have some knowledge of how the data is mapped in the entity repository (e.g.: \"RECORD_ID\" or \"DATA_SOURCE\").  An application may exclude displaying these as options if these things are being auto-generated or automatically selected for the user.  You may want to contact Senzing support before leveraging advanced attribute types in your application.
+     */
+    advanced?: boolean;
+    /**
+     * Whether or not an attribute type is typically generated internally based on other attribute types.  These are not commonly used by the user except in some rare cases.  Examples include pre-hashed versions of attributes that are hashed.
+     */
+    internal?: boolean;
 }

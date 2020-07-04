@@ -11,7 +11,6 @@
  */
 import { SzAttributeType } from './szAttributeType';
 
-
 export interface SzAttributeTypeResponseData {
     attributeType?: SzAttributeType;
 }

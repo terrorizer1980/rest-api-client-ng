@@ -11,9 +11,8 @@
  */
 import { SzDataSourceRecordSummary } from './szDataSourceRecordSummary';
 import { SzEntityFeature } from './szEntityFeature';
-import { SzEntityRecord } from './szEntityRecord';
+import { SzMatchedRecord } from './szMatchedRecord';
 import { SzResolvedEntity } from './szResolvedEntity';
-
 
 /**
  * Provides the additional fields to an SzResolvedEntity that describe an entity's relationship to another.  This serves as a basis for SzAttributeSearchResult and SzRelatedEntity.
@@ -34,11 +33,11 @@ export interface SzBaseRelatedEntity extends SzResolvedEntity {
     /**
      * A boolean flag indicating if this related entity represents a disclosed relationship.
      */
-    disclosed?: boolean;
+    /*disclosed?: boolean;*/
     /**
      * A boolean flag indicating if this related entity represents an ambiguous relationship.
      */
-    ambiguous?: boolean;
+    /*ambiguous?: boolean;*/
     /**
      * The match key describing what features matched between the primary resolved entity and the related entity.
      */
@@ -51,8 +50,9 @@ export interface SzBaseRelatedEntity extends SzResolvedEntity {
      * The ref score between the primary resolved entity and this related entity.
      */
     refScore?: number;
-    /**
+
+   /**
      * If true then this RelatedEntity has complete features and records, otherwise they are not provided.  Also, the recordSummary items will be missing the topRecordIds if partial is true.
      */
-    partial?: boolean;
+    /*partial?: boolean;*/
 }

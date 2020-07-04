@@ -9,34 +9,22 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+import { SzHttpMethod } from './szHttpMethod';
 
 export interface SzBaseResponseMeta {
-  /**
-   * The HTTP method that was used for the operation.
-   */
-  httpMethod?: SzBaseResponseMeta.HttpMethodEnum;
-  /**
-   * The HTTP status response code.
-   */
-  httpStatusCode?: number;
-  /**
-   * The timestamp of the operation's execution.
-   */
-  timestamp?: Date;
-  version?: string;
-  restApiVersion?: string;
-  /**
-   * The timing measurements that were taken where the keys are identifying what was timed and the values are the number of milliseconds.
-   */
-  timings?: { [key: string]: number; };
-}
-export namespace SzBaseResponseMeta {
-  export type HttpMethodEnum = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
-  export const HttpMethodEnum = {
-      GET: 'GET' as HttpMethodEnum,
-      POST: 'POST' as HttpMethodEnum,
-      PUT: 'PUT' as HttpMethodEnum,
-      PATCH: 'PATCH' as HttpMethodEnum,
-      DELETE: 'DELETE' as HttpMethodEnum
-  };
+    httpMethod?: SzHttpMethod;
+    /**
+     * The HTTP status response code.
+     */
+    httpStatusCode?: number;
+    /**
+     * The timestamp of the operation's execution.
+     */
+    timestamp?: Date;
+    version?: string;
+    restApiVersion?: string;
+    /**
+     * The timing measurements that were taken where the keys are identifying what was timed and the values are the number of milliseconds.
+     */
+    timings?: { [key: string]: number; };
 }

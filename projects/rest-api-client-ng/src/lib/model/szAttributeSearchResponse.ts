@@ -17,5 +17,5 @@ import { SzResponseWithRawData } from './szResponseWithRawData';
  * The response describing the resolved entities found from a search.
  */
 export interface SzAttributeSearchResponse extends SzResponseWithRawData {
-  data?: SzAttributeSearchResponseData;
+    data?: SzAttributeSearchResponseData;
 }

@@ -9,6 +9,7 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+//import { ModelObject } from './modelObject';
 
 /**
  * Describes a record (aka: observed entity) that has been loaded for a particular data source.
@@ -53,5 +54,5 @@ export interface SzEntityRecord {
     /**
      * The JSON representation of the original data record that was loaded.
      */
-    originalSourceData?: any;
+    originalSourceData?: { [key: string]: any; };
 }

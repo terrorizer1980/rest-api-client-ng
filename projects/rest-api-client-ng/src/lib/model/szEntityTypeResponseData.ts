@@ -12,8 +12,5 @@
 import { SzEntityType } from './szEntityType';
 
 export interface SzEntityTypeResponseData {
-    /**
-     * The requested entity type as an `SzEntityType` object.
-     */
-    entityType?: Array<SzEntityType>;
+    entityType?: Array<SzEntityType> | SzEntityType;
 }

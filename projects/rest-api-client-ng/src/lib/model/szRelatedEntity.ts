@@ -11,32 +11,11 @@
  */
 import { SzBaseRelatedEntity } from './szBaseRelatedEntity';
 import { SzRelationshipType } from './szRelationshipType';
-import { SzEntityFeature } from './szEntityFeature';
 
 /**
  * Provides a description of an entity that is related to a ResolvedEntity.  This describes how the entity is related and may be missing the complete features and record list of a ResolvedEntity.
  */
 export interface SzRelatedEntity extends SzBaseRelatedEntity {
-    // BEWARE!!! Added manually, autogen missed this property
-    /**
-     * An enum string value describing the relationship type to the entity.
-     * possible values: 'POSSIBLE_MATCH' | 'POSSIBLE_RELATION' | 'DISCLOSED_RELATION'
-     *
-    */
-    relationType?: SzRelationshipType;
-
-    /**
-     * The integer \"match level\" describing how the related entity matched to the primary resolved entity.
-     */
-    matchLevel?: number;
-    /**
-     * The full name score between the primary resolved entity and this related entity.  The higher the score the closer the name match.
-     */
-    fullNameScore?: number;
-    /**
-     * The match score between the primary resolved entity and this related entity.  The higher the score the closer the match.
-     */
-    matchScore?: number;
     /**
      * A boolean flag indicating if this related entity represents a disclosed relationship.
      */
@@ -45,16 +24,5 @@ export interface SzRelatedEntity extends SzBaseRelatedEntity {
      * A boolean flag indicating if this related entity represents an ambiguous relationship.
      */
     ambiguous?: boolean;
-    /**
-     * The match key describing what features matched between the primary resolved entity and the related entity.
-     */
-    matchKey?: string;
-    /**
-     * The code identifying the resolution rule that related this entity to the primary resolved entity.
-     */
-    resolutionRuleCode?: string;
-    /**
-     * The ref score between the primary resolved entity and this related entity.
-     */
-    refScore?: number;
+    relationType?: SzRelationshipType;
 }

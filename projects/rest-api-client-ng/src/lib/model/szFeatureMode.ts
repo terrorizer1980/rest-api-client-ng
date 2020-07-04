@@ -9,13 +9,14 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-//import { ModelObject } from './modelObject';
-import { SzDataSourceResponseData } from './szDataSourceResponseData';
-import { SzResponseWithRawData } from './szResponseWithRawData';
 
 /**
- * The response describing a data source.
+ * The method by which feature values should be included for entities returned in the response.  The possible values are:   * `NONE` - Do not include any feature values -- this is the fastest              option from a performance perspective because feature              values do not have to be retrieved.   * `REPRESENTATIVE` - Include only a single representative value per                        \"unique\" value of a feature.  If there are                        multiple values that are near duplicates then                        only one value is included and the others are                        suppressed.   * `WITH_DUPLICATES` - ** (default value) ** Group near-duplicate                         feature values and return a representative value                         along with its near duplicate values.
  */
-export interface SzDataSourceResponse extends SzResponseWithRawData {
-    data?: SzDataSourceResponseData;
-}
+export type SzFeatureMode = 'NONE' | 'REPRESENTATIVE' | 'WITH_DUPLICATES';
+
+export const SzFeatureMode = {
+    NONE: 'NONE' as SzFeatureMode,
+    REPRESENTATIVE: 'REPRESENTATIVE' as SzFeatureMode,
+    WITHDUPLICATES: 'WITH_DUPLICATES' as SzFeatureMode
+};

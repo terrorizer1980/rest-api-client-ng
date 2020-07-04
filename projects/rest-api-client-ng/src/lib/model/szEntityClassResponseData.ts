@@ -12,8 +12,5 @@
 import { SzEntityClass } from './szEntityClass';
 
 export interface SzEntityClassResponseData {
-    /**
-     * The requested data source as an `SzEntityClass` object.
-     */
-    dataSource?: Array<SzEntityClass>;
+    entityClass?: SzEntityClass;
 }

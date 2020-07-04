@@ -10,12 +10,9 @@
  * Do not edit the class manually.
  */
 //import { ModelObject } from './modelObject';
-import { SzDataSourceResponseData } from './szDataSourceResponseData';
+import { SzReevaluateResponseData } from './szReevaluateResponseData';
 import { SzResponseWithRawData } from './szResponseWithRawData';
 
-/**
- * The response describing a data source.
- */
-export interface SzDataSourceResponse extends SzResponseWithRawData {
-    data?: SzDataSourceResponseData;
+export interface SzDeleteRecordResponse extends SzResponseWithRawData {
+    data?: SzReevaluateResponseData;
 }

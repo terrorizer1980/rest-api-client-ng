@@ -9,11 +9,10 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { SzBaseResponse } from './szBaseResponse';
-import { SzBaseResponseLinks } from './szBaseResponseLinks';
-import { SzBaseResponseMeta } from './szBaseResponseMeta';
+//import { ModelObject } from './modelObject';
 import { SzLoadRecordResponseData } from './szLoadRecordResponseData';
+import { SzResponseWithRawData } from './szResponseWithRawData';
 
-export interface SzLoadRecordResponse extends SzBaseResponse {
+export interface SzLoadRecordResponse extends SzResponseWithRawData {
     data?: SzLoadRecordResponseData;
 }

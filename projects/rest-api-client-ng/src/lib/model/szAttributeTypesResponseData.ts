@@ -11,10 +11,9 @@
  */
 import { SzAttributeType } from './szAttributeType';
 
-
 export interface SzAttributeTypesResponseData {
-  /**
-   * The list of attribute types.
-   */
-  attributeTypes?: Array<SzAttributeType>;
+    /**
+     * The list of attribute types.
+     */
+    attributeTypes?: Array<SzAttributeType>;
 }

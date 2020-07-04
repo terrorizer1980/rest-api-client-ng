@@ -9,10 +9,12 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+import { SzResolutionInfo } from './szResolutionInfo';
 
 export interface SzLoadRecordResponseData {
-  /**
-   * The record ID of the record that was loaded.
-   */
-  recordId?: string;
+    /**
+     * The record ID of the record that was loaded.
+     */
+    recordId?: string;
+    info?: SzResolutionInfo;
 }

@@ -38,7 +38,7 @@ export interface SzResolvedEntity {
      */
     nameData?: Array<string>;
     /**
-     * An array of characteristiics associated with the entity that are formatted for readability.  These will be prefixed by a characteristic type and optionally by a \"usage type\" if one was provided.
+     * An array of characteristics associated with the entity that are formatted for readability.  These will be prefixed by a characteristic type and optionally by a \"usage type\" if one was provided.
      */
     characteristicData?: Array<string>;
     /**
@@ -50,11 +50,19 @@ export interface SzResolvedEntity {
      */
     phoneData?: Array<string>;
     /**
-     * An array of entity data associated with the record where the items are formatted for readability.  These will be prefixed by an identifier type and may be prefixed by a \"usage type\" if one was provided (e.g.: \"ID: 123456789\" or \"EMAIL: WORK: joe@nowhere.com\")
+     * An array of entity data associated with the entity where the items are formatted for readability.  These will be prefixed by an identifier type and may be prefixed by a \"usage type\" if one was provided (e.g.: \"ID: 123456789\" or \"EMAIL: WORK: joe@nowhere.com\")
      */
     identifierData?: Array<string>;
     /**
-     * The array of EntityRecord instances describing the records associated with this entity.
+     * An array of relationship data items associated with the entity that describes disclosed relationships.
+     */
+    relationshipData?: Array<string>;
+    /**
+     * An array of associated data items that were loaded with the entity's records but not normally recognized or used for entity resolution. This array usually contains useful information from the source systems.
+     */
+    otherData?: Array<string>;
+    /**
+     * The array of `SzMatchedRecord` instances describing the records associated with this entity.
      */
     records?: Array<SzMatchedRecord>;
     /**

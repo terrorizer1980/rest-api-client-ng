@@ -9,6 +9,7 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+//import { ModelObject } from './modelObject';
 import { SzResponseWithRawData } from './szResponseWithRawData';
 import { SzWhyEntityResponseData } from './szWhyEntityResponseData';
 

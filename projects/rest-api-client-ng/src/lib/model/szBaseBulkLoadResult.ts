@@ -15,24 +15,24 @@ import { SzBulkLoadError } from './szBulkLoadError';
  * Provides statistics specific common to all bulk load results regardless of how they are aggregated.
  */
 export interface SzBaseBulkLoadResult {
-  /**
-   * The number of records found in the bulk data set with the aggregate group.  This may not match the number of \"observed entities\" once loaded since some records may be exact duplicates.
-   */
-  recordCount?: number;
-  /**
-   * The number of records successfully loaded from the bulk data set within the aggregate group.  This may not match the number of \"observed entities\" loaded since some records may be exact duplicates.
-   */
-  loadedRecordCount?: number;
-  /**
-   * The number of records from the bulk data set within the aggregate group that are missing either a `DATA_SOURCE` value or `ENTITY_TYPE` value.
-   */
-  incompleteRecordCount?: number;
-  /**
-   * The number of records from the bulk data set within the aggregate group that failed to load.
-   */
-  failedRecordCount?: number;
-  /**
-   * The array of top error occurrences with the number of times they occurred when loading records with the associated data source.
-   */
-  topErrors?: Array<SzBulkLoadError>;
+    /**
+     * The number of records found in the bulk data set with the aggregate group.  This may not match the number of \"observed entities\" once loaded since some records may be exact duplicates.
+     */
+    recordCount?: number;
+    /**
+     * The number of records successfully loaded from the bulk data set within the aggregate group.  This may not match the number of \"observed entities\" loaded since some records may be exact duplicates.
+     */
+    loadedRecordCount?: number;
+    /**
+     * The number of records from the bulk data set within the aggregate group that are missing either a `DATA_SOURCE` value or `ENTITY_TYPE` value.
+     */
+    incompleteRecordCount?: number;
+    /**
+     * The number of records from the bulk data set within the aggregate group that failed to load.
+     */
+    failedRecordCount?: number;
+    /**
+     * The array of top error occurrences with the number of times they occurred when loading records with the associated data source.
+     */
+    topErrors?: Array<SzBulkLoadError>;
 }

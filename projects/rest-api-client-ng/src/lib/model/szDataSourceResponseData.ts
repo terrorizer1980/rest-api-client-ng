@@ -12,8 +12,5 @@
 import { SzDataSource } from './szDataSource';
 
 export interface SzDataSourceResponseData {
-    /**
-     * The requested data source as an `SzDataSource` object.
-     */
-    dataSource?: Array<SzDataSource>;
+    dataSource?: SzDataSource | Array<SzDataSource>;
 }
