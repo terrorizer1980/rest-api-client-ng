@@ -15,6 +15,8 @@ EntityDataService.reevaluateEntity
 EntityDataService.reevaluateRecord
 EntityDataService.whyEntityByEntityID
 EntityDataService.whyEntityByRecordID
+EntityDataService.whyRecords
+EntityDataService.deleteRecord
 
 ### Removed in 2.0.0
 
@@ -30,8 +32,11 @@ ConfigService.listEntityTypes: renamed to `ConfigService.getEntityTypes`
 ConfigService.listEntityTypesByClass: renamed to `ConfigService.getEntityTypesByClass`
 
 EntityDataService: `withRelated` arg type(s) globally changed from `string: 'NONE' | 'REPRESENTATIVE' | 'WITH_DUPLICATES'` to `SzRelationshipMode: NONE | PARTIAL | FULL as SzRelationshipMode`
-EntityDataService.getDataSourceRecord: renamed to EntityDataService.getRecord
+EntityDataService.addRecord: `withInfo` and `withRaw` arguments added
+EntityDataService.addRecordWithReturnedRecordId: `withInfo` and `withRaw` arguments added
+EntityDataService.getDataSourceRecord: renamed to `EntityDataService.getRecord`
 EntityDataService.getEntityByEntityId: `withDerivedFeatures` renamed to `withInternalFeatures`
+EntityDataService.getEntityByEntityId: `forceMinimal` argument added
 EntityDataService.getEntityByEntityId: order of args changed from:
     `entityId, featureMode, forceMinimal, withFeatureStats, withDerivedFeatures, withRelated, withRaw, observe, reportProgress`
 to:
@@ -44,7 +49,6 @@ EntityDataService.getEntityByRecordId: `withDerivedFeatures` renamed to `withInt
 EntityDataService.whyEntityByEntityID: `withDerivedFeatures` renamed to `withInternalFeatures`
 EntityDataService.whyEntityByRecordID: `withDerivedFeatures` renamed to `withInternalFeatures`
 
-EntityGraphService.
 EntityGraphService.findNetworkByEntityID: renamed to `EntityGraphService.findEntityNetwork`
 EntityGraphService.findPathByEntityID: renamed to `EntityGraphService.findEntityPath`
 EntityGraphService.findEntityNetwork: `withDerivedFeatures` renamed to `withInternalFeatures`
