@@ -59,7 +59,7 @@ export class BulkDataService {
     }
 
 
-     /**
+    /**
      * Analyze a bulk data set of records. (Supports SSE)
      *
      * @param body The bulk record data as a single JSON record per line, a JSON array, or a CSV.  Further, multipart/form-data can be provided with the &quot;data&quot; property representing the record data as described above.  Set your content type accordingly.  The data should be in pre-mapped format using JSON property names or CSV column names as described by the [Senzing Generic Entity Specification](https://senzing.zendesk.com/hc/en-us/articles/231925448-Generic-Entity-Specification).

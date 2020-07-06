@@ -535,6 +535,7 @@ See the various request body examples.
      * @param reportProgress flag to report request and response progress.
      * @deprecated use getActiveConfig instead
      */
+    /*
     public getCurrentConfig(observe?: 'body', reportProgress?: boolean): Observable<SzConfigResponse>;
     public getCurrentConfig(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<SzConfigResponse>>;
     public getCurrentConfig(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<SzConfigResponse>>;
@@ -565,7 +566,7 @@ See the various request body examples.
                 reportProgress: reportProgress
             }
         );
-    }
+    }*/
 
     /**
      * Gets the details on the specified data source.
@@ -619,12 +620,59 @@ See the various request body examples.
     }
 
     /**
+     * Get a list of configured data sources.
+     *
+     * @param withRaw Whether or not to include the raw JSON response from the underlying native API.  This raw response may include additional details but lack some of the abstraction the standard response provides.  If true, then the &#x27;rawData&#x27; field in the response will be a non-null value and contain the additional details.
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getDataSources(withRaw?: boolean, observe?: 'body', reportProgress?: boolean): Observable<SzDataSourcesResponse>;
+    public getDataSources(withRaw?: boolean, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<SzDataSourcesResponse>>;
+    public getDataSources(withRaw?: boolean, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<SzDataSourcesResponse>>;
+    public getDataSources(withRaw?: boolean, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+
+        let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
+        if (withRaw !== undefined && withRaw !== null) {
+            queryParameters = queryParameters.set('withRaw', <any>withRaw);
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json; charset=UTF-8',
+            'application/json',
+            'default'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+        ];
+
+        return this.httpClient.request<SzDataSourcesResponse>('get',`${this.basePath}/data-sources`,
+            {
+                params: queryParameters,
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
      * Gets the default configuration as raw JSON, no interpretation.
      *
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      * @deprecated not available as of 2.0.0. use getTemplateConfig() method instead.
      */
+    /*
     public getDefaultConfig(observe?: 'body', reportProgress?: boolean): Observable<SzConfigResponse>;
     public getDefaultConfig(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<SzConfigResponse>>;
     public getDefaultConfig(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<SzConfigResponse>>;
@@ -655,7 +703,7 @@ See the various request body examples.
                 reportProgress: reportProgress
             }
         );
-    }
+    }*/
 
 
     /**
@@ -699,6 +747,52 @@ See the various request body examples.
         ];
 
         return this.httpClient.request<SzEntityClassResponse>('get',`${this.basePath}/entity-classes/${encodeURIComponent(String(entityClassCode))}`,
+            {
+                params: queryParameters,
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Get a list of configured entity classes.  Currently the only supported entity class is &#x60;ACTOR&#x60;.
+     *
+     * @param withRaw Whether or not to include the raw JSON response from the underlying native API.  This raw response may include additional details but lack some of the abstraction the standard response provides.  If true, then the &#x27;rawData&#x27; field in the response will be a non-null value and contain the additional details.
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getEntityClasses(withRaw?: boolean, observe?: 'body', reportProgress?: boolean): Observable<SzEntityClassesResponse>;
+    public getEntityClasses(withRaw?: boolean, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<SzEntityClassesResponse>>;
+    public getEntityClasses(withRaw?: boolean, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<SzEntityClassesResponse>>;
+    public getEntityClasses(withRaw?: boolean, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+
+        let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
+        if (withRaw !== undefined && withRaw !== null) {
+            queryParameters = queryParameters.set('withRaw', <any>withRaw);
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json; charset=UTF-8',
+            'application/json',
+            'default'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+        ];
+
+        return this.httpClient.request<SzEntityClassesResponse>('get',`${this.basePath}/entity-classes`,
             {
                 params: queryParameters,
                 withCredentials: this.configuration.withCredentials,
@@ -817,136 +911,6 @@ See the various request body examples.
     }
 
     /**
-     * Gets the base template configuration as raw JSON, no interpretation. This is the initial configuration for a new repository.
-     *
-     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-     * @param reportProgress flag to report request and response progress.
-     */
-    public getTemplateConfig(observe?: 'body', reportProgress?: boolean): Observable<SzConfigResponse>;
-    public getTemplateConfig(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<SzConfigResponse>>;
-    public getTemplateConfig(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<SzConfigResponse>>;
-    public getTemplateConfig(observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
-
-        let headers = this.defaultHeaders;
-
-        // to determine the Accept header
-        let httpHeaderAccepts: string[] = [
-            'application/json; charset=UTF-8',
-            'application/json',
-            'default'
-        ];
-        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-        if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set('Accept', httpHeaderAcceptSelected);
-        }
-
-        // to determine the Content-Type header
-        const consumes: string[] = [
-        ];
-
-        return this.httpClient.request<SzConfigResponse>('get',`${this.basePath}/configs/template`,
-            {
-                withCredentials: this.configuration.withCredentials,
-                headers: headers,
-                observe: observe,
-                reportProgress: reportProgress
-            }
-        );
-    }
-
-    /**
-     * Get a list of configured data sources.
-     *
-     * @param withRaw Whether or not to include the raw JSON response from the underlying native API.  This raw response may include additional details but lack some of the abstraction the standard response provides.  If true, then the &#x27;rawData&#x27; field in the response will be a non-null value and contain the additional details.
-     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-     * @param reportProgress flag to report request and response progress.
-     */
-    public listDataSources(withRaw?: boolean, observe?: 'body', reportProgress?: boolean): Observable<SzDataSourcesResponse>;
-    public listDataSources(withRaw?: boolean, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<SzDataSourcesResponse>>;
-    public listDataSources(withRaw?: boolean, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<SzDataSourcesResponse>>;
-    public listDataSources(withRaw?: boolean, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
-
-
-        let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
-        if (withRaw !== undefined && withRaw !== null) {
-            queryParameters = queryParameters.set('withRaw', <any>withRaw);
-        }
-
-        let headers = this.defaultHeaders;
-
-        // to determine the Accept header
-        let httpHeaderAccepts: string[] = [
-            'application/json; charset=UTF-8',
-            'application/json',
-            'default'
-        ];
-        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-        if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set('Accept', httpHeaderAcceptSelected);
-        }
-
-        // to determine the Content-Type header
-        const consumes: string[] = [
-        ];
-
-        return this.httpClient.request<SzDataSourcesResponse>('get',`${this.basePath}/data-sources`,
-            {
-                params: queryParameters,
-                withCredentials: this.configuration.withCredentials,
-                headers: headers,
-                observe: observe,
-                reportProgress: reportProgress
-            }
-        );
-    }
-
-    /**
-     * Get a list of configured entity classes.  Currently the only supported entity class is &#x60;ACTOR&#x60;.
-     *
-     * @param withRaw Whether or not to include the raw JSON response from the underlying native API.  This raw response may include additional details but lack some of the abstraction the standard response provides.  If true, then the &#x27;rawData&#x27; field in the response will be a non-null value and contain the additional details.
-     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-     * @param reportProgress flag to report request and response progress.
-     */
-    public listEntityClasses(withRaw?: boolean, observe?: 'body', reportProgress?: boolean): Observable<SzEntityClassesResponse>;
-    public listEntityClasses(withRaw?: boolean, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<SzEntityClassesResponse>>;
-    public listEntityClasses(withRaw?: boolean, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<SzEntityClassesResponse>>;
-    public listEntityClasses(withRaw?: boolean, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
-
-
-        let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
-        if (withRaw !== undefined && withRaw !== null) {
-            queryParameters = queryParameters.set('withRaw', <any>withRaw);
-        }
-
-        let headers = this.defaultHeaders;
-
-        // to determine the Accept header
-        let httpHeaderAccepts: string[] = [
-            'application/json; charset=UTF-8',
-            'application/json',
-            'default'
-        ];
-        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-        if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set('Accept', httpHeaderAcceptSelected);
-        }
-
-        // to determine the Content-Type header
-        const consumes: string[] = [
-        ];
-
-        return this.httpClient.request<SzEntityClassesResponse>('get',`${this.basePath}/entity-classes`,
-            {
-                params: queryParameters,
-                withCredentials: this.configuration.withCredentials,
-                headers: headers,
-                observe: observe,
-                reportProgress: reportProgress
-            }
-        );
-    }
-
-    /**
      * Get a list of configured entity types.
      *
      * @param entityClass If specified, this filters the list of returned entity types to those having the specified entity class.  If not specified then no filtering on entity class is performed and all are returned.  At this time, the only supported entity class is &#x60;ACTOR&#x60;, however, in the future this will change.
@@ -954,10 +918,10 @@ See the various request body examples.
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public listEntityTypes(entityClass?: SzAttributeClass, withRaw?: boolean, observe?: 'body', reportProgress?: boolean): Observable<SzEntityTypesResponse>;
-    public listEntityTypes(entityClass?: SzAttributeClass, withRaw?: boolean, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<SzEntityTypesResponse>>;
-    public listEntityTypes(entityClass?: SzAttributeClass, withRaw?: boolean, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<SzEntityTypesResponse>>;
-    public listEntityTypes(entityClass?: SzAttributeClass, withRaw?: boolean, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public getEntityTypes(entityClass?: string, withRaw?: boolean, observe?: 'body', reportProgress?: boolean): Observable<SzEntityTypesResponse>;
+    public getEntityTypes(entityClass?: string, withRaw?: boolean, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<SzEntityTypesResponse>>;
+    public getEntityTypes(entityClass?: string, withRaw?: boolean, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<SzEntityTypesResponse>>;
+    public getEntityTypes(entityClass?: string, withRaw?: boolean, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
 
 
@@ -1005,6 +969,242 @@ See the various request body examples.
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
+    public getEntityTypesByClass(entityClassCode: string, withRaw?: boolean, observe?: 'body', reportProgress?: boolean): Observable<SzEntityTypesResponse>;
+    public getEntityTypesByClass(entityClassCode: string, withRaw?: boolean, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<SzEntityTypesResponse>>;
+    public getEntityTypesByClass(entityClassCode: string, withRaw?: boolean, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<SzEntityTypesResponse>>;
+    public getEntityTypesByClass(entityClassCode: string, withRaw?: boolean, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (entityClassCode === null || entityClassCode === undefined) {
+            throw new Error('Required parameter entityClassCode was null or undefined when calling getEntityTypesByClass.');
+        }
+
+
+        let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
+        if (withRaw !== undefined && withRaw !== null) {
+            queryParameters = queryParameters.set('withRaw', <any>withRaw);
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json; charset=UTF-8',
+            'application/json',
+            'default'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+        ];
+
+        return this.httpClient.request<SzEntityTypesResponse>('get',`${this.basePath}/entity-classes/${encodeURIComponent(String(entityClassCode))}/entity-types`,
+            {
+                params: queryParameters,
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Gets the base template configuration as raw JSON, no interpretation. This is the initial configuration for a new repository.
+     *
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getTemplateConfig(observe?: 'body', reportProgress?: boolean): Observable<SzConfigResponse>;
+    public getTemplateConfig(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<SzConfigResponse>>;
+    public getTemplateConfig(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<SzConfigResponse>>;
+    public getTemplateConfig(observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json; charset=UTF-8',
+            'application/json',
+            'default'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+        ];
+
+        return this.httpClient.request<SzConfigResponse>('get',`${this.basePath}/configs/template`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Get a list of configured data sources.
+     *
+     * @param withRaw Whether or not to include the raw JSON response from the underlying native API.  This raw response may include additional details but lack some of the abstraction the standard response provides.  If true, then the &#x27;rawData&#x27; field in the response will be a non-null value and contain the additional details.
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    /*
+    public listDataSources(withRaw?: boolean, observe?: 'body', reportProgress?: boolean): Observable<SzDataSourcesResponse>;
+    public listDataSources(withRaw?: boolean, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<SzDataSourcesResponse>>;
+    public listDataSources(withRaw?: boolean, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<SzDataSourcesResponse>>;
+    public listDataSources(withRaw?: boolean, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+
+        let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
+        if (withRaw !== undefined && withRaw !== null) {
+            queryParameters = queryParameters.set('withRaw', <any>withRaw);
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json; charset=UTF-8',
+            'application/json',
+            'default'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+        ];
+
+        return this.httpClient.request<SzDataSourcesResponse>('get',`${this.basePath}/data-sources`,
+            {
+                params: queryParameters,
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }*/
+
+    /**
+     * Get a list of configured entity classes.  Currently the only supported entity class is &#x60;ACTOR&#x60;.
+     *
+     * @param withRaw Whether or not to include the raw JSON response from the underlying native API.  This raw response may include additional details but lack some of the abstraction the standard response provides.  If true, then the &#x27;rawData&#x27; field in the response will be a non-null value and contain the additional details.
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    /*
+    public listEntityClasses(withRaw?: boolean, observe?: 'body', reportProgress?: boolean): Observable<SzEntityClassesResponse>;
+    public listEntityClasses(withRaw?: boolean, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<SzEntityClassesResponse>>;
+    public listEntityClasses(withRaw?: boolean, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<SzEntityClassesResponse>>;
+    public listEntityClasses(withRaw?: boolean, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+
+        let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
+        if (withRaw !== undefined && withRaw !== null) {
+            queryParameters = queryParameters.set('withRaw', <any>withRaw);
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json; charset=UTF-8',
+            'application/json',
+            'default'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+        ];
+
+        return this.httpClient.request<SzEntityClassesResponse>('get',`${this.basePath}/entity-classes`,
+            {
+                params: queryParameters,
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }*/
+
+    /**
+     * Get a list of configured entity types.
+     *
+     * @param entityClass If specified, this filters the list of returned entity types to those having the specified entity class.  If not specified then no filtering on entity class is performed and all are returned.  At this time, the only supported entity class is &#x60;ACTOR&#x60;, however, in the future this will change.
+     * @param withRaw Whether or not to include the raw JSON response from the underlying native API.  This raw response may include additional details but lack some of the abstraction the standard response provides.  If true, then the &#x27;rawData&#x27; field in the response will be a non-null value and contain the additional details.
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    /*
+    public listEntityTypes(entityClass?: SzAttributeClass, withRaw?: boolean, observe?: 'body', reportProgress?: boolean): Observable<SzEntityTypesResponse>;
+    public listEntityTypes(entityClass?: SzAttributeClass, withRaw?: boolean, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<SzEntityTypesResponse>>;
+    public listEntityTypes(entityClass?: SzAttributeClass, withRaw?: boolean, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<SzEntityTypesResponse>>;
+    public listEntityTypes(entityClass?: SzAttributeClass, withRaw?: boolean, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+
+
+        let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
+        if (entityClass !== undefined && entityClass !== null) {
+            queryParameters = queryParameters.set('entityClass', <any>entityClass);
+        }
+        if (withRaw !== undefined && withRaw !== null) {
+            queryParameters = queryParameters.set('withRaw', <any>withRaw);
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json; charset=UTF-8',
+            'application/json',
+            'default'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+        ];
+
+        return this.httpClient.request<SzEntityTypesResponse>('get',`${this.basePath}/entity-types`,
+            {
+                params: queryParameters,
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }*/
+
+    /**
+     * Get a list of configured entity types for the identified entity class. NOTE: Currently the only supported entity class is &#x60;ACTOR&#x60;, but this will change in the future.
+     *
+     * @param entityClassCode The entity class code identifying the entity class.  Currently, the only recognized value is &#x60;ACTOR&#x60;.  Other values will yield a 404 error.
+     * @param withRaw Whether or not to include the raw JSON response from the underlying native API.  This raw response may include additional details but lack some of the abstraction the standard response provides.  If true, then the &#x27;rawData&#x27; field in the response will be a non-null value and contain the additional details.
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    /*
     public listEntityTypesByClass(entityClassCode: string, withRaw?: boolean, observe?: 'body', reportProgress?: boolean): Observable<SzEntityTypesResponse>;
     public listEntityTypesByClass(entityClassCode: string, withRaw?: boolean, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<SzEntityTypesResponse>>;
     public listEntityTypesByClass(entityClassCode: string, withRaw?: boolean, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<SzEntityTypesResponse>>;
@@ -1047,4 +1247,5 @@ See the various request body examples.
             }
         );
     }
+    */
 }

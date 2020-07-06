@@ -18,10 +18,14 @@ import { CustomHttpUrlEncodingCodec }                        from '../encoder';
 import { Observable }                                        from 'rxjs';
 
 import { SzAttributeSearchResponse } from '../model/szAttributeSearchResponse';
+import { SzDeleteRecordResponse } from '../model/szDeleteRecordResponse';
 import { SzEntityResponse } from '../model/szEntityResponse';
 import { SzErrorResponse } from '../model/szErrorResponse';
+import { SzFeatureMode } from '../model/szFeatureMode';
 import { SzLoadRecordResponse } from '../model/szLoadRecordResponse';
 import { SzRecordResponse } from '../model/szRecordResponse';
+import { SzReevaluateResponse } from '../model/szReevaluateResponse';
+import { SzRelationshipMode } from '../model/szRelationshipMode';
 import { SzWhyEntityResponse } from '../model/szWhyEntityResponse';
 import { SzWhyRecordsResponse } from '../model/szWhyRecordsResponse';
 
@@ -80,13 +84,15 @@ export class EntityDataService {
      * @param dataSourceCode The data source code identifying the data source.
      * @param recordId The identifier that uniquely identifies the requested record within a given data source.  This may have been specified when the record was loaded or generated automatically.
      * @param loadId The optional load ID to associate with the loaded record.
+     * @param withInfo Set to &#x60;true&#x60; to include resolution information related to loading, and &#x60;false&#x60; to exclude it.  This defaults to &#x60;false&#x60;.
+     * @param withRaw Whether or not to include the raw JSON response from the underlying native API.  This raw response may include additional details but lack some of the abstraction the standard response provides.  If true, then the &#x27;rawData&#x27; field in the response will be a non-null value and contain the additional details.
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public addRecord(body: { [key: string]: any; }, dataSourceCode: string, recordId: string, loadId?: string, observe?: 'body', reportProgress?: boolean): Observable<SzLoadRecordResponse>;
-    public addRecord(body: { [key: string]: any; }, dataSourceCode: string, recordId: string, loadId?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<SzLoadRecordResponse>>;
-    public addRecord(body: { [key: string]: any; }, dataSourceCode: string, recordId: string, loadId?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<SzLoadRecordResponse>>;
-    public addRecord(body: { [key: string]: any; }, dataSourceCode: string, recordId: string, loadId?: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public addRecord(body: { [key: string]: any; }, dataSourceCode: string, recordId: string, loadId?: string, withInfo?: boolean, withRaw?: boolean, observe?: 'body', reportProgress?: boolean): Observable<SzLoadRecordResponse>;
+    public addRecord(body: { [key: string]: any; }, dataSourceCode: string, recordId: string, loadId?: string, withInfo?: boolean, withRaw?: boolean, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<SzLoadRecordResponse>>;
+    public addRecord(body: { [key: string]: any; }, dataSourceCode: string, recordId: string, loadId?: string, withInfo?: boolean, withRaw?: boolean, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<SzLoadRecordResponse>>;
+    public addRecord(body: { [key: string]: any; }, dataSourceCode: string, recordId: string, loadId?: string, withInfo?: boolean, withRaw?: boolean, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (body === null || body === undefined) {
             throw new Error('Required parameter body was null or undefined when calling addRecord.');
@@ -101,9 +107,17 @@ export class EntityDataService {
         }
 
 
+
+
         let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
         if (loadId !== undefined && loadId !== null) {
             queryParameters = queryParameters.set('loadId', <any>loadId);
+        }
+        if (withInfo !== undefined && withInfo !== null) {
+            queryParameters = queryParameters.set('withInfo', <any>withInfo);
+        }
+        if (withRaw !== undefined && withRaw !== null) {
+            queryParameters = queryParameters.set('withRaw', <any>withRaw);
         }
 
         let headers = this.defaultHeaders;
@@ -147,13 +161,15 @@ export class EntityDataService {
      * @param body The record data as JSON.  The format of the JSON is described by the [Senzing Generic Entity Specification](https://senzing.zendesk.com/hc/en-us/articles/231925448-Generic-Entity-Specification). The specified JSON may include or exclude the DATA_SOURCE field. It will be added if excluded.  If included, it must match the data source code in the path parameters.
      * @param dataSourceCode The data source code identifying the data source.
      * @param loadId The optional load ID to associate with the loaded record.
+     * @param withInfo Set to &#x60;true&#x60; to include resolution information related to loading, and &#x60;false&#x60; to exclude it.  This defaults to &#x60;false&#x60;.
+     * @param withRaw Whether or not to include the raw JSON response from the underlying native API.  This raw response may include additional details but lack some of the abstraction the standard response provides.  If true, then the &#x27;rawData&#x27; field in the response will be a non-null value and contain the additional details.
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public addRecordWithReturnedRecordId(body: { [key: string]: any; }, dataSourceCode: string, loadId?: string, observe?: 'body', reportProgress?: boolean): Observable<SzLoadRecordResponse>;
-    public addRecordWithReturnedRecordId(body: { [key: string]: any; }, dataSourceCode: string, loadId?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<SzLoadRecordResponse>>;
-    public addRecordWithReturnedRecordId(body: { [key: string]: any; }, dataSourceCode: string, loadId?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<SzLoadRecordResponse>>;
-    public addRecordWithReturnedRecordId(body: { [key: string]: any; }, dataSourceCode: string, loadId?: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public addRecordWithReturnedRecordId(body: { [key: string]: any; }, dataSourceCode: string, loadId?: string, withInfo?: boolean, withRaw?: boolean, observe?: 'body', reportProgress?: boolean): Observable<SzLoadRecordResponse>;
+    public addRecordWithReturnedRecordId(body: { [key: string]: any; }, dataSourceCode: string, loadId?: string, withInfo?: boolean, withRaw?: boolean, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<SzLoadRecordResponse>>;
+    public addRecordWithReturnedRecordId(body: { [key: string]: any; }, dataSourceCode: string, loadId?: string, withInfo?: boolean, withRaw?: boolean, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<SzLoadRecordResponse>>;
+    public addRecordWithReturnedRecordId(body: { [key: string]: any; }, dataSourceCode: string, loadId?: string, withInfo?: boolean, withRaw?: boolean, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (body === null || body === undefined) {
             throw new Error('Required parameter body was null or undefined when calling addRecordWithReturnedRecordId.');
@@ -164,9 +180,17 @@ export class EntityDataService {
         }
 
 
+
+
         let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
         if (loadId !== undefined && loadId !== null) {
             queryParameters = queryParameters.set('loadId', <any>loadId);
+        }
+        if (withInfo !== undefined && withInfo !== null) {
+            queryParameters = queryParameters.set('withInfo', <any>withInfo);
+        }
+        if (withRaw !== undefined && withRaw !== null) {
+            queryParameters = queryParameters.set('withRaw', <any>withRaw);
         }
 
         let headers = this.defaultHeaders;
@@ -205,6 +229,72 @@ export class EntityDataService {
     }
 
     /**
+     * Delete a record given its data source and record ID.
+     *
+     * @param dataSourceCode The data source code identifying the data source.
+     * @param recordId The identifier that uniquely identifies the requested record within a given data source.  This may have been specified when the record was loaded or generated automatically.
+     * @param loadId The optional load ID to associate with the loaded record.
+     * @param withInfo Set to &#x60;true&#x60; to include resolution information related to loading, and &#x60;false&#x60; to exclude it.  This defaults to &#x60;false&#x60;.
+     * @param withRaw Whether or not to include the raw JSON response from the underlying native API.  This raw response may include additional details but lack some of the abstraction the standard response provides.  If true, then the &#x27;rawData&#x27; field in the response will be a non-null value and contain the additional details.
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public deleteRecord(dataSourceCode: string, recordId: string, loadId?: string, withInfo?: boolean, withRaw?: boolean, observe?: 'body', reportProgress?: boolean): Observable<SzDeleteRecordResponse>;
+    public deleteRecord(dataSourceCode: string, recordId: string, loadId?: string, withInfo?: boolean, withRaw?: boolean, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<SzDeleteRecordResponse>>;
+    public deleteRecord(dataSourceCode: string, recordId: string, loadId?: string, withInfo?: boolean, withRaw?: boolean, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<SzDeleteRecordResponse>>;
+    public deleteRecord(dataSourceCode: string, recordId: string, loadId?: string, withInfo?: boolean, withRaw?: boolean, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (dataSourceCode === null || dataSourceCode === undefined) {
+            throw new Error('Required parameter dataSourceCode was null or undefined when calling deleteRecord.');
+        }
+
+        if (recordId === null || recordId === undefined) {
+            throw new Error('Required parameter recordId was null or undefined when calling deleteRecord.');
+        }
+
+
+
+
+        let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
+        if (loadId !== undefined && loadId !== null) {
+            queryParameters = queryParameters.set('loadId', <any>loadId);
+        }
+        if (withInfo !== undefined && withInfo !== null) {
+            queryParameters = queryParameters.set('withInfo', <any>withInfo);
+        }
+        if (withRaw !== undefined && withRaw !== null) {
+            queryParameters = queryParameters.set('withRaw', <any>withRaw);
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json; charset=UTF-8',
+            'application/json',
+            'default'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+        ];
+
+        return this.httpClient.request<SzDeleteRecordResponse>('delete',`${this.basePath}/data-sources/${encodeURIComponent(String(dataSourceCode))}/records/${encodeURIComponent(String(recordId))}`,
+            {
+                params: queryParameters,
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
      * Get an entity record by data source and record ID.
      *
      * @param dataSourceCode The data source code identifying the data source.
@@ -213,6 +303,7 @@ export class EntityDataService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
+    /*
     public getDataSourceRecord(dataSourceCode: string, recordId: string, withRaw?: boolean, observe?: 'body', reportProgress?: boolean): Observable<SzRecordResponse>;
     public getDataSourceRecord(dataSourceCode: string, recordId: string, withRaw?: boolean, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<SzRecordResponse>>;
     public getDataSourceRecord(dataSourceCode: string, recordId: string, withRaw?: boolean, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<SzRecordResponse>>;
@@ -258,25 +349,25 @@ export class EntityDataService {
                 reportProgress: reportProgress
             }
         );
-    }
+    }*/
 
-/**
+    /**
      * Get a resolved entity by entity ID.
      *
      * @param entityId The unique numeric ID that identifies that entity being requested.
      * @param featureMode The method by which feature values should be included for entities returned in the response.  The possible values are:   * &#x60;NONE&#x60; - Do not include any feature values -- this is the fastest              option from a performance perspective because feature              values do not have to be retrieved.   * &#x60;REPRESENTATIVE&#x60; - Include only a single representative value per                        \&quot;unique\&quot; value of a feature.  If there are                        multiple values that are near duplicates then                        only one value is included and the others are                        suppressed.   * &#x60;WITH_DUPLICATES&#x60; - Group near-duplicate feature values and return                         a representative value along with its near                         duplicate values.
-     * @param forceMinimal Whether or not to force the minimum entity detail in the response which may consist of nothing more than an entity ID.  This provides the fastest response to an entity query operation because no additional data needs to be retrieved other than what is directly accessible.  This overrules other parameters governing the retrieval of features or related entities.
      * @param withFeatureStats Set to &#x60;true&#x60; to include resolution statistics for features.  This defaults to &#x60;false&#x60;.
-     * @param withDerivedFeatures Set to &#x60;true&#x60; to include \&quot;expressed\&quot; features that are derived composite keys such as name + date of birth keys.  This defaults to &#x60;false&#x60;.
+     * @param withInternalFeatures Set to &#x60;true&#x60; to include \&quot;expressed\&quot; features that are derived composite keys such as name + date of birth keys.  This defaults to &#x60;false&#x60;.
+     * @param forceMinimal Whether or not to force the minimum entity detail in the response which may consist of nothing more than an entity ID.  This provides the fastest response to an entity query operation because no additional data needs to be retrieved other than what is directly accessible.  This overrules other parameters governing the retrieval of features or related entities.
      * @param withRelated Controls how to handle the first-degree related entities.  The possible values are:   * &#x60;NONE&#x60; - Do not include any data on first-degree related entities --      this is the fastest option from a performance perspective because      related entities do not have to be retrieved.   * &#x60;PARTIAL&#x60; - **(default value)** Include only partial stub      information for related entities with the &#x60;partial&#x60; property of the      &#x60;SzRelatedEntity&#x60; instances set to &#x60;true&#x60;.  Obtaining additional      information requires subsequent API calls.   * &#x60;FULL&#x60; - Include full data on the first-degree related entities.      This option obtains entity network at one degree for the requested      entity and will fully populate up to 1000 related entities and sets      the &#x60;partial&#x60; property of those &#x60;SzRelatedEntity&#x60; instances to      &#x60;false&#x60;.  Related entities beyond the first 1000 will be left      incomplete and have their &#x60;partial&#x60; property will be set to &#x60;true&#x60;.
      * @param withRaw Whether or not to include the raw JSON response from the underlying native API.  This raw response may include additional details but lack some of the abstraction the standard response provides.  If true, then the &#x27;rawData&#x27; field in the response will be a non-null value and contain the additional details.
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
-     */
-    public getEntityByEntityId(entityId: number, featureMode?: string, forceMinimal?: boolean, withFeatureStats?: boolean, withDerivedFeatures?: boolean, withRelated?: 'NONE' | 'PARTIAL' | 'FULL', withRaw?: boolean, observe?: 'body', reportProgress?: boolean): Observable<SzEntityResponse>;
-    public getEntityByEntityId(entityId: number, featureMode?: string, forceMinimal?: boolean, withFeatureStats?: boolean, withDerivedFeatures?: boolean, withRelated?: 'NONE' | 'PARTIAL' | 'FULL', withRaw?: boolean, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<SzEntityResponse>>;
-    public getEntityByEntityId(entityId: number, featureMode?: string, forceMinimal?: boolean, withFeatureStats?: boolean, withDerivedFeatures?: boolean, withRelated?: 'NONE' | 'PARTIAL' | 'FULL', withRaw?: boolean, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<SzEntityResponse>>;
-    public getEntityByEntityId(entityId: number, featureMode?: string, forceMinimal?: boolean, withFeatureStats?: boolean, withDerivedFeatures?: boolean, withRelated?: 'NONE' | 'PARTIAL' | 'FULL', withRaw?: boolean, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    */
+    public getEntityByEntityId(entityId: number, featureMode?: SzFeatureMode, forceMinimal?: boolean, withFeatureStats?: boolean, withInternalFeatures?: boolean, withRelated?: SzRelationshipMode, withRaw?: boolean, observe?: 'body', reportProgress?: boolean): Observable<SzEntityResponse>;
+    public getEntityByEntityId(entityId: number, featureMode?: SzFeatureMode, forceMinimal?: boolean, withFeatureStats?: boolean, withInternalFeatures?: boolean, withRelated?: SzRelationshipMode, withRaw?: boolean, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<SzEntityResponse>>;
+    public getEntityByEntityId(entityId: number, featureMode?: SzFeatureMode, forceMinimal?: boolean, withFeatureStats?: boolean, withInternalFeatures?: boolean, withRelated?: SzRelationshipMode, withRaw?: boolean, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<SzEntityResponse>>;
+    public getEntityByEntityId(entityId: number, featureMode?: SzFeatureMode, forceMinimal?: boolean, withFeatureStats?: boolean, withInternalFeatures?: boolean, withRelated?: SzRelationshipMode, withRaw?: boolean, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (entityId === null || entityId === undefined) {
             throw new Error('Required parameter entityId was null or undefined when calling getEntityByEntityId.');
@@ -292,14 +383,14 @@ export class EntityDataService {
         if (featureMode !== undefined && featureMode !== null) {
             queryParameters = queryParameters.set('featureMode', <any>featureMode);
         }
-        if (forceMinimal !== undefined && forceMinimal !== null) {
-            queryParameters = queryParameters.set('forceMinimal', <any>forceMinimal);
-        }
         if (withFeatureStats !== undefined && withFeatureStats !== null) {
             queryParameters = queryParameters.set('withFeatureStats', <any>withFeatureStats);
         }
-        if (withDerivedFeatures !== undefined && withDerivedFeatures !== null) {
-            queryParameters = queryParameters.set('withDerivedFeatures', <any>withDerivedFeatures);
+        if (withInternalFeatures !== undefined && withInternalFeatures !== null) {
+            queryParameters = queryParameters.set('withInternalFeatures', <any>withInternalFeatures);
+        }
+        if (forceMinimal !== undefined && forceMinimal !== null) {
+            queryParameters = queryParameters.set('forceMinimal', <any>forceMinimal);
         }
         if (withRelated !== undefined && withRelated !== null) {
             queryParameters = queryParameters.set('withRelated', <any>withRelated);
@@ -343,17 +434,17 @@ export class EntityDataService {
      * @param recordId The identifier that uniquely identifies the requested record within a given data source.  This may have been specified when the record was loaded or generated automatically.
      * @param featureMode The method by which feature values should be included for entities returned in the response.  The possible values are:   * &#x60;NONE&#x60; - Do not include any feature values -- this is the fastest              option from a performance perspective because feature              values do not have to be retrieved.   * &#x60;REPRESENTATIVE&#x60; - Include only a single representative value per                        \&quot;unique\&quot; value of a feature.  If there are                        multiple values that are near duplicates then                        only one value is included and the others are                        suppressed.   * &#x60;WITH_DUPLICATES&#x60; - Group near-duplicate feature values and return                         a representative value along with its near                         duplicate values.
      * @param withFeatureStats Set to &#x60;true&#x60; to include resolution statistics for features.  This defaults to &#x60;false&#x60;.
-     * @param withDerivedFeatures Set to &#x60;true&#x60; to include \&quot;expressed\&quot; features that are derived composite keys such as name + date of birth keys.  This defaults to &#x60;false&#x60;.
+     * @param withInternalFeatures Set to &#x60;true&#x60; to include \&quot;expressed\&quot; features that are derived composite keys such as name + date of birth keys.  This defaults to &#x60;false&#x60;.
      * @param forceMinimal Whether or not to force the minimum entity detail in the response which may consist of nothing more than an entity ID.  This provides the fastest response to an entity query operation because no additional data needs to be retrieved other than what is directly accessible.  This overrules other parameters governing the retrieval of features or related entities.
      * @param withRelated Controls how to handle the first-degree related entities.  The possible values are:   * &#x60;NONE&#x60; - Do not include any data on first-degree related entities --      this is the fastest option from a performance perspective because      related entities do not have to be retrieved.   * &#x60;PARTIAL&#x60; - **(default value)** Include only partial stub      information for related entities with the &#x60;partial&#x60; property of the      &#x60;SzRelatedEntity&#x60; instances set to &#x60;true&#x60;.  Obtaining additional      information requires subsequent API calls.   * &#x60;FULL&#x60; - Include full data on the first-degree related entities.      This option obtains entity network at one degree for the requested      entity and will fully populate up to 1000 related entities and sets      the &#x60;partial&#x60; property of those &#x60;SzRelatedEntity&#x60; instances to      &#x60;false&#x60;.  Related entities beyond the first 1000 will be left      incomplete and have their &#x60;partial&#x60; property will be set to &#x60;true&#x60;.
      * @param withRaw Whether or not to include the raw JSON response from the underlying native API.  This raw response may include additional details but lack some of the abstraction the standard response provides.  If true, then the &#x27;rawData&#x27; field in the response will be a non-null value and contain the additional details.
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getEntityByRecordId(dataSourceCode: string, recordId: string, featureMode?: string, withFeatureStats?: boolean, withDerivedFeatures?: boolean, forceMinimal?: boolean, withRelated?: 'NONE' | 'REPRESENTATIVE' | 'WITH_DUPLICATES', withRaw?: boolean, observe?: 'body', reportProgress?: boolean): Observable<SzEntityResponse>;
-    public getEntityByRecordId(dataSourceCode: string, recordId: string, featureMode?: string, withFeatureStats?: boolean, withDerivedFeatures?: boolean, forceMinimal?: boolean, withRelated?: 'NONE' | 'REPRESENTATIVE' | 'WITH_DUPLICATES', withRaw?: boolean, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<SzEntityResponse>>;
-    public getEntityByRecordId(dataSourceCode: string, recordId: string, featureMode?: string, withFeatureStats?: boolean, withDerivedFeatures?: boolean, forceMinimal?: boolean, withRelated?: 'NONE' | 'REPRESENTATIVE' | 'WITH_DUPLICATES', withRaw?: boolean, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<SzEntityResponse>>;
-    public getEntityByRecordId(dataSourceCode: string, recordId: string, featureMode?: string, withFeatureStats?: boolean, withDerivedFeatures?: boolean, forceMinimal?: boolean, withRelated?: 'NONE' | 'REPRESENTATIVE' | 'WITH_DUPLICATES', withRaw?: boolean, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public getEntityByRecordId(dataSourceCode: string, recordId: string, featureMode?: SzFeatureMode, withFeatureStats?: boolean, withInternalFeatures?: boolean, forceMinimal?: boolean, withRelated?: SzRelationshipMode, withRaw?: boolean, observe?: 'body', reportProgress?: boolean): Observable<SzEntityResponse>;
+    public getEntityByRecordId(dataSourceCode: string, recordId: string, featureMode?: SzFeatureMode, withFeatureStats?: boolean, withInternalFeatures?: boolean, forceMinimal?: boolean, withRelated?: SzRelationshipMode, withRaw?: boolean, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<SzEntityResponse>>;
+    public getEntityByRecordId(dataSourceCode: string, recordId: string, featureMode?: SzFeatureMode, withFeatureStats?: boolean, withInternalFeatures?: boolean, forceMinimal?: boolean, withRelated?: SzRelationshipMode, withRaw?: boolean, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<SzEntityResponse>>;
+    public getEntityByRecordId(dataSourceCode: string, recordId: string, featureMode?: SzFeatureMode, withFeatureStats?: boolean, withInternalFeatures?: boolean, forceMinimal?: boolean, withRelated?: SzRelationshipMode, withRaw?: boolean, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (dataSourceCode === null || dataSourceCode === undefined) {
             throw new Error('Required parameter dataSourceCode was null or undefined when calling getEntityByRecordId.');
@@ -376,8 +467,8 @@ export class EntityDataService {
         if (withFeatureStats !== undefined && withFeatureStats !== null) {
             queryParameters = queryParameters.set('withFeatureStats', <any>withFeatureStats);
         }
-        if (withDerivedFeatures !== undefined && withDerivedFeatures !== null) {
-            queryParameters = queryParameters.set('withDerivedFeatures', <any>withDerivedFeatures);
+        if (withInternalFeatures !== undefined && withInternalFeatures !== null) {
+            queryParameters = queryParameters.set('withInternalFeatures', <any>withInternalFeatures);
         }
         if (forceMinimal !== undefined && forceMinimal !== null) {
             queryParameters = queryParameters.set('forceMinimal', <any>forceMinimal);
@@ -417,24 +508,200 @@ export class EntityDataService {
         );
     }
 
-     /**
-     * Search for entities that would match or relate to the provided entity features.
+    /**
+     * Get an entity record by data source and record ID.
      *
-     * @param attrs The JSON record describing the entity attributes in the same format as how an entity record is loaded.  The specified attributes are treated as a hypothetical record being loaded, and the result is anything that would have matched or related to it.  Here are some examples of encoding this parameter:  - **JavaScript Example**   &#x60;&#x60;&#x60;javascript     var searchCriteria &#x3D; {       \&quot;NAME_FULL\&quot;: \&quot;Joe Schmoe\&quot;,       \&quot;DATE_OF_BIRTH\&quot;: \&quot;03-SEP-1987\&quot;     };     var searchAttrs &#x3D; JSON.stringify(searchCriteria);     var urlPath &#x3D; \&quot;/entities?attrs&#x3D;\&quot; + encodeURIComponent(searchAttrs);   &#x60;&#x60;&#x60;  - **Java Example**   &#x60;&#x60;&#x60;java     JsonObjectBuilder builder &#x3D; Json.createObjectBuilder();     builder.add(\&quot;NAME_FULL\&quot;, \&quot;Joe Schmoe\&quot;);     builder.add(\&quot;DATE_OF_BIRTH\&quot;, \&quot;03-SEP-1987\&quot;);     JsonObject searchCriteria &#x3D; builder.build();      String searchAttrs &#x3D; searchCriteria.toString();     String encodedAttrs &#x3D; URLEncoder.encode(searchAttrs, \&quot;UTF-8\&quot;);     String urlPath &#x3D; \&quot;/entities?attrs&#x3D;\&quot; + encodedAttrs;   &#x60;&#x60;&#x60;  In both of the above examples the &#x60;urlPath&#x60; variable is set to: &#x60;&#x60;&#x60;json  /entities?attrs&#x3D;%7B%22NAME_FULL%22%3A%22Joe%20Schmoe%22%2C%22DATE_OF_BIRTH%22%3A%2203-SEP-1987%22%7D  &#x60;&#x60;&#x60;
-     * @param attr Either the &#x60;attrs&#x60; or &#x60;attr&#x60; parameter is required, **however** if the &#x60;attrs&#x60; parameter is provided it takes precedence and the &#x60;attr&#x60; parameter will be ignored.  If you are using this API programmatically then you should typically use the &#x60;attrs&#x60; parameter.  But when manually constructing a URL in the browser address bar, in a command-line tool like &#x60;curl&#x60; or in a REST client browser extension for debugging or testing purposes, encoding that JSON value can be unwieldy.  This parameter (which is multi-valued) lets you specify colon-delimited strings that are prefixed with the JSON property name and suffixed with the value.  For example, &#x60;NAME_FIRST:Joe&#x60; (url encoded of course).  This side-steps the need to URL-encode the structural JSON characters and usually means you need only URL-encode basic characters like colons (&#x60;%3A&#x60;) and spaces (&#x60;%20&#x60;).  The JSON constructed using this parameter is obviously flat.  If you want to group properties together by their \&quot;usage type\&quot; (e.g.: &#x60;NAME_TYPE&#x60;, &#x60;PHONE_TYPE&#x60; or &#x60;ADDRESS_TYPE&#x60;) then you would **also** prefix with the type (e.g.: &#x60;HOME_PHONE_NUMBER:702-555-1212&#x60;).
-     * @param withRelationships Set to &#x60;false&#x60; to suppress inclusion of related entity information. This defaults to &#x60;true&#x60; for backwards compatibility with previous implementations.
-     * @param featureMode The method by which feature values should be included for entities returned in the response.  The possible values are:   * &#x60;NONE&#x60; - Do not include any feature values -- this is the fastest              option from a performance perspective because feature              values do not have to be retrieved.   * &#x60;REPRESENTATIVE&#x60; - Include only a single representative value per                        \&quot;unique\&quot; value of a feature.  If there are                        multiple values that are near duplicates then                        only one value is included and the others are                        suppressed.   * &#x60;WITH_DUPLICATES&#x60; - Group near-duplicate feature values and return                         a representative value along with its near                         duplicate values.
-     * @param withFeatureStats Set to &#x60;true&#x60; to include resolution statistics for features.  This defaults to &#x60;false&#x60;.
-     * @param withDerivedFeatures Set to &#x60;true&#x60; to include \&quot;expressed\&quot; features that are derived composite keys such as name + date of birth keys.  This defaults to &#x60;false&#x60;.
-     * @param forceMinimal Whether or not to force the minimum entity detail in the response which may consist of nothing more than an entity ID.  This provides the fastest response to an entity query operation because no additional data needs to be retrieved other than what is directly accessible.  This overrules other parameters governing the retrieval of features or related entities.
+     * @param dataSourceCode The data source code identifying the data source.
+     * @param recordId The identifier that uniquely identifies the requested record within a given data source.  This may have been specified when the record was loaded or generated automatically.
      * @param withRaw Whether or not to include the raw JSON response from the underlying native API.  This raw response may include additional details but lack some of the abstraction the standard response provides.  If true, then the &#x27;rawData&#x27; field in the response will be a non-null value and contain the additional details.
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public searchByAttributes(attrs?: string, attr?: Array<string>, withRelationships?: boolean, featureMode?: string, withFeatureStats?: boolean, withDerivedFeatures?: boolean, forceMinimal?: boolean, withRaw?: boolean, observe?: 'body', reportProgress?: boolean): Observable<SzAttributeSearchResponse>;
-    public searchByAttributes(attrs?: string, attr?: Array<string>, withRelationships?: boolean, featureMode?: string, withFeatureStats?: boolean, withDerivedFeatures?: boolean, forceMinimal?: boolean, withRaw?: boolean, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<SzAttributeSearchResponse>>;
-    public searchByAttributes(attrs?: string, attr?: Array<string>, withRelationships?: boolean, featureMode?: string, withFeatureStats?: boolean, withDerivedFeatures?: boolean, forceMinimal?: boolean, withRaw?: boolean, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<SzAttributeSearchResponse>>;
-    public searchByAttributes(attrs?: string, attr?: Array<string>, withRelationships?: boolean, featureMode?: string, withFeatureStats?: boolean, withDerivedFeatures?: boolean, forceMinimal?: boolean, withRaw?: boolean, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public getRecord(dataSourceCode: string, recordId: string, withRaw?: boolean, observe?: 'body', reportProgress?: boolean): Observable<SzRecordResponse>;
+    public getRecord(dataSourceCode: string, recordId: string, withRaw?: boolean, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<SzRecordResponse>>;
+    public getRecord(dataSourceCode: string, recordId: string, withRaw?: boolean, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<SzRecordResponse>>;
+    public getRecord(dataSourceCode: string, recordId: string, withRaw?: boolean, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (dataSourceCode === null || dataSourceCode === undefined) {
+            throw new Error('Required parameter dataSourceCode was null or undefined when calling getRecord.');
+        }
+
+        if (recordId === null || recordId === undefined) {
+            throw new Error('Required parameter recordId was null or undefined when calling getRecord.');
+        }
+
+
+        let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
+        if (withRaw !== undefined && withRaw !== null) {
+            queryParameters = queryParameters.set('withRaw', <any>withRaw);
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json; charset=UTF-8',
+            'application/json',
+            'default'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+        ];
+
+        return this.httpClient.request<SzRecordResponse>('get',`${this.basePath}/data-sources/${encodeURIComponent(String(dataSourceCode))}/records/${encodeURIComponent(String(recordId))}`,
+            {
+                params: queryParameters,
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Reevaluate an entity identified by its entity ID.
+     *
+     * @param entityId The entity ID of the entity to reevaluate.
+     * @param withInfo Set to &#x60;true&#x60; to include resolution information related to loading, and &#x60;false&#x60; to exclude it.  This defaults to &#x60;false&#x60;.
+     * @param withRaw Whether or not to include the raw JSON response from the underlying native API.  This raw response may include additional details but lack some of the abstraction the standard response provides.  If true, then the &#x27;rawData&#x27; field in the response will be a non-null value and contain the additional details.
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public reevaluateEntity(entityId: number, withInfo?: boolean, withRaw?: boolean, observe?: 'body', reportProgress?: boolean): Observable<SzReevaluateResponse>;
+    public reevaluateEntity(entityId: number, withInfo?: boolean, withRaw?: boolean, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<SzReevaluateResponse>>;
+    public reevaluateEntity(entityId: number, withInfo?: boolean, withRaw?: boolean, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<SzReevaluateResponse>>;
+    public reevaluateEntity(entityId: number, withInfo?: boolean, withRaw?: boolean, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (entityId === null || entityId === undefined) {
+            throw new Error('Required parameter entityId was null or undefined when calling reevaluateEntity.');
+        }
+
+
+
+        let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
+        if (entityId !== undefined && entityId !== null) {
+            queryParameters = queryParameters.set('entityId', <any>entityId);
+        }
+        if (withInfo !== undefined && withInfo !== null) {
+            queryParameters = queryParameters.set('withInfo', <any>withInfo);
+        }
+        if (withRaw !== undefined && withRaw !== null) {
+            queryParameters = queryParameters.set('withRaw', <any>withRaw);
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json; charset=UTF-8',
+            'application/json',
+            'default'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+        ];
+
+        return this.httpClient.request<SzReevaluateResponse>('post',`${this.basePath}/reevaluate-entity`,
+            {
+                params: queryParameters,
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Reevaluate a record identified by a data source and record ID.
+     *
+     * @param dataSourceCode The data source code identifying the data source.
+     * @param recordId The identifier that uniquely identifies the requested record within a given data source.  This may have been specified when the record was loaded or generated automatically.
+     * @param withInfo Set to &#x60;true&#x60; to include resolution information related to loading, and &#x60;false&#x60; to exclude it.  This defaults to &#x60;false&#x60;.
+     * @param withRaw Whether or not to include the raw JSON response from the underlying native API.  This raw response may include additional details but lack some of the abstraction the standard response provides.  If true, then the &#x27;rawData&#x27; field in the response will be a non-null value and contain the additional details.
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public reevaluateRecord(dataSourceCode: string, recordId: string, withInfo?: boolean, withRaw?: boolean, observe?: 'body', reportProgress?: boolean): Observable<SzReevaluateResponse>;
+    public reevaluateRecord(dataSourceCode: string, recordId: string, withInfo?: boolean, withRaw?: boolean, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<SzReevaluateResponse>>;
+    public reevaluateRecord(dataSourceCode: string, recordId: string, withInfo?: boolean, withRaw?: boolean, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<SzReevaluateResponse>>;
+    public reevaluateRecord(dataSourceCode: string, recordId: string, withInfo?: boolean, withRaw?: boolean, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (dataSourceCode === null || dataSourceCode === undefined) {
+            throw new Error('Required parameter dataSourceCode was null or undefined when calling reevaluateRecord.');
+        }
+
+        if (recordId === null || recordId === undefined) {
+            throw new Error('Required parameter recordId was null or undefined when calling reevaluateRecord.');
+        }
+
+
+
+        let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
+        if (withInfo !== undefined && withInfo !== null) {
+            queryParameters = queryParameters.set('withInfo', <any>withInfo);
+        }
+        if (withRaw !== undefined && withRaw !== null) {
+            queryParameters = queryParameters.set('withRaw', <any>withRaw);
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json; charset=UTF-8',
+            'application/json',
+            'default'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+        ];
+
+        return this.httpClient.request<SzReevaluateResponse>('post',`${this.basePath}/data-sources/${encodeURIComponent(String(dataSourceCode))}/records/${encodeURIComponent(String(recordId))}/reevaluate`,
+            {
+                params: queryParameters,
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Search for entities that would match or relate to the provided entity features.
+     *
+     * @param attrs The JSON record describing the entity attributes in the same format as how an entity record is loaded.  The specified attributes are treated as a hypothetical record being loaded, and the result is anything that would have matched or related to it.  Here are some examples of encoding this parameter:  - **JavaScript Example**   &#x60;&#x60;&#x60;javascript     var searchCriteria &#x3D; {       \&quot;NAME_FULL\&quot;: \&quot;Joe Schmoe\&quot;,       \&quot;DATE_OF_BIRTH\&quot;: \&quot;03-SEP-1987\&quot;     };     var searchAttrs &#x3D; JSON.stringify(searchCriteria);     var urlPath &#x3D; \&quot;/entities?attrs&#x3D;\&quot; + encodeURIComponent(searchAttrs);   &#x60;&#x60;&#x60;  - **Java Example**   &#x60;&#x60;&#x60;java     JsonObjectBuilder builder &#x3D; Json.createObjectBuilder();     builder.add(\&quot;NAME_FULL\&quot;, \&quot;Joe Schmoe\&quot;);     builder.add(\&quot;DATE_OF_BIRTH\&quot;, \&quot;03-SEP-1987\&quot;);     JsonObject searchCriteria &#x3D; builder.build();      String searchAttrs &#x3D; searchCriteria.toString();     String encodedAttrs &#x3D; URLEncoder.encode(searchAttrs, \&quot;UTF-8\&quot;);     String urlPath &#x3D; \&quot;/entities?attrs&#x3D;\&quot; + encodedAttrs;   &#x60;&#x60;&#x60;  In both of the above examples the &#x60;urlPath&#x60; variable is set to: &#x60;&#x60;&#x60;json  /entities?attrs&#x3D;%7B%22NAME_FULL%22%3A%22Joe%20Schmoe%22%2C%22DATE_OF_BIRTH%22%3A%2203-SEP-1987%22%7D  &#x60;&#x60;&#x60;
+     * @param attr Either the &#x60;attrs&#x60; or &#x60;attr&#x60; parameter is required, **however** if the &#x60;attrs&#x60; parameter is provided it takes precedence and the &#x60;attr&#x60; parameter will be ignored.  If you are using this API programmatically then you should typically use the &#x60;attrs&#x60; parameter.  But when manually constructing a URL in the browser address bar, in a command-line tool like &#x60;curl&#x60; or in a REST client browser extension for debugging or testing purposes, encoding that JSON value can be unwieldy.  This parameter (which is multi-valued) lets you specify colon-delimited strings that are prefixed with the JSON property name and suffixed with the value.  For example, &#x60;NAME_FIRST:Joe&#x60; (url encoded of course).  This side-steps the need to URL-encode the structural JSON characters and usually means you need only URL-encode basic characters like colons (&#x60;%3A&#x60;) and spaces (&#x60;%20&#x60;).  The JSON constructed using this parameter is obviously flat.  If you want to group properties together by their \&quot;usage type\&quot; (e.g.: &#x60;NAME_TYPE&#x60;, &#x60;PHONE_TYPE&#x60; or &#x60;ADDRESS_TYPE&#x60;) then you would **also** prefix with the type (e.g.: &#x60;HOME_PHONE_NUMBER:702-555-1212&#x60;).
+     * @param featureMode The method by which feature values should be included for entities returned in the response.  The possible values are:   * &#x60;NONE&#x60; - Do not include any feature values -- this is the fastest              option from a performance perspective because feature              values do not have to be retrieved.   * &#x60;REPRESENTATIVE&#x60; - Include only a single representative value per                        \&quot;unique\&quot; value of a feature.  If there are                        multiple values that are near duplicates then                        only one value is included and the others are                        suppressed.   * &#x60;WITH_DUPLICATES&#x60; - Group near-duplicate feature values and return                         a representative value along with its near                         duplicate values.
+     * @param withFeatureStats Set to &#x60;true&#x60; to include resolution statistics for features.  This defaults to &#x60;false&#x60;.
+     * @param withInternalFeatures Set to &#x60;true&#x60; to include \&quot;expressed\&quot; features that are derived composite keys such as name + date of birth keys.  This defaults to &#x60;false&#x60;.
+     * @param forceMinimal Whether or not to force the minimum entity detail in the response which may consist of nothing more than an entity ID.  This provides the fastest response to an entity query operation because no additional data needs to be retrieved other than what is directly accessible.  This overrules other parameters governing the retrieval of features or related entities.
+     * @param withRelationships Set to &#x60;true&#x60; to include partial information of related entities for the returned entities.  This defaults to &#x60;false&#x60;.
+     * @param withRaw Whether or not to include the raw JSON response from the underlying native API.  This raw response may include additional details but lack some of the abstraction the standard response provides.  If true, then the &#x27;rawData&#x27; field in the response will be a non-null value and contain the additional details.
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public searchByAttributes(attrs?: string, attr?: Array<string>, featureMode?: SzFeatureMode, withFeatureStats?: boolean, withInternalFeatures?: boolean, forceMinimal?: boolean, withRelationships?: boolean, withRaw?: boolean, observe?: 'body', reportProgress?: boolean): Observable<SzAttributeSearchResponse>;
+    public searchByAttributes(attrs?: string, attr?: Array<string>, featureMode?: SzFeatureMode, withFeatureStats?: boolean, withInternalFeatures?: boolean, forceMinimal?: boolean, withRelationships?: boolean, withRaw?: boolean, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<SzAttributeSearchResponse>>;
+    public searchByAttributes(attrs?: string, attr?: Array<string>, featureMode?: SzFeatureMode, withFeatureStats?: boolean, withInternalFeatures?: boolean, forceMinimal?: boolean, withRelationships?: boolean, withRaw?: boolean, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<SzAttributeSearchResponse>>;
+    public searchByAttributes(attrs?: string, attr?: Array<string>, featureMode?: SzFeatureMode, withFeatureStats?: boolean, withInternalFeatures?: boolean, forceMinimal?: boolean, withRelationships?: boolean, withRaw?: boolean, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
 
 
@@ -453,20 +720,20 @@ export class EntityDataService {
                 queryParameters = queryParameters.append('attr', <any>element);
             })
         }
-        if (withRelationships !== undefined && withRelationships !== null) {
-            queryParameters = queryParameters.set('withRelationships', <any>withRelationships);
-        }
         if (featureMode !== undefined && featureMode !== null) {
             queryParameters = queryParameters.set('featureMode', <any>featureMode);
         }
         if (withFeatureStats !== undefined && withFeatureStats !== null) {
             queryParameters = queryParameters.set('withFeatureStats', <any>withFeatureStats);
         }
-        if (withDerivedFeatures !== undefined && withDerivedFeatures !== null) {
-            queryParameters = queryParameters.set('withDerivedFeatures', <any>withDerivedFeatures);
+        if (withInternalFeatures !== undefined && withInternalFeatures !== null) {
+            queryParameters = queryParameters.set('withInternalFeatures', <any>withInternalFeatures);
         }
         if (forceMinimal !== undefined && forceMinimal !== null) {
             queryParameters = queryParameters.set('forceMinimal', <any>forceMinimal);
+        }
+        if (withRelationships !== undefined && withRelationships !== null) {
+            queryParameters = queryParameters.set('withRelationships', <any>withRelationships);
         }
         if (withRaw !== undefined && withRaw !== null) {
             queryParameters = queryParameters.set('withRaw', <any>withRaw);
@@ -506,17 +773,17 @@ export class EntityDataService {
      * @param entityId The unique numeric ID that identifies that entity being requested.
      * @param withRelationships Set to &#x60;true&#x60; to include partial information of related entities for the returned entities.  This defaults to &#x60;false&#x60; for why operations.
      * @param withFeatureStats Set to &#x60;false&#x60; to suppress resolution statistics for features.  This defaults to &#x60;true&#x60; for why operations.
-     * @param withDerivedFeatures Set to &#x60;false&#x60; to suppress \&quot;expressed\&quot; features that are derived composite keys such as &#x60;FULL_NAME&#x60; + &#x60;DATE_OF_BIRTH&#x60;.  This defaults to &#x60;true&#x60; for why operations.
+     * @param withInternalFeatures Set to &#x60;false&#x60; to suppress \&quot;expressed\&quot; features that are derived composite keys such as &#x60;FULL_NAME&#x60; + &#x60;DATE_OF_BIRTH&#x60;.  This defaults to &#x60;true&#x60; for why operations.
      * @param featureMode The method by which feature values should be included for entities returned in the response.  The possible values are:   * &#x60;NONE&#x60; - Do not include any feature values -- this is the fastest              option from a performance perspective because feature              values do not have to be retrieved.   * &#x60;REPRESENTATIVE&#x60; - Include only a single representative value per                        \&quot;unique\&quot; value of a feature.  If there are                        multiple values that are near duplicates then                        only one value is included and the others are                        suppressed.   * &#x60;WITH_DUPLICATES&#x60; - Group near-duplicate feature values and return                         a representative value along with its near                         duplicate values.
      * @param forceMinimal Whether or not to force the minimum entity detail in the response which may consist of nothing more than an entity ID.  This provides the fastest response to an entity query operation because no additional data needs to be retrieved other than what is directly accessible.  This overrules other parameters governing the retrieval of features or related entities.
      * @param withRaw Whether or not to include the raw JSON response from the underlying native API.  This raw response may include additional details but lack some of the abstraction the standard response provides.  If true, then the &#x27;rawData&#x27; field in the response will be a non-null value and contain the additional details.
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public whyEntityByEntityID(entityId: number, withRelationships?: boolean, withFeatureStats?: boolean, withDerivedFeatures?: boolean, featureMode?: string, forceMinimal?: boolean, withRaw?: boolean, observe?: 'body', reportProgress?: boolean): Observable<SzWhyEntityResponse>;
-    public whyEntityByEntityID(entityId: number, withRelationships?: boolean, withFeatureStats?: boolean, withDerivedFeatures?: boolean, featureMode?: string, forceMinimal?: boolean, withRaw?: boolean, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<SzWhyEntityResponse>>;
-    public whyEntityByEntityID(entityId: number, withRelationships?: boolean, withFeatureStats?: boolean, withDerivedFeatures?: boolean, featureMode?: string, forceMinimal?: boolean, withRaw?: boolean, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<SzWhyEntityResponse>>;
-    public whyEntityByEntityID(entityId: number, withRelationships?: boolean, withFeatureStats?: boolean, withDerivedFeatures?: boolean, featureMode?: string, forceMinimal?: boolean, withRaw?: boolean, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public whyEntityByEntityID(entityId: number, withRelationships?: boolean, withFeatureStats?: boolean, withInternalFeatures?: boolean, featureMode?: SzFeatureMode, forceMinimal?: boolean, withRaw?: boolean, observe?: 'body', reportProgress?: boolean): Observable<SzWhyEntityResponse>;
+    public whyEntityByEntityID(entityId: number, withRelationships?: boolean, withFeatureStats?: boolean, withInternalFeatures?: boolean, featureMode?: SzFeatureMode, forceMinimal?: boolean, withRaw?: boolean, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<SzWhyEntityResponse>>;
+    public whyEntityByEntityID(entityId: number, withRelationships?: boolean, withFeatureStats?: boolean, withInternalFeatures?: boolean, featureMode?: SzFeatureMode, forceMinimal?: boolean, withRaw?: boolean, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<SzWhyEntityResponse>>;
+    public whyEntityByEntityID(entityId: number, withRelationships?: boolean, withFeatureStats?: boolean, withInternalFeatures?: boolean, featureMode?: SzFeatureMode, forceMinimal?: boolean, withRaw?: boolean, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (entityId === null || entityId === undefined) {
             throw new Error('Required parameter entityId was null or undefined when calling whyEntityByEntityID.');
@@ -535,8 +802,8 @@ export class EntityDataService {
         if (withFeatureStats !== undefined && withFeatureStats !== null) {
             queryParameters = queryParameters.set('withFeatureStats', <any>withFeatureStats);
         }
-        if (withDerivedFeatures !== undefined && withDerivedFeatures !== null) {
-            queryParameters = queryParameters.set('withDerivedFeatures', <any>withDerivedFeatures);
+        if (withInternalFeatures !== undefined && withInternalFeatures !== null) {
+            queryParameters = queryParameters.set('withInternalFeatures', <any>withInternalFeatures);
         }
         if (featureMode !== undefined && featureMode !== null) {
             queryParameters = queryParameters.set('featureMode', <any>featureMode);
@@ -583,17 +850,17 @@ export class EntityDataService {
      * @param recordId The identifier that uniquely identifies the requested record within a given data source.  This may have been specified when the record was loaded or generated automatically.
      * @param withRelationships Set to &#x60;true&#x60; to include partial information of related entities for the returned entities.  This defaults to &#x60;false&#x60; for why operations.
      * @param withFeatureStats Set to &#x60;false&#x60; to suppress resolution statistics for features.  This defaults to &#x60;true&#x60; for why operations.
-     * @param withDerivedFeatures Set to &#x60;false&#x60; to suppress \&quot;expressed\&quot; features that are derived composite keys such as &#x60;FULL_NAME&#x60; + &#x60;DATE_OF_BIRTH&#x60;.  This defaults to &#x60;true&#x60; for why operations.
+     * @param withInternalFeatures Set to &#x60;false&#x60; to suppress \&quot;expressed\&quot; features that are derived composite keys such as &#x60;FULL_NAME&#x60; + &#x60;DATE_OF_BIRTH&#x60;.  This defaults to &#x60;true&#x60; for why operations.
      * @param featureMode The method by which feature values should be included for entities returned in the response.  The possible values are:   * &#x60;NONE&#x60; - Do not include any feature values -- this is the fastest              option from a performance perspective because feature              values do not have to be retrieved.   * &#x60;REPRESENTATIVE&#x60; - Include only a single representative value per                        \&quot;unique\&quot; value of a feature.  If there are                        multiple values that are near duplicates then                        only one value is included and the others are                        suppressed.   * &#x60;WITH_DUPLICATES&#x60; - Group near-duplicate feature values and return                         a representative value along with its near                         duplicate values.
      * @param forceMinimal Whether or not to force the minimum entity detail in the response which may consist of nothing more than an entity ID.  This provides the fastest response to an entity query operation because no additional data needs to be retrieved other than what is directly accessible.  This overrules other parameters governing the retrieval of features or related entities.
      * @param withRaw Whether or not to include the raw JSON response from the underlying native API.  This raw response may include additional details but lack some of the abstraction the standard response provides.  If true, then the &#x27;rawData&#x27; field in the response will be a non-null value and contain the additional details.
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public whyEntityByRecordID(dataSourceCode: string, recordId: string, withRelationships?: boolean, withFeatureStats?: boolean, withDerivedFeatures?: boolean, featureMode?: string, forceMinimal?: boolean, withRaw?: boolean, observe?: 'body', reportProgress?: boolean): Observable<SzWhyEntityResponse>;
-    public whyEntityByRecordID(dataSourceCode: string, recordId: string, withRelationships?: boolean, withFeatureStats?: boolean, withDerivedFeatures?: boolean, featureMode?: string, forceMinimal?: boolean, withRaw?: boolean, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<SzWhyEntityResponse>>;
-    public whyEntityByRecordID(dataSourceCode: string, recordId: string, withRelationships?: boolean, withFeatureStats?: boolean, withDerivedFeatures?: boolean, featureMode?: string, forceMinimal?: boolean, withRaw?: boolean, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<SzWhyEntityResponse>>;
-    public whyEntityByRecordID(dataSourceCode: string, recordId: string, withRelationships?: boolean, withFeatureStats?: boolean, withDerivedFeatures?: boolean, featureMode?: string, forceMinimal?: boolean, withRaw?: boolean, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public whyEntityByRecordID(dataSourceCode: string, recordId: string, withRelationships?: boolean, withFeatureStats?: boolean, withInternalFeatures?: boolean, featureMode?: SzFeatureMode, forceMinimal?: boolean, withRaw?: boolean, observe?: 'body', reportProgress?: boolean): Observable<SzWhyEntityResponse>;
+    public whyEntityByRecordID(dataSourceCode: string, recordId: string, withRelationships?: boolean, withFeatureStats?: boolean, withInternalFeatures?: boolean, featureMode?: SzFeatureMode, forceMinimal?: boolean, withRaw?: boolean, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<SzWhyEntityResponse>>;
+    public whyEntityByRecordID(dataSourceCode: string, recordId: string, withRelationships?: boolean, withFeatureStats?: boolean, withInternalFeatures?: boolean, featureMode?: SzFeatureMode, forceMinimal?: boolean, withRaw?: boolean, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<SzWhyEntityResponse>>;
+    public whyEntityByRecordID(dataSourceCode: string, recordId: string, withRelationships?: boolean, withFeatureStats?: boolean, withInternalFeatures?: boolean, featureMode?: SzFeatureMode, forceMinimal?: boolean, withRaw?: boolean, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (dataSourceCode === null || dataSourceCode === undefined) {
             throw new Error('Required parameter dataSourceCode was null or undefined when calling whyEntityByRecordID.');
@@ -616,8 +883,8 @@ export class EntityDataService {
         if (withFeatureStats !== undefined && withFeatureStats !== null) {
             queryParameters = queryParameters.set('withFeatureStats', <any>withFeatureStats);
         }
-        if (withDerivedFeatures !== undefined && withDerivedFeatures !== null) {
-            queryParameters = queryParameters.set('withDerivedFeatures', <any>withDerivedFeatures);
+        if (withInternalFeatures !== undefined && withInternalFeatures !== null) {
+            queryParameters = queryParameters.set('withInternalFeatures', <any>withInternalFeatures);
         }
         if (featureMode !== undefined && featureMode !== null) {
             queryParameters = queryParameters.set('featureMode', <any>featureMode);
@@ -666,17 +933,17 @@ export class EntityDataService {
      * @param recordId2 The data source for the second record.
      * @param withRelationships Set to &#x60;true&#x60; to include partial information of related entities for the returned entities.  This defaults to &#x60;false&#x60; for why operations.
      * @param withFeatureStats Set to &#x60;false&#x60; to suppress resolution statistics for features.  This defaults to &#x60;true&#x60; for why operations.
-     * @param withDerivedFeatures Set to &#x60;false&#x60; to suppress \&quot;expressed\&quot; features that are derived composite keys such as &#x60;FULL_NAME&#x60; + &#x60;DATE_OF_BIRTH&#x60;.  This defaults to &#x60;true&#x60; for why operations.
+     * @param withInternalFeatures Set to &#x60;false&#x60; to suppress \&quot;expressed\&quot; features that are derived composite keys such as &#x60;FULL_NAME&#x60; + &#x60;DATE_OF_BIRTH&#x60;.  This defaults to &#x60;true&#x60; for why operations.
      * @param featureMode The method by which feature values should be included for entities returned in the response.  The possible values are:   * &#x60;NONE&#x60; - Do not include any feature values -- this is the fastest              option from a performance perspective because feature              values do not have to be retrieved.   * &#x60;REPRESENTATIVE&#x60; - Include only a single representative value per                        \&quot;unique\&quot; value of a feature.  If there are                        multiple values that are near duplicates then                        only one value is included and the others are                        suppressed.   * &#x60;WITH_DUPLICATES&#x60; - Group near-duplicate feature values and return                         a representative value along with its near                         duplicate values.
      * @param forceMinimal Whether or not to force the minimum entity detail in the response which may consist of nothing more than an entity ID.  This provides the fastest response to an entity query operation because no additional data needs to be retrieved other than what is directly accessible.  This overrules other parameters governing the retrieval of features or related entities.
      * @param withRaw Whether or not to include the raw JSON response from the underlying native API.  This raw response may include additional details but lack some of the abstraction the standard response provides.  If true, then the &#x27;rawData&#x27; field in the response will be a non-null value and contain the additional details.
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public whyRecords(dataSource1: string, recordId1: string, dataSource2: string, recordId2: string, withRelationships?: boolean, withFeatureStats?: boolean, withDerivedFeatures?: boolean, featureMode?: string, forceMinimal?: boolean, withRaw?: boolean, observe?: 'body', reportProgress?: boolean): Observable<SzWhyRecordsResponse>;
-    public whyRecords(dataSource1: string, recordId1: string, dataSource2: string, recordId2: string, withRelationships?: boolean, withFeatureStats?: boolean, withDerivedFeatures?: boolean, featureMode?: string, forceMinimal?: boolean, withRaw?: boolean, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<SzWhyRecordsResponse>>;
-    public whyRecords(dataSource1: string, recordId1: string, dataSource2: string, recordId2: string, withRelationships?: boolean, withFeatureStats?: boolean, withDerivedFeatures?: boolean, featureMode?: string, forceMinimal?: boolean, withRaw?: boolean, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<SzWhyRecordsResponse>>;
-    public whyRecords(dataSource1: string, recordId1: string, dataSource2: string, recordId2: string, withRelationships?: boolean, withFeatureStats?: boolean, withDerivedFeatures?: boolean, featureMode?: string, forceMinimal?: boolean, withRaw?: boolean, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public whyRecords(dataSource1: string, recordId1: string, dataSource2: string, recordId2: string, withRelationships?: boolean, withFeatureStats?: boolean, withInternalFeatures?: boolean, featureMode?: SzFeatureMode, forceMinimal?: boolean, withRaw?: boolean, observe?: 'body', reportProgress?: boolean): Observable<SzWhyRecordsResponse>;
+    public whyRecords(dataSource1: string, recordId1: string, dataSource2: string, recordId2: string, withRelationships?: boolean, withFeatureStats?: boolean, withInternalFeatures?: boolean, featureMode?: SzFeatureMode, forceMinimal?: boolean, withRaw?: boolean, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<SzWhyRecordsResponse>>;
+    public whyRecords(dataSource1: string, recordId1: string, dataSource2: string, recordId2: string, withRelationships?: boolean, withFeatureStats?: boolean, withInternalFeatures?: boolean, featureMode?: SzFeatureMode, forceMinimal?: boolean, withRaw?: boolean, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<SzWhyRecordsResponse>>;
+    public whyRecords(dataSource1: string, recordId1: string, dataSource2: string, recordId2: string, withRelationships?: boolean, withFeatureStats?: boolean, withInternalFeatures?: boolean, featureMode?: SzFeatureMode, forceMinimal?: boolean, withRaw?: boolean, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (dataSource1 === null || dataSource1 === undefined) {
             throw new Error('Required parameter dataSource1 was null or undefined when calling whyRecords.');
@@ -719,8 +986,8 @@ export class EntityDataService {
         if (withFeatureStats !== undefined && withFeatureStats !== null) {
             queryParameters = queryParameters.set('withFeatureStats', <any>withFeatureStats);
         }
-        if (withDerivedFeatures !== undefined && withDerivedFeatures !== null) {
-            queryParameters = queryParameters.set('withDerivedFeatures', <any>withDerivedFeatures);
+        if (withInternalFeatures !== undefined && withInternalFeatures !== null) {
+            queryParameters = queryParameters.set('withInternalFeatures', <any>withInternalFeatures);
         }
         if (featureMode !== undefined && featureMode !== null) {
             queryParameters = queryParameters.set('featureMode', <any>featureMode);

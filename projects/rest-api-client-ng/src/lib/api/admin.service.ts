@@ -115,8 +115,6 @@ export class AdminService {
     /**
      * Gets a heartbeat from the server to make sure it is up and running.  The response will include the current timestamp.
      *
-     *
-     *
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
@@ -155,8 +153,6 @@ export class AdminService {
     /**
      * Get the license information.
      *
-     *
-     *
      * @param withRaw Whether or not to include the raw JSON response from the underlying native API.  This raw response may include additional details but lack some of the abstraction the standard response provides.  If true, then the &#x27;rawData&#x27; field in the response will be a non-null value and contain the additional details.
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -167,10 +163,10 @@ export class AdminService {
     public license(withRaw?: boolean, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
 
-         let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
-         if (withRaw !== undefined && withRaw !== null) {
-             queryParameters = queryParameters.set('withRaw', <any>withRaw);
-         }
+        let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
+        if (withRaw !== undefined && withRaw !== null) {
+            queryParameters = queryParameters.set('withRaw', <any>withRaw);
+        }
 
         let headers = this.defaultHeaders;
 
@@ -202,8 +198,6 @@ export class AdminService {
 
     /**
      * Get the full version information.
-     *
-     *
      *
      * @param withRaw Whether or not to include the raw JSON response from the underlying native API.  This raw response may include additional details but lack some of the abstraction the standard response provides.  If true, then the &#x27;rawData&#x27; field in the response will be a non-null value and contain the additional details.
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.

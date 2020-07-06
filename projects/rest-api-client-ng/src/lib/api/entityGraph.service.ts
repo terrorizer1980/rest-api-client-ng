@@ -22,6 +22,7 @@ import { SzEntityIdentifiers } from '../model/szEntityIdentifiers';
 import { SzEntityNetworkResponse } from '../model/szEntityNetworkResponse';
 import { SzEntityPathResponse } from '../model/szEntityPathResponse';
 import { SzErrorResponse } from '../model/szErrorResponse';
+import { SzFeatureMode } from '../model/szFeatureMode';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
@@ -83,16 +84,16 @@ export class EntityGraphService {
      * @param maxEntities The maximum number of entities to build out when the &#x60;buildOut&#x60; is greater than zero (0).  This defaults to &#x60;1000&#x60; if not specified.
      * @param featureMode The method by which feature values should be included for entities returned in the response.  The possible values are:   * &#x60;NONE&#x60; - Do not include any feature values -- this is the fastest              option from a performance perspective because feature              values do not have to be retrieved.   * &#x60;REPRESENTATIVE&#x60; - Include only a single representative value per                        \&quot;unique\&quot; value of a feature.  If there are                        multiple values that are near duplicates then                        only one value is included and the others are                        suppressed.   * &#x60;WITH_DUPLICATES&#x60; - Group near-duplicate feature values and return                         a representative value along with its near                         duplicate values.
      * @param withFeatureStats Set to &#x60;true&#x60; to include resolution statistics for features.  This defaults to &#x60;false&#x60;.
-     * @param withDerivedFeatures Set to &#x60;true&#x60; to include \&quot;expressed\&quot; features that are derived composite keys such as name + date of birth keys.  This defaults to &#x60;false&#x60;.
+     * @param withInternalFeatures Set to &#x60;true&#x60; to include \&quot;expressed\&quot; features that are derived composite keys such as name + date of birth keys.  This defaults to &#x60;false&#x60;.
      * @param forceMinimal Whether or not to force the minimum entity detail in the response which may consist of nothing more than an entity ID.  This provides the fastest response to an entity query operation because no additional data needs to be retrieved other than what is directly accessible.  This overrules other parameters governing the retrieval of features or related entities.
      * @param withRaw Whether or not to include the raw JSON response from the underlying native API.  This raw response may include additional details but lack some of the abstraction the standard response provides.  If true, then the &#x27;rawData&#x27; field in the response will be a non-null value and contain the additional details.
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public findNetworkByEntityID(e?: Array<string|number>, entities?: string, maxDegrees?: number, buildOut?: number, maxEntities?: number, featureMode?: 'NONE' | 'REPRESENTATIVE' | 'WITH_DUPLICATES', withFeatureStats?: boolean, withDerivedFeatures?: boolean, forceMinimal?: boolean, withRaw?: boolean, observe?: 'body', reportProgress?: boolean): Observable<SzEntityNetworkResponse>;
-    public findNetworkByEntityID(e?: Array<string|number>, entities?: string, maxDegrees?: number, buildOut?: number, maxEntities?: number, featureMode?: 'NONE' | 'REPRESENTATIVE' | 'WITH_DUPLICATES', withFeatureStats?: boolean, withDerivedFeatures?: boolean, forceMinimal?: boolean, withRaw?: boolean, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<SzEntityNetworkResponse>>;
-    public findNetworkByEntityID(e?: Array<string|number>, entities?: string, maxDegrees?: number, buildOut?: number, maxEntities?: number, featureMode?: 'NONE' | 'REPRESENTATIVE' | 'WITH_DUPLICATES', withFeatureStats?: boolean, withDerivedFeatures?: boolean, forceMinimal?: boolean, withRaw?: boolean, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<SzEntityNetworkResponse>>;
-    public findNetworkByEntityID(e?: Array<string|number>, entities?: string, maxDegrees?: number, buildOut?: number, maxEntities?: number, featureMode?: 'NONE' | 'REPRESENTATIVE' | 'WITH_DUPLICATES', withFeatureStats?: boolean, withDerivedFeatures?: boolean, forceMinimal?: boolean, withRaw?: boolean, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public findEntityNetwork(e?: Array<SzEntityIdentifier>, entities?: SzEntityIdentifiers, maxDegrees?: number, buildOut?: number, maxEntities?: number, featureMode?: SzFeatureMode, withFeatureStats?: boolean, withInternalFeatures?: boolean, forceMinimal?: boolean, withRaw?: boolean, observe?: 'body', reportProgress?: boolean): Observable<SzEntityNetworkResponse>;
+    public findEntityNetwork(e?: Array<SzEntityIdentifier>, entities?: SzEntityIdentifiers, maxDegrees?: number, buildOut?: number, maxEntities?: number, featureMode?: SzFeatureMode, withFeatureStats?: boolean, withInternalFeatures?: boolean, forceMinimal?: boolean, withRaw?: boolean, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<SzEntityNetworkResponse>>;
+    public findEntityNetwork(e?: Array<SzEntityIdentifier>, entities?: SzEntityIdentifiers, maxDegrees?: number, buildOut?: number, maxEntities?: number, featureMode?: SzFeatureMode, withFeatureStats?: boolean, withInternalFeatures?: boolean, forceMinimal?: boolean, withRaw?: boolean, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<SzEntityNetworkResponse>>;
+    public findEntityNetwork(e?: Array<SzEntityIdentifier>, entities?: SzEntityIdentifiers, maxDegrees?: number, buildOut?: number, maxEntities?: number, featureMode?: SzFeatureMode, withFeatureStats?: boolean, withInternalFeatures?: boolean, forceMinimal?: boolean, withRaw?: boolean, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
 
 
@@ -128,8 +129,8 @@ export class EntityGraphService {
         if (withFeatureStats !== undefined && withFeatureStats !== null) {
             queryParameters = queryParameters.set('withFeatureStats', <any>withFeatureStats);
         }
-        if (withDerivedFeatures !== undefined && withDerivedFeatures !== null) {
-            queryParameters = queryParameters.set('withDerivedFeatures', <any>withDerivedFeatures);
+        if (withInternalFeatures !== undefined && withInternalFeatures !== null) {
+            queryParameters = queryParameters.set('withInternalFeatures', <any>withInternalFeatures);
         }
         if (forceMinimal !== undefined && forceMinimal !== null) {
             queryParameters = queryParameters.set('forceMinimal', <any>forceMinimal);
@@ -178,16 +179,16 @@ export class EntityGraphService {
      * @param s The multi-valued query parameter where each value is a data source code identifying data sources for which one must be included in the entities for the path.  If not provided, then the default is to NOT require any specific data sources.
      * @param featureMode The method by which feature values should be included for entities returned in the response.  The possible values are:   * &#x60;NONE&#x60; - Do not include any feature values -- this is the fastest              option from a performance perspective because feature              values do not have to be retrieved.   * &#x60;REPRESENTATIVE&#x60; - Include only a single representative value per                        \&quot;unique\&quot; value of a feature.  If there are                        multiple values that are near duplicates then                        only one value is included and the others are                        suppressed.   * &#x60;WITH_DUPLICATES&#x60; - Group near-duplicate feature values and return                         a representative value along with its near                         duplicate values.
      * @param withFeatureStats Set to &#x60;true&#x60; to include resolution statistics for features.  This defaults to &#x60;false&#x60;.
-     * @param withDerivedFeatures Set to &#x60;true&#x60; to include \&quot;expressed\&quot; features that are derived composite keys such as name + date of birth keys.  This defaults to &#x60;false&#x60;.
+     * @param withInternalFeatures Set to &#x60;true&#x60; to include \&quot;expressed\&quot; features that are derived composite keys such as name + date of birth keys.  This defaults to &#x60;false&#x60;.
      * @param forceMinimal Whether or not to force the minimum entity detail in the response which may consist of nothing more than an entity ID.  This provides the fastest response to an entity query operation because no additional data needs to be retrieved other than what is directly accessible.  This overrules other parameters governing the retrieval of features or related entities.
      * @param withRaw Whether or not to include the raw JSON response from the underlying native API.  This raw response may include additional details but lack some of the abstraction the standard response provides.  If true, then the &#x27;rawData&#x27; field in the response will be a non-null value and contain the additional details.
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public findPathByEntityID(from: SzEntityIdentifier, to: SzEntityIdentifier, maxDegrees?: number, x?: SzEntityIdentifiers, avoidEntities?: SzEntityIdentifiers, forbidAvoided?: boolean, s?: Array<string>, featureMode?: string, withFeatureStats?: boolean, withDerivedFeatures?: boolean, forceMinimal?: boolean, withRaw?: boolean, observe?: 'body', reportProgress?: boolean): Observable<SzEntityPathResponse>;
-    public findPathByEntityID(from: SzEntityIdentifier, to: SzEntityIdentifier, maxDegrees?: number, x?: SzEntityIdentifiers, avoidEntities?: SzEntityIdentifiers, forbidAvoided?: boolean, s?: Array<string>, featureMode?: string, withFeatureStats?: boolean, withDerivedFeatures?: boolean, forceMinimal?: boolean, withRaw?: boolean, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<SzEntityPathResponse>>;
-    public findPathByEntityID(from: SzEntityIdentifier, to: SzEntityIdentifier, maxDegrees?: number, x?: SzEntityIdentifiers, avoidEntities?: SzEntityIdentifiers, forbidAvoided?: boolean, s?: Array<string>, featureMode?: string, withFeatureStats?: boolean, withDerivedFeatures?: boolean, forceMinimal?: boolean, withRaw?: boolean, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<SzEntityPathResponse>>;
-    public findPathByEntityID(from: SzEntityIdentifier, to: SzEntityIdentifier, maxDegrees?: number, x?: SzEntityIdentifiers, avoidEntities?: SzEntityIdentifiers, forbidAvoided?: boolean, s?: Array<string>, featureMode?: string, withFeatureStats?: boolean, withDerivedFeatures?: boolean, forceMinimal?: boolean, withRaw?: boolean, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public findEntityPath(from: SzEntityIdentifier, to: SzEntityIdentifier, maxDegrees?: number, x?: Array<SzEntityIdentifier>, avoidEntities?: SzEntityIdentifiers, forbidAvoided?: boolean, s?: Array<string>, featureMode?: SzFeatureMode, withFeatureStats?: boolean, withInternalFeatures?: boolean, forceMinimal?: boolean, withRaw?: boolean, observe?: 'body', reportProgress?: boolean): Observable<SzEntityPathResponse>;
+    public findEntityPath(from: SzEntityIdentifier, to: SzEntityIdentifier, maxDegrees?: number, x?: Array<SzEntityIdentifier>, avoidEntities?: SzEntityIdentifiers, forbidAvoided?: boolean, s?: Array<string>, featureMode?: SzFeatureMode, withFeatureStats?: boolean, withInternalFeatures?: boolean, forceMinimal?: boolean, withRaw?: boolean, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<SzEntityPathResponse>>;
+    public findEntityPath(from: SzEntityIdentifier, to: SzEntityIdentifier, maxDegrees?: number, x?: Array<SzEntityIdentifier>, avoidEntities?: SzEntityIdentifiers, forbidAvoided?: boolean, s?: Array<string>, featureMode?: SzFeatureMode, withFeatureStats?: boolean, withInternalFeatures?: boolean, forceMinimal?: boolean, withRaw?: boolean, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<SzEntityPathResponse>>;
+    public findEntityPath(from: SzEntityIdentifier, to: SzEntityIdentifier, maxDegrees?: number, x?: Array<SzEntityIdentifier>, avoidEntities?: SzEntityIdentifiers, forbidAvoided?: boolean, s?: Array<string>, featureMode?: SzFeatureMode, withFeatureStats?: boolean, withInternalFeatures?: boolean, forceMinimal?: boolean, withRaw?: boolean, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (from === null || from === undefined) {
             throw new Error('Required parameter from was null or undefined when calling findPathByEntityID.');
@@ -214,12 +215,13 @@ export class EntityGraphService {
         if (to !== undefined && to !== null) {
             queryParameters = queryParameters.set('to', <any>to);
         }
-
         if (maxDegrees !== undefined && maxDegrees !== null) {
             queryParameters = queryParameters.set('maxDegrees', <any>maxDegrees);
         }
-        if (x !== undefined && x !== null) {
-            queryParameters = queryParameters.set('x', <any>x);
+        if (x && x !== undefined && x !== null && x.forEach) {
+            x.forEach((element) => {
+                queryParameters = queryParameters.append('x', <any>element);
+            })
         }
         if (avoidEntities !== undefined && avoidEntities !== null) {
             queryParameters = queryParameters.set('avoidEntities', <any>avoidEntities);
@@ -238,8 +240,8 @@ export class EntityGraphService {
         if (withFeatureStats !== undefined && withFeatureStats !== null) {
             queryParameters = queryParameters.set('withFeatureStats', <any>withFeatureStats);
         }
-        if (withDerivedFeatures !== undefined && withDerivedFeatures !== null) {
-            queryParameters = queryParameters.set('withDerivedFeatures', <any>withDerivedFeatures);
+        if (withInternalFeatures !== undefined && withInternalFeatures !== null) {
+            queryParameters = queryParameters.set('withInternalFeatures', <any>withInternalFeatures);
         }
         if (forceMinimal !== undefined && forceMinimal !== null) {
             queryParameters = queryParameters.set('forceMinimal', <any>forceMinimal);
