@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>Senzing Rest Api Client (Angular)</title>
+        <title>@senzing/rest-api-client-ng documentation</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -13,7 +13,7 @@
     <body>
 
         <div class="navbar navbar-default navbar-fixed-top visible-xs">
-            <a href="../" class="navbar-brand">Senzing Rest Api Client (Angular)</a>
+            <a href="../" class="navbar-brand">@senzing/rest-api-client-ng documentation</a>
             <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
         </div>
 
@@ -58,6 +58,7 @@
         <p class="comment">
             <code>projects/rest-api-client-ng/src/lib/api/bulkData.service.ts</code>
         </p>
+
 
 
 
@@ -152,7 +153,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">projects/rest-api-client-ng/src/lib/api/bulkData.service.ts:34</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">projects/rest-api-client-ng/src/lib/api/bulkData.service.ts:35</a></div>
                             </td>
                         </tr>
 
@@ -173,7 +174,7 @@
                                                         <td>httpClient</td>
                                                   
                                                         <td>
-                                                                    <code><a href="https://angular.io/api/common/http/HttpClient" target="_blank" >HttpClient</a></code>
+                                                                        <code><a href="https://angular.io/api/common/http/HttpClient" target="_blank" >HttpClient</a></code>
                                                         </td>
                                                   
                                                     <td>
@@ -185,7 +186,7 @@
                                                         <td>basePath</td>
                                                   
                                                         <td>
-                                                                    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                                                        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
                                                         </td>
                                                   
                                                     <td>
@@ -197,7 +198,7 @@
                                                         <td>configuration</td>
                                                   
                                                         <td>
-                                                                    <code><a href="../classes/Configuration.html" target="_self" >Configuration</a></code>
+                                                                        <code><a href="../classes/Configuration.html" target="_self" >Configuration</a></code>
                                                         </td>
                                                   
                                                     <td>
@@ -216,919 +217,1252 @@
 
             <section>
     
-        <h3 id="methods">
-            Methods
-        </h3>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="analyzeBulkRecords"></a>
-                        <span class="name">
-                            <b>
-                                <span class="modifier">Public</span>
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="analyzeBulkRecords"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Public</span>
                             analyzeBulkRecords
-                            </b>
-                            <a href="#analyzeBulkRecords"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                            <span class="modifier-icon icon ion-ios-reset"></span>
-                        <code>analyzeBulkRecords(body: string | Blob | File | Array<literal type>, observe?, reportProgress?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank">boolean</a>)</code>
-                    </td>
-                </tr>
+                        </b>
+                        <a href="#analyzeBulkRecords"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>analyzeBulkRecords(body: string | Blob | File | Array<literal type>, progressPeriod?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, observe?, reportProgress?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank">boolean</a>)</code>
+                </td>
+            </tr>
 
 
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="68" class="link-to-prism">projects/rest-api-client-ng/src/lib/api/bulkData.service.ts:68</a></div>
-                            </td>
-                        </tr>
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="70"
+                            class="link-to-prism">projects/rest-api-client-ng/src/lib/api/bulkData.service.ts:70</a></div>
+                </td>
+            </tr>
 
 
-                <tr>
-                    <td class="col-md-4">
-                            <div class="io-description"><p>Analyze a bulk data set of records</p>
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Analyze a bulk data set of records. (Supports SSE)</p>
 </div>
 
-                            <div class="io-description">
-                                    <b>Parameters :</b>
-                                    <table class="params">
-                                        <thead>
-                                            <tr>
-                                                <td>Name</td>
-                                                    <td>Type</td>
-                                                <td>Optional</td>
-                                                    <td>Description</td>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                                <tr>
-                                                        <td>body</td>
-                                                        <td>
-                                                                    <code>string | Blob | File | Array&lt;literal type&gt;</code>
-                                                        </td>
-                                                    
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                    <td>Description</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>body</td>
+                                    <td>
+                                            <code>string | Blob | File | Array&lt;literal type&gt;</code>
+                                    </td>
 
-                                                        <td>
-                                                        </td>
-                                                </tr>
-                                                <tr>
-                                                        <td>observe</td>
-                                                        <td>
-                                                        </td>
-                                                    
-                                                    <td>
-                                                            Yes
-                                                    </td>
-                                                    
+                                    <td>
+                                        No
+                                    </td>
 
-                                                        <td>
-                                                                <code><p>set whether or not to return the data Observable as the body, response or events. defaults to returning the body.</p>
-</code>
-                                                        </td>
-                                                </tr>
-                                                <tr>
-                                                        <td>reportProgress</td>
-                                                        <td>
-                                                                    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
-                                                        </td>
-                                                    
-                                                    <td>
-                                                            Yes
-                                                    </td>
-                                                    
 
-                                                        <td>
-                                                                <code><p>flag to report request and response progress.</p>
-</code>
-                                                        </td>
-                                                </tr>
-                                        </tbody>
-                                    </table>
-                            </div>
-                            <div>
-                            </div>
-                            <div class="io-description">
-                                <b>Returns : </b>    <code><a href="../interfaces/SzBulkDataAnalysisResponse.html" target="_self" >Observable&lt;SzBulkDataAnalysisResponse&gt;</a></code>
+                                    <td>
+                                        <p>The bulk record data as a single JSON record per line, a JSON array, or a CSV.  Further, multipart/form-data can be provided with the &quot;data&quot; property representing the record data as described above.  Set your content type accordingly.  The data should be in pre-mapped format using JSON property names or CSV column names as described by the <a href="https://senzing.zendesk.com/hc/en-us/articles/231925448-Generic-Entity-Specification">Senzing Generic Entity Specification</a>.</p>
 
-                            </div>
-                                <div class="io-description">
-                                    
-                                </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="analyzeBulkRecords"></a>
-                        <span class="name">
-                            <b>
-                                <span class="modifier">Public</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>progressPeriod</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        Yes
+                                    </td>
+
+
+                                    <td>
+                                        <p>The suggested maximum time between SSE &#x60;progress&#x60; events specified in milliseconds.  If not specified then the default of &#x60;3000&#x60; milliseconds (i.e.: 3 seconds) is used.  This parameter is NOT used if the operation is not producing an SSE response (i.e.: &#x60;text/event-stream&#x60; media type was not requested via the &#x60;Accept&#x60; header).</p>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>observe</td>
+                                    <td>
+                                    </td>
+
+                                    <td>
+                                        Yes
+                                    </td>
+
+
+                                    <td>
+                                        <p>set whether or not to return the data Observable as the body, response or events. defaults to returning the body.</p>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>reportProgress</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                                    </td>
+
+                                    <td>
+                                        Yes
+                                    </td>
+
+
+                                    <td>
+                                        <p>flag to report request and response progress.</p>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>Observable&lt;SzBulkDataAnalysisResponse&gt;</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="analyzeBulkRecords"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Public</span>
                             analyzeBulkRecords
-                            </b>
-                            <a href="#analyzeBulkRecords"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                            <span class="modifier-icon icon ion-ios-reset"></span>
-                        <code>analyzeBulkRecords(body: string | Blob | File | Array<literal type>, observe?, reportProgress?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank">boolean</a>)</code>
-                    </td>
-                </tr>
+                        </b>
+                        <a href="#analyzeBulkRecords"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>analyzeBulkRecords(body: string | Blob | File | Array<literal type>, progressPeriod?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, observe?, reportProgress?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank">boolean</a>)</code>
+                </td>
+            </tr>
 
 
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="69" class="link-to-prism">projects/rest-api-client-ng/src/lib/api/bulkData.service.ts:69</a></div>
-                            </td>
-                        </tr>
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="71"
+                            class="link-to-prism">projects/rest-api-client-ng/src/lib/api/bulkData.service.ts:71</a></div>
+                </td>
+            </tr>
 
 
-                <tr>
-                    <td class="col-md-4">
+            <tr>
+                <td class="col-md-4">
 
-                            <div class="io-description">
-                                    <b>Parameters :</b>
-                                    <table class="params">
-                                        <thead>
-                                            <tr>
-                                                <td>Name</td>
-                                                    <td>Type</td>
-                                                <td>Optional</td>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                                <tr>
-                                                        <td>body</td>
-                                                        <td>
-                                                                    <code>string | Blob | File | Array&lt;literal type&gt;</code>
-                                                        </td>
-                                                    
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>body</td>
+                                    <td>
+                                            <code>string | Blob | File | Array&lt;literal type&gt;</code>
+                                    </td>
 
-                                                </tr>
-                                                <tr>
-                                                        <td>observe</td>
-                                                        <td>
-                                                        </td>
-                                                    
-                                                    <td>
-                                                            Yes
-                                                    </td>
-                                                    
+                                    <td>
+                                        No
+                                    </td>
 
-                                                </tr>
-                                                <tr>
-                                                        <td>reportProgress</td>
-                                                        <td>
-                                                                    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
-                                                        </td>
-                                                    
-                                                    <td>
-                                                            Yes
-                                                    </td>
-                                                    
 
-                                                </tr>
-                                        </tbody>
-                                    </table>
-                            </div>
-                            <div>
-                            </div>
-                            <div class="io-description">
-                                <b>Returns : </b>    <code><a href="../interfaces/SzBulkDataAnalysisResponse.html" target="_self" >Observable&lt;HttpResponse&lt;SzBulkDataAnalysisResponse&gt;&gt;</a></code>
+                                </tr>
+                                <tr>
+                                    <td>progressPeriod</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
 
-                            </div>
-                                <div class="io-description">
-                                    
-                                </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="analyzeBulkRecords"></a>
-                        <span class="name">
-                            <b>
-                                <span class="modifier">Public</span>
+                                    <td>
+                                        Yes
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>observe</td>
+                                    <td>
+                                    </td>
+
+                                    <td>
+                                        Yes
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>reportProgress</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                                    </td>
+
+                                    <td>
+                                        Yes
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>Observable&lt;HttpResponse&lt;SzBulkDataAnalysisResponse&gt;&gt;</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="analyzeBulkRecords"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Public</span>
                             analyzeBulkRecords
-                            </b>
-                            <a href="#analyzeBulkRecords"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                            <span class="modifier-icon icon ion-ios-reset"></span>
-                        <code>analyzeBulkRecords(body: string | Blob | File | Array<literal type>, observe?, reportProgress?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank">boolean</a>)</code>
-                    </td>
-                </tr>
+                        </b>
+                        <a href="#analyzeBulkRecords"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>analyzeBulkRecords(body: string | Blob | File | Array<literal type>, progressPeriod?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, observe?, reportProgress?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank">boolean</a>)</code>
+                </td>
+            </tr>
 
 
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="70" class="link-to-prism">projects/rest-api-client-ng/src/lib/api/bulkData.service.ts:70</a></div>
-                            </td>
-                        </tr>
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="72"
+                            class="link-to-prism">projects/rest-api-client-ng/src/lib/api/bulkData.service.ts:72</a></div>
+                </td>
+            </tr>
 
 
-                <tr>
-                    <td class="col-md-4">
+            <tr>
+                <td class="col-md-4">
 
-                            <div class="io-description">
-                                    <b>Parameters :</b>
-                                    <table class="params">
-                                        <thead>
-                                            <tr>
-                                                <td>Name</td>
-                                                    <td>Type</td>
-                                                <td>Optional</td>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                                <tr>
-                                                        <td>body</td>
-                                                        <td>
-                                                                    <code>string | Blob | File | Array&lt;literal type&gt;</code>
-                                                        </td>
-                                                    
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>body</td>
+                                    <td>
+                                            <code>string | Blob | File | Array&lt;literal type&gt;</code>
+                                    </td>
 
-                                                </tr>
-                                                <tr>
-                                                        <td>observe</td>
-                                                        <td>
-                                                        </td>
-                                                    
-                                                    <td>
-                                                            Yes
-                                                    </td>
-                                                    
+                                    <td>
+                                        No
+                                    </td>
 
-                                                </tr>
-                                                <tr>
-                                                        <td>reportProgress</td>
-                                                        <td>
-                                                                    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
-                                                        </td>
-                                                    
-                                                    <td>
-                                                            Yes
-                                                    </td>
-                                                    
 
-                                                </tr>
-                                        </tbody>
-                                    </table>
-                            </div>
-                            <div>
-                            </div>
-                            <div class="io-description">
-                                <b>Returns : </b>    <code><a href="../interfaces/SzBulkDataAnalysisResponse.html" target="_self" >Observable&lt;HttpEvent&lt;SzBulkDataAnalysisResponse&gt;&gt;</a></code>
+                                </tr>
+                                <tr>
+                                    <td>progressPeriod</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
 
-                            </div>
-                                <div class="io-description">
-                                    
-                                </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="analyzeBulkRecords"></a>
-                        <span class="name">
-                            <b>
-                                <span class="modifier">Public</span>
+                                    <td>
+                                        Yes
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>observe</td>
+                                    <td>
+                                    </td>
+
+                                    <td>
+                                        Yes
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>reportProgress</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                                    </td>
+
+                                    <td>
+                                        Yes
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>Observable&lt;HttpEvent&lt;SzBulkDataAnalysisResponse&gt;&gt;</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="analyzeBulkRecords"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Public</span>
                             analyzeBulkRecords
-                            </b>
-                            <a href="#analyzeBulkRecords"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                            <span class="modifier-icon icon ion-ios-reset"></span>
-                        <code>analyzeBulkRecords(body: string | Blob | File | Array<literal type>, observe: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>, reportProgress: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank">boolean</a>)</code>
-                    </td>
-                </tr>
+                        </b>
+                        <a href="#analyzeBulkRecords"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>analyzeBulkRecords(body: string | Blob | File | Array<literal type>, progressPeriod?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, observe: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>, reportProgress: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank">boolean</a>)</code>
+                </td>
+            </tr>
 
 
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="71" class="link-to-prism">projects/rest-api-client-ng/src/lib/api/bulkData.service.ts:71</a></div>
-                            </td>
-                        </tr>
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="73"
+                            class="link-to-prism">projects/rest-api-client-ng/src/lib/api/bulkData.service.ts:73</a></div>
+                </td>
+            </tr>
 
 
-                <tr>
-                    <td class="col-md-4">
+            <tr>
+                <td class="col-md-4">
 
-                            <div class="io-description">
-                                    <b>Parameters :</b>
-                                    <table class="params">
-                                        <thead>
-                                            <tr>
-                                                <td>Name</td>
-                                                    <td>Type</td>
-                                                <td>Optional</td>
-                                                    <td>Default value</td>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                                <tr>
-                                                        <td>body</td>
-                                                        <td>
-                                                                    <code>string | Blob | File | Array&lt;literal type&gt;</code>
-                                                        </td>
-                                                    
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                        <td>
-                                                        </td>
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                    <td>Default value</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>body</td>
+                                    <td>
+                                            <code>string | Blob | File | Array&lt;literal type&gt;</code>
+                                    </td>
 
-                                                </tr>
-                                                <tr>
-                                                        <td>observe</td>
-                                                        <td>
-                                                                    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
-                                                        </td>
-                                                    
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                        <td>
-                                                                <code>&#x27;body&#x27;</code>
-                                                        </td>
+                                    <td>
+                                        No
+                                    </td>
 
-                                                </tr>
-                                                <tr>
-                                                        <td>reportProgress</td>
-                                                        <td>
-                                                                    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
-                                                        </td>
-                                                    
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                        <td>
-                                                                <code>false</code>
-                                                        </td>
+                                    <td>
+                                    </td>
 
-                                                </tr>
-                                        </tbody>
-                                    </table>
-                            </div>
-                            <div>
-                            </div>
-                            <div class="io-description">
-                                <b>Returns : </b>    <code>Observable&lt;any&gt;</code>
+                                </tr>
+                                <tr>
+                                    <td>progressPeriod</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
 
-                            </div>
-                                <div class="io-description">
-                                    
-                                </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="loadBulkRecords"></a>
-                        <span class="name">
-                            <b>
-                                <span class="modifier">Public</span>
+                                    <td>
+                                        Yes
+                                    </td>
+
+                                    <td>
+                                    </td>
+
+                                </tr>
+                                <tr>
+                                    <td>observe</td>
+                                    <td>
+                                                <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+                                    <td>
+                                        <code>&#x27;body&#x27;</code>
+                                    </td>
+
+                                </tr>
+                                <tr>
+                                    <td>reportProgress</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+                                    <td>
+                                        <code>false</code>
+                                    </td>
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>Observable&lt;any&gt;</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loadBulkRecords"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Public</span>
                             loadBulkRecords
-                            </b>
-                            <a href="#loadBulkRecords"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                            <span class="modifier-icon icon ion-ios-reset"></span>
-                        <code>loadBulkRecords(body: string | Blob | File, dataSource?: string | literal type, entityType?: string | literal type, observe?, reportProgress?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank">boolean</a>)</code>
-                    </td>
-                </tr>
+                        </b>
+                        <a href="#loadBulkRecords"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>loadBulkRecords(body: string | Blob | File | Array<literal type>, dataSource?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, mapDataSources?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, mapDataSource?: Array<string>, entityType?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, mapEntityTypes?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, mapEntityType?: Array<string>, progressPeriod?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, observe?, reportProgress?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank">boolean</a>)</code>
+                </td>
+            </tr>
 
 
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="146" class="link-to-prism">projects/rest-api-client-ng/src/lib/api/bulkData.service.ts:146</a></div>
-                            </td>
-                        </tr>
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="162"
+                            class="link-to-prism">projects/rest-api-client-ng/src/lib/api/bulkData.service.ts:162</a></div>
+                </td>
+            </tr>
 
 
-                <tr>
-                    <td class="col-md-4">
-                            <div class="io-description"><p>Load the records in the provided bulk data set.</p>
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Load the records in the provided bulk data set. (supports SSE)</p>
 </div>
 
-                            <div class="io-description">
-                                    <b>Parameters :</b>
-                                    <table class="params">
-                                        <thead>
-                                            <tr>
-                                                <td>Name</td>
-                                                    <td>Type</td>
-                                                <td>Optional</td>
-                                                    <td>Description</td>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                                <tr>
-                                                        <td>body</td>
-                                                        <td>
-                                                                    <code>string | Blob | File</code>
-                                                        </td>
-                                                    
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                    <td>Description</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>body</td>
+                                    <td>
+                                            <code>string | Blob | File | Array&lt;literal type&gt;</code>
+                                    </td>
 
-                                                        <td>
-                                                                <code><p>The bulk record data as a single JSON record per line, a JSON array, or a CSV.  Further, multipart/form-data can be provided with the &quot;data&quot; property representing the record data as described above.  Set your content type accordingly.  The data should be in pre-mapped format using JSON property names or CSV column names as described by the <a href="https://senzing.zendesk.com/hc/en-us/articles/231925448-Generic-Entity-Specification">Senzing Generic Entity Specification</a>.</p>
-</code>
-                                                        </td>
-                                                </tr>
-                                                <tr>
-                                                        <td>dataSource</td>
-                                                        <td>
-                                                                    <code>string | literal type</code>
-                                                        </td>
-                                                    
-                                                    <td>
-                                                            Yes
-                                                    </td>
-                                                    
+                                    <td>
+                                        No
+                                    </td>
 
-                                                        <td>
-                                                                <code><p>Used to set the overriding data source for the records.  This data source will be assigned to every record unless the record has a data source already and that data source has a specific override specified by a &#x60;dataSource_xxxx&#x60; parameter.  For example &#x60;dataSource_EMPL&#x60; will map the &#x60;EMPL&#x60; data source to the specified value.</p>
-</code>
-                                                        </td>
-                                                </tr>
-                                                <tr>
-                                                        <td>entityType</td>
-                                                        <td>
-                                                                    <code>string | literal type</code>
-                                                        </td>
-                                                    
-                                                    <td>
-                                                            Yes
-                                                    </td>
-                                                    
 
-                                                        <td>
-                                                                <code><p>Used to set the overriding entity type for the records.  This entity type will be assigned to every record unless the record already has an entity type and that data source has a specific override specified by a &#x60;entityType_xxxx&#x60; parameter.  For example &#x60;entityType_PERSON&#x60; will map the &#x60;PERSON&#x60; entity type to the specified value.  If no override is provided then the entity type specified for the record is used directly, unless the record has no entity type in which case an entity type by the same name as the data source is used.</p>
-</code>
-                                                        </td>
-                                                </tr>
-                                                <tr>
-                                                        <td>observe</td>
-                                                        <td>
-                                                        </td>
-                                                    
-                                                    <td>
-                                                            Yes
-                                                    </td>
-                                                    
+                                    <td>
+                                        <p>The bulk record data as a single JSON record per line, a JSON array, or a CSV.  Further, multipart/form-data can be provided with the &quot;data&quot; property representing the record data as described above.  Set your content type accordingly.  The data should be in pre-mapped format using JSON property names or CSV column names as described by the <a href="https://senzing.zendesk.com/hc/en-us/articles/231925448-Generic-Entity-Specification">Senzing Generic Entity Specification</a>.</p>
 
-                                                        <td>
-                                                                <code><p>set whether or not to return the data Observable as the body, response or events. defaults to returning the body.</p>
-</code>
-                                                        </td>
-                                                </tr>
-                                                <tr>
-                                                        <td>reportProgress</td>
-                                                        <td>
-                                                                    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
-                                                        </td>
-                                                    
-                                                    <td>
-                                                            Yes
-                                                    </td>
-                                                    
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>dataSource</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
 
-                                                        <td>
-                                                                <code><p>flag to report request and response progress.</p>
-</code>
-                                                        </td>
-                                                </tr>
-                                        </tbody>
-                                    </table>
-                            </div>
-                            <div>
-                            </div>
-                            <div class="io-description">
-                                <b>Returns : </b>    <code><a href="../interfaces/SzBulkDataLoadResponse.html" target="_self" >Observable&lt;SzBulkDataLoadResponse&gt;</a></code>
+                                    <td>
+                                        Yes
+                                    </td>
 
-                            </div>
-                                <div class="io-description">
-                                    
-                                </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="loadBulkRecords"></a>
-                        <span class="name">
-                            <b>
-                                <span class="modifier">Public</span>
+
+                                    <td>
+                                        <p>Used to set the overriding data source for the records.  This data source will be assigned to every record <strong>unless</strong> the record&#x27;s data source (including blank data source) has a specific mapping specified by a &#x60;mapDataSources&#x60; or &#x60;mapDataSource&#x60; parameters.  If this parameter is <strong>not</strong> provided and no specific overrides are provided for a record then the data source specified in the inbound record is used directly.  If the record has no data source and no override is provided then it will fail to load.</p>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>mapDataSources</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        Yes
+                                    </td>
+
+
+                                    <td>
+                                        <p>A URL-encoded JSON object whose properties are interpreted as data source codes to map from and whose corresponding values are interpretted as data source codes to map to.  For example, &#x60;{&amp;quot;EMPL&amp;quot;: &amp;quot;EMPLOYEES&amp;quot;}&#x60; (url-encoded of course) would map all records with inbound data source &#x60;EMPL&#x60; to &#x60;EMPLOYEES&#x60;.  To map only inbound records with no data source to a specific data source you would use an empty JSON property (e.g.: &#x60;{&amp;quot;&amp;quot;: &amp;quot;CUSTOMERS&amp;quot;}&#x60;). If the &#x60;dataSource&#x60; parameter is <strong>not</strong> provided and no specific overrides are provided for a record with this parameter or via &#x60;mapDataSource&#x60; then the data source specified in the inbound record is used directly.  If the record has no data source and no overriding or mapped data source is provided for an empty data source then the record will fail to load.  <strong>NOTE</strong>: If both this parameter and the &#x60;mapDataSource&#x60; parameter is provided then the mappings are merged with the more ad-hoc &#x60;mapDataSource&#x60; parameter taking precedence since it is likely being used for debugging and diagnostic purposes to avoid the URL encoding.  Here are some examples of encoding this parameter:  - <strong>JavaScript Example</strong>   &#x60;&#x60;&#x60;javascript     var dataSourceMap &#x3D; {       &amp;quot;&amp;quot;: &amp;quot;CUSTOMERS&amp;quot;,       &amp;quot;EMPL&amp;quot;: &amp;quot;EMPLOYEES&amp;quot;,       &amp;quot;VEND&amp;quot;: &amp;quot;VENDORS&amp;quot;     };     var mapDataSources &#x3D; JSON.stringify(dataSourceMap);     var urlPath &#x3D; &amp;quot;/bulk-data/load?mapDataSources&#x3D;&amp;quot;                 + encodeURIComponent(mapDataSources);   &#x60;&#x60;&#x60;  - <strong>Java Example</strong>   &#x60;&#x60;&#x60;java     JsonObjectBuilder builder &#x3D; Json.createObjectBuilder();     builder.add(&amp;quot;&amp;quot;, &amp;quot;CUSTOMERS&amp;quot;);     builder.add(&amp;quot;EMPL&amp;quot;, &amp;quot;EMPLOYEES&amp;quot;);     builder.add(&amp;quot;VEND&amp;quot;, &amp;quot;VENDORS&amp;quot;);     JsonObject dataSourceMap &#x3D; builder.build();      String mapDataSources &#x3D; dataSourceMap.toString();     String encodedMap     &#x3D; URLEncoder.encode(mapDataSources, &amp;quot;UTF-8&amp;quot;);     String urlPath &#x3D; &amp;quot;/bulk-data/load?mapDataSources&#x3D;&amp;quot; + encodedMap;   &#x60;&#x60;&#x60;  In both of the above examples the &#x60;urlPath&#x60; variable is set to: &#x60;&#x60;&#x60;json  /bulk-data/load?mapDataSources&#x3D;%7B%22%22%3A%22CUSTOMERS%22%2C%22EMPL%22%3A%22EMPLOYEES%22%2C%22VEND%22%3A%22VENDORS%22%7D  &#x60;&#x60;&#x60;</p>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>mapDataSource</td>
+                                    <td>
+                                            <code>Array&lt;string&gt;</code>
+                                    </td>
+
+                                    <td>
+                                        Yes
+                                    </td>
+
+
+                                    <td>
+                                        <p>As an alternative to the &#x60;mapDataSources&#x60; parameter you may specify the &#x60;mapDataSource&#x60; parameter zero or more times to add additional data source mappings or <strong>override</strong> data source mappings from &#x60;mapDataSources&#x60;.  If you are using this API programmatically then you should typically use the &#x60;mapDataSources&#x60; parameter instead of this one.  But when manually constructing a URL in the browser address bar, in a command-line tool like &#x60;curl&#x60; or in a REST client browser extension for debugging or testing purposes, encoding the JSON value for &#x60;mapDataSources&#x60; can be unwieldy.  This parameter (which is multi-valued) lets you specify delimited strings that begin with the delimiter character, followed by the original data source name, then the delimiter character and the new data source name.  You should only have to URL-encode the delimiter you choose and maybe spaces.  For example, &#x60;:EMPL:EMPLOYEES&#x60; or &#x60;|EMPL|EMPLOYEES&#x60; (url-encoded of course) would map all records with inbound data source &#x60;EMPL&#x60; to &#x60;EMPLOYEES&#x60;.  To map only inbound records with no data source to a specific data source you would begin the value with two repeated delimiter characters followed by the new data source value (e.g.: &#x60;||CUSTOMERS&#x60; or &#x60;::CUSTOMERS&#x60;). If the &#x60;dataSource&#x60; parameter is <strong>not</strong> provided and no specific overrides are provided for a record with this parameter or the &#x60;mapDataSources&#x60; parameter then the data source specified in the inbound record is used directly.  If the record has no data source and no overriding or mapped data source is provided for an empty data source then the record will fail to load.</p>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>entityType</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        Yes
+                                    </td>
+
+
+                                    <td>
+                                        <p>Used to set the overriding entity type for the records.  This entity type will be assigned to every record <strong>unless</strong> the record&#x27;s entity type (including blank entity type) has a specific mapping specified by a &#x60;mapEntityTypes&#x60; or &#x60;mapEntityType&#x60; parameters.  If this parameter is <strong>not</strong> provided and no specific overrides are provided for a record then the entity type specified in the inbound record is used directly.  If the record has no entity type and no override is provided then &#x60;GENERIC&#x60; will be used.</p>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>mapEntityTypes</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        Yes
+                                    </td>
+
+
+                                    <td>
+                                        <p>A URL-encoded JSON object whose properties are interpreted as entity type codes to map from and whose corresponding values are interpretted as entity type codes to map to.  For example, &#x60;{&amp;quot;COMPANY&amp;quot;: &amp;quot;ORGANIZATION&amp;quot;}&#x60; (url-encoded of course) would map all records with inbound entity type &#x60;COMPANY&#x60; to &#x60;ORGANIZATION&#x60;.  To map only inbound records with no entity type to a specific entity type you would use an empty JSON property (e.g.: &#x60;{&amp;quot;&amp;quot;: &amp;quot;PERSON&amp;quot;}&#x60;). If the &#x60;entityType&#x60; parameter is <strong>not</strong> provided and no specific overrides are provided for a record with this parameter or via &#x60;mapEntityType&#x60; then the entity type specified in the inbound record is used directly.  If the record has no entity type and no overriding or mapped entity type is provided for an empty entity type then &#x60;GENERIC&#x60; will be used.  <strong>NOTE</strong>: If both this parameter and the &#x60;mapEntityType&#x60; parameter is provided then the mappings are merged with the more ad-hoc &#x60;mapEntityType&#x60; parameter taking precedence since it is likely being used for debugging and diagnostic purposes to avoid the URL encoding.  Here are some examples of encoding this parameter:  - <strong>JavaScript Example</strong>   &#x60;&#x60;&#x60;javascript     var entityTypeMap &#x3D; {       &amp;quot;&amp;quot;: &amp;quot;PERSON&amp;quot;,       &amp;quot;ORG&amp;quot;: &amp;quot;ORGANIZATION&amp;quot;,       &amp;quot;COMP&amp;quot;: &amp;quot;ORGANIZATION&amp;quot;     };     var mapEntityTypes &#x3D; JSON.stringify(entityTypeMap);     var urlPath &#x3D; &amp;quot;/bulk-data/load?mapEntityTypes&#x3D;&amp;quot;                 + encodeURIComponent(mapEntityTypes);   &#x60;&#x60;&#x60;  - <strong>Java Example</strong>   &#x60;&#x60;&#x60;java     JsonObjectBuilder builder &#x3D; Json.createObjectBuilder();     builder.add(&amp;quot;&amp;quot;, &amp;quot;PERSON&amp;quot;);     builder.add(&amp;quot;ORG&amp;quot;, &amp;quot;ORGANIZATION&amp;quot;);     builder.add(&amp;quot;COMP&amp;quot;, &amp;quot;ORGANIZATION&amp;quot;);     JsonObject entityTypeMap &#x3D; builder.build();      String mapEntityTypes &#x3D; entityTypeMap.toString();     String encodedMap     &#x3D; URLEncoder.encode(mapEntityTypes, &amp;quot;UTF-8&amp;quot;);     String urlPath &#x3D; &amp;quot;/bulk-data/load?mapEntityTypes&#x3D;&amp;quot; + encodedMap;   &#x60;&#x60;&#x60;  In both of the above examples the &#x60;urlPath&#x60; variable is set to: &#x60;&#x60;&#x60;json  /bulk-data/load?mapEntityTypes&#x3D;%7B%22%22%3A%22PERSON%22%2C%22ORG%22%3A%22ORGANIZATION%22%2C%22COMP%22%3A%22ORGANIZATION%22%7D  &#x60;&#x60;&#x60;</p>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>mapEntityType</td>
+                                    <td>
+                                            <code>Array&lt;string&gt;</code>
+                                    </td>
+
+                                    <td>
+                                        Yes
+                                    </td>
+
+
+                                    <td>
+                                        <p>As an alternative to the &#x60;mapEntityTypes&#x60; parameter you may specify the &#x60;mapEntityType&#x60; parameter zero or more times to add additional data source mappings or <strong>override</strong> data source mappings from &#x60;mapDataSources&#x60;.  If you are using this API programmatically then you should typically use the &#x60;mapDataSources&#x60; parameter instead of this one.  But when manually constructing a URL in the browser address bar, in a command-line tool like &#x60;curl&#x60; or in a REST client browser extension for debugging or testing purposes, encoding the JSON value for &#x60;mapDataSources&#x60; can be unwieldy.  This parameter (which is multi-valued) lets you specify delimited strings that begin with the delimiter character, followed by the original data source name, then the delimiter character and the new data source name.  You should only have to URL-encode the delimiter you choose and maybe spaces.  For example, &#x60;:EMPL:EMPLOYEES&#x60; or &#x60;|EMPL|EMPLOYEES&#x60; (url-encoded of course) would map all records with inbound data source &#x60;EMPL&#x60; to &#x60;EMPLOYEES&#x60;.  To map only inbound records with no data source to a specific data source you would begin the value with two repeated delimiter characters followed by the new data source value (e.g.: &#x60;||CUSTOMERS&#x60; or &#x60;::CUSTOMERS&#x60;). If the &#x60;dataSource&#x60; parameter is <strong>not</strong> provided and no specific overrides are provided for a record with this parameter or the &#x60;mapDataSources&#x60; parameter then the data source specified in the inbound record is used directly.  If the record has no entity type and no overriding or mapped entity type is provided for an empty entity type then &#x60;GENERIC&#x60; will be used.</p>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>progressPeriod</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        Yes
+                                    </td>
+
+
+                                    <td>
+                                        <p>The suggested maximum time between SSE &#x60;progress&#x60; events specified in milliseconds.  If not specified then the default of &#x60;3000&#x60; milliseconds (i.e.: 3 seconds) is used.  This parameter is NOT used if the operation is not producing an SSE response (i.e.: &#x60;text/event-stream&#x60; media type was not requested via the &#x60;Accept&#x60; header).</p>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>observe</td>
+                                    <td>
+                                    </td>
+
+                                    <td>
+                                        Yes
+                                    </td>
+
+
+                                    <td>
+                                        <p>set whether or not to return the data Observable as the body, response or events. defaults to returning the body.</p>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>reportProgress</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                                    </td>
+
+                                    <td>
+                                        Yes
+                                    </td>
+
+
+                                    <td>
+                                        <p>flag to report request and response progress.</p>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="../interfaces/SzBulkLoadResponse.html" target="_self" >Observable&lt;SzBulkLoadResponse&gt;</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loadBulkRecords"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Public</span>
                             loadBulkRecords
-                            </b>
-                            <a href="#loadBulkRecords"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                            <span class="modifier-icon icon ion-ios-reset"></span>
-                        <code>loadBulkRecords(body: string | Blob | File, dataSource?: string | literal type, entityType?: string | literal type, observe?, reportProgress?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank">boolean</a>)</code>
-                    </td>
-                </tr>
+                        </b>
+                        <a href="#loadBulkRecords"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>loadBulkRecords(body: string | Blob | File | Array<literal type>, dataSource?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, mapDataSources?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, mapDataSource?: Array<string>, entityType?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, mapEntityTypes?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, mapEntityType?: Array<string>, progressPeriod?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, observe?, reportProgress?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank">boolean</a>)</code>
+                </td>
+            </tr>
 
 
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="147" class="link-to-prism">projects/rest-api-client-ng/src/lib/api/bulkData.service.ts:147</a></div>
-                            </td>
-                        </tr>
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="163"
+                            class="link-to-prism">projects/rest-api-client-ng/src/lib/api/bulkData.service.ts:163</a></div>
+                </td>
+            </tr>
 
 
-                <tr>
-                    <td class="col-md-4">
+            <tr>
+                <td class="col-md-4">
 
-                            <div class="io-description">
-                                    <b>Parameters :</b>
-                                    <table class="params">
-                                        <thead>
-                                            <tr>
-                                                <td>Name</td>
-                                                    <td>Type</td>
-                                                <td>Optional</td>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                                <tr>
-                                                        <td>body</td>
-                                                        <td>
-                                                                    <code>string | Blob | File</code>
-                                                        </td>
-                                                    
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>body</td>
+                                    <td>
+                                            <code>string | Blob | File | Array&lt;literal type&gt;</code>
+                                    </td>
 
-                                                </tr>
-                                                <tr>
-                                                        <td>dataSource</td>
-                                                        <td>
-                                                                    <code>string | literal type</code>
-                                                        </td>
-                                                    
-                                                    <td>
-                                                            Yes
-                                                    </td>
-                                                    
+                                    <td>
+                                        No
+                                    </td>
 
-                                                </tr>
-                                                <tr>
-                                                        <td>entityType</td>
-                                                        <td>
-                                                                    <code>string | literal type</code>
-                                                        </td>
-                                                    
-                                                    <td>
-                                                            Yes
-                                                    </td>
-                                                    
 
-                                                </tr>
-                                                <tr>
-                                                        <td>observe</td>
-                                                        <td>
-                                                        </td>
-                                                    
-                                                    <td>
-                                                            Yes
-                                                    </td>
-                                                    
+                                </tr>
+                                <tr>
+                                    <td>dataSource</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
 
-                                                </tr>
-                                                <tr>
-                                                        <td>reportProgress</td>
-                                                        <td>
-                                                                    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
-                                                        </td>
-                                                    
-                                                    <td>
-                                                            Yes
-                                                    </td>
-                                                    
+                                    <td>
+                                        Yes
+                                    </td>
 
-                                                </tr>
-                                        </tbody>
-                                    </table>
-                            </div>
-                            <div>
-                            </div>
-                            <div class="io-description">
-                                <b>Returns : </b>    <code><a href="../interfaces/SzBulkDataLoadResponse.html" target="_self" >Observable&lt;HttpResponse&lt;SzBulkDataLoadResponse&gt;&gt;</a></code>
 
-                            </div>
-                                <div class="io-description">
-                                    
-                                </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="loadBulkRecords"></a>
-                        <span class="name">
-                            <b>
-                                <span class="modifier">Public</span>
+                                </tr>
+                                <tr>
+                                    <td>mapDataSources</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        Yes
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>mapDataSource</td>
+                                    <td>
+                                            <code>Array&lt;string&gt;</code>
+                                    </td>
+
+                                    <td>
+                                        Yes
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>entityType</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        Yes
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>mapEntityTypes</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        Yes
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>mapEntityType</td>
+                                    <td>
+                                            <code>Array&lt;string&gt;</code>
+                                    </td>
+
+                                    <td>
+                                        Yes
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>progressPeriod</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        Yes
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>observe</td>
+                                    <td>
+                                    </td>
+
+                                    <td>
+                                        Yes
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>reportProgress</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                                    </td>
+
+                                    <td>
+                                        Yes
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="../interfaces/SzBulkLoadResponse.html" target="_self" >Observable&lt;HttpResponse&lt;SzBulkLoadResponse&gt;&gt;</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loadBulkRecords"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Public</span>
                             loadBulkRecords
-                            </b>
-                            <a href="#loadBulkRecords"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                            <span class="modifier-icon icon ion-ios-reset"></span>
-                        <code>loadBulkRecords(body: string | Blob | File, dataSource?: string | literal type, entityType?: string | literal type, observe?, reportProgress?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank">boolean</a>)</code>
-                    </td>
-                </tr>
+                        </b>
+                        <a href="#loadBulkRecords"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>loadBulkRecords(body: string | Blob | File | Array<literal type>, dataSource?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, mapDataSources?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, mapDataSource?: Array<string>, entityType?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, mapEntityTypes?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, mapEntityType?: Array<string>, progressPeriod?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, observe?, reportProgress?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank">boolean</a>)</code>
+                </td>
+            </tr>
 
 
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="148" class="link-to-prism">projects/rest-api-client-ng/src/lib/api/bulkData.service.ts:148</a></div>
-                            </td>
-                        </tr>
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="164"
+                            class="link-to-prism">projects/rest-api-client-ng/src/lib/api/bulkData.service.ts:164</a></div>
+                </td>
+            </tr>
 
 
-                <tr>
-                    <td class="col-md-4">
+            <tr>
+                <td class="col-md-4">
 
-                            <div class="io-description">
-                                    <b>Parameters :</b>
-                                    <table class="params">
-                                        <thead>
-                                            <tr>
-                                                <td>Name</td>
-                                                    <td>Type</td>
-                                                <td>Optional</td>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                                <tr>
-                                                        <td>body</td>
-                                                        <td>
-                                                                    <code>string | Blob | File</code>
-                                                        </td>
-                                                    
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>body</td>
+                                    <td>
+                                            <code>string | Blob | File | Array&lt;literal type&gt;</code>
+                                    </td>
 
-                                                </tr>
-                                                <tr>
-                                                        <td>dataSource</td>
-                                                        <td>
-                                                                    <code>string | literal type</code>
-                                                        </td>
-                                                    
-                                                    <td>
-                                                            Yes
-                                                    </td>
-                                                    
+                                    <td>
+                                        No
+                                    </td>
 
-                                                </tr>
-                                                <tr>
-                                                        <td>entityType</td>
-                                                        <td>
-                                                                    <code>string | literal type</code>
-                                                        </td>
-                                                    
-                                                    <td>
-                                                            Yes
-                                                    </td>
-                                                    
 
-                                                </tr>
-                                                <tr>
-                                                        <td>observe</td>
-                                                        <td>
-                                                        </td>
-                                                    
-                                                    <td>
-                                                            Yes
-                                                    </td>
-                                                    
+                                </tr>
+                                <tr>
+                                    <td>dataSource</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
 
-                                                </tr>
-                                                <tr>
-                                                        <td>reportProgress</td>
-                                                        <td>
-                                                                    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
-                                                        </td>
-                                                    
-                                                    <td>
-                                                            Yes
-                                                    </td>
-                                                    
+                                    <td>
+                                        Yes
+                                    </td>
 
-                                                </tr>
-                                        </tbody>
-                                    </table>
-                            </div>
-                            <div>
-                            </div>
-                            <div class="io-description">
-                                <b>Returns : </b>    <code><a href="../interfaces/SzBulkDataLoadResponse.html" target="_self" >Observable&lt;HttpEvent&lt;SzBulkDataLoadResponse&gt;&gt;</a></code>
 
-                            </div>
-                                <div class="io-description">
-                                    
-                                </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="loadBulkRecords"></a>
-                        <span class="name">
-                            <b>
-                                <span class="modifier">Public</span>
+                                </tr>
+                                <tr>
+                                    <td>mapDataSources</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        Yes
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>mapDataSource</td>
+                                    <td>
+                                            <code>Array&lt;string&gt;</code>
+                                    </td>
+
+                                    <td>
+                                        Yes
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>entityType</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        Yes
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>mapEntityTypes</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        Yes
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>mapEntityType</td>
+                                    <td>
+                                            <code>Array&lt;string&gt;</code>
+                                    </td>
+
+                                    <td>
+                                        Yes
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>progressPeriod</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        Yes
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>observe</td>
+                                    <td>
+                                    </td>
+
+                                    <td>
+                                        Yes
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>reportProgress</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                                    </td>
+
+                                    <td>
+                                        Yes
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="../interfaces/SzBulkLoadResponse.html" target="_self" >Observable&lt;HttpEvent&lt;SzBulkLoadResponse&gt;&gt;</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loadBulkRecords"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Public</span>
                             loadBulkRecords
-                            </b>
-                            <a href="#loadBulkRecords"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                            <span class="modifier-icon icon ion-ios-reset"></span>
-                        <code>loadBulkRecords(body: string | Blob | File, dataSource?: string | literal type, entityType?: string | literal type, observe: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>, reportProgress: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank">boolean</a>)</code>
-                    </td>
-                </tr>
+                        </b>
+                        <a href="#loadBulkRecords"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>loadBulkRecords(body: string | Blob | File | Array<literal type>, dataSource?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, mapDataSources?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, mapDataSource?: Array<string>, entityType?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, mapEntityTypes?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, mapEntityType?: Array<string>, progressPeriod?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, observe: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>, reportProgress: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank">boolean</a>)</code>
+                </td>
+            </tr>
 
 
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="149" class="link-to-prism">projects/rest-api-client-ng/src/lib/api/bulkData.service.ts:149</a></div>
-                            </td>
-                        </tr>
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="165"
+                            class="link-to-prism">projects/rest-api-client-ng/src/lib/api/bulkData.service.ts:165</a></div>
+                </td>
+            </tr>
 
 
-                <tr>
-                    <td class="col-md-4">
+            <tr>
+                <td class="col-md-4">
 
-                            <div class="io-description">
-                                    <b>Parameters :</b>
-                                    <table class="params">
-                                        <thead>
-                                            <tr>
-                                                <td>Name</td>
-                                                    <td>Type</td>
-                                                <td>Optional</td>
-                                                    <td>Default value</td>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                                <tr>
-                                                        <td>body</td>
-                                                        <td>
-                                                                    <code>string | Blob | File</code>
-                                                        </td>
-                                                    
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                        <td>
-                                                        </td>
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                    <td>Default value</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>body</td>
+                                    <td>
+                                            <code>string | Blob | File | Array&lt;literal type&gt;</code>
+                                    </td>
 
-                                                </tr>
-                                                <tr>
-                                                        <td>dataSource</td>
-                                                        <td>
-                                                                    <code>string | literal type</code>
-                                                        </td>
-                                                    
-                                                    <td>
-                                                            Yes
-                                                    </td>
-                                                    
-                                                        <td>
-                                                        </td>
+                                    <td>
+                                        No
+                                    </td>
 
-                                                </tr>
-                                                <tr>
-                                                        <td>entityType</td>
-                                                        <td>
-                                                                    <code>string | literal type</code>
-                                                        </td>
-                                                    
-                                                    <td>
-                                                            Yes
-                                                    </td>
-                                                    
-                                                        <td>
-                                                        </td>
+                                    <td>
+                                    </td>
 
-                                                </tr>
-                                                <tr>
-                                                        <td>observe</td>
-                                                        <td>
-                                                                    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
-                                                        </td>
-                                                    
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                        <td>
-                                                                <code>&#x27;body&#x27;</code>
-                                                        </td>
+                                </tr>
+                                <tr>
+                                    <td>dataSource</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
 
-                                                </tr>
-                                                <tr>
-                                                        <td>reportProgress</td>
-                                                        <td>
-                                                                    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
-                                                        </td>
-                                                    
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                        <td>
-                                                                <code>false</code>
-                                                        </td>
+                                    <td>
+                                        Yes
+                                    </td>
 
-                                                </tr>
-                                        </tbody>
-                                    </table>
-                            </div>
-                            <div>
-                            </div>
-                            <div class="io-description">
-                                <b>Returns : </b>    <code>Observable&lt;any&gt;</code>
+                                    <td>
+                                    </td>
 
-                            </div>
-                                <div class="io-description">
-                                    
-                                </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+                                </tr>
+                                <tr>
+                                    <td>mapDataSources</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        Yes
+                                    </td>
+
+                                    <td>
+                                    </td>
+
+                                </tr>
+                                <tr>
+                                    <td>mapDataSource</td>
+                                    <td>
+                                            <code>Array&lt;string&gt;</code>
+                                    </td>
+
+                                    <td>
+                                        Yes
+                                    </td>
+
+                                    <td>
+                                    </td>
+
+                                </tr>
+                                <tr>
+                                    <td>entityType</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        Yes
+                                    </td>
+
+                                    <td>
+                                    </td>
+
+                                </tr>
+                                <tr>
+                                    <td>mapEntityTypes</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        Yes
+                                    </td>
+
+                                    <td>
+                                    </td>
+
+                                </tr>
+                                <tr>
+                                    <td>mapEntityType</td>
+                                    <td>
+                                            <code>Array&lt;string&gt;</code>
+                                    </td>
+
+                                    <td>
+                                        Yes
+                                    </td>
+
+                                    <td>
+                                    </td>
+
+                                </tr>
+                                <tr>
+                                    <td>progressPeriod</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        Yes
+                                    </td>
+
+                                    <td>
+                                    </td>
+
+                                </tr>
+                                <tr>
+                                    <td>observe</td>
+                                    <td>
+                                                <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+                                    <td>
+                                        <code>&#x27;body&#x27;</code>
+                                    </td>
+
+                                </tr>
+                                <tr>
+                                    <td>reportProgress</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+                                    <td>
+                                        <code>false</code>
+                                    </td>
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>Observable&lt;any&gt;</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </section>
-
             <section>
     
         <h3 id="inputs">
@@ -1142,21 +1476,14 @@
                         <span class="name">
                             <b>
                                 <span class="modifier">Protected</span>
-                            basePath
-                            </b>
+                            basePath</b>
                             <a href="#basePath"><span class="icon ion-ios-link"></span></a>
                         </span>
                     </td>
                 </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <span class="modifier-icon icon ion-ios-reset"></span><code>basePath:     <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-</code>
-                    </td>
-                </tr>
                     <tr>
                         <td class="col-md-4">
-                            <i>Type : </i>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 
                         </td>
                     </tr>
@@ -1167,7 +1494,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">projects/rest-api-client-ng/src/lib/api/bulkData.service.ts:32</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">projects/rest-api-client-ng/src/lib/api/bulkData.service.ts:33</a></div>
                             </td>
                         </tr>
 
@@ -1182,16 +1509,9 @@
                         <span class="name">
                             <b>
                                 <span class="modifier">Public</span>
-                            configuration
-                            </b>
+                            configuration</b>
                             <a href="#configuration"><span class="icon ion-ios-link"></span></a>
                         </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <span class="modifier-icon icon ion-ios-reset"></span><code>configuration:     <code></code>
-</code>
                     </td>
                 </tr>
                     <tr>
@@ -1201,7 +1521,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">projects/rest-api-client-ng/src/lib/api/bulkData.service.ts:34</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">projects/rest-api-client-ng/src/lib/api/bulkData.service.ts:35</a></div>
                             </td>
                         </tr>
 
@@ -1216,16 +1536,9 @@
                         <span class="name">
                             <b>
                                 <span class="modifier">Public</span>
-                            defaultHeaders
-                            </b>
+                            defaultHeaders</b>
                             <a href="#defaultHeaders"><span class="icon ion-ios-link"></span></a>
                         </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <span class="modifier-icon icon ion-ios-reset"></span><code>defaultHeaders:     <code></code>
-</code>
                     </td>
                 </tr>
                     <tr>
@@ -1235,7 +1548,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">projects/rest-api-client-ng/src/lib/api/bulkData.service.ts:33</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">projects/rest-api-client-ng/src/lib/api/bulkData.service.ts:34</a></div>
                             </td>
                         </tr>
 
@@ -1256,8 +1569,9 @@ import { CustomHttpUrlEncodingCodec }                        from &#x27;../encod
 import { Observable }                                        from &#x27;rxjs&#x27;;
 import { tap, catchError }                                               from &#x27;rxjs/operators&#x27;;
 
+//import { ModelObject } from &#x27;../model/modelObject&#x27;;
 import { SzBulkDataAnalysisResponse } from &#x27;../model/szBulkDataAnalysisResponse&#x27;;
-import { SzBulkDataLoadResponse } from &#x27;../model/szBulkDataLoadResponse&#x27;;
+import { SzBulkLoadResponse } from &#x27;../model/szBulkLoadResponse&#x27;;
 import { SzErrorResponse } from &#x27;../model/szErrorResponse&#x27;;
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from &#x27;../variables&#x27;;
@@ -1297,19 +1611,26 @@ export class BulkDataService {
 
 
     /**
-     * Analyze a bulk data set of records
-     * 
-     * @param data 
+     * Analyze a bulk data set of records. (Supports SSE)
+     *
+     * @param body The bulk record data as a single JSON record per line, a JSON array, or a CSV.  Further, multipart/form-data can be provided with the &amp;quot;data&amp;quot; property representing the record data as described above.  Set your content type accordingly.  The data should be in pre-mapped format using JSON property names or CSV column names as described by the [Senzing Generic Entity Specification](https://senzing.zendesk.com/hc/en-us/articles/231925448-Generic-Entity-Specification).
+     * @param progressPeriod The suggested maximum time between SSE &amp;#x60;progress&amp;#x60; events specified in milliseconds.  If not specified then the default of &amp;#x60;3000&amp;#x60; milliseconds (i.e.: 3 seconds) is used.  This parameter is NOT used if the operation is not producing an SSE response (i.e.: &amp;#x60;text/event-stream&amp;#x60; media type was not requested via the &amp;#x60;Accept&amp;#x60; header).
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public analyzeBulkRecords(body: string | Blob | File | Array&lt;{ [key: string]: any; }&gt;, observe?: &#x27;body&#x27;, reportProgress?: boolean): Observable&lt;SzBulkDataAnalysisResponse&gt;;
-    public analyzeBulkRecords(body: string | Blob | File | Array&lt;{ [key: string]: any; }&gt;, observe?: &#x27;response&#x27;, reportProgress?: boolean): Observable&lt;HttpResponse&lt;SzBulkDataAnalysisResponse&gt;&gt;;
-    public analyzeBulkRecords(body: string | Blob | File | Array&lt;{ [key: string]: any; }&gt;, observe?: &#x27;events&#x27;, reportProgress?: boolean): Observable&lt;HttpEvent&lt;SzBulkDataAnalysisResponse&gt;&gt;;
-    public analyzeBulkRecords(body: string | Blob | File | Array&lt;{ [key: string]: any; }&gt;, observe: any &#x3D; &#x27;body&#x27;, reportProgress: boolean &#x3D; false ): Observable&lt;any&gt; {
+    public analyzeBulkRecords(body: string | Blob | File | Array&lt;{ [key: string]: any; }&gt;, progressPeriod?: string, observe?: &#x27;body&#x27;, reportProgress?: boolean): Observable&lt;SzBulkDataAnalysisResponse&gt;;
+    public analyzeBulkRecords(body: string | Blob | File | Array&lt;{ [key: string]: any; }&gt;, progressPeriod?: string, observe?: &#x27;response&#x27;, reportProgress?: boolean): Observable&lt;HttpResponse&lt;SzBulkDataAnalysisResponse&gt;&gt;;
+    public analyzeBulkRecords(body: string | Blob | File | Array&lt;{ [key: string]: any; }&gt;, progressPeriod?: string, observe?: &#x27;events&#x27;, reportProgress?: boolean): Observable&lt;HttpEvent&lt;SzBulkDataAnalysisResponse&gt;&gt;;
+    public analyzeBulkRecords(body: string | Blob | File | Array&lt;{ [key: string]: any; }&gt;, progressPeriod?: string, observe: any &#x3D; &#x27;body&#x27;, reportProgress: boolean &#x3D; false ): Observable&lt;any&gt; {
 
         if (body &#x3D;&#x3D;&#x3D; null || body &#x3D;&#x3D;&#x3D; undefined) {
-            throw new Error(&#x27;Required parameter data was null or undefined when calling analyzeBulkRecords.&#x27;);
+            throw new Error(&#x27;Required parameter body was null or undefined when calling analyzeBulkRecords.&#x27;);
+        }
+
+
+        let queryParameters &#x3D; new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
+        if (progressPeriod !&#x3D;&#x3D; undefined &amp;&amp; progressPeriod !&#x3D;&#x3D; null) {
+            queryParameters &#x3D; queryParameters.set(&#x27;progressPeriod&#x27;, &lt;any&gt;progressPeriod);
         }
 
         let headers &#x3D; this.defaultHeaders;
@@ -1336,6 +1657,8 @@ export class BulkDataService {
             &#x27;application/json&#x27;,
             &#x27;text/csv; charset&#x3D;UTF-8&#x27;,
             &#x27;text/csv&#x27;,
+            &#x27;text/plain; charset&#x3D;UTF-8&#x27;,
+            &#x27;text/plain&#x27;,
             &#x27;multipart/form-data&#x27;
         ];
         const httpContentTypeSelected: string | undefined &#x3D; this.configuration.selectHeaderContentType(consumes, body);
@@ -1361,9 +1684,10 @@ export class BulkDataService {
             formParams &#x3D; formParams.append(&#x27;data&#x27;, &lt;any&gt;body) as any || formParams;
         }
 
-        return this.httpClient.post&lt;SzBulkDataAnalysisResponse&gt;(&#x60;${this.basePath}/bulk-data/analyze&#x60;,
-            body,
+        return this.httpClient.request&lt;SzBulkDataAnalysisResponse&gt;(&#x27;post&#x27;,&#x60;${this.basePath}/bulk-data/analyze&#x60;,
             {
+                body: body,
+                params: queryParameters,
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
                 observe: observe,
@@ -1373,54 +1697,85 @@ export class BulkDataService {
     }
 
     /**
-     * Load the records in the provided bulk data set.
-     * 
+     * Load the records in the provided bulk data set. (supports SSE)
+     *
      * @param body The bulk record data as a single JSON record per line, a JSON array, or a CSV.  Further, multipart/form-data can be provided with the &amp;quot;data&amp;quot; property representing the record data as described above.  Set your content type accordingly.  The data should be in pre-mapped format using JSON property names or CSV column names as described by the [Senzing Generic Entity Specification](https://senzing.zendesk.com/hc/en-us/articles/231925448-Generic-Entity-Specification).
-     * @param dataSource Used to set the overriding data source for the records.  This data source will be assigned to every record unless the record has a data source already and that data source has a specific override specified by a &amp;#x60;dataSource_xxxx&amp;#x60; parameter.  For example &amp;#x60;dataSource_EMPL&amp;#x60; will map the &amp;#x60;EMPL&amp;#x60; data source to the specified value.
-     * @param entityType Used to set the overriding entity type for the records.  This entity type will be assigned to every record unless the record already has an entity type and that data source has a specific override specified by a &amp;#x60;entityType_xxxx&amp;#x60; parameter.  For example &amp;#x60;entityType_PERSON&amp;#x60; will map the &amp;#x60;PERSON&amp;#x60; entity type to the specified value.  If no override is provided then the entity type specified for the record is used directly, unless the record has no entity type in which case an entity type by the same name as the data source is used.
+     * @param dataSource Used to set the overriding data source for the records.  This data source will be assigned to every record **unless** the record&amp;#x27;s data source (including blank data source) has a specific mapping specified by a &amp;#x60;mapDataSources&amp;#x60; or &amp;#x60;mapDataSource&amp;#x60; parameters.  If this parameter is **not** provided and no specific overrides are provided for a record then the data source specified in the inbound record is used directly.  If the record has no data source and no override is provided then it will fail to load.
+     * @param mapDataSources A URL-encoded JSON object whose properties are interpreted as data source codes to map from and whose corresponding values are interpretted as data source codes to map to.  For example, &amp;#x60;{\&amp;quot;EMPL\&amp;quot;: \&amp;quot;EMPLOYEES\&amp;quot;}&amp;#x60; (url-encoded of course) would map all records with inbound data source &amp;#x60;EMPL&amp;#x60; to &amp;#x60;EMPLOYEES&amp;#x60;.  To map only inbound records with no data source to a specific data source you would use an empty JSON property (e.g.: &amp;#x60;{\&amp;quot;\&amp;quot;: \&amp;quot;CUSTOMERS\&amp;quot;}&amp;#x60;). If the &amp;#x60;dataSource&amp;#x60; parameter is **not** provided and no specific overrides are provided for a record with this parameter or via &amp;#x60;mapDataSource&amp;#x60; then the data source specified in the inbound record is used directly.  If the record has no data source and no overriding or mapped data source is provided for an empty data source then the record will fail to load.  **NOTE**: If both this parameter and the &amp;#x60;mapDataSource&amp;#x60; parameter is provided then the mappings are merged with the more ad-hoc &amp;#x60;mapDataSource&amp;#x60; parameter taking precedence since it is likely being used for debugging and diagnostic purposes to avoid the URL encoding.  Here are some examples of encoding this parameter:  - **JavaScript Example**   &amp;#x60;&amp;#x60;&amp;#x60;javascript     var dataSourceMap &amp;#x3D; {       \&amp;quot;\&amp;quot;: \&amp;quot;CUSTOMERS\&amp;quot;,       \&amp;quot;EMPL\&amp;quot;: \&amp;quot;EMPLOYEES\&amp;quot;,       \&amp;quot;VEND\&amp;quot;: \&amp;quot;VENDORS\&amp;quot;     };     var mapDataSources &amp;#x3D; JSON.stringify(dataSourceMap);     var urlPath &amp;#x3D; \&amp;quot;/bulk-data/load?mapDataSources&amp;#x3D;\&amp;quot;                 + encodeURIComponent(mapDataSources);   &amp;#x60;&amp;#x60;&amp;#x60;  - **Java Example**   &amp;#x60;&amp;#x60;&amp;#x60;java     JsonObjectBuilder builder &amp;#x3D; Json.createObjectBuilder();     builder.add(\&amp;quot;\&amp;quot;, \&amp;quot;CUSTOMERS\&amp;quot;);     builder.add(\&amp;quot;EMPL\&amp;quot;, \&amp;quot;EMPLOYEES\&amp;quot;);     builder.add(\&amp;quot;VEND\&amp;quot;, \&amp;quot;VENDORS\&amp;quot;);     JsonObject dataSourceMap &amp;#x3D; builder.build();      String mapDataSources &amp;#x3D; dataSourceMap.toString();     String encodedMap     &amp;#x3D; URLEncoder.encode(mapDataSources, \&amp;quot;UTF-8\&amp;quot;);     String urlPath &amp;#x3D; \&amp;quot;/bulk-data/load?mapDataSources&amp;#x3D;\&amp;quot; + encodedMap;   &amp;#x60;&amp;#x60;&amp;#x60;  In both of the above examples the &amp;#x60;urlPath&amp;#x60; variable is set to: &amp;#x60;&amp;#x60;&amp;#x60;json  /bulk-data/load?mapDataSources&amp;#x3D;%7B%22%22%3A%22CUSTOMERS%22%2C%22EMPL%22%3A%22EMPLOYEES%22%2C%22VEND%22%3A%22VENDORS%22%7D  &amp;#x60;&amp;#x60;&amp;#x60;
+     * @param mapDataSource As an alternative to the &amp;#x60;mapDataSources&amp;#x60; parameter you may specify the &amp;#x60;mapDataSource&amp;#x60; parameter zero or more times to add additional data source mappings or **override** data source mappings from &amp;#x60;mapDataSources&amp;#x60;.  If you are using this API programmatically then you should typically use the &amp;#x60;mapDataSources&amp;#x60; parameter instead of this one.  But when manually constructing a URL in the browser address bar, in a command-line tool like &amp;#x60;curl&amp;#x60; or in a REST client browser extension for debugging or testing purposes, encoding the JSON value for &amp;#x60;mapDataSources&amp;#x60; can be unwieldy.  This parameter (which is multi-valued) lets you specify delimited strings that begin with the delimiter character, followed by the original data source name, then the delimiter character and the new data source name.  You should only have to URL-encode the delimiter you choose and maybe spaces.  For example, &amp;#x60;:EMPL:EMPLOYEES&amp;#x60; or &amp;#x60;|EMPL|EMPLOYEES&amp;#x60; (url-encoded of course) would map all records with inbound data source &amp;#x60;EMPL&amp;#x60; to &amp;#x60;EMPLOYEES&amp;#x60;.  To map only inbound records with no data source to a specific data source you would begin the value with two repeated delimiter characters followed by the new data source value (e.g.: &amp;#x60;||CUSTOMERS&amp;#x60; or &amp;#x60;::CUSTOMERS&amp;#x60;). If the &amp;#x60;dataSource&amp;#x60; parameter is **not** provided and no specific overrides are provided for a record with this parameter or the &amp;#x60;mapDataSources&amp;#x60; parameter then the data source specified in the inbound record is used directly.  If the record has no data source and no overriding or mapped data source is provided for an empty data source then the record will fail to load.
+     * @param entityType Used to set the overriding entity type for the records.  This entity type will be assigned to every record **unless** the record&amp;#x27;s entity type (including blank entity type) has a specific mapping specified by a &amp;#x60;mapEntityTypes&amp;#x60; or &amp;#x60;mapEntityType&amp;#x60; parameters.  If this parameter is **not** provided and no specific overrides are provided for a record then the entity type specified in the inbound record is used directly.  If the record has no entity type and no override is provided then &amp;#x60;GENERIC&amp;#x60; will be used.
+     * @param mapEntityTypes A URL-encoded JSON object whose properties are interpreted as entity type codes to map from and whose corresponding values are interpretted as entity type codes to map to.  For example, &amp;#x60;{\&amp;quot;COMPANY\&amp;quot;: \&amp;quot;ORGANIZATION\&amp;quot;}&amp;#x60; (url-encoded of course) would map all records with inbound entity type &amp;#x60;COMPANY&amp;#x60; to &amp;#x60;ORGANIZATION&amp;#x60;.  To map only inbound records with no entity type to a specific entity type you would use an empty JSON property (e.g.: &amp;#x60;{\&amp;quot;\&amp;quot;: \&amp;quot;PERSON\&amp;quot;}&amp;#x60;). If the &amp;#x60;entityType&amp;#x60; parameter is **not** provided and no specific overrides are provided for a record with this parameter or via &amp;#x60;mapEntityType&amp;#x60; then the entity type specified in the inbound record is used directly.  If the record has no entity type and no overriding or mapped entity type is provided for an empty entity type then &amp;#x60;GENERIC&amp;#x60; will be used.  **NOTE**: If both this parameter and the &amp;#x60;mapEntityType&amp;#x60; parameter is provided then the mappings are merged with the more ad-hoc &amp;#x60;mapEntityType&amp;#x60; parameter taking precedence since it is likely being used for debugging and diagnostic purposes to avoid the URL encoding.  Here are some examples of encoding this parameter:  - **JavaScript Example**   &amp;#x60;&amp;#x60;&amp;#x60;javascript     var entityTypeMap &amp;#x3D; {       \&amp;quot;\&amp;quot;: \&amp;quot;PERSON\&amp;quot;,       \&amp;quot;ORG\&amp;quot;: \&amp;quot;ORGANIZATION\&amp;quot;,       \&amp;quot;COMP\&amp;quot;: \&amp;quot;ORGANIZATION\&amp;quot;     };     var mapEntityTypes &amp;#x3D; JSON.stringify(entityTypeMap);     var urlPath &amp;#x3D; \&amp;quot;/bulk-data/load?mapEntityTypes&amp;#x3D;\&amp;quot;                 + encodeURIComponent(mapEntityTypes);   &amp;#x60;&amp;#x60;&amp;#x60;  - **Java Example**   &amp;#x60;&amp;#x60;&amp;#x60;java     JsonObjectBuilder builder &amp;#x3D; Json.createObjectBuilder();     builder.add(\&amp;quot;\&amp;quot;, \&amp;quot;PERSON\&amp;quot;);     builder.add(\&amp;quot;ORG\&amp;quot;, \&amp;quot;ORGANIZATION\&amp;quot;);     builder.add(\&amp;quot;COMP\&amp;quot;, \&amp;quot;ORGANIZATION\&amp;quot;);     JsonObject entityTypeMap &amp;#x3D; builder.build();      String mapEntityTypes &amp;#x3D; entityTypeMap.toString();     String encodedMap     &amp;#x3D; URLEncoder.encode(mapEntityTypes, \&amp;quot;UTF-8\&amp;quot;);     String urlPath &amp;#x3D; \&amp;quot;/bulk-data/load?mapEntityTypes&amp;#x3D;\&amp;quot; + encodedMap;   &amp;#x60;&amp;#x60;&amp;#x60;  In both of the above examples the &amp;#x60;urlPath&amp;#x60; variable is set to: &amp;#x60;&amp;#x60;&amp;#x60;json  /bulk-data/load?mapEntityTypes&amp;#x3D;%7B%22%22%3A%22PERSON%22%2C%22ORG%22%3A%22ORGANIZATION%22%2C%22COMP%22%3A%22ORGANIZATION%22%7D  &amp;#x60;&amp;#x60;&amp;#x60;
+     * @param mapEntityType As an alternative to the &amp;#x60;mapEntityTypes&amp;#x60; parameter you may specify the &amp;#x60;mapEntityType&amp;#x60; parameter zero or more times to add additional data source mappings or **override** data source mappings from &amp;#x60;mapDataSources&amp;#x60;.  If you are using this API programmatically then you should typically use the &amp;#x60;mapDataSources&amp;#x60; parameter instead of this one.  But when manually constructing a URL in the browser address bar, in a command-line tool like &amp;#x60;curl&amp;#x60; or in a REST client browser extension for debugging or testing purposes, encoding the JSON value for &amp;#x60;mapDataSources&amp;#x60; can be unwieldy.  This parameter (which is multi-valued) lets you specify delimited strings that begin with the delimiter character, followed by the original data source name, then the delimiter character and the new data source name.  You should only have to URL-encode the delimiter you choose and maybe spaces.  For example, &amp;#x60;:EMPL:EMPLOYEES&amp;#x60; or &amp;#x60;|EMPL|EMPLOYEES&amp;#x60; (url-encoded of course) would map all records with inbound data source &amp;#x60;EMPL&amp;#x60; to &amp;#x60;EMPLOYEES&amp;#x60;.  To map only inbound records with no data source to a specific data source you would begin the value with two repeated delimiter characters followed by the new data source value (e.g.: &amp;#x60;||CUSTOMERS&amp;#x60; or &amp;#x60;::CUSTOMERS&amp;#x60;). If the &amp;#x60;dataSource&amp;#x60; parameter is **not** provided and no specific overrides are provided for a record with this parameter or the &amp;#x60;mapDataSources&amp;#x60; parameter then the data source specified in the inbound record is used directly.  If the record has no entity type and no overriding or mapped entity type is provided for an empty entity type then &amp;#x60;GENERIC&amp;#x60; will be used.
+     * @param progressPeriod The suggested maximum time between SSE &amp;#x60;progress&amp;#x60; events specified in milliseconds.  If not specified then the default of &amp;#x60;3000&amp;#x60; milliseconds (i.e.: 3 seconds) is used.  This parameter is NOT used if the operation is not producing an SSE response (i.e.: &amp;#x60;text/event-stream&amp;#x60; media type was not requested via the &amp;#x60;Accept&amp;#x60; header).
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public loadBulkRecords(body: string | Blob | File, dataSource?: string | { [key: string]: string }, entityType?: string | { [key: string]: string }, observe?: &#x27;body&#x27;, reportProgress?: boolean): Observable&lt;SzBulkDataLoadResponse&gt;;
-    public loadBulkRecords(body: string | Blob | File, dataSource?: string | { [key: string]: string }, entityType?: string | { [key: string]: string }, observe?: &#x27;response&#x27;, reportProgress?: boolean): Observable&lt;HttpResponse&lt;SzBulkDataLoadResponse&gt;&gt;;
-    public loadBulkRecords(body: string | Blob | File, dataSource?: string | { [key: string]: string }, entityType?: string | { [key: string]: string }, observe?: &#x27;events&#x27;, reportProgress?: boolean): Observable&lt;HttpEvent&lt;SzBulkDataLoadResponse&gt;&gt;;
-    public loadBulkRecords(body: string | Blob | File, dataSource?: string | { [key: string]: string }, entityType?: string | { [key: string]: string }, observe: any &#x3D; &#x27;body&#x27;, reportProgress: boolean &#x3D; false ): Observable&lt;any&gt; {
-        let prefix &#x3D; &#x27;&#x27;;
-        let queryParameters &#x3D; new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
+    public loadBulkRecords(body: string | Blob | File | Array&lt;{ [key: string]: any }&gt;, dataSource?: string, mapDataSources?: string, mapDataSource?: Array&lt;string&gt;, entityType?: string, mapEntityTypes?: string, mapEntityType?: Array&lt;string&gt;, progressPeriod?: string, observe?: &#x27;body&#x27;, reportProgress?: boolean): Observable&lt;SzBulkLoadResponse&gt;;
+    public loadBulkRecords(body: string | Blob | File | Array&lt;{ [key: string]: any }&gt;, dataSource?: string, mapDataSources?: string, mapDataSource?: Array&lt;string&gt;, entityType?: string, mapEntityTypes?: string, mapEntityType?: Array&lt;string&gt;, progressPeriod?: string, observe?: &#x27;response&#x27;, reportProgress?: boolean): Observable&lt;HttpResponse&lt;SzBulkLoadResponse&gt;&gt;;
+    public loadBulkRecords(body: string | Blob | File | Array&lt;{ [key: string]: any }&gt;, dataSource?: string, mapDataSources?: string, mapDataSource?: Array&lt;string&gt;, entityType?: string, mapEntityTypes?: string, mapEntityType?: Array&lt;string&gt;, progressPeriod?: string, observe?: &#x27;events&#x27;, reportProgress?: boolean): Observable&lt;HttpEvent&lt;SzBulkLoadResponse&gt;&gt;;
+    public loadBulkRecords(body: string | Blob | File | Array&lt;{ [key: string]: any }&gt;, dataSource?: string, mapDataSources?: string, mapDataSource?: Array&lt;string&gt;, entityType?: string, mapEntityTypes?: string, mapEntityType?: Array&lt;string&gt;, progressPeriod?: string, observe: any &#x3D; &#x27;body&#x27;, reportProgress: boolean &#x3D; false ): Observable&lt;any&gt; {
 
         if (body &#x3D;&#x3D;&#x3D; null || body &#x3D;&#x3D;&#x3D; undefined) {
             throw new Error(&#x27;Required parameter body was null or undefined when calling loadBulkRecords.&#x27;);
         }
 
+        let queryParameters &#x3D; new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
+        /*
         if (dataSource !&#x3D;&#x3D; undefined &amp;&amp; dataSource !&#x3D;&#x3D; null) {
-            if((dataSource as { [key: string]: string }) &amp;&amp; typeof (dataSource as { [key: string]: string }) !&#x3D;&#x3D; &#x27;string&#x27;) {
-              for (const key in (dataSource as { [key: string]: string })) {
-                  if(key &#x3D;&#x3D;&#x3D; null || key &#x3D;&#x3D;&#x3D; &#x27;null&#x27; || key &#x3D;&#x3D;&#x3D; &#x27;NULL&#x27;) {
-                    queryParameters &#x3D; queryParameters.append(&#x27;dataSource&#x27;, dataSource[key]);
-                  } else {
-                    queryParameters &#x3D; queryParameters.append(&#x27;dataSource_&#x27;+key, dataSource[key]);
-                  }
-                  //console.log(&#x27;BulkDataService.loadBulkRecords entity types set to: &#x27;, queryParameters);
-              }
-            } else {
-              // is single ds
-              queryParameters &#x3D; queryParameters.set(&#x27;dataSource&#x27;, &lt;any&gt;dataSource);
-            }
-        }
-
-        if (entityType !&#x3D;&#x3D; undefined &amp;&amp; entityType !&#x3D;&#x3D; null) {
-          if((entityType as { [key: string]: string }) &amp;&amp; typeof (entityType as { [key: string]: string }) !&#x3D;&#x3D; &#x27;string&#x27;) {
-            for (const key in (entityType as { [key: string]: string })) {
+          if((dataSource as { [key: string]: string }) &amp;&amp; typeof (dataSource as { [key: string]: string }) !&#x3D;&#x3D; &#x27;string&#x27;) {
+            for (const key in (dataSource as { [key: string]: string })) {
                 if(key &#x3D;&#x3D;&#x3D; null || key &#x3D;&#x3D;&#x3D; &#x27;null&#x27; || key &#x3D;&#x3D;&#x3D; &#x27;NULL&#x27;) {
-                  queryParameters &#x3D; queryParameters.append(&#x27;entityType&#x27;, entityType[key]);
+                  queryParameters &#x3D; queryParameters.append(&#x27;dataSource&#x27;, dataSource[key]);
                 } else {
-                  queryParameters &#x3D; queryParameters.append(&#x27;entityType_&#x27;+key, entityType[key]);
+                  queryParameters &#x3D; queryParameters.append(&#x27;dataSource_&#x27;+key, dataSource[key]);
                 }
+                //console.log(&#x27;BulkDataService.loadBulkRecords entity types set to: &#x27;, queryParameters);
             }
           } else {
-            // is single et
-            queryParameters &#x3D; queryParameters.set(&#x27;entityType&#x27;, &lt;any&gt;entityType);
+            // is single ds
+            queryParameters &#x3D; queryParameters.set(&#x27;dataSource&#x27;, &lt;any&gt;dataSource);
           }
+      }
+
+      if (entityType !&#x3D;&#x3D; undefined &amp;&amp; entityType !&#x3D;&#x3D; null) {
+        if((entityType as { [key: string]: string }) &amp;&amp; typeof (entityType as { [key: string]: string }) !&#x3D;&#x3D; &#x27;string&#x27;) {
+          for (const key in (entityType as { [key: string]: string })) {
+              if(key &#x3D;&#x3D;&#x3D; null || key &#x3D;&#x3D;&#x3D; &#x27;null&#x27; || key &#x3D;&#x3D;&#x3D; &#x27;NULL&#x27;) {
+                queryParameters &#x3D; queryParameters.append(&#x27;entityType&#x27;, entityType[key]);
+              } else {
+                queryParameters &#x3D; queryParameters.append(&#x27;entityType_&#x27;+key, entityType[key]);
+              }
+          }
+        } else {
+          // is single et
+          queryParameters &#x3D; queryParameters.set(&#x27;entityType&#x27;, &lt;any&gt;entityType);
+        }
+      }*/
+
+        if (dataSource !&#x3D;&#x3D; undefined &amp;&amp; dataSource !&#x3D;&#x3D; null) {
+            queryParameters &#x3D; queryParameters.set(&#x27;dataSource&#x27;, &lt;any&gt;dataSource);
+        }
+        if (mapDataSources !&#x3D;&#x3D; undefined &amp;&amp; mapDataSources !&#x3D;&#x3D; null) {
+            queryParameters &#x3D; queryParameters.set(&#x27;mapDataSources&#x27;, &lt;any&gt;mapDataSources);
+        }
+        if (mapDataSource) {
+            mapDataSource.forEach((element) &#x3D;&gt; {
+                queryParameters &#x3D; queryParameters.append(&#x27;mapDataSource&#x27;, &lt;any&gt;element);
+            })
+        }
+        if (entityType !&#x3D;&#x3D; undefined &amp;&amp; entityType !&#x3D;&#x3D; null) {
+            queryParameters &#x3D; queryParameters.set(&#x27;entityType&#x27;, &lt;any&gt;entityType);
+        }
+        if (mapEntityTypes !&#x3D;&#x3D; undefined &amp;&amp; mapEntityTypes !&#x3D;&#x3D; null) {
+            queryParameters &#x3D; queryParameters.set(&#x27;mapEntityTypes&#x27;, &lt;any&gt;mapEntityTypes);
+        }
+        if (mapEntityType) {
+            mapEntityType.forEach((element) &#x3D;&gt; {
+                queryParameters &#x3D; queryParameters.append(&#x27;mapEntityType&#x27;, &lt;any&gt;element);
+            })
+        }
+        if (progressPeriod !&#x3D;&#x3D; undefined &amp;&amp; progressPeriod !&#x3D;&#x3D; null) {
+            queryParameters &#x3D; queryParameters.set(&#x27;progressPeriod&#x27;, &lt;any&gt;progressPeriod);
         }
 
         let headers &#x3D; this.defaultHeaders;
@@ -1472,9 +1827,9 @@ export class BulkDataService {
             formParams &#x3D; formParams.append(&#x27;data&#x27;, &lt;any&gt;body) as any || formParams;
         }
 
-        return this.httpClient.post&lt;SzBulkDataLoadResponse&gt;(&#x60;${this.basePath}/bulk-data/load&#x60;,
-            body,
+        return this.httpClient.request&lt;SzBulkLoadResponse&gt;(&#x27;post&#x27;,&#x60;${this.basePath}/bulk-data/load&#x60;,
             {
+                body: body,
                 params: queryParameters,
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
@@ -1499,6 +1854,7 @@ export class BulkDataService {
 
 
 
+                   
 
 
 
@@ -1521,6 +1877,7 @@ export class BulkDataService {
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'injectable';
             var COMPODOC_CURRENT_PAGE_URL = 'BulkDataService.html';
+            var MAX_SEARCH_RESULTS = 15;
        </script>
 
        <script src="../js/libs/custom-elements.min.js"></script>
