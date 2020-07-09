@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>Senzing Rest Api Client (Angular)</title>
+        <title>@senzing/rest-api-client-ng documentation</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -13,7 +13,7 @@
     <body>
 
         <div class="navbar navbar-default navbar-fixed-top visible-xs">
-            <a href="../" class="navbar-brand">Senzing Rest Api Client (Angular)</a>
+            <a href="../" class="navbar-brand">@senzing/rest-api-client-ng documentation</a>
             <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
         </div>
 
@@ -91,6 +91,10 @@
                                 </li>
                                 <li>
                                             <span class="modifier">Optional</span>
+                                        <a href="#incompleteRecordCount">incompleteRecordCount</a>
+                                </li>
+                                <li>
+                                            <span class="modifier">Optional</span>
                                         <a href="#loadedRecordCount">loadedRecordCount</a>
                                 </li>
                                 <li>
@@ -122,7 +126,7 @@
                                 </tr>
                                 <tr>
                                     <td class="col-md-4">
-                                        <code>failedRecordCount:     <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                        <code>failedRecordCount:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
 </code>
                                     </td>
                                 </tr>
@@ -130,7 +134,7 @@
 
                                     <tr>
                                         <td class="col-md-4">
-                                            <i>Type : </i>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
 
                                         </td>
                                     </tr>
@@ -146,7 +150,47 @@
 
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-description"><p>The number of records from the bulk data set having the associated data source that failed to load.</p>
+                                    <div class="io-description"><p>The number of records from the bulk data set within the aggregate group that failed to load.</p>
+</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="incompleteRecordCount"></a>
+                                        <span class="name"><b>incompleteRecordCount</b><a href="#incompleteRecordCount"><span class="icon ion-ios-link"></span></a></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>incompleteRecordCount:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Optional</i>
+                                        </td>
+                                    </tr>
+
+
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>The number of records from the bulk data set within the aggregate group that are missing either a <code>DATA_SOURCE</code> value or <code>ENTITY_TYPE</code> value.</p>
 </div>
                                 </td>
                             </tr>
@@ -162,7 +206,7 @@
                                 </tr>
                                 <tr>
                                     <td class="col-md-4">
-                                        <code>loadedRecordCount:     <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                        <code>loadedRecordCount:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
 </code>
                                     </td>
                                 </tr>
@@ -170,7 +214,7 @@
 
                                     <tr>
                                         <td class="col-md-4">
-                                            <i>Type : </i>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
 
                                         </td>
                                     </tr>
@@ -186,7 +230,7 @@
 
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-description"><p>The number of records successfully loaded from the bulk data set having the associated data source.  This may not match the number of "observed entities" loaded for that data source since some records may be exact duplicates.</p>
+                                    <div class="io-description"><p>The number of records successfully loaded from the bulk data set within the aggregate group.  This may not match the number of &quot;observed entities&quot; loaded since some records may be exact duplicates.</p>
 </div>
                                 </td>
                             </tr>
@@ -202,7 +246,7 @@
                                 </tr>
                                 <tr>
                                     <td class="col-md-4">
-                                        <code>recordCount:     <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                        <code>recordCount:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
 </code>
                                     </td>
                                 </tr>
@@ -210,7 +254,7 @@
 
                                     <tr>
                                         <td class="col-md-4">
-                                            <i>Type : </i>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
 
                                         </td>
                                     </tr>
@@ -226,7 +270,7 @@
 
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-description"><p>The number of records found in the bulk data set having the associated data source.  This may not match the number of "observed entities" once loaded since some records may be exact duplicates.</p>
+                                    <div class="io-description"><p>The number of records found in the bulk data set with the aggregate group.  This may not match the number of &quot;observed entities&quot; once loaded since some records may be exact duplicates.</p>
 </div>
                                 </td>
                             </tr>
@@ -242,7 +286,7 @@
                                 </tr>
                                 <tr>
                                     <td class="col-md-4">
-                                        <code>topErrors:     <code><a href="../interfaces/SzBulkLoadError.html" target="_self" >Array&lt;SzBulkLoadError&gt;</a></code>
+                                        <code>topErrors:         <code><a href="../interfaces/SzBulkLoadError.html" target="_self" >Array&lt;SzBulkLoadError&gt;</a></code>
 </code>
                                     </td>
                                 </tr>
@@ -250,7 +294,7 @@
 
                                     <tr>
                                         <td class="col-md-4">
-                                            <i>Type : </i>    <code><a href="../interfaces/SzBulkLoadError.html" target="_self" >Array&lt;SzBulkLoadError&gt;</a></code>
+                                            <i>Type : </i>        <code><a href="../interfaces/SzBulkLoadError.html" target="_self" >Array&lt;SzBulkLoadError&gt;</a></code>
 
                                         </td>
                                     </tr>
@@ -282,28 +326,34 @@
 /**
  * Provides statistics specific common to all bulk load results regardless of how they are aggregated.
  */
-export interface SzBaseBulkLoadResult { 
+export interface SzBaseBulkLoadResult {
     /**
-     * The number of records found in the bulk data set having the associated data source.  This may not match the number of \&quot;observed entities\&quot; once loaded since some records may be exact duplicates.
+     * The number of records found in the bulk data set with the aggregate group.  This may not match the number of \&quot;observed entities\&quot; once loaded since some records may be exact duplicates.
      */
     recordCount?: number;
     /**
-     * The number of records successfully loaded from the bulk data set having the associated data source.  This may not match the number of \&quot;observed entities\&quot; loaded for that data source since some records may be exact duplicates.
+     * The number of records successfully loaded from the bulk data set within the aggregate group.  This may not match the number of \&quot;observed entities\&quot; loaded since some records may be exact duplicates.
      */
     loadedRecordCount?: number;
     /**
-     * The number of records from the bulk data set having the associated data source that failed to load.
+     * The number of records from the bulk data set within the aggregate group that are missing either a &#x60;DATA_SOURCE&#x60; value or &#x60;ENTITY_TYPE&#x60; value.
+     */
+    incompleteRecordCount?: number;
+    /**
+     * The number of records from the bulk data set within the aggregate group that failed to load.
      */
     failedRecordCount?: number;
     /**
      * The array of top error occurrences with the number of times they occurred when loading records with the associated data source.
      */
     topErrors?: Array&lt;SzBulkLoadError&gt;;
-}</code></pre>
+}
+</code></pre>
     </div>
 </div>
 
 
+                   
 
 
 
@@ -326,6 +376,7 @@ export interface SzBaseBulkLoadResult {
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'interface';
             var COMPODOC_CURRENT_PAGE_URL = 'SzBaseBulkLoadResult.html';
+            var MAX_SEARCH_RESULTS = 15;
        </script>
 
        <script src="../js/libs/custom-elements.min.js"></script>

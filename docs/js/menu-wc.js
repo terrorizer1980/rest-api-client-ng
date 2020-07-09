@@ -1,41 +1,456 @@
 'use strict';
 
 
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-customElements.define('compodoc-menu', function (_HTMLElement) {
-    _inherits(_class, _HTMLElement);
-
-    function _class() {
-        _classCallCheck(this, _class);
-
-        var _this = _possibleConstructorReturn(this, (_class.__proto__ || Object.getPrototypeOf(_class)).call(this));
-
-        _this.isNormalMode = _this.getAttribute('mode') === 'normal';
-        return _this;
+customElements.define('compodoc-menu', class extends HTMLElement {
+    constructor() {
+        super();
+        this.isNormalMode = this.getAttribute('mode') === 'normal';
     }
 
-    _createClass(_class, [{
-        key: 'connectedCallback',
-        value: function connectedCallback() {
-            this.render(this.isNormalMode);
-        }
-    }, {
-        key: 'render',
-        value: function render(isNormalMode) {
-            let tp = lithtml.html(
-'<nav>\n    <ul class="list">\n        <li class="title">\n            \n                <a href="index.html" data-type="index-link">Senzing Rest Api Client (Angular)</a>\n            \n        </li>\n\n        <li class="divider"></li>\n        ' + (isNormalMode ? '<div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>' : '') + '\n        <li class="chapter">\n            <a data-type="chapter-link" href="index.html"><span class="icon ion-ios-home"></span>Getting started</a>\n            <ul class="links">\n                \n                    <li class="link">\n                        <a href="overview.html" data-type="chapter-link">\n                            <span class="icon ion-ios-keypad"></span>Overview\n                        </a>\n                    </li>\n                    <li class="link">\n                        <a href="index.html" data-type="chapter-link">\n                            <span class="icon ion-ios-paper"></span>README\n                        </a>\n                    </li>\n                \n                \n                    <li class="link">\n                        \n                            <a href="changelog.html"\n                        \n                        data-type="chapter-link">\n                            <span class="icon ion-ios-paper"></span>CHANGELOG\n                        </a>\n                    </li>\n                \n                    <li class="link">\n                        \n                            <a href="contributing.html"\n                        \n                        data-type="chapter-link">\n                            <span class="icon ion-ios-paper"></span>CONTRIBUTING\n                        </a>\n                    </li>\n                \n                    <li class="link">\n                        \n                            <a href="license.html"\n                        \n                        data-type="chapter-link">\n                            <span class="icon ion-ios-paper"></span>LICENSE\n                        </a>\n                    </li>\n                \n                \n                    <li class="link">\n                        <a href="dependencies.html"\n                            data-type="chapter-link">\n                            <span class="icon ion-ios-list"></span>Dependencies\n                        </a>\n                    </li>\n                \n            </ul>\n        </li>\n        \n        \n        <li class="chapter modules">\n            <a data-type="chapter-link" href="modules.html">\n                <div class="menu-toggler linked" data-toggle="collapse"\n                    ' + (isNormalMode ? 'data-target="#modules-links"' : 'data-target="#xs-modules-links"') + '>\n                    <span class="icon ion-ios-archive"></span>\n                    <span class="link-name">Modules</span>\n                    <span class="icon ion-ios-arrow-down"></span>\n                </div>\n            </a>\n            <ul class="links collapse"\n            ' + (isNormalMode ? 'id="modules-links"' : 'id="xs-modules-links"') + '>\n                \n                    <li class="link">\n                        <a href="modules/ApiModule.html" data-type="entity-link">ApiModule</a>\n                        \n                        \n                        \n                        \n                            <li class="chapter inner">\n                                <div class="simple menu-toggler" data-toggle="collapse"\n                                    ' + (isNormalMode ? 'data-target="#injectables-links-module-ApiModule-dbe2bcf0e17ac64dc2f6109806c0b06a"' : 'data-target="#xs-injectables-links-module-ApiModule-dbe2bcf0e17ac64dc2f6109806c0b06a"') + '>\n                                    <span class="icon ion-md-arrow-round-down"></span>\n                                    <span>Injectables</span>\n                                    <span class="icon ion-ios-arrow-down"></span>\n                                </div>\n                                <ul class="links collapse"\n                                    ' + (isNormalMode ? 'id="injectables-links-module-ApiModule-dbe2bcf0e17ac64dc2f6109806c0b06a"' : 'id="xs-injectables-links-module-ApiModule-dbe2bcf0e17ac64dc2f6109806c0b06a"') + '>\n                                    \n                                        <li class="link">\n                                            <a href="injectables/AdminService.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules"}>AdminService</a>\n                                        </li>\n                                    \n                                        <li class="link">\n                                            <a href="injectables/BulkDataService.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules"}>BulkDataService</a>\n                                        </li>\n                                    \n                                        <li class="link">\n                                            <a href="injectables/ConfigService.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules"}>ConfigService</a>\n                                        </li>\n                                    \n                                        <li class="link">\n                                            <a href="injectables/EntityDataService.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules"}>EntityDataService</a>\n                                        </li>\n                                    \n                                        <li class="link">\n                                            <a href="injectables/EntityGraphService.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules"}>EntityGraphService</a>\n                                        </li>\n                                    \n                                </ul>\n                            </li>\n                        \n                        \n                    </li>\n                \n            </ul>\n        </li>\n        \n        \n        \n        \n        \n        <li class="chapter">\n            <div class="simple menu-toggler" data-toggle="collapse"\n            ' + (isNormalMode ? 'data-target="#classes-links"' : 'data-target="#xs-classes-links"') + '>\n                <span class="icon ion-ios-paper"></span>\n                <span>Classes</span>\n                <span class="icon ion-ios-arrow-down"></span>\n            </div>\n            <ul class="links collapse"\n            ' + (isNormalMode ? 'id="classes-links"' : 'id="xs-classes-links"') + '>\n                \n                    <li class="link">\n                        <a href="classes/Configuration.html" data-type="entity-link">Configuration</a>\n                    </li>\n                \n                    <li class="link">\n                        <a href="classes/CustomHttpUrlEncodingCodec.html" data-type="entity-link">CustomHttpUrlEncodingCodec</a>\n                    </li>\n                \n            </ul>\n        </li>\n        \n        \n            \n                <li class="chapter">\n                    <div class="simple menu-toggler" data-toggle="collapse"\n                        ' + (isNormalMode ? 'data-target="#injectables-links"' : 'data-target="#xs-injectables-links"') + '>\n                        <span class="icon ion-md-arrow-round-down"></span>\n                        <span>Injectables</span>\n                        <span class="icon ion-ios-arrow-down"></span>\n                    </div>\n                    <ul class="links collapse"\n                    ' + (isNormalMode ? 'id="injectables-links"' : 'id="xs-injectables-links"') + '>\n                        \n                            <li class="link">\n                                <a href="injectables/AdminService.html" data-type="entity-link">AdminService</a>\n                            </li>\n                        \n                            <li class="link">\n                                <a href="injectables/BulkDataService.html" data-type="entity-link">BulkDataService</a>\n                            </li>\n                        \n                            <li class="link">\n                                <a href="injectables/ConfigService.html" data-type="entity-link">ConfigService</a>\n                            </li>\n                        \n                            <li class="link">\n                                <a href="injectables/EntityDataService.html" data-type="entity-link">EntityDataService</a>\n                            </li>\n                        \n                            <li class="link">\n                                <a href="injectables/EntityGraphService.html" data-type="entity-link">EntityGraphService</a>\n                            </li>\n                        \n                    </ul>\n                </li>\n            \n        \n        \n        \n        \n        <li class="chapter">\n            <div class="simple menu-toggler" data-toggle="collapse"\n                ' + (isNormalMode ? 'data-target="#interfaces-links"' : 'data-target="#xs-interfaces-links"') + '>\n                <span class="icon ion-md-information-circle-outline"></span>\n                <span>Interfaces</span>\n                <span class="icon ion-ios-arrow-down"></span>\n            </div>\n            <ul class="links collapse"\n            ' + (isNormalMode ? ' id="interfaces-links"' : 'id="xs-interfaces-links"') + '>\n                \n                    <li class="link">\n                        <a href="interfaces/Body4.html" data-type="entity-link">Body4</a>\n                    </li>\n                \n                    <li class="link">\n                        <a href="interfaces/Body5.html" data-type="entity-link">Body5</a>\n                    </li>\n                \n                    <li class="link">\n                        <a href="interfaces/ConfigurationParameters.html" data-type="entity-link">ConfigurationParameters</a>\n                    </li>\n                \n                    <li class="link">\n                        <a href="interfaces/SzAttributeSearchResponse.html" data-type="entity-link">SzAttributeSearchResponse</a>\n                    </li>\n                \n                    <li class="link">\n                        <a href="interfaces/SzAttributeSearchResponseData.html" data-type="entity-link">SzAttributeSearchResponseData</a>\n                    </li>\n                \n                    <li class="link">\n                        <a href="interfaces/SzAttributeSearchResult.html" data-type="entity-link">SzAttributeSearchResult</a>\n                    </li>\n                \n                    <li class="link">\n                        <a href="interfaces/SzAttributeType.html" data-type="entity-link">SzAttributeType</a>\n                    </li>\n                \n                    <li class="link">\n                        <a href="interfaces/SzAttributeTypeResponse.html" data-type="entity-link">SzAttributeTypeResponse</a>\n                    </li>\n                \n                    <li class="link">\n                        <a href="interfaces/SzAttributeTypeResponseData.html" data-type="entity-link">SzAttributeTypeResponseData</a>\n                    </li>\n                \n                    <li class="link">\n                        <a href="interfaces/SzAttributeTypesResponse.html" data-type="entity-link">SzAttributeTypesResponse</a>\n                    </li>\n                \n                    <li class="link">\n                        <a href="interfaces/SzAttributeTypesResponseData.html" data-type="entity-link">SzAttributeTypesResponseData</a>\n                    </li>\n                \n                    <li class="link">\n                        <a href="interfaces/SzBaseBulkLoadResult.html" data-type="entity-link">SzBaseBulkLoadResult</a>\n                    </li>\n                \n                    <li class="link">\n                        <a href="interfaces/SzBaseRelatedEntity.html" data-type="entity-link">SzBaseRelatedEntity</a>\n                    </li>\n                \n                    <li class="link">\n                        <a href="interfaces/SzBaseResponse.html" data-type="entity-link">SzBaseResponse</a>\n                    </li>\n                \n                    <li class="link">\n                        <a href="interfaces/SzBaseResponseLinks.html" data-type="entity-link">SzBaseResponseLinks</a>\n                    </li>\n                \n                    <li class="link">\n                        <a href="interfaces/SzBulkDataAnalysis.html" data-type="entity-link">SzBulkDataAnalysis</a>\n                    </li>\n                \n                    <li class="link">\n                        <a href="interfaces/SzBulkDataAnalysisResponse.html" data-type="entity-link">SzBulkDataAnalysisResponse</a>\n                    </li>\n                \n                    <li class="link">\n                        <a href="interfaces/SzBulkDataLoadResponse.html" data-type="entity-link">SzBulkDataLoadResponse</a>\n                    </li>\n                \n                    <li class="link">\n                        <a href="interfaces/SzBulkLoadError.html" data-type="entity-link">SzBulkLoadError</a>\n                    </li>\n                \n                    <li class="link">\n                        <a href="interfaces/SzBulkLoadResponse.html" data-type="entity-link">SzBulkLoadResponse</a>\n                    </li>\n                \n                    <li class="link">\n                        <a href="interfaces/SzBulkLoadResult.html" data-type="entity-link">SzBulkLoadResult</a>\n                    </li>\n                \n                    <li class="link">\n                        <a href="interfaces/SzConfigResponse.html" data-type="entity-link">SzConfigResponse</a>\n                    </li>\n                \n                    <li class="link">\n                        <a href="interfaces/SzDataSource.html" data-type="entity-link">SzDataSource</a>\n                    </li>\n                \n                    <li class="link">\n                        <a href="interfaces/SzDataSourceBulkLoadResult.html" data-type="entity-link">SzDataSourceBulkLoadResult</a>\n                    </li>\n                \n                    <li class="link">\n                        <a href="interfaces/SzDataSourceDescriptor.html" data-type="entity-link">SzDataSourceDescriptor</a>\n                    </li>\n                \n                    <li class="link">\n                        <a href="interfaces/SzDataSourceRecordAnalysis.html" data-type="entity-link">SzDataSourceRecordAnalysis</a>\n                    </li>\n                \n                    <li class="link">\n                        <a href="interfaces/SzDataSourceRecordSummary.html" data-type="entity-link">SzDataSourceRecordSummary</a>\n                    </li>\n                \n                    <li class="link">\n                        <a href="interfaces/SzDataSourceResponse.html" data-type="entity-link">SzDataSourceResponse</a>\n                    </li>\n                \n                    <li class="link">\n                        <a href="interfaces/SzDataSourceResponseData.html" data-type="entity-link">SzDataSourceResponseData</a>\n                    </li>\n                \n                    <li class="link">\n                        <a href="interfaces/SzDataSourcesResponse.html" data-type="entity-link">SzDataSourcesResponse</a>\n                    </li>\n                \n                    <li class="link">\n                        <a href="interfaces/SzDataSourcesResponseData.html" data-type="entity-link">SzDataSourcesResponseData</a>\n                    </li>\n                \n                    <li class="link">\n                        <a href="interfaces/SzEntityClass.html" data-type="entity-link">SzEntityClass</a>\n                    </li>\n                \n                    <li class="link">\n                        <a href="interfaces/SzEntityClassesResponse.html" data-type="entity-link">SzEntityClassesResponse</a>\n                    </li>\n                \n                    <li class="link">\n                        <a href="interfaces/SzEntityClassesResponseData.html" data-type="entity-link">SzEntityClassesResponseData</a>\n                    </li>\n                \n                    <li class="link">\n                        <a href="interfaces/SzEntityClassResponse.html" data-type="entity-link">SzEntityClassResponse</a>\n                    </li>\n                \n                    <li class="link">\n                        <a href="interfaces/SzEntityClassResponseData.html" data-type="entity-link">SzEntityClassResponseData</a>\n                    </li>\n                \n                    <li class="link">\n                        <a href="interfaces/SzEntityData.html" data-type="entity-link">SzEntityData</a>\n                    </li>\n                \n                    <li class="link">\n                        <a href="interfaces/SzEntityFeature.html" data-type="entity-link">SzEntityFeature</a>\n                    </li>\n                \n                    <li class="link">\n                        <a href="interfaces/SzEntityIdentifier.html" data-type="entity-link">SzEntityIdentifier</a>\n                    </li>\n                \n                    <li class="link">\n                        <a href="interfaces/SzEntityIdentifiers.html" data-type="entity-link">SzEntityIdentifiers</a>\n                    </li>\n                \n                    <li class="link">\n                        <a href="interfaces/SzEntityNetworkData.html" data-type="entity-link">SzEntityNetworkData</a>\n                    </li>\n                \n                    <li class="link">\n                        <a href="interfaces/SzEntityNetworkResponse.html" data-type="entity-link">SzEntityNetworkResponse</a>\n                    </li>\n                \n                    <li class="link">\n                        <a href="interfaces/SzEntityPath.html" data-type="entity-link">SzEntityPath</a>\n                    </li>\n                \n                    <li class="link">\n                        <a href="interfaces/SzEntityPathData.html" data-type="entity-link">SzEntityPathData</a>\n                    </li>\n                \n                    <li class="link">\n                        <a href="interfaces/SzEntityPathResponse.html" data-type="entity-link">SzEntityPathResponse</a>\n                    </li>\n                \n                    <li class="link">\n                        <a href="interfaces/SzEntityRecord.html" data-type="entity-link">SzEntityRecord</a>\n                    </li>\n                \n                    <li class="link">\n                        <a href="interfaces/SzEntityResponse.html" data-type="entity-link">SzEntityResponse</a>\n                    </li>\n                \n                    <li class="link">\n                        <a href="interfaces/SzEntityType.html" data-type="entity-link">SzEntityType</a>\n                    </li>\n                \n                    <li class="link">\n                        <a href="interfaces/SzEntityTypeBulkLoadResult.html" data-type="entity-link">SzEntityTypeBulkLoadResult</a>\n                    </li>\n                \n                    <li class="link">\n                        <a href="interfaces/SzEntityTypeDescriptor.html" data-type="entity-link">SzEntityTypeDescriptor</a>\n                    </li>\n                \n                    <li class="link">\n                        <a href="interfaces/SzEntityTypeRecordAnalysis.html" data-type="entity-link">SzEntityTypeRecordAnalysis</a>\n                    </li>\n                \n                    <li class="link">\n                        <a href="interfaces/SzEntityTypeResponse.html" data-type="entity-link">SzEntityTypeResponse</a>\n                    </li>\n                \n                    <li class="link">\n                        <a href="interfaces/SzEntityTypeResponseData.html" data-type="entity-link">SzEntityTypeResponseData</a>\n                    </li>\n                \n                    <li class="link">\n                        <a href="interfaces/SzEntityTypesResponse.html" data-type="entity-link">SzEntityTypesResponse</a>\n                    </li>\n                \n                    <li class="link">\n                        <a href="interfaces/SzEntityTypesResponseData.html" data-type="entity-link">SzEntityTypesResponseData</a>\n                    </li>\n                \n                    <li class="link">\n                        <a href="interfaces/SzError.html" data-type="entity-link">SzError</a>\n                    </li>\n                \n                    <li class="link">\n                        <a href="interfaces/SzErrorResponse.html" data-type="entity-link">SzErrorResponse</a>\n                    </li>\n                \n                    <li class="link">\n                        <a href="interfaces/SzLicenseInfo.html" data-type="entity-link">SzLicenseInfo</a>\n                    </li>\n                \n                    <li class="link">\n                        <a href="interfaces/SzLicenseResponse.html" data-type="entity-link">SzLicenseResponse</a>\n                    </li>\n                \n                    <li class="link">\n                        <a href="interfaces/SzLicenseResponseData.html" data-type="entity-link">SzLicenseResponseData</a>\n                    </li>\n                \n                    <li class="link">\n                        <a href="interfaces/SzLoadRecordResponse.html" data-type="entity-link">SzLoadRecordResponse</a>\n                    </li>\n                \n                    <li class="link">\n                        <a href="interfaces/SzLoadRecordResponseData.html" data-type="entity-link">SzLoadRecordResponseData</a>\n                    </li>\n                \n                    <li class="link">\n                        <a href="interfaces/SzMatchedRecord.html" data-type="entity-link">SzMatchedRecord</a>\n                    </li>\n                \n                    <li class="link">\n                        <a href="interfaces/SzRecordId.html" data-type="entity-link">SzRecordId</a>\n                    </li>\n                \n                    <li class="link">\n                        <a href="interfaces/SzRecordResponse.html" data-type="entity-link">SzRecordResponse</a>\n                    </li>\n                \n                    <li class="link">\n                        <a href="interfaces/SzRecordResponseData.html" data-type="entity-link">SzRecordResponseData</a>\n                    </li>\n                \n                    <li class="link">\n                        <a href="interfaces/SzRelatedEntity.html" data-type="entity-link">SzRelatedEntity</a>\n                    </li>\n                \n                    <li class="link">\n                        <a href="interfaces/SzResolvedEntity.html" data-type="entity-link">SzResolvedEntity</a>\n                    </li>\n                \n                    <li class="link">\n                        <a href="interfaces/SzResponseWithRawData.html" data-type="entity-link">SzResponseWithRawData</a>\n                    </li>\n                \n                    <li class="link">\n                        <a href="interfaces/SzServerInfo.html" data-type="entity-link">SzServerInfo</a>\n                    </li>\n                \n                    <li class="link">\n                        <a href="interfaces/SzServerInfoResponse.html" data-type="entity-link">SzServerInfoResponse</a>\n                    </li>\n                \n                    <li class="link">\n                        <a href="interfaces/SzVersionInfo.html" data-type="entity-link">SzVersionInfo</a>\n                    </li>\n                \n                    <li class="link">\n                        <a href="interfaces/SzVersionResponse.html" data-type="entity-link">SzVersionResponse</a>\n                    </li>\n                \n            </ul>\n        </li>\n        \n        \n        \n        <li class="chapter">\n            <div class="simple menu-toggler" data-toggle="collapse"\n            ' + (isNormalMode ? 'data-target="#miscellaneous-links"' : 'data-target="#xs-miscellaneous-links"') + '>\n                <span class="icon ion-ios-cube"></span>\n                <span>Miscellaneous</span>\n                <span class="icon ion-ios-arrow-down"></span>\n            </div>\n            <ul class="links collapse"\n            ' + (isNormalMode ? 'id="miscellaneous-links"' : 'id="xs-miscellaneous-links"') + '>\n                \n                \n                \n                    <li class="link">\n                      <a href="miscellaneous/typealiases.html" data-type="entity-link">Type aliases</a>\n                    </li>\n                \n                \n                    <li class="link">\n                      <a href="miscellaneous/variables.html" data-type="entity-link">Variables</a>\n                    </li>\n                \n            </ul>\n        </li>\n        \n        \n        \n        <li class="chapter">\n            <a data-type="chapter-link" href="coverage.html"><span class="icon ion-ios-stats"></span>Documentation coverage</a>\n        </li>\n        \n        \n        \n        <li class="divider"></li>\n        <li class="copyright">\n                Documentation generated using <a href="https://compodoc.app/" target="_blank">\n                    \n                        \n                            <img data-src="images/compodoc-vectorise.png" class="img-responsive" data-type="compodoc-logo">\n                        \n                    \n                </a>\n        </li>\n        \n    </ul>\n</nav>'
-);
-        this.innerHTML = tp.strings;
-        }
-    }]);
+    connectedCallback() {
+        this.render(this.isNormalMode);
+    }
 
-    return _class;
-}(HTMLElement));
+    render(isNormalMode) {
+        let tp = lithtml.html(`
+        <nav>
+            <ul class="list">
+                <li class="title">
+                    <a href="index.html" data-type="index-link">@senzing/rest-api-client-ng documentation</a>
+                </li>
+
+                <li class="divider"></li>
+                ${ isNormalMode ? `<div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>` : '' }
+                <li class="chapter">
+                    <a data-type="chapter-link" href="index.html"><span class="icon ion-ios-home"></span>Getting started</a>
+                    <ul class="links">
+                        <li class="link">
+                            <a href="overview.html" data-type="chapter-link">
+                                <span class="icon ion-ios-keypad"></span>Overview
+                            </a>
+                        </li>
+                        <li class="link">
+                            <a href="index.html" data-type="chapter-link">
+                                <span class="icon ion-ios-paper"></span>README
+                            </a>
+                        </li>
+                        <li class="link">
+                            <a href="changelog.html"  data-type="chapter-link">
+                                <span class="icon ion-ios-paper"></span>CHANGELOG
+                            </a>
+                        </li>
+                        <li class="link">
+                            <a href="contributing.html"  data-type="chapter-link">
+                                <span class="icon ion-ios-paper"></span>CONTRIBUTING
+                            </a>
+                        </li>
+                        <li class="link">
+                            <a href="license.html"  data-type="chapter-link">
+                                <span class="icon ion-ios-paper"></span>LICENSE
+                            </a>
+                        </li>
+                                <li class="link">
+                                    <a href="dependencies.html" data-type="chapter-link">
+                                        <span class="icon ion-ios-list"></span>Dependencies
+                                    </a>
+                                </li>
+                    </ul>
+                </li>
+                    <li class="chapter modules">
+                        <a data-type="chapter-link" href="modules.html">
+                            <div class="menu-toggler linked" data-toggle="collapse" ${ isNormalMode ?
+                                'data-target="#modules-links"' : 'data-target="#xs-modules-links"' }>
+                                <span class="icon ion-ios-archive"></span>
+                                <span class="link-name">Modules</span>
+                                <span class="icon ion-ios-arrow-down"></span>
+                            </div>
+                        </a>
+                        <ul class="links collapse " ${ isNormalMode ? 'id="modules-links"' : 'id="xs-modules-links"' }>
+                            <li class="link">
+                                <a href="modules/ApiModule.html" data-type="entity-link">ApiModule</a>
+                                <li class="chapter inner">
+                                    <div class="simple menu-toggler" data-toggle="collapse" ${ isNormalMode ?
+                                        'data-target="#injectables-links-module-ApiModule-9b213d33789fa47e2ac5fe9584f4b448"' : 'data-target="#xs-injectables-links-module-ApiModule-9b213d33789fa47e2ac5fe9584f4b448"' }>
+                                        <span class="icon ion-md-arrow-round-down"></span>
+                                        <span>Injectables</span>
+                                        <span class="icon ion-ios-arrow-down"></span>
+                                    </div>
+                                    <ul class="links collapse" ${ isNormalMode ? 'id="injectables-links-module-ApiModule-9b213d33789fa47e2ac5fe9584f4b448"' :
+                                        'id="xs-injectables-links-module-ApiModule-9b213d33789fa47e2ac5fe9584f4b448"' }>
+                                        <li class="link">
+                                            <a href="injectables/AdminService.html"
+                                                data-type="entity-link" data-context="sub-entity" data-context-id="modules" }>AdminService</a>
+                                        </li>
+                                        <li class="link">
+                                            <a href="injectables/BulkDataService.html"
+                                                data-type="entity-link" data-context="sub-entity" data-context-id="modules" }>BulkDataService</a>
+                                        </li>
+                                        <li class="link">
+                                            <a href="injectables/ConfigService.html"
+                                                data-type="entity-link" data-context="sub-entity" data-context-id="modules" }>ConfigService</a>
+                                        </li>
+                                        <li class="link">
+                                            <a href="injectables/EntityDataService.html"
+                                                data-type="entity-link" data-context="sub-entity" data-context-id="modules" }>EntityDataService</a>
+                                        </li>
+                                        <li class="link">
+                                            <a href="injectables/EntityGraphService.html"
+                                                data-type="entity-link" data-context="sub-entity" data-context-id="modules" }>EntityGraphService</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </li>
+                </ul>
+                </li>
+                    <li class="chapter">
+                        <div class="simple menu-toggler" data-toggle="collapse" ${ isNormalMode ? 'data-target="#classes-links"' :
+                            'data-target="#xs-classes-links"' }>
+                            <span class="icon ion-ios-paper"></span>
+                            <span>Classes</span>
+                            <span class="icon ion-ios-arrow-down"></span>
+                        </div>
+                        <ul class="links collapse " ${ isNormalMode ? 'id="classes-links"' : 'id="xs-classes-links"' }>
+                            <li class="link">
+                                <a href="classes/Configuration.html" data-type="entity-link">Configuration</a>
+                            </li>
+                            <li class="link">
+                                <a href="classes/CustomHttpUrlEncodingCodec.html" data-type="entity-link">CustomHttpUrlEncodingCodec</a>
+                            </li>
+                        </ul>
+                    </li>
+                        <li class="chapter">
+                            <div class="simple menu-toggler" data-toggle="collapse" ${ isNormalMode ? 'data-target="#injectables-links"' :
+                                'data-target="#xs-injectables-links"' }>
+                                <span class="icon ion-md-arrow-round-down"></span>
+                                <span>Injectables</span>
+                                <span class="icon ion-ios-arrow-down"></span>
+                            </div>
+                            <ul class="links collapse " ${ isNormalMode ? 'id="injectables-links"' : 'id="xs-injectables-links"' }>
+                                <li class="link">
+                                    <a href="injectables/AdminService.html" data-type="entity-link">AdminService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/BulkDataService.html" data-type="entity-link">BulkDataService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/ConfigService.html" data-type="entity-link">ConfigService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/EntityDataService.html" data-type="entity-link">EntityDataService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/EntityGraphService.html" data-type="entity-link">EntityGraphService</a>
+                                </li>
+                            </ul>
+                        </li>
+                    <li class="chapter">
+                        <div class="simple menu-toggler" data-toggle="collapse" ${ isNormalMode ? 'data-target="#interfaces-links"' :
+                            'data-target="#xs-interfaces-links"' }>
+                            <span class="icon ion-md-information-circle-outline"></span>
+                            <span>Interfaces</span>
+                            <span class="icon ion-ios-arrow-down"></span>
+                        </div>
+                        <ul class="links collapse " ${ isNormalMode ? ' id="interfaces-links"' : 'id="xs-interfaces-links"' }>
+                            <li class="link">
+                                <a href="interfaces/Body4.html" data-type="entity-link">Body4</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/Body5.html" data-type="entity-link">Body5</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/ConfigurationParameters.html" data-type="entity-link">ConfigurationParameters</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/SzAttributeSearchResponse.html" data-type="entity-link">SzAttributeSearchResponse</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/SzAttributeSearchResponseData.html" data-type="entity-link">SzAttributeSearchResponseData</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/SzAttributeSearchResult.html" data-type="entity-link">SzAttributeSearchResult</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/SzAttributeType.html" data-type="entity-link">SzAttributeType</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/SzAttributeTypeResponse.html" data-type="entity-link">SzAttributeTypeResponse</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/SzAttributeTypeResponseData.html" data-type="entity-link">SzAttributeTypeResponseData</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/SzAttributeTypesResponse.html" data-type="entity-link">SzAttributeTypesResponse</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/SzAttributeTypesResponseData.html" data-type="entity-link">SzAttributeTypesResponseData</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/SzBaseBulkLoadResult.html" data-type="entity-link">SzBaseBulkLoadResult</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/SzBaseRelatedEntity.html" data-type="entity-link">SzBaseRelatedEntity</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/SzBaseResponse.html" data-type="entity-link">SzBaseResponse</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/SzBaseResponseLinks.html" data-type="entity-link">SzBaseResponseLinks</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/SzBaseResponseMeta.html" data-type="entity-link">SzBaseResponseMeta</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/SzBulkDataAnalysis.html" data-type="entity-link">SzBulkDataAnalysis</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/SzBulkDataAnalysisResponse.html" data-type="entity-link">SzBulkDataAnalysisResponse</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/SzBulkDataLoadResponse.html" data-type="entity-link">SzBulkDataLoadResponse</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/SzBulkLoadError.html" data-type="entity-link">SzBulkLoadError</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/SzBulkLoadResponse.html" data-type="entity-link">SzBulkLoadResponse</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/SzBulkLoadResult.html" data-type="entity-link">SzBulkLoadResult</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/SzCandidateKey.html" data-type="entity-link">SzCandidateKey</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/SzConfigResponse.html" data-type="entity-link">SzConfigResponse</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/SzDataSource.html" data-type="entity-link">SzDataSource</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/SzDataSourceBulkLoadResult.html" data-type="entity-link">SzDataSourceBulkLoadResult</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/SzDataSourceRecordAnalysis.html" data-type="entity-link">SzDataSourceRecordAnalysis</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/SzDataSourceRecordSummary.html" data-type="entity-link">SzDataSourceRecordSummary</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/SzDataSourceResponse.html" data-type="entity-link">SzDataSourceResponse</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/SzDataSourceResponseData.html" data-type="entity-link">SzDataSourceResponseData</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/SzDataSourcesResponse.html" data-type="entity-link">SzDataSourcesResponse</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/SzDataSourcesResponseData.html" data-type="entity-link">SzDataSourcesResponseData</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/SzDeleteRecordResponse.html" data-type="entity-link">SzDeleteRecordResponse</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/SzEntityClass.html" data-type="entity-link">SzEntityClass</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/SzEntityClassesResponse.html" data-type="entity-link">SzEntityClassesResponse</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/SzEntityClassesResponseData.html" data-type="entity-link">SzEntityClassesResponseData</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/SzEntityClassResponse.html" data-type="entity-link">SzEntityClassResponse</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/SzEntityClassResponseData.html" data-type="entity-link">SzEntityClassResponseData</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/SzEntityData.html" data-type="entity-link">SzEntityData</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/SzEntityFeature.html" data-type="entity-link">SzEntityFeature</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/SzEntityFeatureDetail.html" data-type="entity-link">SzEntityFeatureDetail</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/SzEntityFeatureStatistics.html" data-type="entity-link">SzEntityFeatureStatistics</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/SzEntityNetworkData.html" data-type="entity-link">SzEntityNetworkData</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/SzEntityNetworkResponse.html" data-type="entity-link">SzEntityNetworkResponse</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/SzEntityPath.html" data-type="entity-link">SzEntityPath</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/SzEntityPathData.html" data-type="entity-link">SzEntityPathData</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/SzEntityPathResponse.html" data-type="entity-link">SzEntityPathResponse</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/SzEntityRecord.html" data-type="entity-link">SzEntityRecord</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/SzEntityResponse.html" data-type="entity-link">SzEntityResponse</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/SzEntityType.html" data-type="entity-link">SzEntityType</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/SzEntityTypeBulkLoadResult.html" data-type="entity-link">SzEntityTypeBulkLoadResult</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/SzEntityTypeRecordAnalysis.html" data-type="entity-link">SzEntityTypeRecordAnalysis</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/SzEntityTypeResponse.html" data-type="entity-link">SzEntityTypeResponse</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/SzEntityTypeResponseData.html" data-type="entity-link">SzEntityTypeResponseData</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/SzEntityTypesResponse.html" data-type="entity-link">SzEntityTypesResponse</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/SzEntityTypesResponseData.html" data-type="entity-link">SzEntityTypesResponseData</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/SzError.html" data-type="entity-link">SzError</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/SzErrorResponse.html" data-type="entity-link">SzErrorResponse</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/SzFeatureScore.html" data-type="entity-link">SzFeatureScore</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/SzFlaggedEntity.html" data-type="entity-link">SzFlaggedEntity</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/SzFlaggedRecord.html" data-type="entity-link">SzFlaggedRecord</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/SzFocusRecordId.html" data-type="entity-link">SzFocusRecordId</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/SzLicenseInfo.html" data-type="entity-link">SzLicenseInfo</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/SzLicenseResponse.html" data-type="entity-link">SzLicenseResponse</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/SzLicenseResponseData.html" data-type="entity-link">SzLicenseResponseData</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/SzLoadRecordResponse.html" data-type="entity-link">SzLoadRecordResponse</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/SzLoadRecordResponseData.html" data-type="entity-link">SzLoadRecordResponseData</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/SzMatchedRecord.html" data-type="entity-link">SzMatchedRecord</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/SzMatchInfo.html" data-type="entity-link">SzMatchInfo</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/SzRecordId.html" data-type="entity-link">SzRecordId</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/SzRecordResponse.html" data-type="entity-link">SzRecordResponse</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/SzRecordResponseData.html" data-type="entity-link">SzRecordResponseData</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/SzReevaluateResponse.html" data-type="entity-link">SzReevaluateResponse</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/SzReevaluateResponseData.html" data-type="entity-link">SzReevaluateResponseData</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/SzRelatedEntity.html" data-type="entity-link">SzRelatedEntity</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/SzResolutionInfo.html" data-type="entity-link">SzResolutionInfo</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/SzResolvedEntity.html" data-type="entity-link">SzResolvedEntity</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/SzResponseWithRawData.html" data-type="entity-link">SzResponseWithRawData</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/SzScoredFeature.html" data-type="entity-link">SzScoredFeature</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/SzScoringBehavior.html" data-type="entity-link">SzScoringBehavior</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/SzServerInfo.html" data-type="entity-link">SzServerInfo</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/SzServerInfoResponse.html" data-type="entity-link">SzServerInfoResponse</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/SzVersionInfo.html" data-type="entity-link">SzVersionInfo</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/SzVersionResponse.html" data-type="entity-link">SzVersionResponse</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/SzWhyEntityResponse.html" data-type="entity-link">SzWhyEntityResponse</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/SzWhyEntityResponseData.html" data-type="entity-link">SzWhyEntityResponseData</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/SzWhyEntityResult.html" data-type="entity-link">SzWhyEntityResult</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/SzWhyPerspective.html" data-type="entity-link">SzWhyPerspective</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/SzWhyRecordsResponse.html" data-type="entity-link">SzWhyRecordsResponse</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/SzWhyRecordsResponseData.html" data-type="entity-link">SzWhyRecordsResponseData</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/SzWhyRecordsResult.html" data-type="entity-link">SzWhyRecordsResult</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="chapter">
+                        <div class="simple menu-toggler" data-toggle="collapse" ${ isNormalMode ? 'data-target="#miscellaneous-links"'
+                            : 'data-target="#xs-miscellaneous-links"' }>
+                            <span class="icon ion-ios-cube"></span>
+                            <span>Miscellaneous</span>
+                            <span class="icon ion-ios-arrow-down"></span>
+                        </div>
+                        <ul class="links collapse " ${ isNormalMode ? 'id="miscellaneous-links"' : 'id="xs-miscellaneous-links"' }>
+                            <li class="link">
+                                <a href="miscellaneous/typealiases.html" data-type="entity-link">Type aliases</a>
+                            </li>
+                            <li class="link">
+                                <a href="miscellaneous/variables.html" data-type="entity-link">Variables</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="divider"></li>
+                    <li class="copyright">
+                        Documentation generated using <a href="https://compodoc.app/" target="_blank">
+                            <img data-src="images/compodoc-vectorise.png" class="img-responsive" data-type="compodoc-logo">
+                        </a>
+                    </li>
+            </ul>
+        </nav>
+        `);
+        this.innerHTML = tp.strings;
+    }
+});
