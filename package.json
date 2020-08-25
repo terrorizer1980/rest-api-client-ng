@@ -1,11 +1,11 @@
 {
   "name": "@senzing/rest-api-client-ng",
-  "version": "2.0.0",
-  "description": "A package providing restful http interfaces to typescript interfaces to @senzing/senzing-api-server",
+  "version": "2.1.0",
+  "description": "A package providing restful http interfaces to typescript interfaces to @senzing/senzing-api-server. Utilizes the OpenAPI spec defined in the https://github.com/Senzing/senzing-rest-api-specification repository.",
   "scripts": {
     "ng": "ng",
     "build": "ng build",
-    "build:docs": "npx compodoc -p projects/rest-api-client-ng/tsconfig.lib.json -n \"Senzing Rest Api Client (Angular)\" -d docs --disableInternal --disablePrivate --disableDomTree --disableGraph --disableRoutesGraph",
+    "build:docs": "npx compodoc -p projects/rest-api-client-ng/tsconfig.lib.json -d docs --disableInternal --disablePrivate --disableDomTree --disableGraph --disableRoutesGraph --disableCoverage",
     "docs": "npm run build:docs",
     "clean": "rimraf dist/@senzing/rest-api-client-ng",
     "package": "node post-build.js && cd ./dist/@senzing/rest-api-client-ng/ && npm pack",

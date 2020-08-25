@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>Senzing Rest Api Client (Angular)</title>
+        <title>@senzing/rest-api-client-ng documentation</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -13,7 +13,7 @@
     <body>
 
         <div class="navbar navbar-default navbar-fixed-top visible-xs">
-            <a href="./" class="navbar-brand">Senzing Rest Api Client (Angular)</a>
+            <a href="./" class="navbar-brand">@senzing/rest-api-client-ng documentation</a>
             <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
         </div>
 
@@ -35,8 +35,51 @@
 <p>The format is based on <a href="https://keepachangelog.com/en/1.0.0/">Keep a Changelog</a>,
 <a href="https://dlaa.me/markdownlint/">markdownlint</a>,
 and this project adheres to <a href="https://semver.org/spec/v2.0.0.html">Semantic Versioning</a>.</p>
-<h2 id="-1-0-2-2019-06-05">[1.0.2] - 2019-06-05</h2>
-<h3 id="added-to-1-0-2">Added to 1.0.2</h3>
+<h2 id="200---2020-07-06">2.0.0 - 2020-07-06</h2>
+<h3 id="added-to-200">Added to 2.0.0</h3>
+<p>ConfigService.getDataSources
+EntityDataService.reevaluateEntity
+EntityDataService.reevaluateRecord
+EntityDataService.whyEntityByEntityID
+EntityDataService.whyEntityByRecordID
+EntityDataService.whyRecords
+EntityDataService.deleteRecord</p>
+<h3 id="removed-in-200">Removed in 2.0.0</h3>
+<p>ConfigService.addEntityClasses
+ConfigService.getCurrentConfig
+ConfigService.getDefaultConfig</p>
+<h3 id="refactored-in-200">Refactored in 2.0.0</h3>
+<p>ConfigService.listDataSources: renamed to <code>ConfigService.getDataSources</code>
+ConfigService.listEntityClasses: renamed to <code>ConfigService.getEntityClasses</code>
+ConfigService.listEntityTypes: renamed to <code>ConfigService.getEntityTypes</code>
+ConfigService.listEntityTypesByClass: renamed to <code>ConfigService.getEntityTypesByClass</code></p>
+<p>EntityDataService: <code>withRelated</code> arg type(s) globally changed from <code>string: &#39;NONE&#39; | &#39;REPRESENTATIVE&#39; | &#39;WITH_DUPLICATES&#39;</code> to <code>SzRelationshipMode: NONE | PARTIAL | FULL as SzRelationshipMode</code>
+EntityDataService.addRecord: <code>withInfo</code> and <code>withRaw</code> arguments added
+EntityDataService.addRecordWithReturnedRecordId: <code>withInfo</code> and <code>withRaw</code> arguments added
+EntityDataService.getDataSourceRecord: renamed to <code>EntityDataService.getRecord</code>
+EntityDataService.getEntityByEntityId: <code>withDerivedFeatures</code> renamed to <code>withInternalFeatures</code>
+EntityDataService.getEntityByEntityId: <code>forceMinimal</code> argument added
+EntityDataService.getEntityByEntityId: order of args changed from:
+    <code>entityId, featureMode, forceMinimal, withFeatureStats, withDerivedFeatures, withRelated, withRaw, observe, reportProgress</code>
+to:
+    <code>entityId, featureMode, withFeatureStats, withInternalFeatures, forceMinimal, withRelated, withRaw, observe, reportProgress</code>
+EntityDataService.searchByAttributes: order of args changed from:
+    <code>attrs, attr, withRelationships, featureMode, withFeatureStats, withDerivedFeatures, forceMinimal, withRaw, observe, reportProgress</code>
+to:
+    <code>attrs, attr, featureMode, withFeatureStats, withInternalFeatures, forceMinimal, withRelationships, withRaw, observe, reportProgress</code>
+EntityDataService.getEntityByRecordId: <code>withDerivedFeatures</code> renamed to <code>withInternalFeatures</code>
+EntityDataService.whyEntityByEntityID: <code>withDerivedFeatures</code> renamed to <code>withInternalFeatures</code>
+EntityDataService.whyEntityByRecordID: <code>withDerivedFeatures</code> renamed to <code>withInternalFeatures</code></p>
+<p>EntityGraphService.findNetworkByEntityID: renamed to <code>EntityGraphService.findEntityNetwork</code>
+EntityGraphService.findPathByEntityID: renamed to <code>EntityGraphService.findEntityPath</code>
+EntityGraphService.findEntityNetwork: <code>withDerivedFeatures</code> renamed to <code>withInternalFeatures</code>
+EntityGraphService.findEntityNetwork: &quot;e&quot; arg type changed from <code>Array&lt;string|number&gt;</code> to <code>Array&lt;SzEntityIdentifier&gt;</code> which is equal to <code>Array&lt;number | SzRecordId | string&gt;</code>
+EntityGraphService.findEntityNetwork: &quot;entities&quot; arg type changed from <code>string</code> to <code>SzEntityIdentifiers</code> which is equal to <code>Array&lt;number&gt; | Array&lt;SzRecordId | string&gt;</code>
+EntityGraphService.findEntityPath: <code>withDerivedFeatures</code> renamed to <code>withInternalFeatures</code>
+EntityGraphService.findEntityPath: <code>x</code> arg type changed from <code>SzEntityIdentifiers</code> to <code>Array&lt;SzEntityIdentifier&gt;</code> (superficial type change)
+EntityGraphService.findEntityPath: <code>featureMode</code> arg type changed from <code>string</code> to <code>featureMode</code> (enum &#39;NONE&#39; | &#39;REPRESENTATIVE&#39; | &#39;WITHDUPLICATES&#39;)</p>
+<h2 id="102---2019-06-05">[1.0.2] - 2019-06-05</h2>
+<h3 id="added-to-102">Added to 1.0.2</h3>
 <ul>
 <li>minor update to projects/rest-api-client-ng/src/lib/model/szEntityPath.ts to support Graph Components.
 model was incorrect.</li>
@@ -55,6 +98,7 @@ model was incorrect.</li>
 
 
 
+                   
 
 
 
@@ -77,6 +121,7 @@ model was incorrect.</li>
             var COMPODOC_CURRENT_PAGE_DEPTH = 0;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'getting-started';
             var COMPODOC_CURRENT_PAGE_URL = 'changelog.html';
+            var MAX_SEARCH_RESULTS = 15;
        </script>
 
        <script src="./js/libs/custom-elements.min.js"></script>
