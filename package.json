@@ -12,8 +12,7 @@
     "publish": "npm run build:docs && npm run package && cd ./dist/@senzing/rest-api-client-ng/ && npm publish --access private",
     "test": "ng test",
     "test:headless": "ng test --no-watch --watch=false --progress=false --no-progress --browsers=ChromeHeadlessCI",
-    "lint": "ng lint",
-    "e2e": "ng e2e"
+    "lint": "ng lint"
   },
   "private": true,
   "repository": {
