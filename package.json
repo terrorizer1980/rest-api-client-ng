@@ -5,6 +5,7 @@
   "scripts": {
     "ng": "ng",
     "build": "ng build",
+    "build:prod": "ng build --prod",
     "build:docs": "npx compodoc -p projects/rest-api-client-ng/tsconfig.lib.json -d docs --disableInternal --disablePrivate --disableDomTree --disableGraph --disableRoutesGraph --disableCoverage",
     "docs": "npm run build:docs",
     "clean": "rimraf dist/@senzing/rest-api-client-ng",
