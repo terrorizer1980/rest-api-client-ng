@@ -14,6 +14,11 @@
           "options": {
             "tsConfig": "projects/rest-api-client-ng/tsconfig.lib.json",
             "project": "projects/rest-api-client-ng/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/rest-api-client-ng/tsconfig.lib.prod.json"
+            }
           }
         },
         "test": {

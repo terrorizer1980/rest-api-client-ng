@@ -6,6 +6,23 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 [markdownlint](https://dlaa.me/markdownlint/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.1.0] - 2020-9-20
+
+Maintenance release for framework upgrade to Angular 10: see [https://blog.angular.io/version-10-of-angular-now-available-78960babd41](https://blog.angular.io/version-10-of-angular-now-available-78960babd41)
+
+Major updates to most dependency versions have also been made which should improve file sizes, security, and stability.
+
+The following Senzing projects have also been updated to operate on Angular 10,
+see the following links for associated tickets:
+- [sdk-components-ng/issues/143](https://github.com/Senzing/sdk-components-ng/issues/143)
+- [rest-api-client-ng/issues/39](https://github.com/Senzing/rest-api-client-ng/issues/39)
+- [sdk-graph-components/issues/37](https://github.com/Senzing/sdk-graph-components/issues/37)
+
+## 2.0.1 - 2020-9-20
+
+Minor updates to dependency versions. Security patches.
+
+
 ## 2.0.0 - 2020-07-06
 
 ### Added to 2.0.0
