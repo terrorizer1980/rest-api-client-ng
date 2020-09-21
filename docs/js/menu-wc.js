@@ -70,13 +70,13 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <a href="modules/ApiModule.html" data-type="entity-link">ApiModule</a>
                                 <li class="chapter inner">
                                     <div class="simple menu-toggler" data-toggle="collapse" ${ isNormalMode ?
-                                        'data-target="#injectables-links-module-ApiModule-9b213d33789fa47e2ac5fe9584f4b448"' : 'data-target="#xs-injectables-links-module-ApiModule-9b213d33789fa47e2ac5fe9584f4b448"' }>
+                                        'data-target="#injectables-links-module-ApiModule-bec36a8f4efd43ba757ddd6bb1ec764b"' : 'data-target="#xs-injectables-links-module-ApiModule-bec36a8f4efd43ba757ddd6bb1ec764b"' }>
                                         <span class="icon ion-md-arrow-round-down"></span>
                                         <span>Injectables</span>
                                         <span class="icon ion-ios-arrow-down"></span>
                                     </div>
-                                    <ul class="links collapse" ${ isNormalMode ? 'id="injectables-links-module-ApiModule-9b213d33789fa47e2ac5fe9584f4b448"' :
-                                        'id="xs-injectables-links-module-ApiModule-9b213d33789fa47e2ac5fe9584f4b448"' }>
+                                    <ul class="links collapse" ${ isNormalMode ? 'id="injectables-links-module-ApiModule-bec36a8f4efd43ba757ddd6bb1ec764b"' :
+                                        'id="xs-injectables-links-module-ApiModule-bec36a8f4efd43ba757ddd6bb1ec764b"' }>
                                         <li class="link">
                                             <a href="injectables/AdminService.html"
                                                 data-type="entity-link" data-context="sub-entity" data-context-id="modules" }>AdminService</a>
