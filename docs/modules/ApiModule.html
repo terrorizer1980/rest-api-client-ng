@@ -153,7 +153,7 @@
                     <div>
                     </div>
                     <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://angular.io/api/core/ModuleWithProviders" target="_blank" >ModuleWithProviders</a></code>
+                        <b>Returns : </b>    <code>ModuleWithProviders&lt;ApiModule&gt;</code>
 
                     </div>
                     <div class="io-description">
@@ -190,7 +190,7 @@ import { EntityGraphService } from &#x27;./api/entityGraph.service&#x27;;
     EntityGraphService ]
 })
 export class ApiModule {
-    public static forRoot(configurationFactory: () &#x3D;&gt; Configuration): ModuleWithProviders {
+    public static forRoot(configurationFactory: () &#x3D;&gt; Configuration): ModuleWithProviders&lt;ApiModule&gt; {
         return {
             ngModule: ApiModule,
             providers: [ { provide: Configuration, useFactory: configurationFactory } ]
