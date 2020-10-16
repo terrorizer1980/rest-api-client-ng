@@ -9,20 +9,29 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { SzBaseRelatedEntity } from './szBaseRelatedEntity';
-import { SzRelationshipType } from './szRelationshipType';
 
 /**
- * Provides a description of an entity that is related to a ResolvedEntity.  This describes how the entity is related and may be missing the complete features and record list of a ResolvedEntity.
+ * Describes the scoring details between two names.
  */
-export interface SzRelatedEntity extends SzBaseRelatedEntity { 
+export interface SzNameScoring { 
     /**
-     * A boolean flag indicating if this related entity represents a disclosed relationship.
+     * The full name score.  This field is omitted if there is not a full name score (e.g.: with an organization name)
      */
-    disclosed?: boolean;
+    fullNameScore?: number;
     /**
-     * A boolean flag indicating if this related entity represents an ambiguous relationship.
+     * The surname score.  This field is omitted if there is not a surname score (e.g.: with an organization name or if there were no surnames to compare)
      */
-    ambiguous?: boolean;
-    relationType?: SzRelationshipType;
+    surnameScore?: number;
+    /**
+     * The given name score.  This field is omitted if there is not a given name score (e.g.: with an organization name or if there were no given names to compare)
+     */
+    givenNameScore?: number;
+    /**
+     * The generation match score.  This field is omitted if there is not a generation match score (e.g.: with an organization name or if there were no generations to compare)
+     */
+    generationScore?: number;
+    /**
+     * The organization name score.  This field is omitted if there is not a organization name score (e.g.: with an personal name)
+     */
+    orgNameScore?: number;
 }

@@ -9,20 +9,17 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { SzBaseRelatedEntity } from './szBaseRelatedEntity';
-import { SzRelationshipType } from './szRelationshipType';
 
 /**
- * Provides a description of an entity that is related to a ResolvedEntity.  This describes how the entity is related and may be missing the complete features and record list of a ResolvedEntity.
+ * Describes the various match levels describing how two records resolve against each other.  The possible values are:   * `NO_MATCH` - No match was found between the records.   * `RESOLVED` - The records resolved to the same entity.   * `POSSIBLY_SAME` - The records were not close enough to resolve     but may represent the same entity if more data was provided.   * `POSSIBLY_RELATED` - The records share some attributes that     suggest a relationship.   * `NAME_ONLY` - The records match in name only.   * `DISCLOSED` - An explicit relationship has been disclosed between     the records.
  */
-export interface SzRelatedEntity extends SzBaseRelatedEntity { 
-    /**
-     * A boolean flag indicating if this related entity represents a disclosed relationship.
-     */
-    disclosed?: boolean;
-    /**
-     * A boolean flag indicating if this related entity represents an ambiguous relationship.
-     */
-    ambiguous?: boolean;
-    relationType?: SzRelationshipType;
-}
+export type SzMatchLevel = 'NO_MATCH' | 'RESOLVED' | 'POSSIBLY_SAME' | 'POSSIBLY_RELATED' | 'NAME_ONLY' | 'DISCLOSED';
+
+export const SzMatchLevel = {
+    NOMATCH: 'NO_MATCH' as SzMatchLevel,
+    RESOLVED: 'RESOLVED' as SzMatchLevel,
+    POSSIBLYSAME: 'POSSIBLY_SAME' as SzMatchLevel,
+    POSSIBLYRELATED: 'POSSIBLY_RELATED' as SzMatchLevel,
+    NAMEONLY: 'NAME_ONLY' as SzMatchLevel,
+    DISCLOSED: 'DISCLOSED' as SzMatchLevel
+};
