@@ -9,20 +9,27 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { SzBaseRelatedEntity } from './szBaseRelatedEntity';
-import { SzRelationshipType } from './szRelationshipType';
+import { SzNameScoring } from './szNameScoring';
 
 /**
- * Provides a description of an entity that is related to a ResolvedEntity.  This describes how the entity is related and may be missing the complete features and record list of a ResolvedEntity.
+ * Describes the scoring between two search features.
  */
-export interface SzRelatedEntity extends SzBaseRelatedEntity { 
+export interface SzSearchFeatureScore { 
     /**
-     * A boolean flag indicating if this related entity represents a disclosed relationship.
+     * The feature type of the features being scored.
      */
-    disclosed?: boolean;
+    featureType?: string;
     /**
-     * A boolean flag indicating if this related entity represents an ambiguous relationship.
+     * The inbound feature value as a string.
      */
-    ambiguous?: boolean;
-    relationType?: SzRelationshipType;
+    inboundFeature?: string;
+    /**
+     * The feature value that was a candidate match for the inbound feature as a string.
+     */
+    candidateFeature?: string;
+    /**
+     * The integer score between the two feature values (typically from 0 to 100).  If this is a name feature, then this value is the \"best\" value from the `SzNameScoring` instance described by `nameScoringDetails` (in order of precedence the first of these values that exists: `orgNameScore`, `fullNameScore`, `surnameScore` and then `givenNameScore`).
+     */
+    score?: number;
+    nameScoringDetails?: SzNameScoring;
 }
