@@ -43,7 +43,7 @@
 
 <ol class="breadcrumb">
   <li>Interfaces</li>
-  <li>SzBaseRelatedEntity</li>
+  <li>SzSearchFeatureScore</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -61,23 +61,17 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>projects/rest-api-client-ng/src/lib/model/szBaseRelatedEntity.ts</code>
+            <code>projects/rest-api-client-ng/src/lib/model/szSearchFeatureScore.ts</code>
         </p>
 
             <p class="comment">
                 <h3>Description</h3>
             </p>
             <p class="comment">
-                <p>Provides the additional fields to an SzResolvedEntity that describe an entity&#39;s relationship to another.  This serves as a basis for SzAttributeSearchResult and SzRelatedEntity.</p>
+                <p>Describes the scoring between two search features.</p>
 
             </p>
 
-            <p class="comment">
-                <h3>Extends</h3>
-            </p>
-            <p class="comment">
-                        <code><a href="../interfaces/SzResolvedEntity.html" target="_self" >SzResolvedEntity</a></code>
-            </p>
 
         <section>
             <h3 id="index">Index</h3>
@@ -93,23 +87,23 @@
                             <ul class="index-list">
                                 <li>
                                             <span class="modifier">Optional</span>
-                                        <a href="#matchKey">matchKey</a>
+                                        <a href="#candidateFeature">candidateFeature</a>
                                 </li>
                                 <li>
                                             <span class="modifier">Optional</span>
-                                        <a href="#matchLevel">matchLevel</a>
+                                        <a href="#featureType">featureType</a>
                                 </li>
                                 <li>
                                             <span class="modifier">Optional</span>
-                                        <a href="#matchScore">matchScore</a>
+                                        <a href="#inboundFeature">inboundFeature</a>
                                 </li>
                                 <li>
                                             <span class="modifier">Optional</span>
-                                        <a href="#refScore">refScore</a>
+                                        <a href="#nameScoringDetails">nameScoringDetails</a>
                                 </li>
                                 <li>
                                             <span class="modifier">Optional</span>
-                                        <a href="#resolutionRuleCode">resolutionRuleCode</a>
+                                        <a href="#score">score</a>
                                 </li>
                             </ul>
                         </td>
@@ -126,13 +120,13 @@
                         <tbody>
                                 <tr>
                                     <td class="col-md-4">
-                                        <a name="matchKey"></a>
-                                        <span class="name"><b>matchKey</b><a href="#matchKey"><span class="icon ion-ios-link"></span></a></span>
+                                        <a name="candidateFeature"></a>
+                                        <span class="name"><b>candidateFeature</b><a href="#candidateFeature"><span class="icon ion-ios-link"></span></a></span>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="col-md-4">
-                                        <code>matchKey:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                        <code>candidateFeature:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 </code>
                                     </td>
                                 </tr>
@@ -156,7 +150,7 @@
 
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-description"><p>The match key describing what features matched between the primary resolved entity and the related entity.</p>
+                                    <div class="io-description"><p>The feature value that was a candidate match for the inbound feature as a string.</p>
 </div>
                                 </td>
                             </tr>
@@ -166,133 +160,13 @@
                         <tbody>
                                 <tr>
                                     <td class="col-md-4">
-                                        <a name="matchLevel"></a>
-                                        <span class="name"><b>matchLevel</b><a href="#matchLevel"><span class="icon ion-ios-link"></span></a></span>
+                                        <a name="featureType"></a>
+                                        <span class="name"><b>featureType</b><a href="#featureType"><span class="icon ion-ios-link"></span></a></span>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="col-md-4">
-                                        <code>matchLevel:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
-</code>
-                                    </td>
-                                </tr>
-
-
-                                    <tr>
-                                        <td class="col-md-4">
-                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
-
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td class="col-md-4">
-                                            <i>Optional</i>
-                                        </td>
-                                    </tr>
-
-
-
-
-                            <tr>
-                                <td class="col-md-4">
-                                    <div class="io-description"><p>The integer &quot;match level&quot; describing how the related entity matched to the primary resolved entity.</p>
-</div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <table class="table table-sm table-bordered">
-                        <tbody>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <a name="matchScore"></a>
-                                        <span class="name"><b>matchScore</b><a href="#matchScore"><span class="icon ion-ios-link"></span></a></span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <code>matchScore:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
-</code>
-                                    </td>
-                                </tr>
-
-
-                                    <tr>
-                                        <td class="col-md-4">
-                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
-
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td class="col-md-4">
-                                            <i>Optional</i>
-                                        </td>
-                                    </tr>
-
-
-
-
-                            <tr>
-                                <td class="col-md-4">
-                                    <div class="io-description"><p>The match score between the primary resolved entity and this related entity.  The higher the score the closer the match.</p>
-</div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <table class="table table-sm table-bordered">
-                        <tbody>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <a name="refScore"></a>
-                                        <span class="name"><b>refScore</b><a href="#refScore"><span class="icon ion-ios-link"></span></a></span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <code>refScore:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
-</code>
-                                    </td>
-                                </tr>
-
-
-                                    <tr>
-                                        <td class="col-md-4">
-                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
-
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td class="col-md-4">
-                                            <i>Optional</i>
-                                        </td>
-                                    </tr>
-
-
-
-
-                            <tr>
-                                <td class="col-md-4">
-                                    <div class="io-description"><p>The ref score between the primary resolved entity and this related entity.</p>
-</div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <table class="table table-sm table-bordered">
-                        <tbody>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <a name="resolutionRuleCode"></a>
-                                        <span class="name"><b>resolutionRuleCode</b><a href="#resolutionRuleCode"><span class="icon ion-ios-link"></span></a></span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <code>resolutionRuleCode:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                        <code>featureType:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 </code>
                                     </td>
                                 </tr>
@@ -316,7 +190,121 @@
 
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-description"><p>The code identifying the resolution rule that related this entity to the primary resolved entity.</p>
+                                    <div class="io-description"><p>The feature type of the features being scored.</p>
+</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="inboundFeature"></a>
+                                        <span class="name"><b>inboundFeature</b><a href="#inboundFeature"><span class="icon ion-ios-link"></span></a></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>inboundFeature:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Optional</i>
+                                        </td>
+                                    </tr>
+
+
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>The inbound feature value as a string.</p>
+</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="nameScoringDetails"></a>
+                                        <span class="name"><b>nameScoringDetails</b><a href="#nameScoringDetails"><span class="icon ion-ios-link"></span></a></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>nameScoringDetails:         <code><a href="../interfaces/SzNameScoring.html" target="_self" >SzNameScoring</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="../interfaces/SzNameScoring.html" target="_self" >SzNameScoring</a></code>
+
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Optional</i>
+                                        </td>
+                                    </tr>
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="score"></a>
+                                        <span class="name"><b>score</b><a href="#score"><span class="icon ion-ios-link"></span></a></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>score:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Optional</i>
+                                        </td>
+                                    </tr>
+
+
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>The integer score between the two feature values (typically from 0 to 100).  If this is a name feature, then this value is the &quot;best&quot; value from the <code>SzNameScoring</code> instance described by <code>nameScoringDetails</code> (in order of precedence the first of these values that exists: <code>orgNameScore</code>, <code>fullNameScore</code>, <code>surnameScore</code> and then <code>givenNameScore</code>).</p>
 </div>
                                 </td>
                             </tr>
@@ -327,35 +315,29 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { SzDataSourceRecordSummary } from &#x27;./szDataSourceRecordSummary&#x27;;
-import { SzEntityFeature } from &#x27;./szEntityFeature&#x27;;
-import { SzMatchedRecord } from &#x27;./szMatchedRecord&#x27;;
-import { SzResolvedEntity } from &#x27;./szResolvedEntity&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { SzNameScoring } from &#x27;./szNameScoring&#x27;;
 
 /**
- * Provides the additional fields to an SzResolvedEntity that describe an entity&#x27;s relationship to another.  This serves as a basis for SzAttributeSearchResult and SzRelatedEntity.
+ * Describes the scoring between two search features.
  */
-export interface SzBaseRelatedEntity extends SzResolvedEntity { 
+export interface SzSearchFeatureScore { 
     /**
-     * The integer \&quot;match level\&quot; describing how the related entity matched to the primary resolved entity.
+     * The feature type of the features being scored.
      */
-    matchLevel?: number;
+    featureType?: string;
     /**
-     * The match score between the primary resolved entity and this related entity.  The higher the score the closer the match.
+     * The inbound feature value as a string.
      */
-    matchScore?: number;
+    inboundFeature?: string;
     /**
-     * The match key describing what features matched between the primary resolved entity and the related entity.
+     * The feature value that was a candidate match for the inbound feature as a string.
      */
-    matchKey?: string;
+    candidateFeature?: string;
     /**
-     * The code identifying the resolution rule that related this entity to the primary resolved entity.
+     * The integer score between the two feature values (typically from 0 to 100).  If this is a name feature, then this value is the \&quot;best\&quot; value from the &#x60;SzNameScoring&#x60; instance described by &#x60;nameScoringDetails&#x60; (in order of precedence the first of these values that exists: &#x60;orgNameScore&#x60;, &#x60;fullNameScore&#x60;, &#x60;surnameScore&#x60; and then &#x60;givenNameScore&#x60;).
      */
-    resolutionRuleCode?: string;
-    /**
-     * The ref score between the primary resolved entity and this related entity.
-     */
-    refScore?: number;
+    score?: number;
+    nameScoringDetails?: SzNameScoring;
 }</code></pre>
     </div>
 </div>
@@ -383,7 +365,7 @@ export interface SzBaseRelatedEntity extends SzResolvedEntity {
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'interface';
-            var COMPODOC_CURRENT_PAGE_URL = 'SzBaseRelatedEntity.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'SzSearchFeatureScore.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
 

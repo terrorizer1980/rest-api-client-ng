@@ -99,6 +99,10 @@
                                 </li>
                                 <li>
                                             <span class="modifier">Optional</span>
+                                        <a href="#nameScoringDetails">nameScoringDetails</a>
+                                </li>
+                                <li>
+                                            <span class="modifier">Optional</span>
                                         <a href="#score">score</a>
                                 </li>
                                 <li>
@@ -232,6 +236,40 @@
                         <tbody>
                                 <tr>
                                     <td class="col-md-4">
+                                        <a name="nameScoringDetails"></a>
+                                        <span class="name"><b>nameScoringDetails</b><a href="#nameScoringDetails"><span class="icon ion-ios-link"></span></a></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>nameScoringDetails:         <code><a href="../interfaces/SzNameScoring.html" target="_self" >SzNameScoring</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="../interfaces/SzNameScoring.html" target="_self" >SzNameScoring</a></code>
+
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Optional</i>
+                                        </td>
+                                    </tr>
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
                                         <a name="score"></a>
                                         <span class="name"><b>score</b><a href="#score"><span class="icon ion-ios-link"></span></a></span>
                                     </td>
@@ -262,7 +300,7 @@
 
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-description"><p>The integer score between the two feature values (typically from 0 to 100)</p>
+                                    <div class="io-description"><p>The integer score between the two feature values (typically from 0 to 100).  If this is a name feature, then this value is the &quot;best&quot; value from the <code>SzNameScoring</code> instance described by <code>nameScoringDetails</code> (in order of precedence the first of these values that exists: <code>orgNameScore</code>, <code>fullNameScore</code>, <code>surnameScore</code> and then <code>givenNameScore</code>).</p>
 </div>
                                 </td>
                             </tr>
@@ -341,14 +379,15 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { SzScoredFeature } from &#x27;./szScoredFeature&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { SzNameScoring } from &#x27;./szNameScoring&#x27;;
+import { SzScoredFeature } from &#x27;./szScoredFeature&#x27;;
 import { SzScoringBehavior } from &#x27;./szScoringBehavior&#x27;;
 import { SzScoringBucket } from &#x27;./szScoringBucket&#x27;;
 
 /**
  * Describes the scoring between two &#x60;SzScoredFeature&#x60; instances.
  */
-export interface SzFeatureScore {
+export interface SzFeatureScore { 
     /**
      * The feature type of the features being scored.
      */
@@ -356,13 +395,13 @@ export interface SzFeatureScore {
     inboundFeature?: SzScoredFeature;
     candidateFeature?: SzScoredFeature;
     /**
-     * The integer score between the two feature values (typically from 0 to 100)
+     * The integer score between the two feature values (typically from 0 to 100).  If this is a name feature, then this value is the \&quot;best\&quot; value from the &#x60;SzNameScoring&#x60; instance described by &#x60;nameScoringDetails&#x60; (in order of precedence the first of these values that exists: &#x60;orgNameScore&#x60;, &#x60;fullNameScore&#x60;, &#x60;surnameScore&#x60; and then &#x60;givenNameScore&#x60;).
      */
     score?: number;
+    nameScoringDetails?: SzNameScoring;
     scoringBucket?: SzScoringBucket;
     scoringBehavior?: SzScoringBehavior;
-}
-</code></pre>
+}</code></pre>
     </div>
 </div>
 

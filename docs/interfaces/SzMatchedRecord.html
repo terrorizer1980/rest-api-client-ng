@@ -332,7 +332,7 @@
 /**
  * Provides the additional fields to an SzEntityRecord that describe how it matched to the entity that it belongs to.
  */
-export interface SzMatchedRecord extends SzEntityRecord {
+export interface SzMatchedRecord extends SzEntityRecord { 
     /**
      * The match key describing what features matched between the first record in the resolved entity and this record. This is blank for the first record.
      */
@@ -353,8 +353,7 @@ export interface SzMatchedRecord extends SzEntityRecord {
      * The ref score between the first record in the resolved entity and this record.  This is zero (0) for the first record in the resolved entity.
      */
     refScore?: number;
-}
-</code></pre>
+}</code></pre>
     </div>
 </div>
 
