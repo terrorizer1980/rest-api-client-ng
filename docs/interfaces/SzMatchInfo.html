@@ -95,6 +95,10 @@
                                 </li>
                                 <li>
                                             <span class="modifier">Optional</span>
+                                        <a href="#matchLevel">matchLevel</a>
+                                </li>
+                                <li>
+                                            <span class="modifier">Optional</span>
                                         <a href="#resolutionRule">resolutionRule</a>
                                 </li>
                                 <li>
@@ -196,6 +200,40 @@
                         <tbody>
                                 <tr>
                                     <td class="col-md-4">
+                                        <a name="matchLevel"></a>
+                                        <span class="name"><b>matchLevel</b><a href="#matchLevel"><span class="icon ion-ios-link"></span></a></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>matchLevel:         <code><a href="../miscellaneous/variables.html#SzMatchLevel" target="_self" >SzMatchLevel</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="../miscellaneous/variables.html#SzMatchLevel" target="_self" >SzMatchLevel</a></code>
+
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Optional</i>
+                                        </td>
+                                    </tr>
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
                                         <a name="resolutionRule"></a>
                                         <span class="name"><b>resolutionRule</b><a href="#resolutionRule"><span class="icon ion-ios-link"></span></a></span>
                                     </td>
@@ -279,15 +317,17 @@
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { SzCandidateKey } from &#x27;./szCandidateKey&#x27;;
 import { SzFeatureScore } from &#x27;./szFeatureScore&#x27;;
+import { SzMatchLevel } from &#x27;./szMatchLevel&#x27;;
 
 /**
  * The match info describing why two entities (or records) resolve or relate to one another.
  */
-export interface SzMatchInfo {
+export interface SzMatchInfo { 
     /**
      * The why key indicating the components of the match (similar to the match key).
      */
     whyKey?: string;
+    matchLevel?: SzMatchLevel;
     /**
      * The resolution rule that triggered the match.
      */
@@ -300,8 +340,7 @@ export interface SzMatchInfo {
      * The map of feature types to arrays of &#x60;SzFeatureScore&#x60; instances for that feature type.
      */
     featureScores?: { [key: string]: Array&lt;SzFeatureScore&gt;; };
-}
-</code></pre>
+}</code></pre>
     </div>
 </div>
 

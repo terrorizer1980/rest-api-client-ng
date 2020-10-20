@@ -359,6 +359,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <a href="interfaces/SzMatchInfo.html" data-type="entity-link">SzMatchInfo</a>
                             </li>
                             <li class="link">
+                                <a href="interfaces/SzNameScoring.html" data-type="entity-link">SzNameScoring</a>
+                            </li>
+                            <li class="link">
                                 <a href="interfaces/SzRecordId.html" data-type="entity-link">SzRecordId</a>
                             </li>
                             <li class="link">
@@ -390,6 +393,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                             </li>
                             <li class="link">
                                 <a href="interfaces/SzScoringBehavior.html" data-type="entity-link">SzScoringBehavior</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/SzSearchFeatureScore.html" data-type="entity-link">SzSearchFeatureScore</a>
                             </li>
                             <li class="link">
                                 <a href="interfaces/SzServerInfo.html" data-type="entity-link">SzServerInfo</a>

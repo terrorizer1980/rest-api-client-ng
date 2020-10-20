@@ -35,6 +35,29 @@
 <p>The format is based on <a href="https://keepachangelog.com/en/1.0.0/">Keep a Changelog</a>,
 <a href="https://dlaa.me/markdownlint/">markdownlint</a>,
 and this project adheres to <a href="https://semver.org/spec/v2.0.0.html">Semantic Versioning</a>.</p>
+<h2 id="220---2020-10-16">[2.2.0] - 2020-10-16</h2>
+<p>the models need to be updated to match the 2.2.0 specification release.
+<a href="https://github.com/Senzing/senzing-rest-api-specification/releases/tag/2.2.0">https://github.com/Senzing/senzing-rest-api-specification/releases/tag/2.2.0</a></p>
+<ul>
+<li>Added <code>SzNameScoring</code> to describe name scoring details</li>
+<li>Added <code>SzSearchFeatureScore</code> for search feature scores</li>
+<li>Modified <code>SzBaseRelatedEntity</code> to remove <code>fullNameScore</code> field since it has
+not been populated since switch to version 2.0.0 of native Senzing SDK and
+never made sense in the &quot;base class&quot; since only <code>SzAttributeSearchResult</code> had
+this field populated under native Senzing SDK version 1.x.</li>
+<li>Added <code>bestNameScore</code> field to <code>SzAttributeSearchResult</code> to replace
+<code>fullNameScore</code> in the place where the name score was previously
+used with version 1.x of the native Senzing SDK (i.e.: to sort search results
+based on the strength of the name match).</li>
+<li>Modified <code>SzAttributeSearchResult</code> to include the <code>featureScores</code> field to
+provide feature scores without using &quot;raw data&quot;</li>
+<li>Added <code>nameScoringDetails</code> field to <code>SzFeatureScore</code> class to provide
+<code>SzNameScoring</code> name scoring details on why operations,</li>
+<li>Updated <code>com.senzing.api.model.SzFeatureScore</code> to define its <code>score</code> field as 
+the most sensible score value from the <code>nameScoringDetails</code> for <code>&quot;NAME&quot;</code>
+features since the <code>FULL_SCORE</code> field is not available for names.</li>
+<li>Added the <code>NOT_SCORED</code> value for <code>SzScoringBucket</code> enum.</li>
+</ul>
 <h2 id="210---2020-9-20">[2.1.0] - 2020-9-20</h2>
 <p>Maintenance release for framework upgrade to Angular 10: see <a href="https://blog.angular.io/version-10-of-angular-now-available-78960babd41">https://blog.angular.io/version-10-of-angular-now-available-78960babd41</a></p>
 <p>Major updates to most dependency versions have also been made which should improve file sizes, security, and stability.</p>
