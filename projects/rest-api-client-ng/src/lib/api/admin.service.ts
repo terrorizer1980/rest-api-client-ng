@@ -80,10 +80,10 @@ export class AdminService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getServerInfo(observe?: 'body', reportProgress?: boolean): Observable<SzServerInfoResponse>;
-    public getServerInfo(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<SzServerInfoResponse>>;
-    public getServerInfo(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<SzServerInfoResponse>>;
-    public getServerInfo(observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public getServerInfo(observe?: 'body', reportProgress?: boolean, additionalHeaders?: {[key: string]: string}): Observable<SzServerInfoResponse>;
+    public getServerInfo(observe?: 'response', reportProgress?: boolean, additionalHeaders?: {[key: string]: string}): Observable<HttpResponse<SzServerInfoResponse>>;
+    public getServerInfo(observe?: 'events', reportProgress?: boolean, additionalHeaders?: {[key: string]: string} ): Observable<HttpEvent<SzServerInfoResponse>>;
+    public getServerInfo(observe: any = 'body', reportProgress: boolean = false, additionalHeaders: {[key: string]: string} = {}): Observable<any> {
 
         let headers = this.defaultHeaders;
 
@@ -96,6 +96,11 @@ export class AdminService {
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
             headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+        if(additionalHeaders) {
+            for(let _hKey in additionalHeaders) {
+                headers = headers.set(_hKey, additionalHeaders[_hKey]);
+            }
         }
 
         // to determine the Content-Type header
@@ -118,10 +123,10 @@ export class AdminService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public heartbeat(observe?: 'body', reportProgress?: boolean): Observable<SzBaseResponse>;
-    public heartbeat(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<SzBaseResponse>>;
-    public heartbeat(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<SzBaseResponse>>;
-    public heartbeat(observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public heartbeat(observe?: 'body', reportProgress?: boolean, additionalHeaders?: {[key: string]: string}): Observable<SzBaseResponse>;
+    public heartbeat(observe?: 'response', reportProgress?: boolean, additionalHeaders?: {[key: string]: string}): Observable<HttpResponse<SzBaseResponse>>;
+    public heartbeat(observe?: 'events', reportProgress?: boolean, additionalHeaders?: {[key: string]: string}): Observable<HttpEvent<SzBaseResponse>>;
+    public heartbeat(observe: any = 'body', reportProgress: boolean = false, additionalHeaders: {[key: string]: string} = {} ): Observable<any> {
 
         let headers = this.defaultHeaders;
 
@@ -134,6 +139,11 @@ export class AdminService {
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
             headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+        if(additionalHeaders) {
+            for(let _hKey in additionalHeaders) {
+                headers = headers.set(_hKey, additionalHeaders[_hKey]);
+            }
         }
 
         // to determine the Content-Type header
@@ -157,10 +167,10 @@ export class AdminService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public license(withRaw?: boolean, observe?: 'body', reportProgress?: boolean): Observable<SzLicenseResponse>;
-    public license(withRaw?: boolean, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<SzLicenseResponse>>;
-    public license(withRaw?: boolean, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<SzLicenseResponse>>;
-    public license(withRaw?: boolean, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public license(withRaw?: boolean, observe?: 'body', reportProgress?: boolean, additionalHeaders?: {[key: string]: string}): Observable<SzLicenseResponse>;
+    public license(withRaw?: boolean, observe?: 'response', reportProgress?: boolean, additionalHeaders?: {[key: string]: string}): Observable<HttpResponse<SzLicenseResponse>>;
+    public license(withRaw?: boolean, observe?: 'events', reportProgress?: boolean, additionalHeaders?: {[key: string]: string}): Observable<HttpEvent<SzLicenseResponse>>;
+    public license(withRaw?: boolean, observe: any = 'body', reportProgress: boolean = false, additionalHeaders: {[key: string]: string} = {} ): Observable<any> {
 
 
         let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
@@ -179,6 +189,11 @@ export class AdminService {
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
             headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+        if(additionalHeaders) {
+            for(let _hKey in additionalHeaders) {
+                headers = headers.set(_hKey, additionalHeaders[_hKey]);
+            }
         }
 
         // to determine the Content-Type header
@@ -203,10 +218,10 @@ export class AdminService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public version(withRaw?: boolean, observe?: 'body', reportProgress?: boolean): Observable<SzVersionResponse>;
-    public version(withRaw?: boolean, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<SzVersionResponse>>;
-    public version(withRaw?: boolean, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<SzVersionResponse>>;
-    public version(withRaw?: boolean, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public version(withRaw?: boolean, observe?: 'body', reportProgress?: boolean, additionalHeaders?: {[key: string]: string}): Observable<SzVersionResponse>;
+    public version(withRaw?: boolean, observe?: 'response', reportProgress?: boolean, additionalHeaders?: {[key: string]: string}): Observable<HttpResponse<SzVersionResponse>>;
+    public version(withRaw?: boolean, observe?: 'events', reportProgress?: boolean, additionalHeaders?: {[key: string]: string}): Observable<HttpEvent<SzVersionResponse>>;
+    public version(withRaw?: boolean, observe: any = 'body', reportProgress: boolean = false, additionalHeaders: {[key: string]: string} = {} ): Observable<any> {
 
 
         let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
@@ -225,6 +240,11 @@ export class AdminService {
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
             headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+        if(additionalHeaders) {
+            for(let _hKey in additionalHeaders) {
+                headers = headers.set(_hKey, additionalHeaders[_hKey]);
+            }
         }
 
         // to determine the Content-Type header

@@ -90,10 +90,10 @@ export class EntityGraphService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public findEntityNetwork(e?: Array<SzEntityIdentifier>, entities?: SzEntityIdentifiers, maxDegrees?: number, buildOut?: number, maxEntities?: number, featureMode?: SzFeatureMode, withFeatureStats?: boolean, withInternalFeatures?: boolean, forceMinimal?: boolean, withRaw?: boolean, observe?: 'body', reportProgress?: boolean): Observable<SzEntityNetworkResponse>;
-    public findEntityNetwork(e?: Array<SzEntityIdentifier>, entities?: SzEntityIdentifiers, maxDegrees?: number, buildOut?: number, maxEntities?: number, featureMode?: SzFeatureMode, withFeatureStats?: boolean, withInternalFeatures?: boolean, forceMinimal?: boolean, withRaw?: boolean, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<SzEntityNetworkResponse>>;
-    public findEntityNetwork(e?: Array<SzEntityIdentifier>, entities?: SzEntityIdentifiers, maxDegrees?: number, buildOut?: number, maxEntities?: number, featureMode?: SzFeatureMode, withFeatureStats?: boolean, withInternalFeatures?: boolean, forceMinimal?: boolean, withRaw?: boolean, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<SzEntityNetworkResponse>>;
-    public findEntityNetwork(e?: Array<SzEntityIdentifier>, entities?: SzEntityIdentifiers, maxDegrees?: number, buildOut?: number, maxEntities?: number, featureMode?: SzFeatureMode, withFeatureStats?: boolean, withInternalFeatures?: boolean, forceMinimal?: boolean, withRaw?: boolean, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public findEntityNetwork(e?: Array<SzEntityIdentifier>, entities?: SzEntityIdentifiers, maxDegrees?: number, buildOut?: number, maxEntities?: number, featureMode?: SzFeatureMode, withFeatureStats?: boolean, withInternalFeatures?: boolean, forceMinimal?: boolean, withRaw?: boolean, observe?: 'body', reportProgress?: boolean, additionalHeaders?: {[key: string]: string}): Observable<SzEntityNetworkResponse>;
+    public findEntityNetwork(e?: Array<SzEntityIdentifier>, entities?: SzEntityIdentifiers, maxDegrees?: number, buildOut?: number, maxEntities?: number, featureMode?: SzFeatureMode, withFeatureStats?: boolean, withInternalFeatures?: boolean, forceMinimal?: boolean, withRaw?: boolean, observe?: 'response', reportProgress?: boolean, additionalHeaders?: {[key: string]: string}): Observable<HttpResponse<SzEntityNetworkResponse>>;
+    public findEntityNetwork(e?: Array<SzEntityIdentifier>, entities?: SzEntityIdentifiers, maxDegrees?: number, buildOut?: number, maxEntities?: number, featureMode?: SzFeatureMode, withFeatureStats?: boolean, withInternalFeatures?: boolean, forceMinimal?: boolean, withRaw?: boolean, observe?: 'events', reportProgress?: boolean, additionalHeaders?: {[key: string]: string}): Observable<HttpEvent<SzEntityNetworkResponse>>;
+    public findEntityNetwork(e?: Array<SzEntityIdentifier>, entities?: SzEntityIdentifiers, maxDegrees?: number, buildOut?: number, maxEntities?: number, featureMode?: SzFeatureMode, withFeatureStats?: boolean, withInternalFeatures?: boolean, forceMinimal?: boolean, withRaw?: boolean, observe: any = 'body', reportProgress: boolean = false, additionalHeaders: {[key: string]: string} = {} ): Observable<any> {
 
 
 
@@ -151,6 +151,11 @@ export class EntityGraphService {
         if (httpHeaderAcceptSelected != undefined) {
             headers = headers.set('Accept', httpHeaderAcceptSelected);
         }
+        if(additionalHeaders) {
+            for(let _hKey in additionalHeaders) {
+                headers = headers.set(_hKey, additionalHeaders[_hKey]);
+            }
+        }
 
         // to determine the Content-Type header
         const consumes: string[] = [
@@ -185,10 +190,10 @@ export class EntityGraphService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public findEntityPath(from: SzEntityIdentifier, to: SzEntityIdentifier, maxDegrees?: number, x?: Array<SzEntityIdentifier>, avoidEntities?: SzEntityIdentifiers, forbidAvoided?: boolean, s?: Array<string>, featureMode?: SzFeatureMode, withFeatureStats?: boolean, withInternalFeatures?: boolean, forceMinimal?: boolean, withRaw?: boolean, observe?: 'body', reportProgress?: boolean): Observable<SzEntityPathResponse>;
-    public findEntityPath(from: SzEntityIdentifier, to: SzEntityIdentifier, maxDegrees?: number, x?: Array<SzEntityIdentifier>, avoidEntities?: SzEntityIdentifiers, forbidAvoided?: boolean, s?: Array<string>, featureMode?: SzFeatureMode, withFeatureStats?: boolean, withInternalFeatures?: boolean, forceMinimal?: boolean, withRaw?: boolean, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<SzEntityPathResponse>>;
-    public findEntityPath(from: SzEntityIdentifier, to: SzEntityIdentifier, maxDegrees?: number, x?: Array<SzEntityIdentifier>, avoidEntities?: SzEntityIdentifiers, forbidAvoided?: boolean, s?: Array<string>, featureMode?: SzFeatureMode, withFeatureStats?: boolean, withInternalFeatures?: boolean, forceMinimal?: boolean, withRaw?: boolean, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<SzEntityPathResponse>>;
-    public findEntityPath(from: SzEntityIdentifier, to: SzEntityIdentifier, maxDegrees?: number, x?: Array<SzEntityIdentifier>, avoidEntities?: SzEntityIdentifiers, forbidAvoided?: boolean, s?: Array<string>, featureMode?: SzFeatureMode, withFeatureStats?: boolean, withInternalFeatures?: boolean, forceMinimal?: boolean, withRaw?: boolean, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public findEntityPath(from: SzEntityIdentifier, to: SzEntityIdentifier, maxDegrees?: number, x?: Array<SzEntityIdentifier>, avoidEntities?: SzEntityIdentifiers, forbidAvoided?: boolean, s?: Array<string>, featureMode?: SzFeatureMode, withFeatureStats?: boolean, withInternalFeatures?: boolean, forceMinimal?: boolean, withRaw?: boolean, observe?: 'body', reportProgress?: boolean, additionalHeaders?: {[key: string]: string}): Observable<SzEntityPathResponse>;
+    public findEntityPath(from: SzEntityIdentifier, to: SzEntityIdentifier, maxDegrees?: number, x?: Array<SzEntityIdentifier>, avoidEntities?: SzEntityIdentifiers, forbidAvoided?: boolean, s?: Array<string>, featureMode?: SzFeatureMode, withFeatureStats?: boolean, withInternalFeatures?: boolean, forceMinimal?: boolean, withRaw?: boolean, observe?: 'response', reportProgress?: boolean, additionalHeaders?: {[key: string]: string}): Observable<HttpResponse<SzEntityPathResponse>>;
+    public findEntityPath(from: SzEntityIdentifier, to: SzEntityIdentifier, maxDegrees?: number, x?: Array<SzEntityIdentifier>, avoidEntities?: SzEntityIdentifiers, forbidAvoided?: boolean, s?: Array<string>, featureMode?: SzFeatureMode, withFeatureStats?: boolean, withInternalFeatures?: boolean, forceMinimal?: boolean, withRaw?: boolean, observe?: 'events', reportProgress?: boolean, additionalHeaders?: {[key: string]: string}): Observable<HttpEvent<SzEntityPathResponse>>;
+    public findEntityPath(from: SzEntityIdentifier, to: SzEntityIdentifier, maxDegrees?: number, x?: Array<SzEntityIdentifier>, avoidEntities?: SzEntityIdentifiers, forbidAvoided?: boolean, s?: Array<string>, featureMode?: SzFeatureMode, withFeatureStats?: boolean, withInternalFeatures?: boolean, forceMinimal?: boolean, withRaw?: boolean, observe: any = 'body', reportProgress: boolean = false, additionalHeaders: {[key: string]: string} = {} ): Observable<any> {
 
         if (from === null || from === undefined) {
             throw new Error('Required parameter from was null or undefined when calling findPathByEntityID.');
@@ -261,6 +266,11 @@ export class EntityGraphService {
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
             headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+        if(additionalHeaders) {
+            for(let _hKey in additionalHeaders) {
+                headers = headers.set(_hKey, additionalHeaders[_hKey]);
+            }
         }
 
         // to determine the Content-Type header

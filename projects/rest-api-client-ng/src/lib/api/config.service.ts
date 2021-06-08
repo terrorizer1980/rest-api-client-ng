@@ -98,10 +98,10 @@ See the various request body examples.
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public addDataSources(body?: Body | string, dataSource?: string | Array<string>, withRaw?: boolean, observe?: 'body', reportProgress?: boolean): Observable<SzDataSourcesResponse>;
-    public addDataSources(body?: Body | string, dataSource?: string | Array<string>, withRaw?: boolean, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<SzDataSourcesResponse>>;
-    public addDataSources(body?: Body | string, dataSource?: string | Array<string>, withRaw?: boolean, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<SzDataSourcesResponse>>;
-    public addDataSources(body?: Body | string, dataSource?: string | Array<string>, withRaw?: boolean, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public addDataSources(body?: Body | string, dataSource?: string | Array<string>, withRaw?: boolean, observe?: 'body', reportProgress?: boolean, additionalHeaders?: {[key: string]: string}): Observable<SzDataSourcesResponse>;
+    public addDataSources(body?: Body | string, dataSource?: string | Array<string>, withRaw?: boolean, observe?: 'response', reportProgress?: boolean, additionalHeaders?: {[key: string]: string}): Observable<HttpResponse<SzDataSourcesResponse>>;
+    public addDataSources(body?: Body | string, dataSource?: string | Array<string>, withRaw?: boolean, observe?: 'events', reportProgress?: boolean, additionalHeaders?: {[key: string]: string}): Observable<HttpEvent<SzDataSourcesResponse>>;
+    public addDataSources(body?: Body | string, dataSource?: string | Array<string>, withRaw?: boolean, observe: any = 'body', reportProgress: boolean = false, additionalHeaders: {[key: string]: string} = {} ): Observable<any> {
         let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
         if (dataSource && (dataSource as Array<string>).forEach) {
           (dataSource as Array<string>).forEach((element) => {
@@ -126,6 +126,11 @@ See the various request body examples.
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
             headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+        if(additionalHeaders) {
+            for(let _hKey in additionalHeaders) {
+                headers = headers.set(_hKey, additionalHeaders[_hKey]);
+            }
         }
 
         // to determine the Content-Type header
@@ -163,10 +168,10 @@ See the various request body examples.
      * @param reportProgress flag to report request and response progress.
      */
     /*
-    public addEntityClasses(body?: Array<SzEntityClassDescriptor>, entityClass?: string, resolving?: boolean, observe?: 'body', reportProgress?: boolean): Observable<SzEntityClassesResponse>;
-    public addEntityClasses(body?: Array<SzEntityClassDescriptor>, entityClass?: string, resolving?: boolean, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<SzEntityClassesResponse>>;
-    public addEntityClasses(body?: Array<SzEntityClassDescriptor>, entityClass?: string, resolving?: boolean, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<SzEntityClassesResponse>>;
-    public addEntityClasses(body?: Array<SzEntityClassDescriptor>, entityClass?: string, resolving?: boolean, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public addEntityClasses(body?: Array<SzEntityClassDescriptor>, entityClass?: string, resolving?: boolean, observe?: 'body', reportProgress?: boolean, additionalHeaders?: {[key: string]: string}): Observable<SzEntityClassesResponse>;
+    public addEntityClasses(body?: Array<SzEntityClassDescriptor>, entityClass?: string, resolving?: boolean, observe?: 'response', reportProgress?: boolean, additionalHeaders?: {[key: string]: string}): Observable<HttpResponse<SzEntityClassesResponse>>;
+    public addEntityClasses(body?: Array<SzEntityClassDescriptor>, entityClass?: string, resolving?: boolean, observe?: 'events', reportProgress?: boolean, additionalHeaders?: {[key: string]: string}): Observable<HttpEvent<SzEntityClassesResponse>>;
+    public addEntityClasses(body?: Array<SzEntityClassDescriptor>, entityClass?: string, resolving?: boolean, observe: any = 'body', reportProgress: boolean = false, additionalHeaders: {[key: string]: string} = {} ): Observable<any> {
 
 
 
@@ -201,6 +206,11 @@ See the various request body examples.
         if (httpContentTypeSelected != undefined) {
             headers = headers.set('Content-Type', httpContentTypeSelected);
         }
+        if(additionalHeaders) {
+            for(let _hKey in additionalHeaders) {
+                headers = headers.set(_hKey, additionalHeaders[_hKey]);
+            }
+        }
 
         return this.httpClient.post<SzEntityClassesResponse>(`${this.basePath}/entity-classes`,
             body,
@@ -224,10 +234,10 @@ See the various request body examples.
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public addEntityTypes(body?: Body2 | string, entityType?: string | Array<string>, entityClass?: string, observe?: 'body', reportProgress?: boolean): Observable<SzEntityTypesResponse>;
-    public addEntityTypes(body?: Body2 | string, entityType?: string | Array<string>, entityClass?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<SzEntityTypesResponse>>;
-    public addEntityTypes(body?: Body2 | string, entityType?: string | Array<string>, entityClass?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<SzEntityTypesResponse>>;
-    public addEntityTypes(body?: Body2 | string, entityType?: string | Array<string>, entityClass?: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public addEntityTypes(body?: Body2 | string, entityType?: string | Array<string>, entityClass?: string, observe?: 'body', reportProgress?: boolean, additionalHeaders?: {[key: string]: string}): Observable<SzEntityTypesResponse>;
+    public addEntityTypes(body?: Body2 | string, entityType?: string | Array<string>, entityClass?: string, observe?: 'response', reportProgress?: boolean, additionalHeaders?: {[key: string]: string}): Observable<HttpResponse<SzEntityTypesResponse>>;
+    public addEntityTypes(body?: Body2 | string, entityType?: string | Array<string>, entityClass?: string, observe?: 'events', reportProgress?: boolean, additionalHeaders?: {[key: string]: string}): Observable<HttpEvent<SzEntityTypesResponse>>;
+    public addEntityTypes(body?: Body2 | string, entityType?: string | Array<string>, entityClass?: string, observe: any = 'body', reportProgress: boolean = false, additionalHeaders: {[key: string]: string} = {} ): Observable<any> {
 
 
 
@@ -284,6 +294,11 @@ See the various request body examples.
         if (httpContentTypeSelected != undefined) {
             headers = headers.set('Content-Type', httpContentTypeSelected);
         }
+        if(additionalHeaders) {
+            for(let _hKey in additionalHeaders) {
+                headers = headers.set(_hKey, additionalHeaders[_hKey]);
+            }
+        }
 
         return this.httpClient.request<SzEntityTypesResponse>('post',`${this.basePath}/entity-types`,
             {
@@ -306,10 +321,10 @@ See the various request body examples.
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public addEntityTypesForClass(entityClassCode: string, body?: Array<SzEntityTypeDescriptor> | string, entityType?: Array<string>, observe?: 'body', reportProgress?: boolean): Observable<SzEntityTypesResponse>;
-    public addEntityTypesForClass(entityClassCode: string, body?: Array<SzEntityTypeDescriptor> | string, entityType?: Array<string>, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<SzEntityTypesResponse>>;
-    public addEntityTypesForClass(entityClassCode: string, body?: Array<SzEntityTypeDescriptor> | string, entityType?: Array<string>, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<SzEntityTypesResponse>>;
-    public addEntityTypesForClass(entityClassCode: string, body?: Array<SzEntityTypeDescriptor> | string, entityType?: Array<string>, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public addEntityTypesForClass(entityClassCode: string, body?: Array<SzEntityTypeDescriptor> | string, entityType?: Array<string>, observe?: 'body', reportProgress?: boolean, additionalHeaders?: {[key: string]: string}): Observable<SzEntityTypesResponse>;
+    public addEntityTypesForClass(entityClassCode: string, body?: Array<SzEntityTypeDescriptor> | string, entityType?: Array<string>, observe?: 'response', reportProgress?: boolean, additionalHeaders?: {[key: string]: string}): Observable<HttpResponse<SzEntityTypesResponse>>;
+    public addEntityTypesForClass(entityClassCode: string, body?: Array<SzEntityTypeDescriptor> | string, entityType?: Array<string>, observe?: 'events', reportProgress?: boolean, additionalHeaders?: {[key: string]: string}): Observable<HttpEvent<SzEntityTypesResponse>>;
+    public addEntityTypesForClass(entityClassCode: string, body?: Array<SzEntityTypeDescriptor> | string, entityType?: Array<string>, observe: any = 'body', reportProgress: boolean = false, additionalHeaders: {[key: string]: string} = {} ): Observable<any> {
 
         if (entityClassCode === null || entityClassCode === undefined) {
             throw new Error('Required parameter entityClassCode was null or undefined when calling addEntityTypesForClass.');
@@ -365,6 +380,11 @@ See the various request body examples.
         if (httpContentTypeSelected != undefined) {
             headers = headers.set('Content-Type', httpContentTypeSelected);
         }
+        if(additionalHeaders) {
+            for(let _hKey in additionalHeaders) {
+                headers = headers.set(_hKey, additionalHeaders[_hKey]);
+            }
+        }
 
         return this.httpClient.request<SzEntityTypesResponse>('post',`${this.basePath}/entity-classes/${encodeURIComponent(String(entityClassCode))}/entity-types`,
             {
@@ -384,10 +404,10 @@ See the various request body examples.
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getActiveConfig(observe?: 'body', reportProgress?: boolean): Observable<SzConfigResponse>;
-    public getActiveConfig(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<SzConfigResponse>>;
-    public getActiveConfig(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<SzConfigResponse>>;
-    public getActiveConfig(observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public getActiveConfig(observe?: 'body', reportProgress?: boolean, additionalHeaders?: {[key: string]: string}): Observable<SzConfigResponse>;
+    public getActiveConfig(observe?: 'response', reportProgress?: boolean, additionalHeaders?: {[key: string]: string}): Observable<HttpResponse<SzConfigResponse>>;
+    public getActiveConfig(observe?: 'events', reportProgress?: boolean, additionalHeaders?: {[key: string]: string}): Observable<HttpEvent<SzConfigResponse>>;
+    public getActiveConfig(observe: any = 'body', reportProgress: boolean = false, additionalHeaders: {[key: string]: string} = {} ): Observable<any> {
 
         let headers = this.defaultHeaders;
 
@@ -400,6 +420,11 @@ See the various request body examples.
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
             headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+        if(additionalHeaders) {
+            for(let _hKey in additionalHeaders) {
+                headers = headers.set(_hKey, additionalHeaders[_hKey]);
+            }
         }
 
         // to determine the Content-Type header
@@ -424,10 +449,10 @@ See the various request body examples.
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getAttributeType(attributeCode: string, withRaw?: boolean, observe?: 'body', reportProgress?: boolean): Observable<SzAttributeTypeResponse>;
-    public getAttributeType(attributeCode: string, withRaw?: boolean, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<SzAttributeTypeResponse>>;
-    public getAttributeType(attributeCode: string, withRaw?: boolean, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<SzAttributeTypeResponse>>;
-    public getAttributeType(attributeCode: string, withRaw?: boolean, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public getAttributeType(attributeCode: string, withRaw?: boolean, observe?: 'body', reportProgress?: boolean, additionalHeaders?: {[key: string]: string}): Observable<SzAttributeTypeResponse>;
+    public getAttributeType(attributeCode: string, withRaw?: boolean, observe?: 'response', reportProgress?: boolean, additionalHeaders?: {[key: string]: string}): Observable<HttpResponse<SzAttributeTypeResponse>>;
+    public getAttributeType(attributeCode: string, withRaw?: boolean, observe?: 'events', reportProgress?: boolean, additionalHeaders?: {[key: string]: string}): Observable<HttpEvent<SzAttributeTypeResponse>>;
+    public getAttributeType(attributeCode: string, withRaw?: boolean, observe: any = 'body', reportProgress: boolean = false, additionalHeaders: {[key: string]: string} = {} ): Observable<any> {
 
         if (attributeCode === null || attributeCode === undefined) {
             throw new Error('Required parameter attributeCode was null or undefined when calling getAttributeType.');
@@ -450,6 +475,11 @@ See the various request body examples.
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
             headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+        if(additionalHeaders) {
+            for(let _hKey in additionalHeaders) {
+                headers = headers.set(_hKey, additionalHeaders[_hKey]);
+            }
         }
 
         // to determine the Content-Type header
@@ -477,10 +507,10 @@ See the various request body examples.
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getAttributeTypes(withInternal?: boolean, attributeClass?: SzAttributeClass, featureType?: string, withRaw?: boolean, observe?: 'body', reportProgress?: boolean): Observable<SzAttributeTypesResponse>;
-    public getAttributeTypes(withInternal?: boolean, attributeClass?: SzAttributeClass, featureType?: string, withRaw?: boolean, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<SzAttributeTypesResponse>>;
-    public getAttributeTypes(withInternal?: boolean, attributeClass?: SzAttributeClass, featureType?: string, withRaw?: boolean, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<SzAttributeTypesResponse>>;
-    public getAttributeTypes(withInternal?: boolean, attributeClass?: SzAttributeClass, featureType?: string, withRaw?: boolean, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public getAttributeTypes(withInternal?: boolean, attributeClass?: SzAttributeClass, featureType?: string, withRaw?: boolean, observe?: 'body', reportProgress?: boolean, additionalHeaders?: {[key: string]: string}): Observable<SzAttributeTypesResponse>;
+    public getAttributeTypes(withInternal?: boolean, attributeClass?: SzAttributeClass, featureType?: string, withRaw?: boolean, observe?: 'response', reportProgress?: boolean, additionalHeaders?: {[key: string]: string}): Observable<HttpResponse<SzAttributeTypesResponse>>;
+    public getAttributeTypes(withInternal?: boolean, attributeClass?: SzAttributeClass, featureType?: string, withRaw?: boolean, observe?: 'events', reportProgress?: boolean, additionalHeaders?: {[key: string]: string}): Observable<HttpEvent<SzAttributeTypesResponse>>;
+    public getAttributeTypes(withInternal?: boolean, attributeClass?: SzAttributeClass, featureType?: string, withRaw?: boolean, observe: any = 'body', reportProgress: boolean = false, additionalHeaders: {[key: string]: string} = {} ): Observable<any> {
 
 
 
@@ -512,6 +542,11 @@ See the various request body examples.
         if (httpHeaderAcceptSelected != undefined) {
             headers = headers.set('Accept', httpHeaderAcceptSelected);
         }
+        if(additionalHeaders) {
+            for(let _hKey in additionalHeaders) {
+                headers = headers.set(_hKey, additionalHeaders[_hKey]);
+            }
+        }
 
         // to determine the Content-Type header
         const consumes: string[] = [
@@ -536,10 +571,10 @@ See the various request body examples.
      * @deprecated use getActiveConfig instead
      */
     /*
-    public getCurrentConfig(observe?: 'body', reportProgress?: boolean): Observable<SzConfigResponse>;
-    public getCurrentConfig(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<SzConfigResponse>>;
-    public getCurrentConfig(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<SzConfigResponse>>;
-    public getCurrentConfig(observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public getCurrentConfig(observe?: 'body', reportProgress?: boolean, additionalHeaders?: {[key: string]: string}): Observable<SzConfigResponse>;
+    public getCurrentConfig(observe?: 'response', reportProgress?: boolean, additionalHeaders?: {[key: string]: string}): Observable<HttpResponse<SzConfigResponse>>;
+    public getCurrentConfig(observe?: 'events', reportProgress?: boolean, additionalHeaders?: {[key: string]: string}): Observable<HttpEvent<SzConfigResponse>>;
+    public getCurrentConfig(observe: any = 'body', reportProgress: boolean = false, additionalHeaders: {[key: string]: string} = {} ): Observable<any> {
 
         let headers = this.defaultHeaders;
 
@@ -552,6 +587,11 @@ See the various request body examples.
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
             headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+        if(additionalHeaders) {
+            for(let _hKey in additionalHeaders) {
+                headers = headers.set(_hKey, additionalHeaders[_hKey]);
+            }
         }
 
         // to determine the Content-Type header
@@ -576,10 +616,10 @@ See the various request body examples.
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getDataSource(dataSourceCode: string, withRaw?: boolean, observe?: 'body', reportProgress?: boolean): Observable<SzDataSourceResponse>;
-    public getDataSource(dataSourceCode: string, withRaw?: boolean, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<SzDataSourceResponse>>;
-    public getDataSource(dataSourceCode: string, withRaw?: boolean, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<SzDataSourceResponse>>;
-    public getDataSource(dataSourceCode: string, withRaw?: boolean, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public getDataSource(dataSourceCode: string, withRaw?: boolean, observe?: 'body', reportProgress?: boolean, additionalHeaders?: {[key: string]: string}): Observable<SzDataSourceResponse>;
+    public getDataSource(dataSourceCode: string, withRaw?: boolean, observe?: 'response', reportProgress?: boolean, additionalHeaders?: {[key: string]: string}): Observable<HttpResponse<SzDataSourceResponse>>;
+    public getDataSource(dataSourceCode: string, withRaw?: boolean, observe?: 'events', reportProgress?: boolean, additionalHeaders?: {[key: string]: string}): Observable<HttpEvent<SzDataSourceResponse>>;
+    public getDataSource(dataSourceCode: string, withRaw?: boolean, observe: any = 'body', reportProgress: boolean = false, additionalHeaders: {[key: string]: string} = {} ): Observable<any> {
 
         if (dataSourceCode === null || dataSourceCode === undefined) {
             throw new Error('Required parameter dataSourceCode was null or undefined when calling getDataSource.');
@@ -602,6 +642,11 @@ See the various request body examples.
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
             headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+        if(additionalHeaders) {
+            for(let _hKey in additionalHeaders) {
+                headers = headers.set(_hKey, additionalHeaders[_hKey]);
+            }
         }
 
         // to determine the Content-Type header
@@ -626,10 +671,10 @@ See the various request body examples.
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getDataSources(withRaw?: boolean, observe?: 'body', reportProgress?: boolean): Observable<SzDataSourcesResponse>;
-    public getDataSources(withRaw?: boolean, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<SzDataSourcesResponse>>;
-    public getDataSources(withRaw?: boolean, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<SzDataSourcesResponse>>;
-    public getDataSources(withRaw?: boolean, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public getDataSources(withRaw?: boolean, observe?: 'body', reportProgress?: boolean, additionalHeaders?: {[key: string]: string}): Observable<SzDataSourcesResponse>;
+    public getDataSources(withRaw?: boolean, observe?: 'response', reportProgress?: boolean, additionalHeaders?: {[key: string]: string}): Observable<HttpResponse<SzDataSourcesResponse>>;
+    public getDataSources(withRaw?: boolean, observe?: 'events', reportProgress?: boolean, additionalHeaders?: {[key: string]: string}): Observable<HttpEvent<SzDataSourcesResponse>>;
+    public getDataSources(withRaw?: boolean, observe: any = 'body', reportProgress: boolean = false, additionalHeaders: {[key: string]: string} = {} ): Observable<any> {
 
 
         let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
@@ -648,6 +693,11 @@ See the various request body examples.
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
             headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+        if(additionalHeaders) {
+            for(let _hKey in additionalHeaders) {
+                headers = headers.set(_hKey, additionalHeaders[_hKey]);
+            }
         }
 
         // to determine the Content-Type header
@@ -673,10 +723,10 @@ See the various request body examples.
      * @deprecated not available as of 2.0.0. use getTemplateConfig() method instead.
      */
     /*
-    public getDefaultConfig(observe?: 'body', reportProgress?: boolean): Observable<SzConfigResponse>;
-    public getDefaultConfig(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<SzConfigResponse>>;
-    public getDefaultConfig(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<SzConfigResponse>>;
-    public getDefaultConfig(observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public getDefaultConfig(observe?: 'body', reportProgress?: boolean, additionalHeaders?: {[key: string]: string}): Observable<SzConfigResponse>;
+    public getDefaultConfig(observe?: 'response', reportProgress?: boolean, additionalHeaders?: {[key: string]: string}): Observable<HttpResponse<SzConfigResponse>>;
+    public getDefaultConfig(observe?: 'events', reportProgress?: boolean, additionalHeaders?: {[key: string]: string}): Observable<HttpEvent<SzConfigResponse>>;
+    public getDefaultConfig(observe: any = 'body', reportProgress: boolean = false, additionalHeaders: {[key: string]: string} = {} ): Observable<any> {
 
         let headers = this.defaultHeaders;
 
@@ -689,6 +739,11 @@ See the various request body examples.
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
             headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+        if(additionalHeaders) {
+            for(let _hKey in additionalHeaders) {
+                headers = headers.set(_hKey, additionalHeaders[_hKey]);
+            }
         }
 
         // to determine the Content-Type header
@@ -714,10 +769,10 @@ See the various request body examples.
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getEntityClass(entityClassCode: string, withRaw?: boolean, observe?: 'body', reportProgress?: boolean): Observable<SzEntityClassResponse>;
-    public getEntityClass(entityClassCode: string, withRaw?: boolean, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<SzEntityClassResponse>>;
-    public getEntityClass(entityClassCode: string, withRaw?: boolean, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<SzEntityClassResponse>>;
-    public getEntityClass(entityClassCode: string, withRaw?: boolean, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public getEntityClass(entityClassCode: string, withRaw?: boolean, observe?: 'body', reportProgress?: boolean, additionalHeaders?: {[key: string]: string}): Observable<SzEntityClassResponse>;
+    public getEntityClass(entityClassCode: string, withRaw?: boolean, observe?: 'response', reportProgress?: boolean, additionalHeaders?: {[key: string]: string}): Observable<HttpResponse<SzEntityClassResponse>>;
+    public getEntityClass(entityClassCode: string, withRaw?: boolean, observe?: 'events', reportProgress?: boolean, additionalHeaders?: {[key: string]: string}): Observable<HttpEvent<SzEntityClassResponse>>;
+    public getEntityClass(entityClassCode: string, withRaw?: boolean, observe: any = 'body', reportProgress: boolean = false, additionalHeaders: {[key: string]: string} = {} ): Observable<any> {
 
         if (entityClassCode === null || entityClassCode === undefined) {
             throw new Error('Required parameter entityClassCode was null or undefined when calling getEntityClass.');
@@ -740,6 +795,11 @@ See the various request body examples.
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
             headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+        if(additionalHeaders) {
+            for(let _hKey in additionalHeaders) {
+                headers = headers.set(_hKey, additionalHeaders[_hKey]);
+            }
         }
 
         // to determine the Content-Type header
@@ -764,10 +824,10 @@ See the various request body examples.
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getEntityClasses(withRaw?: boolean, observe?: 'body', reportProgress?: boolean): Observable<SzEntityClassesResponse>;
-    public getEntityClasses(withRaw?: boolean, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<SzEntityClassesResponse>>;
-    public getEntityClasses(withRaw?: boolean, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<SzEntityClassesResponse>>;
-    public getEntityClasses(withRaw?: boolean, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public getEntityClasses(withRaw?: boolean, observe?: 'body', reportProgress?: boolean, additionalHeaders?: {[key: string]: string}): Observable<SzEntityClassesResponse>;
+    public getEntityClasses(withRaw?: boolean, observe?: 'response', reportProgress?: boolean, additionalHeaders?: {[key: string]: string}): Observable<HttpResponse<SzEntityClassesResponse>>;
+    public getEntityClasses(withRaw?: boolean, observe?: 'events', reportProgress?: boolean, additionalHeaders?: {[key: string]: string}): Observable<HttpEvent<SzEntityClassesResponse>>;
+    public getEntityClasses(withRaw?: boolean, observe: any = 'body', reportProgress: boolean = false, additionalHeaders: {[key: string]: string} = {} ): Observable<any> {
 
 
         let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
@@ -786,6 +846,11 @@ See the various request body examples.
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
             headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+        if(additionalHeaders) {
+            for(let _hKey in additionalHeaders) {
+                headers = headers.set(_hKey, additionalHeaders[_hKey]);
+            }
         }
 
         // to determine the Content-Type header
@@ -811,10 +876,10 @@ See the various request body examples.
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getEntityType(entityTypeCode: string, withRaw?: boolean, observe?: 'body', reportProgress?: boolean): Observable<SzEntityTypeResponse>;
-    public getEntityType(entityTypeCode: string, withRaw?: boolean, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<SzEntityTypeResponse>>;
-    public getEntityType(entityTypeCode: string, withRaw?: boolean, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<SzEntityTypeResponse>>;
-    public getEntityType(entityTypeCode: string, withRaw?: boolean, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public getEntityType(entityTypeCode: string, withRaw?: boolean, observe?: 'body', reportProgress?: boolean, additionalHeaders?: {[key: string]: string}): Observable<SzEntityTypeResponse>;
+    public getEntityType(entityTypeCode: string, withRaw?: boolean, observe?: 'response', reportProgress?: boolean, additionalHeaders?: {[key: string]: string}): Observable<HttpResponse<SzEntityTypeResponse>>;
+    public getEntityType(entityTypeCode: string, withRaw?: boolean, observe?: 'events', reportProgress?: boolean, additionalHeaders?: {[key: string]: string}): Observable<HttpEvent<SzEntityTypeResponse>>;
+    public getEntityType(entityTypeCode: string, withRaw?: boolean, observe: any = 'body', reportProgress: boolean = false, additionalHeaders: {[key: string]: string} = {} ): Observable<any> {
 
         if (entityTypeCode === null || entityTypeCode === undefined) {
             throw new Error('Required parameter entityTypeCode was null or undefined when calling getEntityType.');
@@ -837,6 +902,11 @@ See the various request body examples.
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
             headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+        if(additionalHeaders) {
+            for(let _hKey in additionalHeaders) {
+                headers = headers.set(_hKey, additionalHeaders[_hKey]);
+            }
         }
 
         // to determine the Content-Type header
@@ -863,10 +933,10 @@ See the various request body examples.
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getEntityTypeByClass(entityClassCode: string, entityTypeCode: string, withRaw?: boolean, observe?: 'body', reportProgress?: boolean): Observable<SzEntityTypeResponse>;
-    public getEntityTypeByClass(entityClassCode: string, entityTypeCode: string, withRaw?: boolean, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<SzEntityTypeResponse>>;
-    public getEntityTypeByClass(entityClassCode: string, entityTypeCode: string, withRaw?: boolean, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<SzEntityTypeResponse>>;
-    public getEntityTypeByClass(entityClassCode: string, entityTypeCode: string, withRaw?: boolean, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public getEntityTypeByClass(entityClassCode: string, entityTypeCode: string, withRaw?: boolean, observe?: 'body', reportProgress?: boolean, additionalHeaders?: {[key: string]: string}): Observable<SzEntityTypeResponse>;
+    public getEntityTypeByClass(entityClassCode: string, entityTypeCode: string, withRaw?: boolean, observe?: 'response', reportProgress?: boolean, additionalHeaders?: {[key: string]: string}): Observable<HttpResponse<SzEntityTypeResponse>>;
+    public getEntityTypeByClass(entityClassCode: string, entityTypeCode: string, withRaw?: boolean, observe?: 'events', reportProgress?: boolean, additionalHeaders?: {[key: string]: string}): Observable<HttpEvent<SzEntityTypeResponse>>;
+    public getEntityTypeByClass(entityClassCode: string, entityTypeCode: string, withRaw?: boolean, observe: any = 'body', reportProgress: boolean = false, additionalHeaders: {[key: string]: string} = {} ): Observable<any> {
 
         if (entityClassCode === null || entityClassCode === undefined) {
             throw new Error('Required parameter entityClassCode was null or undefined when calling getEntityTypeByClass.');
@@ -894,6 +964,11 @@ See the various request body examples.
         if (httpHeaderAcceptSelected != undefined) {
             headers = headers.set('Accept', httpHeaderAcceptSelected);
         }
+        if(additionalHeaders) {
+            for(let _hKey in additionalHeaders) {
+                headers = headers.set(_hKey, additionalHeaders[_hKey]);
+            }
+        }
 
         // to determine the Content-Type header
         const consumes: string[] = [
@@ -918,10 +993,10 @@ See the various request body examples.
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getEntityTypes(entityClass?: string, withRaw?: boolean, observe?: 'body', reportProgress?: boolean): Observable<SzEntityTypesResponse>;
-    public getEntityTypes(entityClass?: string, withRaw?: boolean, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<SzEntityTypesResponse>>;
-    public getEntityTypes(entityClass?: string, withRaw?: boolean, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<SzEntityTypesResponse>>;
-    public getEntityTypes(entityClass?: string, withRaw?: boolean, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public getEntityTypes(entityClass?: string, withRaw?: boolean, observe?: 'body', reportProgress?: boolean, additionalHeaders?: {[key: string]: string}): Observable<SzEntityTypesResponse>;
+    public getEntityTypes(entityClass?: string, withRaw?: boolean, observe?: 'response', reportProgress?: boolean, additionalHeaders?: {[key: string]: string}): Observable<HttpResponse<SzEntityTypesResponse>>;
+    public getEntityTypes(entityClass?: string, withRaw?: boolean, observe?: 'events', reportProgress?: boolean, additionalHeaders?: {[key: string]: string}): Observable<HttpEvent<SzEntityTypesResponse>>;
+    public getEntityTypes(entityClass?: string, withRaw?: boolean, observe: any = 'body', reportProgress: boolean = false, additionalHeaders: {[key: string]: string} = {} ): Observable<any> {
 
 
 
@@ -944,6 +1019,11 @@ See the various request body examples.
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
             headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+        if(additionalHeaders) {
+            for(let _hKey in additionalHeaders) {
+                headers = headers.set(_hKey, additionalHeaders[_hKey]);
+            }
         }
 
         // to determine the Content-Type header
@@ -969,10 +1049,10 @@ See the various request body examples.
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getEntityTypesByClass(entityClassCode: string, withRaw?: boolean, observe?: 'body', reportProgress?: boolean): Observable<SzEntityTypesResponse>;
-    public getEntityTypesByClass(entityClassCode: string, withRaw?: boolean, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<SzEntityTypesResponse>>;
-    public getEntityTypesByClass(entityClassCode: string, withRaw?: boolean, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<SzEntityTypesResponse>>;
-    public getEntityTypesByClass(entityClassCode: string, withRaw?: boolean, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public getEntityTypesByClass(entityClassCode: string, withRaw?: boolean, observe?: 'body', reportProgress?: boolean, additionalHeaders?: {[key: string]: string}): Observable<SzEntityTypesResponse>;
+    public getEntityTypesByClass(entityClassCode: string, withRaw?: boolean, observe?: 'response', reportProgress?: boolean, additionalHeaders?: {[key: string]: string}): Observable<HttpResponse<SzEntityTypesResponse>>;
+    public getEntityTypesByClass(entityClassCode: string, withRaw?: boolean, observe?: 'events', reportProgress?: boolean, additionalHeaders?: {[key: string]: string}): Observable<HttpEvent<SzEntityTypesResponse>>;
+    public getEntityTypesByClass(entityClassCode: string, withRaw?: boolean, observe: any = 'body', reportProgress: boolean = false, additionalHeaders: {[key: string]: string} = {} ): Observable<any> {
 
         if (entityClassCode === null || entityClassCode === undefined) {
             throw new Error('Required parameter entityClassCode was null or undefined when calling getEntityTypesByClass.');
@@ -996,6 +1076,11 @@ See the various request body examples.
         if (httpHeaderAcceptSelected != undefined) {
             headers = headers.set('Accept', httpHeaderAcceptSelected);
         }
+        if(additionalHeaders) {
+            for(let _hKey in additionalHeaders) {
+                headers = headers.set(_hKey, additionalHeaders[_hKey]);
+            }
+        }
 
         // to determine the Content-Type header
         const consumes: string[] = [
@@ -1018,10 +1103,10 @@ See the various request body examples.
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getTemplateConfig(observe?: 'body', reportProgress?: boolean): Observable<SzConfigResponse>;
-    public getTemplateConfig(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<SzConfigResponse>>;
-    public getTemplateConfig(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<SzConfigResponse>>;
-    public getTemplateConfig(observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public getTemplateConfig(observe?: 'body', reportProgress?: boolean, additionalHeaders?: {[key: string]: string}): Observable<SzConfigResponse>;
+    public getTemplateConfig(observe?: 'response', reportProgress?: boolean, additionalHeaders?: {[key: string]: string}): Observable<HttpResponse<SzConfigResponse>>;
+    public getTemplateConfig(observe?: 'events', reportProgress?: boolean, additionalHeaders?: {[key: string]: string}): Observable<HttpEvent<SzConfigResponse>>;
+    public getTemplateConfig(observe: any = 'body', reportProgress: boolean = false, additionalHeaders: {[key: string]: string} = {} ): Observable<any> {
 
         let headers = this.defaultHeaders;
 
@@ -1034,6 +1119,11 @@ See the various request body examples.
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
             headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+        if(additionalHeaders) {
+            for(let _hKey in additionalHeaders) {
+                headers = headers.set(_hKey, additionalHeaders[_hKey]);
+            }
         }
 
         // to determine the Content-Type header
@@ -1058,10 +1148,10 @@ See the various request body examples.
      * @param reportProgress flag to report request and response progress.
      */
     /*
-    public listDataSources(withRaw?: boolean, observe?: 'body', reportProgress?: boolean): Observable<SzDataSourcesResponse>;
-    public listDataSources(withRaw?: boolean, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<SzDataSourcesResponse>>;
-    public listDataSources(withRaw?: boolean, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<SzDataSourcesResponse>>;
-    public listDataSources(withRaw?: boolean, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public listDataSources(withRaw?: boolean, observe?: 'body', reportProgress?: boolean, additionalHeaders?: {[key: string]: string}): Observable<SzDataSourcesResponse>;
+    public listDataSources(withRaw?: boolean, observe?: 'response', reportProgress?: boolean, additionalHeaders?: {[key: string]: string}): Observable<HttpResponse<SzDataSourcesResponse>>;
+    public listDataSources(withRaw?: boolean, observe?: 'events', reportProgress?: boolean, additionalHeaders?: {[key: string]: string}): Observable<HttpEvent<SzDataSourcesResponse>>;
+    public listDataSources(withRaw?: boolean, observe: any = 'body', reportProgress: boolean = false, additionalHeaders: {[key: string]: string} = {} ): Observable<any> {
 
 
         let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
@@ -1080,6 +1170,11 @@ See the various request body examples.
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
             headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+        if(additionalHeaders) {
+            for(let _hKey in additionalHeaders) {
+                headers = headers.set(_hKey, additionalHeaders[_hKey]);
+            }
         }
 
         // to determine the Content-Type header
@@ -1105,10 +1200,10 @@ See the various request body examples.
      * @param reportProgress flag to report request and response progress.
      */
     /*
-    public listEntityClasses(withRaw?: boolean, observe?: 'body', reportProgress?: boolean): Observable<SzEntityClassesResponse>;
-    public listEntityClasses(withRaw?: boolean, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<SzEntityClassesResponse>>;
-    public listEntityClasses(withRaw?: boolean, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<SzEntityClassesResponse>>;
-    public listEntityClasses(withRaw?: boolean, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public listEntityClasses(withRaw?: boolean, observe?: 'body', reportProgress?: boolean, additionalHeaders?: {[key: string]: string}): Observable<SzEntityClassesResponse>;
+    public listEntityClasses(withRaw?: boolean, observe?: 'response', reportProgress?: boolean, additionalHeaders?: {[key: string]: string}): Observable<HttpResponse<SzEntityClassesResponse>>;
+    public listEntityClasses(withRaw?: boolean, observe?: 'events', reportProgress?: boolean, additionalHeaders?: {[key: string]: string}): Observable<HttpEvent<SzEntityClassesResponse>>;
+    public listEntityClasses(withRaw?: boolean, observe: any = 'body', reportProgress: boolean = false, additionalHeaders: {[key: string]: string} = {} ): Observable<any> {
 
 
         let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
@@ -1127,6 +1222,11 @@ See the various request body examples.
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
             headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+        if(additionalHeaders) {
+            for(let _hKey in additionalHeaders) {
+                headers = headers.set(_hKey, additionalHeaders[_hKey]);
+            }
         }
 
         // to determine the Content-Type header
@@ -1153,10 +1253,10 @@ See the various request body examples.
      * @param reportProgress flag to report request and response progress.
      */
     /*
-    public listEntityTypes(entityClass?: SzAttributeClass, withRaw?: boolean, observe?: 'body', reportProgress?: boolean): Observable<SzEntityTypesResponse>;
-    public listEntityTypes(entityClass?: SzAttributeClass, withRaw?: boolean, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<SzEntityTypesResponse>>;
-    public listEntityTypes(entityClass?: SzAttributeClass, withRaw?: boolean, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<SzEntityTypesResponse>>;
-    public listEntityTypes(entityClass?: SzAttributeClass, withRaw?: boolean, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public listEntityTypes(entityClass?: SzAttributeClass, withRaw?: boolean, observe?: 'body', reportProgress?: boolean, additionalHeaders?: {[key: string]: string}): Observable<SzEntityTypesResponse>;
+    public listEntityTypes(entityClass?: SzAttributeClass, withRaw?: boolean, observe?: 'response', reportProgress?: boolean, additionalHeaders?: {[key: string]: string}): Observable<HttpResponse<SzEntityTypesResponse>>;
+    public listEntityTypes(entityClass?: SzAttributeClass, withRaw?: boolean, observe?: 'events', reportProgress?: boolean, additionalHeaders?: {[key: string]: string}): Observable<HttpEvent<SzEntityTypesResponse>>;
+    public listEntityTypes(entityClass?: SzAttributeClass, withRaw?: boolean, observe: any = 'body', reportProgress: boolean = false, additionalHeaders: {[key: string]: string} = {} ): Observable<any> {
 
 
 
@@ -1179,6 +1279,11 @@ See the various request body examples.
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
             headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+        if(additionalHeaders) {
+            for(let _hKey in additionalHeaders) {
+                headers = headers.set(_hKey, additionalHeaders[_hKey]);
+            }
         }
 
         // to determine the Content-Type header
@@ -1205,10 +1310,10 @@ See the various request body examples.
      * @param reportProgress flag to report request and response progress.
      */
     /*
-    public listEntityTypesByClass(entityClassCode: string, withRaw?: boolean, observe?: 'body', reportProgress?: boolean): Observable<SzEntityTypesResponse>;
-    public listEntityTypesByClass(entityClassCode: string, withRaw?: boolean, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<SzEntityTypesResponse>>;
-    public listEntityTypesByClass(entityClassCode: string, withRaw?: boolean, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<SzEntityTypesResponse>>;
-    public listEntityTypesByClass(entityClassCode: string, withRaw?: boolean, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public listEntityTypesByClass(entityClassCode: string, withRaw?: boolean, observe?: 'body', reportProgress?: boolean, additionalHeaders?: {[key: string]: string}): Observable<SzEntityTypesResponse>;
+    public listEntityTypesByClass(entityClassCode: string, withRaw?: boolean, observe?: 'response', reportProgress?: boolean, additionalHeaders?: {[key: string]: string}): Observable<HttpResponse<SzEntityTypesResponse>>;
+    public listEntityTypesByClass(entityClassCode: string, withRaw?: boolean, observe?: 'events', reportProgress?: boolean, additionalHeaders?: {[key: string]: string}): Observable<HttpEvent<SzEntityTypesResponse>>;
+    public listEntityTypesByClass(entityClassCode: string, withRaw?: boolean, observe: any = 'body', reportProgress: boolean = false, additionalHeaders: {[key: string]: string} = {} ): Observable<any> {
 
         if (entityClassCode === null || entityClassCode === undefined) {
             throw new Error('Required parameter entityClassCode was null or undefined when calling listEntityTypesByClass.');
@@ -1231,6 +1336,11 @@ See the various request body examples.
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
             headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+        if(additionalHeaders) {
+            for(let _hKey in additionalHeaders) {
+                headers = headers.set(_hKey, additionalHeaders[_hKey]);
+            }
         }
 
         // to determine the Content-Type header
