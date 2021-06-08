@@ -30,8 +30,9 @@ import { Configuration }                                     from '../configurat
 
 @Injectable()
 export class EntityGraphService {
-
-    protected _basePath = '/';
+    protected _basePath     = '/';
+    public configuration    = new Configuration();
+    private _defaultHeaders = new HttpHeaders();
     /**
      * get the basePath from the configuration instance
      * or alternatively fallback to local reference
@@ -45,10 +46,27 @@ export class EntityGraphService {
     public set basePath(value: string) {
         this._basePath = value;
     }
-
-    public defaultHeaders = new HttpHeaders();
-    public configuration = new Configuration();
-
+    /**
+     * get additional headers so we can add them to the default request headers
+     */
+    private get additionalHeaders(): {[key: string]: string} | undefined {
+        return this.configuration && this.configuration.additionalHeaders ? this.configuration.additionalHeaders : undefined;
+    }
+    /** 
+     * the default headers for http requests
+     * including any additional headers added to configuration
+    */
+    public get defaultHeaders() {
+        let retVal = this._defaultHeaders;
+        let _additionalHeaders = this.additionalHeaders;
+        // if additional headers specified merge with defaults
+        if(_additionalHeaders) {
+            for(let _hKey in _additionalHeaders) {
+                retVal = retVal.set(_hKey, _additionalHeaders[_hKey]);
+            }
+        }
+        return retVal;
+    }
     constructor(protected httpClient: HttpClient, @Optional()@Inject(BASE_PATH) basePath: string, @Optional() configuration: Configuration) {
         if (basePath) {
             this.basePath = basePath;

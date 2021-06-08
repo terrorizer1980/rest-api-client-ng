@@ -5,6 +5,7 @@ export interface ConfigurationParameters {
     accessToken?: string | (() => string);
     basePath?: string;
     withCredentials?: boolean;
+    additionalHeaders?: {[key: string]: string};
 }
 
 export class Configuration {
@@ -14,6 +15,11 @@ export class Configuration {
     accessToken?: string | (() => string);
     basePath?: string;
     withCredentials?: boolean;
+    /** 
+     * additional headers to pass to api requests 
+     * @internal
+    */
+    private _additionalHeaders: {key: string, value: string}[] | undefined;
 
     constructor(configurationParameters: ConfigurationParameters = {}) {
         this.apiKeys = configurationParameters.apiKeys;
@@ -22,6 +28,10 @@ export class Configuration {
         this.accessToken = configurationParameters.accessToken;
         this.basePath = configurationParameters.basePath;
         this.withCredentials = configurationParameters.withCredentials;
+        // safety check because extra setter logic to unset value present
+        if(configurationParameters.additionalHeaders) { 
+            this.additionalHeaders = configurationParameters.additionalHeaders;
+        }
     }
 
     /**
@@ -144,5 +154,79 @@ export class Configuration {
     public isJsonMime(mime: string): boolean {
         const jsonMime: RegExp = new RegExp('^(application\/json|[^;/ \t]+\/[^;/ \t]+[+]json)[ \t]*(;.*)?$', 'i');
         return mime != null && (jsonMime.test(mime) || mime.toLowerCase() === 'application/json-patch+json');
+    }
+    /** 
+     * additional http/https request headers that will be added by default to 
+     * all outbound api server requests.
+     */
+    public get additionalHeaders(): {[key: string]: string} | undefined {
+        let retVal = undefined;
+        if(this._additionalHeaders) {
+            retVal = {};
+            this._additionalHeaders.forEach((httpHeader) => {
+                retVal[ httpHeader.key ] = httpHeader.value;
+            });
+        }
+        return retVal;
+    }
+    /** 
+     * set additional http/https request headers to be added by default to 
+     * all outbound api server requests. most commonly used for adding custom 
+     * or required non-standard headers like jwt session tokens, auth id etc.
+     */
+    public set additionalHeaders(value: {[key: string]: string}) {
+        if(value && value !== undefined && value !== null) {
+            this._additionalHeaders = []; // set to empty
+            let _keys = Object.keys( value );
+            this._additionalHeaders = _keys.map((_keyName) => {
+                let _value = value[ _keyName ];
+                return {'key': _keyName, 'value': _value}
+            });
+        } else if(value === undefined && value === null) {
+            this._additionalHeaders = undefined;
+        }
+    }
+    /** add an additional header to all outgoing API requests */
+    public addAdditionalRequestHeader(header: {[key: string]: string}) {
+        if(header){
+            let keys = Object.keys(header);
+            if(keys && keys.length > 0) {
+                let alreadyExistsAtIndex = -1;
+                if(!this._additionalHeaders){
+                    this._additionalHeaders = [];
+                } else {
+                    alreadyExistsAtIndex = this._additionalHeaders.findIndex((eheader: {[key: string]: string}) => {
+                        return eheader.key === keys[0];
+                    })
+                }
+                if( this._additionalHeaders && !this._additionalHeaders[alreadyExistsAtIndex]) {
+                    this._additionalHeaders.push({key: keys[0], value: (header[ keys[0] ]) });
+                }
+            }
+        }
+    }
+    /** remove an additional header from all outgoing API requests */
+    public removeAdditionalRequestHeader(header: {[key: string]: string} | string) {
+        if(header){
+            let keyToRemove = (header as string);
+            if( (header as string).indexOf ){
+                // parameter is string
+            } else {
+                // must be object
+                let keys = Object.keys(header as {[key: string]: string});
+                if(keys && keys.length > 0){
+                    keyToRemove = keys[0];
+                }
+            }
+            if(keyToRemove && this._additionalHeaders && this._additionalHeaders.length > 0) {
+                let alreadyExistsAtIndex = this._additionalHeaders.findIndex((eheader: {[key: string]: string}) => {
+                    return eheader.key === keyToRemove;
+                })
+                if(alreadyExistsAtIndex && this._additionalHeaders[ alreadyExistsAtIndex ]) {
+                    //this._additionalHeaders.push({key: keys[0], value: (header[ keys[0] ]) });
+                    this._additionalHeaders = this._additionalHeaders.splice(alreadyExistsAtIndex, 1);
+                }
+            }
+        }
     }
 }
