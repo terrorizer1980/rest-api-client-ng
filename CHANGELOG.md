@@ -6,10 +6,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 [markdownlint](https://dlaa.me/markdownlint/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [2.2.2] - 2021-06-08
+## [2.2.2] - 2021-06-09
 
-- Dependency security updates and bugfixes.
+- Dependency security updates and bugfixes. #67
 - Added new `additionalHeaders` parameter to _*ALL*_ service methods. see issue #63
+- New methods and property added to [Cofiguration class](http://hub.senzing.com/rest-api-client-ng/classes/Configuration.html) :
+    - [additionalHeaders](http://hub.senzing.com/rest-api-client-ng/classes/Configuration.html#additionalHeaders)
+    - [addAdditionalRequestHeader](http://hub.senzing.com/rest-api-client-ng/classes/Configuration.html#addAdditionalRequestHeader)
+    - [removeAdditionalRequestHeader](http://hub.senzing.com/rest-api-client-ng/classes/Configuration.html#removeAdditionalRequestHeader)
+
+relevant tickets: #63, #67
 
 ## [2.2.1] - 2021-04-08
 

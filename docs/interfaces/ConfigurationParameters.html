@@ -84,6 +84,10 @@
                                 </li>
                                 <li>
                                             <span class="modifier">Optional</span>
+                                        <a href="#additionalHeaders">additionalHeaders</a>
+                                </li>
+                                <li>
+                                            <span class="modifier">Optional</span>
                                         <a href="#apiKeys">apiKeys</a>
                                 </li>
                                 <li>
@@ -132,6 +136,40 @@
                                     <tr>
                                         <td class="col-md-4">
                                             <i>Type : </i>    <code>string | </code>
+
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Optional</i>
+                                        </td>
+                                    </tr>
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="additionalHeaders"></a>
+                                        <span class="name"><b>additionalHeaders</b><a href="#additionalHeaders"><span class="icon ion-ios-link"></span></a></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>additionalHeaders:     <code>literal type</code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>    <code>literal type</code>
 
                                         </td>
                                     </tr>
@@ -329,6 +367,7 @@
     accessToken?: string | (() &#x3D;&gt; string);
     basePath?: string;
     withCredentials?: boolean;
+    additionalHeaders?: {[key: string]: string};
 }
 
 export class Configuration {
@@ -338,6 +377,11 @@ export class Configuration {
     accessToken?: string | (() &#x3D;&gt; string);
     basePath?: string;
     withCredentials?: boolean;
+    /** 
+     * additional headers to pass to api requests 
+     * @internal
+    */
+    private _additionalHeaders: {key: string, value: string}[] | undefined;
 
     constructor(configurationParameters: ConfigurationParameters &#x3D; {}) {
         this.apiKeys &#x3D; configurationParameters.apiKeys;
@@ -346,6 +390,10 @@ export class Configuration {
         this.accessToken &#x3D; configurationParameters.accessToken;
         this.basePath &#x3D; configurationParameters.basePath;
         this.withCredentials &#x3D; configurationParameters.withCredentials;
+        // safety check because extra setter logic to unset value present
+        if(configurationParameters.additionalHeaders) { 
+            this.additionalHeaders &#x3D; configurationParameters.additionalHeaders;
+        }
     }
 
     /**
@@ -468,6 +516,80 @@ export class Configuration {
     public isJsonMime(mime: string): boolean {
         const jsonMime: RegExp &#x3D; new RegExp(&#x27;^(application\/json|[^;/ \t]+\/[^;/ \t]+[+]json)[ \t]*(;.*)?$&#x27;, &#x27;i&#x27;);
         return mime !&#x3D; null &amp;&amp; (jsonMime.test(mime) || mime.toLowerCase() &#x3D;&#x3D;&#x3D; &#x27;application/json-patch+json&#x27;);
+    }
+    /** 
+     * additional http/https request headers that will be added by default to 
+     * all outbound api server requests.
+     */
+    public get additionalHeaders(): {[key: string]: string} | undefined {
+        let retVal &#x3D; undefined;
+        if(this._additionalHeaders) {
+            retVal &#x3D; {};
+            this._additionalHeaders.forEach((httpHeader) &#x3D;&gt; {
+                retVal[ httpHeader.key ] &#x3D; httpHeader.value;
+            });
+        }
+        return retVal;
+    }
+    /** 
+     * set additional http/https request headers to be added by default to 
+     * all outbound api server requests. most commonly used for adding custom 
+     * or required non-standard headers like jwt session tokens, auth id etc.
+     */
+    public set additionalHeaders(value: {[key: string]: string}) {
+        if(value &amp;&amp; value !&#x3D;&#x3D; undefined &amp;&amp; value !&#x3D;&#x3D; null) {
+            this._additionalHeaders &#x3D; []; // set to empty
+            let _keys &#x3D; Object.keys( value );
+            this._additionalHeaders &#x3D; _keys.map((_keyName) &#x3D;&gt; {
+                let _value &#x3D; value[ _keyName ];
+                return {&#x27;key&#x27;: _keyName, &#x27;value&#x27;: _value}
+            });
+        } else if(value &#x3D;&#x3D;&#x3D; undefined &amp;&amp; value &#x3D;&#x3D;&#x3D; null) {
+            this._additionalHeaders &#x3D; undefined;
+        }
+    }
+    /** add an additional header to all outgoing API requests */
+    public addAdditionalRequestHeader(header: {[key: string]: string}) {
+        if(header){
+            let keys &#x3D; Object.keys(header);
+            if(keys &amp;&amp; keys.length &gt; 0) {
+                let alreadyExistsAtIndex &#x3D; -1;
+                if(!this._additionalHeaders){
+                    this._additionalHeaders &#x3D; [];
+                } else {
+                    alreadyExistsAtIndex &#x3D; this._additionalHeaders.findIndex((eheader: {[key: string]: string}) &#x3D;&gt; {
+                        return eheader.key &#x3D;&#x3D;&#x3D; keys[0];
+                    })
+                }
+                if( this._additionalHeaders &amp;&amp; !this._additionalHeaders[alreadyExistsAtIndex]) {
+                    this._additionalHeaders.push({key: keys[0], value: (header[ keys[0] ]) });
+                }
+            }
+        }
+    }
+    /** remove an additional header from all outgoing API requests */
+    public removeAdditionalRequestHeader(header: {[key: string]: string} | string) {
+        if(header){
+            let keyToRemove &#x3D; (header as string);
+            if( (header as string).indexOf ){
+                // parameter is string
+            } else {
+                // must be object
+                let keys &#x3D; Object.keys(header as {[key: string]: string});
+                if(keys &amp;&amp; keys.length &gt; 0){
+                    keyToRemove &#x3D; keys[0];
+                }
+            }
+            if(keyToRemove &amp;&amp; this._additionalHeaders &amp;&amp; this._additionalHeaders.length &gt; 0) {
+                let alreadyExistsAtIndex &#x3D; this._additionalHeaders.findIndex((eheader: {[key: string]: string}) &#x3D;&gt; {
+                    return eheader.key &#x3D;&#x3D;&#x3D; keyToRemove;
+                })
+                if(alreadyExistsAtIndex &amp;&amp; this._additionalHeaders[ alreadyExistsAtIndex ]) {
+                    //this._additionalHeaders.push({key: keys[0], value: (header[ keys[0] ]) });
+                    this._additionalHeaders &#x3D; this._additionalHeaders.splice(alreadyExistsAtIndex, 1);
+                }
+            }
+        }
     }
 }
 </code></pre>
