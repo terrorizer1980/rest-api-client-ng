@@ -29,10 +29,44 @@ import { Configuration }                                     from '../configurat
 
 @Injectable()
 export class BulkDataService {
+    protected _basePath     = '/';
+    public configuration    = new Configuration();
+    private _defaultHeaders = new HttpHeaders();
 
-    protected basePath = '/';
-    public defaultHeaders = new HttpHeaders();
-    public configuration = new Configuration();
+    /**
+     * get the basePath from the configuration instance
+     * or alternatively fallback to local reference
+     */
+    public get basePath(): string {
+        return this.configuration && this.configuration.basePath ? this.configuration.basePath : this._basePath;
+    }
+    /**
+     * set the local basePath reference
+     */
+    public set basePath(value: string) {
+        this._basePath = value;
+    }
+    /**
+     * get additional headers so we can add them to the default request headers
+     */
+    private get additionalHeaders(): {[key: string]: string} | undefined {
+        return this.configuration && this.configuration.additionalHeaders ? this.configuration.additionalHeaders : undefined;
+    }
+    /** 
+     * the default headers for http requests
+     * including any additional headers added to configuration
+    */
+    public get defaultHeaders() {
+        let retVal = this._defaultHeaders;
+        let _additionalHeaders = this.additionalHeaders;
+        // if additional headers specified merge with defaults
+        if(_additionalHeaders) {
+            for(let _hKey in _additionalHeaders) {
+                retVal = retVal.set(_hKey, _additionalHeaders[_hKey]);
+            }
+        }
+        return retVal;
+    }
 
     constructor(protected httpClient: HttpClient, @Optional()@Inject(BASE_PATH) basePath: string, @Optional() configuration: Configuration) {
         if (basePath) {
@@ -67,10 +101,10 @@ export class BulkDataService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public analyzeBulkRecords(body: string | Blob | File | Array<{ [key: string]: any; }>, progressPeriod?: string, observe?: 'body', reportProgress?: boolean): Observable<SzBulkDataAnalysisResponse>;
-    public analyzeBulkRecords(body: string | Blob | File | Array<{ [key: string]: any; }>, progressPeriod?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<SzBulkDataAnalysisResponse>>;
-    public analyzeBulkRecords(body: string | Blob | File | Array<{ [key: string]: any; }>, progressPeriod?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<SzBulkDataAnalysisResponse>>;
-    public analyzeBulkRecords(body: string | Blob | File | Array<{ [key: string]: any; }>, progressPeriod?: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public analyzeBulkRecords(body: string | Blob | File | Array<{ [key: string]: any; }>, progressPeriod?: string, observe?: 'body', reportProgress?: boolean, additionalHeaders?: {[key: string]: string}): Observable<SzBulkDataAnalysisResponse>;
+    public analyzeBulkRecords(body: string | Blob | File | Array<{ [key: string]: any; }>, progressPeriod?: string, observe?: 'response', reportProgress?: boolean, additionalHeaders?: {[key: string]: string}): Observable<HttpResponse<SzBulkDataAnalysisResponse>>;
+    public analyzeBulkRecords(body: string | Blob | File | Array<{ [key: string]: any; }>, progressPeriod?: string, observe?: 'events', reportProgress?: boolean, additionalHeaders?: {[key: string]: string}): Observable<HttpEvent<SzBulkDataAnalysisResponse>>;
+    public analyzeBulkRecords(body: string | Blob | File | Array<{ [key: string]: any; }>, progressPeriod?: string, observe: any = 'body', reportProgress: boolean = false, additionalHeaders: {[key: string]: string} = {} ): Observable<any> {
 
         if (body === null || body === undefined) {
             throw new Error('Required parameter body was null or undefined when calling analyzeBulkRecords.');
@@ -113,6 +147,11 @@ export class BulkDataService {
         const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes, body);
         if(httpContentTypeSelected != undefined) {
             headers = headers.set('Content-Type', httpContentTypeSelected);
+        }
+        if(additionalHeaders) {
+            for(let _hKey in additionalHeaders) {
+                headers = headers.set(_hKey, additionalHeaders[_hKey]);
+            }
         }
 
         const canConsumeForm = this.canConsumeForm(consumes);
@@ -159,47 +198,16 @@ export class BulkDataService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public loadBulkRecords(body: string | Blob | File | Array<{ [key: string]: any }>, dataSource?: string, mapDataSources?: string, mapDataSource?: Array<string>, entityType?: string, mapEntityTypes?: string, mapEntityType?: Array<string>, progressPeriod?: string, observe?: 'body', reportProgress?: boolean): Observable<SzBulkLoadResponse>;
-    public loadBulkRecords(body: string | Blob | File | Array<{ [key: string]: any }>, dataSource?: string, mapDataSources?: string, mapDataSource?: Array<string>, entityType?: string, mapEntityTypes?: string, mapEntityType?: Array<string>, progressPeriod?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<SzBulkLoadResponse>>;
-    public loadBulkRecords(body: string | Blob | File | Array<{ [key: string]: any }>, dataSource?: string, mapDataSources?: string, mapDataSource?: Array<string>, entityType?: string, mapEntityTypes?: string, mapEntityType?: Array<string>, progressPeriod?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<SzBulkLoadResponse>>;
-    public loadBulkRecords(body: string | Blob | File | Array<{ [key: string]: any }>, dataSource?: string, mapDataSources?: string, mapDataSource?: Array<string>, entityType?: string, mapEntityTypes?: string, mapEntityType?: Array<string>, progressPeriod?: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public loadBulkRecords(body: string | Blob | File | Array<{ [key: string]: any }>, dataSource?: string, mapDataSources?: string, mapDataSource?: Array<string>, entityType?: string, mapEntityTypes?: string, mapEntityType?: Array<string>, progressPeriod?: string, observe?: 'body', reportProgress?: boolean, additionalHeaders?: {[key: string]: string}): Observable<SzBulkLoadResponse>;
+    public loadBulkRecords(body: string | Blob | File | Array<{ [key: string]: any }>, dataSource?: string, mapDataSources?: string, mapDataSource?: Array<string>, entityType?: string, mapEntityTypes?: string, mapEntityType?: Array<string>, progressPeriod?: string, observe?: 'response', reportProgress?: boolean, additionalHeaders?: {[key: string]: string}): Observable<HttpResponse<SzBulkLoadResponse>>;
+    public loadBulkRecords(body: string | Blob | File | Array<{ [key: string]: any }>, dataSource?: string, mapDataSources?: string, mapDataSource?: Array<string>, entityType?: string, mapEntityTypes?: string, mapEntityType?: Array<string>, progressPeriod?: string, observe?: 'events', reportProgress?: boolean, additionalHeaders?: {[key: string]: string}): Observable<HttpEvent<SzBulkLoadResponse>>;
+    public loadBulkRecords(body: string | Blob | File | Array<{ [key: string]: any }>, dataSource?: string, mapDataSources?: string, mapDataSource?: Array<string>, entityType?: string, mapEntityTypes?: string, mapEntityType?: Array<string>, progressPeriod?: string, observe: any = 'body', reportProgress: boolean = false, additionalHeaders: {[key: string]: string} = {} ): Observable<any> {
 
         if (body === null || body === undefined) {
             throw new Error('Required parameter body was null or undefined when calling loadBulkRecords.');
         }
 
         let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
-        /*
-        if (dataSource !== undefined && dataSource !== null) {
-          if((dataSource as { [key: string]: string }) && typeof (dataSource as { [key: string]: string }) !== 'string') {
-            for (const key in (dataSource as { [key: string]: string })) {
-                if(key === null || key === 'null' || key === 'NULL') {
-                  queryParameters = queryParameters.append('dataSource', dataSource[key]);
-                } else {
-                  queryParameters = queryParameters.append('dataSource_'+key, dataSource[key]);
-                }
-                //console.log('BulkDataService.loadBulkRecords entity types set to: ', queryParameters);
-            }
-          } else {
-            // is single ds
-            queryParameters = queryParameters.set('dataSource', <any>dataSource);
-          }
-      }
-
-      if (entityType !== undefined && entityType !== null) {
-        if((entityType as { [key: string]: string }) && typeof (entityType as { [key: string]: string }) !== 'string') {
-          for (const key in (entityType as { [key: string]: string })) {
-              if(key === null || key === 'null' || key === 'NULL') {
-                queryParameters = queryParameters.append('entityType', entityType[key]);
-              } else {
-                queryParameters = queryParameters.append('entityType_'+key, entityType[key]);
-              }
-          }
-        } else {
-          // is single et
-          queryParameters = queryParameters.set('entityType', <any>entityType);
-        }
-      }*/
 
         if (dataSource !== undefined && dataSource !== null) {
             queryParameters = queryParameters.set('dataSource', <any>dataSource);
@@ -238,6 +246,11 @@ export class BulkDataService {
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
             headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+        if(additionalHeaders) {
+            for(let _hKey in additionalHeaders) {
+                headers = headers.set(_hKey, additionalHeaders[_hKey]);
+            }
         }
 
         // to determine the Content-Type header

@@ -35,7 +35,9 @@ import { Configuration }                                     from '../configurat
 
 @Injectable()
 export class EntityDataService {
-    protected _basePath = '/';
+    protected _basePath     = '/';
+    public configuration    = new Configuration();
+    private _defaultHeaders = new HttpHeaders();
     /**
      * get the basePath from the configuration instance
      * or alternatively fallback to local reference
@@ -49,9 +51,27 @@ export class EntityDataService {
     public set basePath(value: string) {
         this._basePath = value;
     }
-    public defaultHeaders = new HttpHeaders();
-    public configuration = new Configuration();
-
+    /**
+     * get additional headers so we can add them to the default request headers
+     */
+    private get additionalHeaders(): {[key: string]: string} | undefined {
+        return this.configuration && this.configuration.additionalHeaders ? this.configuration.additionalHeaders : undefined;
+    }
+    /** 
+     * the default headers for http requests
+     * including any additional headers added to configuration
+    */
+    public get defaultHeaders() {
+        let retVal = this._defaultHeaders;
+        let _additionalHeaders = this.additionalHeaders;
+        // if additional headers specified merge with defaults
+        if(_additionalHeaders) {
+            for(let _hKey in _additionalHeaders) {
+                retVal = retVal.set(_hKey, _additionalHeaders[_hKey]);
+            }
+        }
+        return retVal;
+    }
     constructor(protected httpClient: HttpClient, @Optional()@Inject(BASE_PATH) basePath: string, @Optional() configuration: Configuration) {
         if (basePath) {
             this.basePath = basePath;
@@ -89,10 +109,10 @@ export class EntityDataService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public addRecord(body: { [key: string]: any; }, dataSourceCode: string, recordId: string, loadId?: string, withInfo?: boolean, withRaw?: boolean, observe?: 'body', reportProgress?: boolean): Observable<SzLoadRecordResponse>;
-    public addRecord(body: { [key: string]: any; }, dataSourceCode: string, recordId: string, loadId?: string, withInfo?: boolean, withRaw?: boolean, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<SzLoadRecordResponse>>;
-    public addRecord(body: { [key: string]: any; }, dataSourceCode: string, recordId: string, loadId?: string, withInfo?: boolean, withRaw?: boolean, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<SzLoadRecordResponse>>;
-    public addRecord(body: { [key: string]: any; }, dataSourceCode: string, recordId: string, loadId?: string, withInfo?: boolean, withRaw?: boolean, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public addRecord(body: { [key: string]: any; }, dataSourceCode: string, recordId: string, loadId?: string, withInfo?: boolean, withRaw?: boolean, observe?: 'body', reportProgress?: boolean, additionalHeaders?: {[key: string]: string}): Observable<SzLoadRecordResponse>;
+    public addRecord(body: { [key: string]: any; }, dataSourceCode: string, recordId: string, loadId?: string, withInfo?: boolean, withRaw?: boolean, observe?: 'response', reportProgress?: boolean, additionalHeaders?: {[key: string]: string}): Observable<HttpResponse<SzLoadRecordResponse>>;
+    public addRecord(body: { [key: string]: any; }, dataSourceCode: string, recordId: string, loadId?: string, withInfo?: boolean, withRaw?: boolean, observe?: 'events', reportProgress?: boolean, additionalHeaders?: {[key: string]: string}): Observable<HttpEvent<SzLoadRecordResponse>>;
+    public addRecord(body: { [key: string]: any; }, dataSourceCode: string, recordId: string, loadId?: string, withInfo?: boolean, withRaw?: boolean, observe: any = 'body', reportProgress: boolean = false, additionalHeaders: {[key: string]: string} = {} ): Observable<any> {
 
         if (body === null || body === undefined) {
             throw new Error('Required parameter body was null or undefined when calling addRecord.');
@@ -132,6 +152,11 @@ export class EntityDataService {
         if (httpHeaderAcceptSelected != undefined) {
             headers = headers.set('Accept', httpHeaderAcceptSelected);
         }
+        if(additionalHeaders) {
+            for(let _hKey in additionalHeaders) {
+                headers = headers.set(_hKey, additionalHeaders[_hKey]);
+            }
+        }
 
         // to determine the Content-Type header
         const consumes: string[] = [
@@ -166,10 +191,10 @@ export class EntityDataService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public addRecordWithReturnedRecordId(body: { [key: string]: any; }, dataSourceCode: string, loadId?: string, withInfo?: boolean, withRaw?: boolean, observe?: 'body', reportProgress?: boolean): Observable<SzLoadRecordResponse>;
-    public addRecordWithReturnedRecordId(body: { [key: string]: any; }, dataSourceCode: string, loadId?: string, withInfo?: boolean, withRaw?: boolean, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<SzLoadRecordResponse>>;
-    public addRecordWithReturnedRecordId(body: { [key: string]: any; }, dataSourceCode: string, loadId?: string, withInfo?: boolean, withRaw?: boolean, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<SzLoadRecordResponse>>;
-    public addRecordWithReturnedRecordId(body: { [key: string]: any; }, dataSourceCode: string, loadId?: string, withInfo?: boolean, withRaw?: boolean, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public addRecordWithReturnedRecordId(body: { [key: string]: any; }, dataSourceCode: string, loadId?: string, withInfo?: boolean, withRaw?: boolean, observe?: 'body', reportProgress?: boolean, additionalHeaders?: {[key: string]: string}): Observable<SzLoadRecordResponse>;
+    public addRecordWithReturnedRecordId(body: { [key: string]: any; }, dataSourceCode: string, loadId?: string, withInfo?: boolean, withRaw?: boolean, observe?: 'response', reportProgress?: boolean, additionalHeaders?: {[key: string]: string}): Observable<HttpResponse<SzLoadRecordResponse>>;
+    public addRecordWithReturnedRecordId(body: { [key: string]: any; }, dataSourceCode: string, loadId?: string, withInfo?: boolean, withRaw?: boolean, observe?: 'events', reportProgress?: boolean, additionalHeaders?: {[key: string]: string}): Observable<HttpEvent<SzLoadRecordResponse>>;
+    public addRecordWithReturnedRecordId(body: { [key: string]: any; }, dataSourceCode: string, loadId?: string, withInfo?: boolean, withRaw?: boolean, observe: any = 'body', reportProgress: boolean = false, additionalHeaders: {[key: string]: string} = {} ): Observable<any> {
 
         if (body === null || body === undefined) {
             throw new Error('Required parameter body was null or undefined when calling addRecordWithReturnedRecordId.');
@@ -215,6 +240,11 @@ export class EntityDataService {
         if (httpContentTypeSelected != undefined) {
             headers = headers.set('Content-Type', httpContentTypeSelected);
         }
+        if(additionalHeaders) {
+            for(let _hKey in additionalHeaders) {
+                headers = headers.set(_hKey, additionalHeaders[_hKey]);
+            }
+        }
 
         return this.httpClient.request<SzLoadRecordResponse>('post',`${this.basePath}/data-sources/${encodeURIComponent(String(dataSourceCode))}/records`,
             {
@@ -239,10 +269,10 @@ export class EntityDataService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public deleteRecord(dataSourceCode: string, recordId: string, loadId?: string, withInfo?: boolean, withRaw?: boolean, observe?: 'body', reportProgress?: boolean): Observable<SzDeleteRecordResponse>;
-    public deleteRecord(dataSourceCode: string, recordId: string, loadId?: string, withInfo?: boolean, withRaw?: boolean, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<SzDeleteRecordResponse>>;
-    public deleteRecord(dataSourceCode: string, recordId: string, loadId?: string, withInfo?: boolean, withRaw?: boolean, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<SzDeleteRecordResponse>>;
-    public deleteRecord(dataSourceCode: string, recordId: string, loadId?: string, withInfo?: boolean, withRaw?: boolean, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public deleteRecord(dataSourceCode: string, recordId: string, loadId?: string, withInfo?: boolean, withRaw?: boolean, observe?: 'body', reportProgress?: boolean, additionalHeaders?: {[key: string]: string}): Observable<SzDeleteRecordResponse>;
+    public deleteRecord(dataSourceCode: string, recordId: string, loadId?: string, withInfo?: boolean, withRaw?: boolean, observe?: 'response', reportProgress?: boolean, additionalHeaders?: {[key: string]: string}): Observable<HttpResponse<SzDeleteRecordResponse>>;
+    public deleteRecord(dataSourceCode: string, recordId: string, loadId?: string, withInfo?: boolean, withRaw?: boolean, observe?: 'events', reportProgress?: boolean, additionalHeaders?: {[key: string]: string}): Observable<HttpEvent<SzDeleteRecordResponse>>;
+    public deleteRecord(dataSourceCode: string, recordId: string, loadId?: string, withInfo?: boolean, withRaw?: boolean, observe: any = 'body', reportProgress: boolean = false, additionalHeaders: {[key: string]: string} = {} ): Observable<any> {
 
         if (dataSourceCode === null || dataSourceCode === undefined) {
             throw new Error('Required parameter dataSourceCode was null or undefined when calling deleteRecord.');
@@ -277,6 +307,11 @@ export class EntityDataService {
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
             headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+        if(additionalHeaders) {
+            for(let _hKey in additionalHeaders) {
+                headers = headers.set(_hKey, additionalHeaders[_hKey]);
+            }
         }
 
         // to determine the Content-Type header
@@ -335,6 +370,11 @@ export class EntityDataService {
         if (httpHeaderAcceptSelected != undefined) {
             headers = headers.set('Accept', httpHeaderAcceptSelected);
         }
+        if(additionalHeaders) {
+            for(let _hKey in additionalHeaders) {
+                headers = headers.set(_hKey, additionalHeaders[_hKey]);
+            }
+        }
 
         // to determine the Content-Type header
         const consumes: string[] = [
@@ -364,10 +404,10 @@ export class EntityDataService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
     */
-    public getEntityByEntityId(entityId: number, featureMode?: SzFeatureMode, forceMinimal?: boolean, withFeatureStats?: boolean, withInternalFeatures?: boolean, withRelated?: SzRelationshipMode, withRaw?: boolean, observe?: 'body', reportProgress?: boolean): Observable<SzEntityResponse>;
-    public getEntityByEntityId(entityId: number, featureMode?: SzFeatureMode, forceMinimal?: boolean, withFeatureStats?: boolean, withInternalFeatures?: boolean, withRelated?: SzRelationshipMode, withRaw?: boolean, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<SzEntityResponse>>;
-    public getEntityByEntityId(entityId: number, featureMode?: SzFeatureMode, forceMinimal?: boolean, withFeatureStats?: boolean, withInternalFeatures?: boolean, withRelated?: SzRelationshipMode, withRaw?: boolean, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<SzEntityResponse>>;
-    public getEntityByEntityId(entityId: number, featureMode?: SzFeatureMode, forceMinimal?: boolean, withFeatureStats?: boolean, withInternalFeatures?: boolean, withRelated?: SzRelationshipMode, withRaw?: boolean, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public getEntityByEntityId(entityId: number, featureMode?: SzFeatureMode, forceMinimal?: boolean, withFeatureStats?: boolean, withInternalFeatures?: boolean, withRelated?: SzRelationshipMode, withRaw?: boolean, observe?: 'body', reportProgress?: boolean, additionalHeaders?: {[key: string]: string}): Observable<SzEntityResponse>;
+    public getEntityByEntityId(entityId: number, featureMode?: SzFeatureMode, forceMinimal?: boolean, withFeatureStats?: boolean, withInternalFeatures?: boolean, withRelated?: SzRelationshipMode, withRaw?: boolean, observe?: 'response', reportProgress?: boolean, additionalHeaders?: {[key: string]: string}): Observable<HttpResponse<SzEntityResponse>>;
+    public getEntityByEntityId(entityId: number, featureMode?: SzFeatureMode, forceMinimal?: boolean, withFeatureStats?: boolean, withInternalFeatures?: boolean, withRelated?: SzRelationshipMode, withRaw?: boolean, observe?: 'events', reportProgress?: boolean, additionalHeaders?: {[key: string]: string}): Observable<HttpEvent<SzEntityResponse>>;
+    public getEntityByEntityId(entityId: number, featureMode?: SzFeatureMode, forceMinimal?: boolean, withFeatureStats?: boolean, withInternalFeatures?: boolean, withRelated?: SzRelationshipMode, withRaw?: boolean, observe: any = 'body', reportProgress: boolean = false, additionalHeaders: {[key: string]: string} = {} ): Observable<any> {
 
         if (entityId === null || entityId === undefined) {
             throw new Error('Required parameter entityId was null or undefined when calling getEntityByEntityId.');
@@ -411,6 +451,11 @@ export class EntityDataService {
         if (httpHeaderAcceptSelected != undefined) {
             headers = headers.set('Accept', httpHeaderAcceptSelected);
         }
+        if(additionalHeaders) {
+            for(let _hKey in additionalHeaders) {
+                headers = headers.set(_hKey, additionalHeaders[_hKey]);
+            }
+        }
 
         // to determine the Content-Type header
         const consumes: string[] = [
@@ -441,10 +486,10 @@ export class EntityDataService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getEntityByRecordId(dataSourceCode: string, recordId: string, featureMode?: SzFeatureMode, withFeatureStats?: boolean, withInternalFeatures?: boolean, forceMinimal?: boolean, withRelated?: SzRelationshipMode, withRaw?: boolean, observe?: 'body', reportProgress?: boolean): Observable<SzEntityResponse>;
-    public getEntityByRecordId(dataSourceCode: string, recordId: string, featureMode?: SzFeatureMode, withFeatureStats?: boolean, withInternalFeatures?: boolean, forceMinimal?: boolean, withRelated?: SzRelationshipMode, withRaw?: boolean, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<SzEntityResponse>>;
-    public getEntityByRecordId(dataSourceCode: string, recordId: string, featureMode?: SzFeatureMode, withFeatureStats?: boolean, withInternalFeatures?: boolean, forceMinimal?: boolean, withRelated?: SzRelationshipMode, withRaw?: boolean, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<SzEntityResponse>>;
-    public getEntityByRecordId(dataSourceCode: string, recordId: string, featureMode?: SzFeatureMode, withFeatureStats?: boolean, withInternalFeatures?: boolean, forceMinimal?: boolean, withRelated?: SzRelationshipMode, withRaw?: boolean, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public getEntityByRecordId(dataSourceCode: string, recordId: string, featureMode?: SzFeatureMode, withFeatureStats?: boolean, withInternalFeatures?: boolean, forceMinimal?: boolean, withRelated?: SzRelationshipMode, withRaw?: boolean, observe?: 'body', reportProgress?: boolean, additionalHeaders?: {[key: string]: string}): Observable<SzEntityResponse>;
+    public getEntityByRecordId(dataSourceCode: string, recordId: string, featureMode?: SzFeatureMode, withFeatureStats?: boolean, withInternalFeatures?: boolean, forceMinimal?: boolean, withRelated?: SzRelationshipMode, withRaw?: boolean, observe?: 'response', reportProgress?: boolean, additionalHeaders?: {[key: string]: string}): Observable<HttpResponse<SzEntityResponse>>;
+    public getEntityByRecordId(dataSourceCode: string, recordId: string, featureMode?: SzFeatureMode, withFeatureStats?: boolean, withInternalFeatures?: boolean, forceMinimal?: boolean, withRelated?: SzRelationshipMode, withRaw?: boolean, observe?: 'events', reportProgress?: boolean, additionalHeaders?: {[key: string]: string}): Observable<HttpEvent<SzEntityResponse>>;
+    public getEntityByRecordId(dataSourceCode: string, recordId: string, featureMode?: SzFeatureMode, withFeatureStats?: boolean, withInternalFeatures?: boolean, forceMinimal?: boolean, withRelated?: SzRelationshipMode, withRaw?: boolean, observe: any = 'body', reportProgress: boolean = false, additionalHeaders: {[key: string]: string} = {} ): Observable<any> {
 
         if (dataSourceCode === null || dataSourceCode === undefined) {
             throw new Error('Required parameter dataSourceCode was null or undefined when calling getEntityByRecordId.');
@@ -492,6 +537,11 @@ export class EntityDataService {
         if (httpHeaderAcceptSelected != undefined) {
             headers = headers.set('Accept', httpHeaderAcceptSelected);
         }
+        if(additionalHeaders) {
+            for(let _hKey in additionalHeaders) {
+                headers = headers.set(_hKey, additionalHeaders[_hKey]);
+            }
+        }
 
         // to determine the Content-Type header
         const consumes: string[] = [
@@ -517,10 +567,10 @@ export class EntityDataService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getRecord(dataSourceCode: string, recordId: string, withRaw?: boolean, observe?: 'body', reportProgress?: boolean): Observable<SzRecordResponse>;
-    public getRecord(dataSourceCode: string, recordId: string, withRaw?: boolean, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<SzRecordResponse>>;
-    public getRecord(dataSourceCode: string, recordId: string, withRaw?: boolean, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<SzRecordResponse>>;
-    public getRecord(dataSourceCode: string, recordId: string, withRaw?: boolean, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public getRecord(dataSourceCode: string, recordId: string, withRaw?: boolean, observe?: 'body', reportProgress?: boolean, additionalHeaders?: {[key: string]: string}): Observable<SzRecordResponse>;
+    public getRecord(dataSourceCode: string, recordId: string, withRaw?: boolean, observe?: 'response', reportProgress?: boolean, additionalHeaders?: {[key: string]: string}): Observable<HttpResponse<SzRecordResponse>>;
+    public getRecord(dataSourceCode: string, recordId: string, withRaw?: boolean, observe?: 'events', reportProgress?: boolean, additionalHeaders?: {[key: string]: string}): Observable<HttpEvent<SzRecordResponse>>;
+    public getRecord(dataSourceCode: string, recordId: string, withRaw?: boolean, observe: any = 'body', reportProgress: boolean = false, additionalHeaders: {[key: string]: string} = {} ): Observable<any> {
 
         if (dataSourceCode === null || dataSourceCode === undefined) {
             throw new Error('Required parameter dataSourceCode was null or undefined when calling getRecord.');
@@ -548,6 +598,11 @@ export class EntityDataService {
         if (httpHeaderAcceptSelected != undefined) {
             headers = headers.set('Accept', httpHeaderAcceptSelected);
         }
+        if(additionalHeaders) {
+            for(let _hKey in additionalHeaders) {
+                headers = headers.set(_hKey, additionalHeaders[_hKey]);
+            }
+        }
 
         // to determine the Content-Type header
         const consumes: string[] = [
@@ -573,10 +628,10 @@ export class EntityDataService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public reevaluateEntity(entityId: number, withInfo?: boolean, withRaw?: boolean, observe?: 'body', reportProgress?: boolean): Observable<SzReevaluateResponse>;
-    public reevaluateEntity(entityId: number, withInfo?: boolean, withRaw?: boolean, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<SzReevaluateResponse>>;
-    public reevaluateEntity(entityId: number, withInfo?: boolean, withRaw?: boolean, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<SzReevaluateResponse>>;
-    public reevaluateEntity(entityId: number, withInfo?: boolean, withRaw?: boolean, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public reevaluateEntity(entityId: number, withInfo?: boolean, withRaw?: boolean, observe?: 'body', reportProgress?: boolean, additionalHeaders?: {[key: string]: string}): Observable<SzReevaluateResponse>;
+    public reevaluateEntity(entityId: number, withInfo?: boolean, withRaw?: boolean, observe?: 'response', reportProgress?: boolean, additionalHeaders?: {[key: string]: string}): Observable<HttpResponse<SzReevaluateResponse>>;
+    public reevaluateEntity(entityId: number, withInfo?: boolean, withRaw?: boolean, observe?: 'events', reportProgress?: boolean, additionalHeaders?: {[key: string]: string}): Observable<HttpEvent<SzReevaluateResponse>>;
+    public reevaluateEntity(entityId: number, withInfo?: boolean, withRaw?: boolean, observe: any = 'body', reportProgress: boolean = false, additionalHeaders: {[key: string]: string} = {} ): Observable<any> {
 
         if (entityId === null || entityId === undefined) {
             throw new Error('Required parameter entityId was null or undefined when calling reevaluateEntity.');
@@ -607,6 +662,11 @@ export class EntityDataService {
         if (httpHeaderAcceptSelected != undefined) {
             headers = headers.set('Accept', httpHeaderAcceptSelected);
         }
+        if(additionalHeaders) {
+            for(let _hKey in additionalHeaders) {
+                headers = headers.set(_hKey, additionalHeaders[_hKey]);
+            }
+        }
 
         // to determine the Content-Type header
         const consumes: string[] = [
@@ -633,10 +693,10 @@ export class EntityDataService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public reevaluateRecord(dataSourceCode: string, recordId: string, withInfo?: boolean, withRaw?: boolean, observe?: 'body', reportProgress?: boolean): Observable<SzReevaluateResponse>;
-    public reevaluateRecord(dataSourceCode: string, recordId: string, withInfo?: boolean, withRaw?: boolean, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<SzReevaluateResponse>>;
-    public reevaluateRecord(dataSourceCode: string, recordId: string, withInfo?: boolean, withRaw?: boolean, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<SzReevaluateResponse>>;
-    public reevaluateRecord(dataSourceCode: string, recordId: string, withInfo?: boolean, withRaw?: boolean, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public reevaluateRecord(dataSourceCode: string, recordId: string, withInfo?: boolean, withRaw?: boolean, observe?: 'body', reportProgress?: boolean, additionalHeaders?: {[key: string]: string}): Observable<SzReevaluateResponse>;
+    public reevaluateRecord(dataSourceCode: string, recordId: string, withInfo?: boolean, withRaw?: boolean, observe?: 'response', reportProgress?: boolean, additionalHeaders?: {[key: string]: string}): Observable<HttpResponse<SzReevaluateResponse>>;
+    public reevaluateRecord(dataSourceCode: string, recordId: string, withInfo?: boolean, withRaw?: boolean, observe?: 'events', reportProgress?: boolean, additionalHeaders?: {[key: string]: string}): Observable<HttpEvent<SzReevaluateResponse>>;
+    public reevaluateRecord(dataSourceCode: string, recordId: string, withInfo?: boolean, withRaw?: boolean, observe: any = 'body', reportProgress: boolean = false, additionalHeaders: {[key: string]: string} = {} ): Observable<any> {
 
         if (dataSourceCode === null || dataSourceCode === undefined) {
             throw new Error('Required parameter dataSourceCode was null or undefined when calling reevaluateRecord.');
@@ -668,6 +728,11 @@ export class EntityDataService {
         if (httpHeaderAcceptSelected != undefined) {
             headers = headers.set('Accept', httpHeaderAcceptSelected);
         }
+        if(additionalHeaders) {
+            for(let _hKey in additionalHeaders) {
+                headers = headers.set(_hKey, additionalHeaders[_hKey]);
+            }
+        }
 
         // to determine the Content-Type header
         const consumes: string[] = [
@@ -698,10 +763,10 @@ export class EntityDataService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public searchByAttributes(attrs?: string, attr?: Array<string>, featureMode?: SzFeatureMode, withFeatureStats?: boolean, withInternalFeatures?: boolean, forceMinimal?: boolean, withRelationships?: boolean, withRaw?: boolean, observe?: 'body', reportProgress?: boolean): Observable<SzAttributeSearchResponse>;
-    public searchByAttributes(attrs?: string, attr?: Array<string>, featureMode?: SzFeatureMode, withFeatureStats?: boolean, withInternalFeatures?: boolean, forceMinimal?: boolean, withRelationships?: boolean, withRaw?: boolean, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<SzAttributeSearchResponse>>;
-    public searchByAttributes(attrs?: string, attr?: Array<string>, featureMode?: SzFeatureMode, withFeatureStats?: boolean, withInternalFeatures?: boolean, forceMinimal?: boolean, withRelationships?: boolean, withRaw?: boolean, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<SzAttributeSearchResponse>>;
-    public searchByAttributes(attrs?: string, attr?: Array<string>, featureMode?: SzFeatureMode, withFeatureStats?: boolean, withInternalFeatures?: boolean, forceMinimal?: boolean, withRelationships?: boolean, withRaw?: boolean, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public searchByAttributes(attrs?: string, attr?: Array<string>, featureMode?: SzFeatureMode, withFeatureStats?: boolean, withInternalFeatures?: boolean, forceMinimal?: boolean, withRelationships?: boolean, withRaw?: boolean, observe?: 'body', reportProgress?: boolean, additionalHeaders?: {[key: string]: string}): Observable<SzAttributeSearchResponse>;
+    public searchByAttributes(attrs?: string, attr?: Array<string>, featureMode?: SzFeatureMode, withFeatureStats?: boolean, withInternalFeatures?: boolean, forceMinimal?: boolean, withRelationships?: boolean, withRaw?: boolean, observe?: 'response', reportProgress?: boolean, additionalHeaders?: {[key: string]: string}): Observable<HttpResponse<SzAttributeSearchResponse>>;
+    public searchByAttributes(attrs?: string, attr?: Array<string>, featureMode?: SzFeatureMode, withFeatureStats?: boolean, withInternalFeatures?: boolean, forceMinimal?: boolean, withRelationships?: boolean, withRaw?: boolean, observe?: 'events', reportProgress?: boolean, additionalHeaders?: {[key: string]: string}): Observable<HttpEvent<SzAttributeSearchResponse>>;
+    public searchByAttributes(attrs?: string, attr?: Array<string>, featureMode?: SzFeatureMode, withFeatureStats?: boolean, withInternalFeatures?: boolean, forceMinimal?: boolean, withRelationships?: boolean, withRaw?: boolean, observe: any = 'body', reportProgress: boolean = false, additionalHeaders: {[key: string]: string} = {} ): Observable<any> {
 
 
 
@@ -751,6 +816,11 @@ export class EntityDataService {
         if (httpHeaderAcceptSelected != undefined) {
             headers = headers.set('Accept', httpHeaderAcceptSelected);
         }
+        if(additionalHeaders) {
+            for(let _hKey in additionalHeaders) {
+                headers = headers.set(_hKey, additionalHeaders[_hKey]);
+            }
+        }
 
         // to determine the Content-Type header
         const consumes: string[] = [
@@ -780,10 +850,10 @@ export class EntityDataService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public whyEntityByEntityID(entityId: number, withRelationships?: boolean, withFeatureStats?: boolean, withInternalFeatures?: boolean, featureMode?: SzFeatureMode, forceMinimal?: boolean, withRaw?: boolean, observe?: 'body', reportProgress?: boolean): Observable<SzWhyEntityResponse>;
-    public whyEntityByEntityID(entityId: number, withRelationships?: boolean, withFeatureStats?: boolean, withInternalFeatures?: boolean, featureMode?: SzFeatureMode, forceMinimal?: boolean, withRaw?: boolean, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<SzWhyEntityResponse>>;
-    public whyEntityByEntityID(entityId: number, withRelationships?: boolean, withFeatureStats?: boolean, withInternalFeatures?: boolean, featureMode?: SzFeatureMode, forceMinimal?: boolean, withRaw?: boolean, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<SzWhyEntityResponse>>;
-    public whyEntityByEntityID(entityId: number, withRelationships?: boolean, withFeatureStats?: boolean, withInternalFeatures?: boolean, featureMode?: SzFeatureMode, forceMinimal?: boolean, withRaw?: boolean, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public whyEntityByEntityID(entityId: number, withRelationships?: boolean, withFeatureStats?: boolean, withInternalFeatures?: boolean, featureMode?: SzFeatureMode, forceMinimal?: boolean, withRaw?: boolean, observe?: 'body', reportProgress?: boolean, additionalHeaders?: {[key: string]: string}): Observable<SzWhyEntityResponse>;
+    public whyEntityByEntityID(entityId: number, withRelationships?: boolean, withFeatureStats?: boolean, withInternalFeatures?: boolean, featureMode?: SzFeatureMode, forceMinimal?: boolean, withRaw?: boolean, observe?: 'response', reportProgress?: boolean, additionalHeaders?: {[key: string]: string}): Observable<HttpResponse<SzWhyEntityResponse>>;
+    public whyEntityByEntityID(entityId: number, withRelationships?: boolean, withFeatureStats?: boolean, withInternalFeatures?: boolean, featureMode?: SzFeatureMode, forceMinimal?: boolean, withRaw?: boolean, observe?: 'events', reportProgress?: boolean, additionalHeaders?: {[key: string]: string}): Observable<HttpEvent<SzWhyEntityResponse>>;
+    public whyEntityByEntityID(entityId: number, withRelationships?: boolean, withFeatureStats?: boolean, withInternalFeatures?: boolean, featureMode?: SzFeatureMode, forceMinimal?: boolean, withRaw?: boolean, observe: any = 'body', reportProgress: boolean = false, additionalHeaders: {[key: string]: string} = {} ): Observable<any> {
 
         if (entityId === null || entityId === undefined) {
             throw new Error('Required parameter entityId was null or undefined when calling whyEntityByEntityID.');
@@ -827,6 +897,11 @@ export class EntityDataService {
         if (httpHeaderAcceptSelected != undefined) {
             headers = headers.set('Accept', httpHeaderAcceptSelected);
         }
+        if(additionalHeaders) {
+            for(let _hKey in additionalHeaders) {
+                headers = headers.set(_hKey, additionalHeaders[_hKey]);
+            }
+        }
 
         // to determine the Content-Type header
         const consumes: string[] = [
@@ -857,10 +932,10 @@ export class EntityDataService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public whyEntityByRecordID(dataSourceCode: string, recordId: string, withRelationships?: boolean, withFeatureStats?: boolean, withInternalFeatures?: boolean, featureMode?: SzFeatureMode, forceMinimal?: boolean, withRaw?: boolean, observe?: 'body', reportProgress?: boolean): Observable<SzWhyEntityResponse>;
-    public whyEntityByRecordID(dataSourceCode: string, recordId: string, withRelationships?: boolean, withFeatureStats?: boolean, withInternalFeatures?: boolean, featureMode?: SzFeatureMode, forceMinimal?: boolean, withRaw?: boolean, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<SzWhyEntityResponse>>;
-    public whyEntityByRecordID(dataSourceCode: string, recordId: string, withRelationships?: boolean, withFeatureStats?: boolean, withInternalFeatures?: boolean, featureMode?: SzFeatureMode, forceMinimal?: boolean, withRaw?: boolean, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<SzWhyEntityResponse>>;
-    public whyEntityByRecordID(dataSourceCode: string, recordId: string, withRelationships?: boolean, withFeatureStats?: boolean, withInternalFeatures?: boolean, featureMode?: SzFeatureMode, forceMinimal?: boolean, withRaw?: boolean, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public whyEntityByRecordID(dataSourceCode: string, recordId: string, withRelationships?: boolean, withFeatureStats?: boolean, withInternalFeatures?: boolean, featureMode?: SzFeatureMode, forceMinimal?: boolean, withRaw?: boolean, observe?: 'body', reportProgress?: boolean, additionalHeaders?: {[key: string]: string}): Observable<SzWhyEntityResponse>;
+    public whyEntityByRecordID(dataSourceCode: string, recordId: string, withRelationships?: boolean, withFeatureStats?: boolean, withInternalFeatures?: boolean, featureMode?: SzFeatureMode, forceMinimal?: boolean, withRaw?: boolean, observe?: 'response', reportProgress?: boolean, additionalHeaders?: {[key: string]: string}): Observable<HttpResponse<SzWhyEntityResponse>>;
+    public whyEntityByRecordID(dataSourceCode: string, recordId: string, withRelationships?: boolean, withFeatureStats?: boolean, withInternalFeatures?: boolean, featureMode?: SzFeatureMode, forceMinimal?: boolean, withRaw?: boolean, observe?: 'events', reportProgress?: boolean, additionalHeaders?: {[key: string]: string}): Observable<HttpEvent<SzWhyEntityResponse>>;
+    public whyEntityByRecordID(dataSourceCode: string, recordId: string, withRelationships?: boolean, withFeatureStats?: boolean, withInternalFeatures?: boolean, featureMode?: SzFeatureMode, forceMinimal?: boolean, withRaw?: boolean, observe: any = 'body', reportProgress: boolean = false, additionalHeaders: {[key: string]: string} = {} ): Observable<any> {
 
         if (dataSourceCode === null || dataSourceCode === undefined) {
             throw new Error('Required parameter dataSourceCode was null or undefined when calling whyEntityByRecordID.');
@@ -908,6 +983,11 @@ export class EntityDataService {
         if (httpHeaderAcceptSelected != undefined) {
             headers = headers.set('Accept', httpHeaderAcceptSelected);
         }
+        if(additionalHeaders) {
+            for(let _hKey in additionalHeaders) {
+                headers = headers.set(_hKey, additionalHeaders[_hKey]);
+            }
+        }
 
         // to determine the Content-Type header
         const consumes: string[] = [
@@ -940,10 +1020,10 @@ export class EntityDataService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public whyRecords(dataSource1: string, recordId1: string, dataSource2: string, recordId2: string, withRelationships?: boolean, withFeatureStats?: boolean, withInternalFeatures?: boolean, featureMode?: SzFeatureMode, forceMinimal?: boolean, withRaw?: boolean, observe?: 'body', reportProgress?: boolean): Observable<SzWhyRecordsResponse>;
-    public whyRecords(dataSource1: string, recordId1: string, dataSource2: string, recordId2: string, withRelationships?: boolean, withFeatureStats?: boolean, withInternalFeatures?: boolean, featureMode?: SzFeatureMode, forceMinimal?: boolean, withRaw?: boolean, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<SzWhyRecordsResponse>>;
-    public whyRecords(dataSource1: string, recordId1: string, dataSource2: string, recordId2: string, withRelationships?: boolean, withFeatureStats?: boolean, withInternalFeatures?: boolean, featureMode?: SzFeatureMode, forceMinimal?: boolean, withRaw?: boolean, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<SzWhyRecordsResponse>>;
-    public whyRecords(dataSource1: string, recordId1: string, dataSource2: string, recordId2: string, withRelationships?: boolean, withFeatureStats?: boolean, withInternalFeatures?: boolean, featureMode?: SzFeatureMode, forceMinimal?: boolean, withRaw?: boolean, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public whyRecords(dataSource1: string, recordId1: string, dataSource2: string, recordId2: string, withRelationships?: boolean, withFeatureStats?: boolean, withInternalFeatures?: boolean, featureMode?: SzFeatureMode, forceMinimal?: boolean, withRaw?: boolean, observe?: 'body', reportProgress?: boolean, additionalHeaders?: {[key: string]: string}): Observable<SzWhyRecordsResponse>;
+    public whyRecords(dataSource1: string, recordId1: string, dataSource2: string, recordId2: string, withRelationships?: boolean, withFeatureStats?: boolean, withInternalFeatures?: boolean, featureMode?: SzFeatureMode, forceMinimal?: boolean, withRaw?: boolean, observe?: 'response', reportProgress?: boolean, additionalHeaders?: {[key: string]: string}): Observable<HttpResponse<SzWhyRecordsResponse>>;
+    public whyRecords(dataSource1: string, recordId1: string, dataSource2: string, recordId2: string, withRelationships?: boolean, withFeatureStats?: boolean, withInternalFeatures?: boolean, featureMode?: SzFeatureMode, forceMinimal?: boolean, withRaw?: boolean, observe?: 'events', reportProgress?: boolean, additionalHeaders?: {[key: string]: string}): Observable<HttpEvent<SzWhyRecordsResponse>>;
+    public whyRecords(dataSource1: string, recordId1: string, dataSource2: string, recordId2: string, withRelationships?: boolean, withFeatureStats?: boolean, withInternalFeatures?: boolean, featureMode?: SzFeatureMode, forceMinimal?: boolean, withRaw?: boolean, observe: any = 'body', reportProgress: boolean = false, additionalHeaders: {[key: string]: string} = {} ): Observable<any> {
 
         if (dataSource1 === null || dataSource1 === undefined) {
             throw new Error('Required parameter dataSource1 was null or undefined when calling whyRecords.');
@@ -1010,6 +1090,11 @@ export class EntityDataService {
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
             headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+        if(additionalHeaders) {
+            for(let _hKey in additionalHeaders) {
+                headers = headers.set(_hKey, additionalHeaders[_hKey]);
+            }
         }
 
         // to determine the Content-Type header
